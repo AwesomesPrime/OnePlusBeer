@@ -1,15 +1,16 @@
+package entities;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+
 @Entity
-@Table(name="User")
-public class User
+@Table(name="entities.UserPermission")
+public class UserPermission
 {
     //-------------------------------------------------------------------------
     //  Vars
@@ -19,29 +20,24 @@ public class User
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "employee")
-    private Employee employee;
-
-    @ManyToOne
-    @JoinColumn(name = "userPermission")
-    private UserPermission userPermission;
-
-    @Column(name = "password")
-    private String password;
+    @Column(name = "description")
+    private String description;
 
 
     //-------------------------------------------------------------------------
     //  Constructor(s)
     //-------------------------------------------------------------------------
-    public User() {
+    public UserPermission() {
 
     }
 
-    public User(Employee employee, UserPermission userPermission, String password) {
-        this.employee = employee;
-        this.userPermission = userPermission;
-        this.password = password;
+    public UserPermission(String description) {
+        this.description = description;
+    }
+
+    public UserPermission(int id, String description) {
+        this.id = id;
+        this.description = description;
     }
 
 
@@ -56,42 +52,23 @@ public class User
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public UserPermission getUserPermission() {
-        return userPermission;
-    }
-
-    public void setPermission(UserPermission userPermission) {
-        this.userPermission = userPermission;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 
     //-------------------------------------------------------------------------
     //  toString()
     //-------------------------------------------------------------------------
-
     @Override
     public String toString() {
-        return "User{" +
+        return "entities.UserPermission{" +
                 "id=" + id +
-                ", employee=" + employee +
-                ", userPermission=" + userPermission +
-                ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
