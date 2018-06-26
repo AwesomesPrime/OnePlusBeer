@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 
 
 @Entity
-@Table(name="entities.UserPermission")
+@Table(name="UserPermission")
 public class UserPermission
 {
     //-------------------------------------------------------------------------

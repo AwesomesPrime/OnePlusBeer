@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name="entities.User")
+@Table(name="User")
 public class User
 {
     //-------------------------------------------------------------------------
