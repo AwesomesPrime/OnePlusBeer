@@ -6,15 +6,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 
 /**
  * Created by Stefan on 25.06.2018.
  */
-public class GenericDatabaseService<T> implements IGenericDatabaseService<T> {
+public abstract class GenericDatabaseService<T> implements IGenericDatabaseService<T> {
 
-    private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     public <T> T get(Class<T> type,  int id) {
         Session session = sessionFactory.openSession();
@@ -23,7 +26,6 @@ public class GenericDatabaseService<T> implements IGenericDatabaseService<T> {
         transaction.commit();
         session.close();
         return (T) result;
-        //return sessionFactory.getCurrentSession().get(type,id);
     }
 
     public <T> ArrayList<T> getAll(Class<T> type) {
@@ -52,4 +54,17 @@ public class GenericDatabaseService<T> implements IGenericDatabaseService<T> {
         transaction.commit();
         session.close();
     }
+
+    /*public <T> ArrayList<T> search (Class<T> type,ArrayList<SearchParam> params) {
+        Session session = sessionFactory.openSession();
+
+        Criteria cr = session.createCriteria(type);
+        for (int i = 0; i < params.size(); i++) {
+            if(params.get(i).getOperation().equals("like")){
+                cr.add(Restrictions.like(params.get(i).getColumn(), params.get(i).getValue()));
+            }
+        }
+
+        return (ArrayList<T>) cr.list();
+    }*/
 }
