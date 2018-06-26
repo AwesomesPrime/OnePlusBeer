@@ -1,3 +1,5 @@
+package entities;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -87,7 +89,7 @@ public class User
 
     @Override
     public String toString() {
-        return "User{" +
+        return "entities.User{" +
                 "id=" + id +
                 ", employee=" + employee +
                 ", userPermission=" + userPermission +

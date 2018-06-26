@@ -1,3 +1,5 @@
+package entities;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -64,7 +66,7 @@ public class UserPermission
     //-------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "UserPermission{" +
+        return "entities.UserPermission{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
                 '}';

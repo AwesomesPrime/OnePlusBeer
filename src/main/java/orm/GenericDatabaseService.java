@@ -1,3 +1,6 @@
+package orm;
+
+import interfaces.IGenericDatabaseService;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
