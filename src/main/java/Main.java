@@ -1,10 +1,25 @@
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
-public class Main {
+public class Main extends Application{
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("frontend/login/login.fxml"));
+        primaryStage.setTitle("OnePlusBier");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
+
 
     public static void main(String[] args){
 
-        GenericDatabaseService<Employee> employeeService = new GenericDatabaseService<Employee>();
+        /*GenericDatabaseService<Employee> employeeService = new GenericDatabaseService<Employee>();
         GenericDatabaseService<UserPermission> userPermissionService = new GenericDatabaseService<UserPermission>();
         GenericDatabaseService<User> userService = new GenericDatabaseService<User>();
 
@@ -36,6 +51,8 @@ public class Main {
         ArrayList<User> users = userService.getAll(User.class);
         for(User u: users){
             System.out.println(u.toString());
-        }
+        }*/
+
+        launch(args);
     }
 }
