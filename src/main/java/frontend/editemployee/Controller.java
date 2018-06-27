@@ -78,7 +78,7 @@ public class Controller implements Initializable {
                     txtMobil.getText(), txtEmail.getText(),
                     txtIBAN.getText(), txtBIC.getText(),
                     Integer.parseInt(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
-                    0,0,
+                    true,0,
                     txtSteuerID.getText(),0, txtBemerkung.getText() ));
         }
         catch(Exception e){

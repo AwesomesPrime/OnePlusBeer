@@ -62,7 +62,7 @@ public class Employee
     private String startOfEmployment;
 
     @Column(name = "activityState")
-    private int activityState;
+    private boolean activityState;
 
     @Column(name = "stateByEmploymentLaw")
     private int stateByEmploymentLaw;
@@ -84,7 +84,7 @@ public class Employee
 
     }
 
-    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, String startOfEmployment, int activityState, int stateByEmploymentLaw, String taxNumber, int workingStatus, String comments) {
+    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, String startOfEmployment, boolean activityState, int stateByEmploymentLaw, String taxNumber, int workingStatus, String comments) {
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -222,11 +222,11 @@ public class Employee
         this.startOfEmployment = startOfEmployment;
     }
 
-    public int getActivityState() {
+    public boolean getActivityState() {
         return activityState;
     }
 
-    public void setActivityState(int activityState) {
+    public void setActivityState(boolean activityState) {
         this.activityState = activityState;
     }
 
