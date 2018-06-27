@@ -1,3 +1,4 @@
+import entities.Employee;
 import entities.User;
 import entities.UserPermission;
 import javafx.application.Application;
