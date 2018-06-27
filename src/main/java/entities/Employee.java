@@ -110,6 +110,10 @@ public class Employee
     //-------------------------------------------------------------------------
     //  Get / Set
     //-------------------------------------------------------------------------
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
+
     public String getSalutation() {
         return salutation;
     }
@@ -291,6 +295,4 @@ public class Employee
                 ", comments='" + comments + '\'' +
                 '}';
     }
-
-
 }
