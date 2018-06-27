@@ -62,17 +62,23 @@ public class Controller implements Initializable {
     @FXML
     public void clickEdit(ActionEvent event){
 
-        EmployeeController employeeController = new EmployeeController();
+        try{
+            EmployeeController employeeController = new EmployeeController();
 
-        employeeController.addEmployee( new Employee(   "Herr", txtVorname.getText(),
-                                                        txtNachname.getText(),txtStrasse.getText(),
-                                                        Integer.parseInt(txtHausNr.getText()), Integer.parseInt(txtPLZ.getText()),
-                                                        txtOrt.getText(), txtFestnetz.getText(),
-                                                        txtMobil.getText(), txtEmail.getText(),
-                                                        txtIBAN.getText(), txtBIC.getText(),
-                                                        Integer.parseInt(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
-                                                        0,0,
-                                                        txtSteuerID.getText(),0, txtBemerkung.getText() ));
+            employeeController.addEmployee( new Employee(   "Herr", txtVorname.getText(),
+                    txtNachname.getText(),txtStrasse.getText(),
+                    Integer.parseInt(txtHausNr.getText()), Integer.parseInt(txtPLZ.getText()),
+                    txtOrt.getText(), txtFestnetz.getText(),
+                    txtMobil.getText(), txtEmail.getText(),
+                    txtIBAN.getText(), txtBIC.getText(),
+                    Integer.parseInt(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
+                    0,0,
+                    txtSteuerID.getText(),0, txtBemerkung.getText() ));
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
 
 
 
