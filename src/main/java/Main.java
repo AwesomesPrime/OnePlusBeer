@@ -36,10 +36,7 @@ public class Main extends Application{
         employee = new entities.Employee( "Herr", "Rob", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "01.01.2010", 0, 0, "684312468473214", 0, "Comment" );
         employeeService.save(employee);
 
-        entities.UserPermission userpermission = new entities.UserPermission("Manager");
-        userPermissionService.save(userpermission);
-
-        entities.User user = new entities.User(employee, userpermission, "pwtest");
+        entities.User user = new entities.User(employee, userPermissionService.get(UserPermission.class, 2), "pwtest");
         userService.save(user);
 
 
