@@ -9,12 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import controller.EmployeeController;
+import validation.InputValidation;
 
 import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    private final InputValidation inputValidation = new InputValidation();
+
 
     @FXML
     private JFXTextField txtVorname;
@@ -62,9 +66,11 @@ public class Controller implements Initializable {
     @FXML
     public void clickEdit(ActionEvent event){
 
+
+
         try{
             EmployeeController employeeController = new EmployeeController();
-
+            validateInput();
             employeeController.addEmployee( new Employee(   "Herr", txtVorname.getText(),
                     txtNachname.getText(),txtStrasse.getText(),
                     Integer.parseInt(txtHausNr.getText()), Integer.parseInt(txtPLZ.getText()),
@@ -76,12 +82,33 @@ public class Controller implements Initializable {
                     txtSteuerID.getText(),0, txtBemerkung.getText() ));
         }
         catch(Exception e){
+            //TODO popup wenn bei txtPLZ kein int eingegeben wird
             System.out.println(e.getMessage());
         }
+    }
 
+    private void validateInput() {
+        if( !inputValidation.validateText(txtVorname.getText())) {
+            //TODO show error message for invalid text
+        }
+        if( !inputValidation.validateText(txtNachname.getText())) {
 
+        }
+        if( !inputValidation.validateText(txtStrasse.getText())){
 
+        }
+        if(!inputValidation.validateText(txtOrt.getText())) {
 
+        }
+        if(!inputValidation.validateText(txtEmail.getText())) {
+
+        }
+        if(!inputValidation.validateText(txtIBAN.getText())) {
+
+        }
+        if(!inputValidation.validateText(txtBIC.getText())) {
+
+        }
     }
 
 }
