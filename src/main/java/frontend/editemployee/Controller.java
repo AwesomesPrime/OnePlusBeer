@@ -65,9 +65,6 @@ public class Controller implements Initializable {
 
     @FXML
     public void clickEdit(ActionEvent event){
-
-
-
         try{
             EmployeeController employeeController = new EmployeeController();
             validateInput();
