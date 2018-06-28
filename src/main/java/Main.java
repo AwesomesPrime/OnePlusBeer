@@ -12,12 +12,13 @@ import orm.UserDatabaseService;
 import orm.UserPermissionDatabaseService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("frontend/employeelist/employeelist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("frontend/eventlist/eventlist.fxml"));
         primaryStage.setTitle("OnePlusBier");
         primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.show();
@@ -30,17 +31,17 @@ public class Main extends Application{
         UserDatabaseService userService = new UserDatabaseService();
 
 
-        ArrayList<entities.Employee> employees = employeeService.getAll(entities.Employee.class);
+        List<Employee> employees = employeeService.getAll(entities.Employee.class);
         for(entities.Employee e: employees){
             System.out.println(e.toString());
         }
 
-        ArrayList<entities.UserPermission> userpermissions = userPermissionService.getAll(entities.UserPermission.class);
+        List<entities.UserPermission> userpermissions = userPermissionService.getAll(entities.UserPermission.class);
         for(entities.UserPermission up: userpermissions){
             System.out.println(up.toString());
         }
 
-        ArrayList<entities.User> users = userService.getAll(entities.User.class);
+        List<entities.User> users = userService.getAll(entities.User.class);
         for(entities.User u: users){
             System.out.println(u.toString());
         }
