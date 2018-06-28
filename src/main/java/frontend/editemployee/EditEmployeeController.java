@@ -7,13 +7,20 @@ import com.jfoenix.controls.JFXTextField;
 import entities.Employee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import controller.EmployeeController;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -60,6 +67,9 @@ public class EditEmployeeController implements Initializable {
     @FXML
     private JFXDatePicker dateBesschSeit;
 
+    @FXML
+    private AnchorPane editPane;
+
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -104,6 +114,25 @@ public class EditEmployeeController implements Initializable {
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
         }
+    }
+
+    public void onMouseClickEmployee(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/employeelist/employeelist.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) editPane.getScene().getWindow();
+        stage.setScene(newScene);
+    }
+
+    public void onMouseClickMain(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/mainMenu/mainMenu.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) editPane.getScene().getWindow();
+        stage.setScene(newScene);
+
     }
 
     private void validateInput() {

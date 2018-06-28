@@ -15,7 +15,11 @@
 
 <SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.employeelist.EmployeeListController">
   <items>
-      <AnchorPane prefHeight="451.0" prefWidth="147.0" />
+      <AnchorPane fx:id="employeeListPane" prefHeight="451.0" prefWidth="147.0" >
+      <children>
+          <Label fx:id="menuEmployee" layoutX="14.0" layoutY="71.0"  text="Mitarbeiter" />
+          <Label fx:id="menuMain" layoutX="14.0" layoutY="32.0" onMouseClicked="#onMouseClickMain" text="Home" />
+      </children></AnchorPane>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
          <content>
             <GridPane alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" vgap="20.0">

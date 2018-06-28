@@ -11,9 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import orm.EmployeeDatabaseService;
 import frontend.editemployee.EditEmployeeController;
@@ -28,6 +30,9 @@ public class EmployeeListController implements Initializable {
 
     @FXML
     private JFXTextField txtSearch;
+
+    @FXML
+    private AnchorPane employeeListPane;
 
     @FXML
     private TableView<Employee> tableView;
@@ -64,16 +69,21 @@ public class EmployeeListController implements Initializable {
             Parent root = fxmlLoader.load();
             EditEmployeeController editEmployeeController = fxmlLoader.<EditEmployeeController>getController();
             editEmployeeController.getDataFromEmployeeView(currentItemSelected);
-            Stage primaryStage = new Stage();
-            primaryStage.setTitle("OnePlusBier");
-            primaryStage.setScene(new Scene(root, 1000, 800));
-            primaryStage.show();
-
-
-
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            Scene newScene = new Scene(root,1000,800);
+            Stage stage = (Stage) employeeListPane.getScene().getWindow();
+            stage.setScene(newScene);
 
         }
+    }
+
+    public void onMouseClickMain(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/mainMenu/mainMenu.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) employeeListPane.getScene().getWindow();
+        stage.setScene(newScene);
+
     }
 
 }
