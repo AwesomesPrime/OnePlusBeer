@@ -1,7 +1,7 @@
 package frontend.editemployee;
 
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXPasswordField;
+
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import entities.Employee;
@@ -13,9 +13,10 @@ import validation.InputValidation;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class EditEmployeeController implements Initializable {
 
     private final InputValidation inputValidation = new InputValidation();
 
@@ -65,6 +66,21 @@ public class Controller implements Initializable {
 
     public void getDataFromEmployeeView(Employee employee) {
         txtVorname.setText(employee.getFirstName());
+        txtNachname.setText(employee.getLastName());
+        txtStrasse.setText(employee.getStreet());
+        txtHausNr.setText(Integer.toString(employee.getHouseNumber()));
+        txtPLZ.setText(Integer.toString(employee.getPlz()));
+        txtOrt.setText(employee.getCity());
+        txtFestnetz.setText(employee.getPhoneNumber());
+        txtMobil.setText(employee.getMobileNumber());
+        txtEmail.setText(employee.getMailAddress());
+        txtIBAN.setText(employee.getIban());
+        txtBIC.setText(employee.getBic());
+        txtBruttoStdSatz.setText(Double.toString(employee.getBruttoPerHour()));
+        //dateBesschSeit.setValue(employee.getStartOfEmployment());
+        txtSteuerID.setText(employee.getTaxNumber());
+        txtBemerkung.setText(employee.getComments());
+
     }
 
     @FXML
