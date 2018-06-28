@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -13,13 +14,23 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.eventlist.EventListController">
   <items>
-      <AnchorPane fx:id="eventPane" prefHeight="451.0" prefWidth="147.0" >
+      <AnchorPane fx:id="eventPane" prefHeight="451.0" prefWidth="147.0">
           <children>
-              <Label fx:id="menuEmployee" layoutX="14.0" layoutY="71.0" onMouseClicked="#onMouseClickEmployee" text="Mitarbeiter" />
-              <Label layoutX="14.0" layoutY="32.0" onMouseClicked="#onMouseClickMain" text="Home" />
-              <Label fx:id="menuEvent" layoutX="14.0" layoutY="115.0"  text="Veranstaltungen" />
+              <Label fx:id="menuEmployee" layoutX="14.0" layoutY="71.0" onMouseClicked="#onMouseClickEmployee" text="Mitarbeiter">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+              <Label layoutX="14.0" layoutY="32.0" onMouseClicked="#onMouseClickMain" text="Home">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+              <Label fx:id="menuEvent" layoutX="14.0" layoutY="115.0" text="Veranstaltungen">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
           </children></AnchorPane>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
          <content>
@@ -47,6 +58,11 @@
                     </columns>
                   </TableView>
                   <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
+                   <FontAwesomeIconView fx:id="addEvent" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                   <cursor>
+                       <Cursor fx:constant="HAND" />
+                   </cursor>
+                   </FontAwesomeIconView>
                </children>
             </GridPane>
          </content>
