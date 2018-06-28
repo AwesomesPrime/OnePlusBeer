@@ -63,6 +63,10 @@ public class Controller implements Initializable {
 
     }
 
+    public void getDataFromEmployeeView(Employee employee) {
+        txtVorname.setText(employee.getFirstName());
+    }
+
     @FXML
     public void clickEdit(ActionEvent event){
         try{

@@ -33,7 +33,7 @@
                      <font>
                         <Font size="22.0" />
                      </font></Label>
-                  <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+                  <TableView fx:id="tableView" onMouseClicked="#OnMouseClick" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                     <columns>
                       <TableColumn fx:id="colID" editable="false" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="-1.0" text="ID" />
                       <TableColumn fx:id="colVorname" editable="false" maxWidth="1.7976931348623157E308" prefWidth="70.0" text="Vorname" />
