@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Einsatzplanung" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6153c149-f6e1-4219-9fe2-2db3cbd3ae98">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Localhost"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM oneplusbier.employee
+LEFT JOIN  oneplusbier.user 
+ON oneplusbier.employee.id = oneplusbier.user.id]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="activityState" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="activityState"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="bic" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bic"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="f" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="f"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="city" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="city"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="comments" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="comments"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="firstName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="firstName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="houseNumber" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="houseNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="iban" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="iban"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="lastName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lastName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="mailAddress" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mailAddress"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="mobileNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mobileNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="phoneNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="phoneNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="plz" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="plz"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="salutation" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="salutation"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="startOfEmployment" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="startOfEmployment"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="stateByEmploymentLaw" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="stateByEmploymentLaw"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="street" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="street"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="taxNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="taxNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="workingStatus" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="workingStatus"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="COLUMN_21" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="password" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="password"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="employee" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="employee"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="userPermission" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="userPermission"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="65" y="53" width="100" height="30" uuid="aaba12f0-20fb-4517-b021-dc24bba300b9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aaaa4e59-0c9d-4b32-8bc1-ce7592a1b417"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="65" y="19" width="100" height="30" uuid="0fb6103e-9a53-486d-b5bc-407fc239eeee">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aaaa4e59-0c9d-4b32-8bc1-ce7592a1b417"/>
+				</reportElement>
+				<text><![CDATA[firstName]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="278" y="53" width="100" height="30" uuid="d77b07e1-a059-4654-99be-75ca12ad6562">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9403b7f-e9b2-41f8-be32-8380781f0e71"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="278" y="19" width="100" height="30" uuid="1f54ea89-c26d-46d3-b4de-798aa126733c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9403b7f-e9b2-41f8-be32-8380781f0e71"/>
+				</reportElement>
+				<text><![CDATA[password]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="53" width="100" height="30" uuid="39205f7d-ad41-4eba-8e1f-39c6f8c96a1a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="238e5d65-9e69-4a62-8702-49a61945dff9"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="19" width="100" height="30" uuid="664cc737-6654-4d47-830a-ea0232ab70e9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="238e5d65-9e69-4a62-8702-49a61945dff9"/>
+				</reportElement>
+				<text><![CDATA[lastName]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
