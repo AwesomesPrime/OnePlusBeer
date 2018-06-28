@@ -1,6 +1,7 @@
 Für Janik: 
 
 Index: 
+```
             try {
                 //1. Load view (This time with View from other package)
                 Parent view = (Parent) fxmlLoader.load();
@@ -16,7 +17,6 @@ Index:
             } catch (IOException e) {
                 e.printStackTrace();
             }
-}
 
 Detail: 
     private RoomModel roomModelToEdit;
