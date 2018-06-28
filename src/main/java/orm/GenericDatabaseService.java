@@ -20,39 +20,77 @@ public abstract class GenericDatabaseService<T> implements IGenericDatabaseServi
     public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     public <T> T get(Class<T> type,  int id) {
+
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Object result = session.get(type, id);
-        transaction.commit();
-        session.close();
+        Object result = null;
+
+        try {
+            result = session.get(type, id);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+        finally {
+            session.close();
+        }
         return (T) result;
     }
 
     public <T> ArrayList<T> getAll(Class<T> type) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(type);
-        transaction.commit();
+        ArrayList<T> resultList;
 
-        ArrayList<T> resultList = (ArrayList<T>) criteria.list();
-        session.close();
+        try {
+            Criteria criteria = session.createCriteria(type);
+            resultList = (ArrayList<T>) criteria.list();
+            transaction.commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+            resultList = null;
+        }
+        finally {
+            session.close();
+        }
         return resultList;
     }
 
     public <T> void save(T entity) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.saveOrUpdate(entity);
-        transaction.commit();
-        session.close();
+
+        try {
+            session.saveOrUpdate(entity);
+            transaction.commit();
+
+        }
+        catch(Exception e) {
+            transaction.rollback();
+        }
+        finally {
+            session.close();
+        }
     }
 
     public <T> void delete(T entity) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(entity);
-        transaction.commit();
-        session.close();
+
+        try {
+            session.delete(entity);
+            transaction.commit();
+        }
+        catch (Exception e){
+            transaction.rollback();
+        }
+        finally {
+            session.close();
+        }
     }
 
     /*public <T> ArrayList<T> search (Class<T> type,ArrayList<SearchParam> params) {
