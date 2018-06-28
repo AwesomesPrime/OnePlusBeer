@@ -22,14 +22,14 @@ public class EventDatabaseService extends GenericDatabaseService<Event> {
             Calendar endDate = Calendar.getInstance();
             endDate.set(2018,11,23, 0, 0 ,0);
 
-            Event event = new Event( "Weihnachtsmarkt 2018", startDate.getTime() , endDate.getTime(), "Hauptstraße 12, 40597 Düsseldorf");
+            Event event = new Event( "Weihnachtsmarkt 2018", startDate.getTime() , endDate.getTime(), "Straße", 12, "1256", "Düsseldorf");
             this.save(event);
 
             startDate.set(2017,11,1, 0, 0, 0);
 
             endDate.set(2017,11,23, 0, 0 ,0);
 
-            event = new Event( "Weihnachtsmarkt 2017", startDate.getTime() , endDate.getTime(), "Bauptstraße 12, 40597 Düsseldorf");
+            event = new Event( "Weihnachtsmarkt 2017", startDate.getTime() , endDate.getTime(), "Hauptstraße", 19, "40597", "MalleSüd");
             System.out.println(endDate.getTime().toString());
             this.save(event);
         }
