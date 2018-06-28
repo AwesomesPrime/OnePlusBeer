@@ -49,4 +49,13 @@ public class mainMenuController implements Initializable {
         stage.setScene(newScene);
     }
 
+    public void onMouseClickEvent(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/eventlist/eventlist.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        stage.setScene(newScene);
+    }
+
 }

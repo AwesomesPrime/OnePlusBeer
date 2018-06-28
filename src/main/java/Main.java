@@ -12,6 +12,7 @@ import orm.UserDatabaseService;
 import orm.UserPermissionDatabaseService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application{
 
@@ -40,7 +41,7 @@ public class Main extends Application{
             System.out.println(up.toString());
         }
 
-        List<entities.User> users = userService.getAll(entities.User.class);
+        List<User> users = userService.getAll(entities.User.class);
         for(entities.User u: users){
             System.out.println(u.toString());
         }

@@ -15,7 +15,12 @@
 
 <SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.eventlist.EventListController">
   <items>
-      <AnchorPane prefHeight="451.0" prefWidth="147.0" />
+      <AnchorPane fx:id="eventPane" prefHeight="451.0" prefWidth="147.0" >
+          <children>
+              <Label fx:id="menuEmployee" layoutX="14.0" layoutY="71.0" onMouseClicked="#onMouseClickEmployee" text="Mitarbeiter" />
+              <Label layoutX="14.0" layoutY="32.0" onMouseClicked="#onMouseClickMain" text="Home" />
+              <Label fx:id="menuEvent" layoutX="14.0" layoutY="115.0"  text="Veranstaltungen" />
+          </children></AnchorPane>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
          <content>
             <GridPane alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" vgap="20.0">
@@ -33,7 +38,7 @@
                      <font>
                         <Font size="22.0" />
                      </font></Label>
-                  <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+                  <TableView fx:id="tableView" onMouseClicked="#onMouseClick" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                     <columns>
                       <TableColumn fx:id="colAnschrift" editable="false" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="128.0" text="Anschrift" />
                       <TableColumn fx:id="colName" editable="false" maxWidth="1.7976931348623157E308" prefWidth="124.0" text="Veranstaltungsname" />

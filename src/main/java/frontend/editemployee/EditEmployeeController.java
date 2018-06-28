@@ -135,6 +135,16 @@ public class EditEmployeeController implements Initializable {
 
     }
 
+    public void onMouseClickEvent(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/eventlist/eventlist.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) editPane.getScene().getWindow();
+        stage.setScene(newScene);
+    }
+
+
     private void validateInput() {
         if( !inputValidation.validateText(txtVorname.getText())) {
             popup.generateWarningPopupWindow("Der Vorname beinhaltet ungültig Zeichen.");

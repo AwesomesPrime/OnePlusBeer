@@ -3,16 +3,25 @@ package frontend.eventlist;
 import com.jfoenix.controls.JFXTextField;
 import entities.Employee;
 import entities.Event;
+import frontend.editemployee.EditEmployeeController;
+import frontend.editevent.EditEventController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import orm.EmployeeDatabaseService;
 import orm.EventDatabaseService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +42,9 @@ public class EventListController implements Initializable {
     private TableColumn<Event, Date> colStart, colEnd;
 
     @FXML
+    private AnchorPane eventPane;
+
+    @FXML
     public void initialize(URL url, ResourceBundle rb){
 
         txtSearch.setLabelFloat(true);
@@ -47,6 +59,40 @@ public class EventListController implements Initializable {
         ObservableList<Event> eventList = FXCollections.observableList(events);
 
         tableView.setItems(eventList);
+    }
+
+    public void onMouseClick(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 2) {
+            Event currentItemSelected = tableView.getSelectionModel().getSelectedItem();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editevent/editevent.fxml"));
+            Parent root = fxmlLoader.load();
+            EditEventController editEventController = fxmlLoader.<EditEventController>getController();
+            editEventController.getDataFromEventView(currentItemSelected);
+            Scene newScene = new Scene(root,1000,800);
+            Stage stage = (Stage) eventPane.getScene().getWindow();
+            stage.setScene(newScene);
+
+        }
+    }
+
+    public void onMouseClickEmployee(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/employeelist/employeelist.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) eventPane.getScene().getWindow();
+        stage.setScene(newScene);
+    }
+
+    public void onMouseClickMain(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/mainMenu/mainMenu.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) eventPane.getScene().getWindow();
+        stage.setScene(newScene);
+
     }
 
 }

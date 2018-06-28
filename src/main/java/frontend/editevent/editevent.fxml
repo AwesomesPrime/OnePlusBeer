@@ -12,9 +12,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.editemployee.Controller">
+<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.editevent.EditEventController">
   <items>
-      <AnchorPane prefHeight="451.0" prefWidth="147.0" />
+      <AnchorPane  fx:id="eventPane" prefHeight="451.0" prefWidth="147.0" >
+          <children>
+              <Label fx:id="menuEmployee" layoutX="14.0" layoutY="71.0" onMouseClicked="#onMouseClickEmployee" text="Mitarbeiter" />
+              <Label fx:id="menuMain" layoutX="14.0" layoutY="32.0" onMouseClicked="#onMouseClickMain" text="Home" />
+              <Label fx:id="menuEvent" layoutX="14.0" layoutY="115.0" onMouseClicked="#onMouseClickEvent" text="Veranstaltungen" />
+          </children></AnchorPane>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
          <content>
             <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" vgap="20.0">
