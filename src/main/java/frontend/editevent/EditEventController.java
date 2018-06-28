@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import controller.EmployeeController;
+import controller.EventController;
 import entities.Employee;
 import entities.Event;
 import javafx.event.ActionEvent;
@@ -16,16 +17,22 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class EditEventController implements Initializable {
 
     private final InputValidation inputValidation = new InputValidation();
+    private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML
     private AnchorPane eventPane;
@@ -98,7 +105,38 @@ public class EditEventController implements Initializable {
 
     @FXML
     public void clickEdit(ActionEvent event){
+        try{
+           EventController eventController = new EventController();
 
+            Calendar startDate = Calendar.getInstance();
+            startDate.set(
+                    dateStart.getValue().getYear(),
+                    dateStart.getValue().getMonthValue(),
+                    dateStart.getValue().getDayOfMonth(),
+                    timeStart.getValue().getHour(),
+                    timeStart.getValue().getMinute(),
+                    timeStart.getValue().getSecond());
+            Calendar endDate = Calendar.getInstance();
+            endDate.set(
+                    dateEnd.getValue().getYear(),
+                    dateEnd.getValue().getMonthValue(),
+                    dateEnd.getValue().getDayOfMonth(),
+                    timeEnd.getValue().getHour(),
+                    timeEnd.getValue().getMinute(),
+                    timeEnd.getValue().getSecond());
+
+            eventController.addEvent( new Event( txtName.getText(),
+                                                startDate.getTime(),
+                                                endDate.getTime(),
+                                                txtStrasse.getText(),
+                                                Integer.parseInt(txtHausNr.getText()),
+                                                txtPLZ.getText(),
+                                                txtOrt.getText()));
+            popup.generateInformationPopupWindow(txtName.getText() + " wurde verarbeitet.");
+        }
+        catch(NumberFormatException e){
+            popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
+        }
     }
 
     private void validateInput() {
