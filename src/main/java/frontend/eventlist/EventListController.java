@@ -38,7 +38,7 @@ public class EventListController implements Initializable {
         txtSearch.setLabelFloat(true);
 
         colName.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getName()));
-        //colAnschrift.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAddress()));
+        colAnschrift.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStreet() + " " + cellData.getValue().getHouseNumber()+ ", " + cellData.getValue().getPlz()+ " " + cellData.getValue().getCity()));
         colStart.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStart()));
         colEnd.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEnd()));
 

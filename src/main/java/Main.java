@@ -18,7 +18,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("frontend/eventlist/eventlist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("frontend/editevent/editevent.fxml"));
         primaryStage.setTitle("OnePlusBier");
         primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.show();
