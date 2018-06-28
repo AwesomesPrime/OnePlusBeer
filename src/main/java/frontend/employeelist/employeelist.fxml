@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.employeelist.Controller">
+<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.employeelist.EmployeeListController">
   <items>
       <AnchorPane prefHeight="451.0" prefWidth="147.0" />
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
@@ -33,7 +33,7 @@
                      <font>
                         <Font size="22.0" />
                      </font></Label>
-                  <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+                  <TableView fx:id="tableView" onMouseClicked="#OnMouseClick" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                     <columns>
                       <TableColumn fx:id="colID" editable="false" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="-1.0" text="ID" />
                       <TableColumn fx:id="colVorname" editable="false" maxWidth="1.7976931348623157E308" prefWidth="70.0" text="Vorname" />
