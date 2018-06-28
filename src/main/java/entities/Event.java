@@ -22,18 +22,30 @@ public class Event {
     @Column(name = "endDate")
     private Date end;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "houseNumber")
+    private int houseNumber;
+
+    @Column(name = "plz")
+    private String plz;
+
+    @Column(name = "city")
+    private String city;
 
 
     public Event() {
     }
 
-    public Event(String name, Date start, Date end, String address) {
+    public Event(String name, Date start, Date end, String street, int houseNumber, String plz, String city) {
         this.name = name;
         this.start = start;
         this.end = end;
-        this.address = address;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.plz = plz;
+        this.city = city;
     }
 
     public int getId() {
@@ -64,12 +76,37 @@ public class Event {
         this.end = end;
     }
 
-    public String getAddress() {
-        return address;
+
+    public String getStreet() {
+        return street;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPlz() {
+        return plz;
+    }
+
+    public void setPlz(String plz) {
+        this.plz = plz;
+    }
+
+    public int getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(int houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
@@ -79,7 +116,10 @@ public class Event {
                 ", name='" + name + '\'' +
                 ", start=" + start +
                 ", end=" + end +
-                ", address='" + address + '\'' +
+                ", street='" + street + '\'' +
+                ", houseNumber=" + houseNumber +
+                ", plz='" + plz + '\'' +
+                ", city='" + city + '\'' +
                 '}';
     }
 }

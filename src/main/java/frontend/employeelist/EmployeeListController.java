@@ -21,6 +21,7 @@ import frontend.editemployee.EditEmployeeController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeeListController implements Initializable {
@@ -49,7 +50,7 @@ public class EmployeeListController implements Initializable {
         colBerufsstatus.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getWorkingStatus()));
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
-        ArrayList<Employee> employees = employeeDatabaseService.getAll(Employee.class);
+        List<Employee> employees = employeeDatabaseService.getAll(Employee.class);
         ObservableList<Employee> employeeList = FXCollections.observableList(employees);
 
         tableView.setItems(employeeList);
