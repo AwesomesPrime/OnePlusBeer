@@ -114,7 +114,7 @@
                    <JFXTextField fx:id="txtSteuerID" GridPane.columnIndex="1" GridPane.rowIndex="20" />
                    <JFXTextField fx:id="txtAnstellungsstatus" GridPane.columnIndex="1" GridPane.rowIndex="21" />
                    <JFXTextArea fx:id="txtBemerkung" GridPane.columnIndex="1" GridPane.rowIndex="22" />
-                   <JFXButton fx:id="btnEditEmployee" onAction="#clickEdit" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />
+                   <JFXButton fx:id="btnEditEmployee" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />
                </children>
             </GridPane>
          </content>

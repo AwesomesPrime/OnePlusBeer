@@ -12,23 +12,22 @@ import javafx.fxml.Initializable;
 import controller.EmployeeController;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EditEmployeeController implements Initializable {
 
     private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
+    private final EmployeeController employeeController = new EmployeeController();
+
 
     @FXML
     private JFXTextField txtVorname;
@@ -70,6 +69,8 @@ public class EditEmployeeController implements Initializable {
     @FXML
     private AnchorPane editPane;
 
+    private Employee employee;
+
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -77,6 +78,8 @@ public class EditEmployeeController implements Initializable {
     }
 
     public void getDataFromEmployeeView(Employee employee) {
+        this.employee = employee;
+
         txtVorname.setText(employee.getFirstName());
         txtNachname.setText(employee.getLastName());
         txtStrasse.setText(employee.getStreet());
@@ -96,24 +99,56 @@ public class EditEmployeeController implements Initializable {
     }
 
     @FXML
-    public void clickEdit(ActionEvent event){
+    public void apply(ActionEvent event){
         try{
-            EmployeeController employeeController = new EmployeeController();
             validateInput();
-            employeeController.addEmployee( new Employee(   "", txtVorname.getText(),
-                    txtNachname.getText(),txtStrasse.getText(),
-                    Integer.parseInt(txtHausNr.getText()), Integer.parseInt(txtPLZ.getText()),
-                    txtOrt.getText(), txtFestnetz.getText(),
-                    txtMobil.getText(), txtEmail.getText(),
-                    txtIBAN.getText(), txtBIC.getText(),
-                    Integer.parseInt(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
-                    true,0,
-                    txtSteuerID.getText(),0, txtBemerkung.getText() ));
-                    popup.generateInformationPopupWindow(txtVorname.getText() + " " + txtNachname.getText() + " wurde verarbeitet.");
+            if(this.employee == null) {
+                employeeController.addEmployee(generateEmployee());
+                generateEmployee();
+            } else {
+
+                employeeController.addEmployee(this.employee);
+
+            }
+            popup.generateInformationPopupWindow(txtVorname.getText() + " " + txtNachname.getText() + " wurde verarbeitet.");
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
         }
+    }
+
+    private Employee generateEmployeeOnExisting() {
+        Employee employee = this.employee;
+        employee.setFirstName(txtVorname.getText());
+        employee.setLastName(txtNachname.getText());
+        employee.setStreet(txtStrasse.getText());
+        employee.setHouseNumber(Integer.parseInt(txtHausNr.getText()));
+        employee.setPlz(Integer.parseInt(txtPLZ.getText()));
+        employee.setCity(txtOrt.getText());
+        employee.setPhoneNumber(txtFestnetz.getText());
+        employee.setMobileNumber(txtMobil.getText());
+        employee.setMailAddress(txtEmail.getText());
+        employee.setIban(txtIBAN.getText());
+        employee.setBic(txtBIC.getText());
+        employee.setBruttoPerHour(Integer.parseInt(txtBruttoStdSatz.getText()));
+        employee.setStartOfEmployment(dateBesschSeit.getValue().toString());
+        //employee.setActivityState(//TODO switch for activity);
+        employee.setTaxNumber(txtSteuerID.getText());
+        employee.setComments(txtBemerkung.getText());
+
+        return employee;
+    }
+
+    private Employee generateEmployee() {
+        return new Employee("", txtVorname.getText(),
+                txtNachname.getText(), txtStrasse.getText(),
+                Integer.parseInt(txtHausNr.getText()), Integer.parseInt(txtPLZ.getText()),
+                txtOrt.getText(), txtFestnetz.getText(),
+                txtMobil.getText(), txtEmail.getText(),
+                txtIBAN.getText(), txtBIC.getText(),
+                Integer.parseInt(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
+                true, 0,
+                txtSteuerID.getText(), 0, txtBemerkung.getText());
     }
 
     public void onMouseClickEmployee(MouseEvent event) throws IOException {
