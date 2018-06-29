@@ -28,15 +28,20 @@ public class Stand {
     @Column (name="closingtime")
     private LocalTime closingTime;
 
+    @ManyToOne
+    @JoinColumn(name ="fk_standDescription")
+    private StandDescription standDescription;
+
     public Stand() {
     }
 
-    public Stand(String street, String zip, String city, LocalTime openingTimes, LocalTime closingTime) {
+    public Stand(String street, String zip, String city, LocalTime openingTimes, LocalTime closingTime, StandDescription standDescription) {
         this.street = street;
         this.zip = zip;
         this.city = city;
         this.openingTimes = openingTimes;
         this.closingTime = closingTime;
+        this.standDescription = standDescription;
     }
 
     public void setOpeningTimes(LocalTime openingTimes) {this.openingTimes = openingTimes;}
@@ -85,5 +90,13 @@ public class Stand {
                 ", openingTimes=" + openingTimes +
                 ", closingTime=" + closingTime +
                 '}';
+    }
+
+    public StandDescription getStandDescription() {
+        return standDescription;
+    }
+
+    public void setStandDescription(StandDescription standDescription) {
+        this.standDescription = standDescription;
     }
 }

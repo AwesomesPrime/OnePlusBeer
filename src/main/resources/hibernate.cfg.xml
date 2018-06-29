@@ -14,5 +14,6 @@
         <mapping class="entities.Event"/>
         <mapping class="entities.ResourcePlanning"/>
         <mapping class="entities.Stand"/>
+        <mapping class="entities.StandDescription"/>
     </session-factory>
 </hibernate-configuration>

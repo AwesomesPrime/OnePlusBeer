@@ -118,7 +118,8 @@ public class Main extends Application{
         /* Load Sample Data for Stand */
         ArrayList<Stand> stands = standDatabaseService.getAll(Stand.class);
         if(stands.size() == 0){
-            stand = new Stand("Bierstand","Straße","239","Berlin","12-18","Sieht gut aus");
+            StandDescription standDescription = new StandDescription("Oettinger Stand", "Bierstand", "IloveBier");
+            stand = new Stand("hanstraße","1544","malleSüd",LocalTime.now(), LocalTime.MIDNIGHT, standDescription);
             standDatabaseService.save(stand);
         }
 
@@ -135,11 +136,17 @@ public class Main extends Application{
             ResourcePlanning resourcePlanningOne = new ResourcePlanning(employee,eventOne,stand,startWorkingTime.getTime(),endWorkingTime.getTime(),30,30.4);
             resourcePlanningDatabaseService.save(resourcePlanningOne);
 
-            startWorkingTime.set(2018,12,2,8,0,0);
-            endWorkingTime.set(2018,12,2,16,0,0);
+            startWorkingTime.set(2018,11,2,8,0,0);
+            endWorkingTime.set(2018,11,2,16,0,0);
 
             ResourcePlanning resourcePlanningTwo = new ResourcePlanning(employee,eventOne,stand,startWorkingTime.getTime(), endWorkingTime.getTime(),30,30.4);
             resourcePlanningDatabaseService.save(resourcePlanningTwo);
+
+            startWorkingTime.set(2018,10,3,5,0,0);
+            endWorkingTime.set(2018,10,3,21,0,0);
+
+            ResourcePlanning resourcePlanningThree = new ResourcePlanning(employee,eventTwo,stand,startWorkingTime.getTime(), endWorkingTime.getTime(), 30, 30.4);
+            resourcePlanningDatabaseService.save(resourcePlanningThree);
         }
 
     }
