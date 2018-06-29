@@ -1,12 +1,9 @@
 package frontend.editevent;
 
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
-import controller.EmployeeController;
 import controller.EventController;
-import entities.Employee;
 import entities.Event;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,13 +17,11 @@ import javafx.stage.Stage;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class EditEventController implements Initializable {
@@ -69,10 +64,16 @@ public class EditEventController implements Initializable {
         txtOrt.setText(event.getCity());
         txtPLZ.setText(event.getPlz());
         txtName.setText(event.getName());
-        //dateStart.setValue(event.getStart());
-        //timeStart ???
-        //dateEnd.setValue(event.getEnd());
-        //timeEnd ???
+        dateStart.setValue(event.getStart()
+                                .toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalDate());
+        timeStart.setValue(event.getStartTime());
+        dateEnd.setValue(event.getEnd()
+                                .toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalDate());
+        timeEnd.setValue(event.getEndTime());
     }
 
     public void onMouseClickEmployee(MouseEvent event) throws IOException {
@@ -128,6 +129,8 @@ public class EditEventController implements Initializable {
             eventController.addEvent( new Event( txtName.getText(),
                                                 startDate.getTime(),
                                                 endDate.getTime(),
+                                                timeStart.getValue(),
+                                                timeEnd.getValue(),
                                                 txtStrasse.getText(),
                                                 Integer.parseInt(txtHausNr.getText()),
                                                 txtPLZ.getText(),

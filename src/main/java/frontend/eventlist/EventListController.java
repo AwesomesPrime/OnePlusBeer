@@ -1,9 +1,7 @@
 package frontend.eventlist;
 
 import com.jfoenix.controls.JFXTextField;
-import entities.Employee;
 import entities.Event;
-import frontend.editemployee.EditEmployeeController;
 import frontend.editevent.EditEventController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -18,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import orm.EmployeeDatabaseService;
 import orm.EventDatabaseService;
 
 import java.io.IOException;
@@ -74,6 +71,15 @@ public class EventListController implements Initializable {
             stage.setScene(newScene);
 
         }
+    }
+
+    public void addEventOnClick(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editevent/editevent.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) eventPane.getScene().getWindow();
+        stage.setScene(newScene);
     }
 
     public void onMouseClickEmployee(MouseEvent event) throws IOException {

@@ -60,7 +60,7 @@
                     </columns>
                   </TableView>
                   <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
-                   <FontAwesomeIconView fx:id="addEmployee" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                   <FontAwesomeIconView fx:id="addEmployee" glyphName="PLUS" glyphStyle="-fx-fill: #444444" onMouseClicked="#addEmployeeOnClick" size="22px" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></FontAwesomeIconView>

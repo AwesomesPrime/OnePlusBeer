@@ -8,10 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -22,7 +20,6 @@ import frontend.editemployee.EditEmployeeController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -75,6 +72,15 @@ public class EmployeeListController implements Initializable {
             stage.setScene(newScene);
 
         }
+    }
+
+    public void addEmployeeOnClick(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editemployee/editemployee.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) employeeListPane.getScene().getWindow();
+        stage.setScene(newScene);
     }
 
     public void onMouseClickMain(MouseEvent event) throws IOException {

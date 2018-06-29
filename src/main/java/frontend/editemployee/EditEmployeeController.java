@@ -22,6 +22,8 @@ import validation.InputValidation;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -77,6 +79,10 @@ public class EditEmployeeController implements Initializable {
     }
 
     public void getDataFromEmployeeView(Employee employee) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate date = LocalDate.parse(employee.getStartOfEmployment(), formatter);
+
         txtVorname.setText(employee.getFirstName());
         txtNachname.setText(employee.getLastName());
         txtStrasse.setText(employee.getStreet());
@@ -89,7 +95,7 @@ public class EditEmployeeController implements Initializable {
         txtIBAN.setText(employee.getIban());
         txtBIC.setText(employee.getBic());
         txtBruttoStdSatz.setText(Double.toString(employee.getBruttoPerHour()));
-        //dateBesschSeit.setValue(employee.getStartOfEmployment());
+        dateBesschSeit.setValue(date);
         txtSteuerID.setText(employee.getTaxNumber());
         txtBemerkung.setText(employee.getComments());
 
