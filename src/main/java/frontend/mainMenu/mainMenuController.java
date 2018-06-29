@@ -40,6 +40,15 @@ public class mainMenuController implements Initializable {
         //Leer
     }
 
+    public void openLogin(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/login/login.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        stage.setScene(newScene);
+    }
+
     public void onMouseClickEmployee(MouseEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/employeelist/employeelist.fxml"));
