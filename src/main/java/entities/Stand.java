@@ -2,6 +2,7 @@ package entities;
 
 
 import javax.persistence.*;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="Stand")
@@ -11,9 +12,6 @@ public class Stand {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column(name = "type")
-    private String type;
 
     @Column(name = "street")
     private String street;
@@ -25,33 +23,30 @@ public class Stand {
     private String city;
 
     @Column(name = "openingtime")
-    private String openingTimes;
+    private LocalTime openingTimes;
 
-    @Column(name = "note")
-    private String note;
+    @Column (name="closingtime")
+    private LocalTime closingTime;
 
     public Stand() {
     }
 
-    public Stand(String type, String street, String zip, String city, String openingTimes, String note) {
-        this.type = type;
+    public Stand(String street, String zip, String city, LocalTime openingTimes, LocalTime closingTime) {
         this.street = street;
         this.zip = zip;
         this.city = city;
         this.openingTimes = openingTimes;
-        this.note = note;
+        this.closingTime = closingTime;
     }
+
+    public void setOpeningTimes(LocalTime openingTimes) {this.openingTimes = openingTimes;}
+
+    public LocalTime getClosingTime() {return closingTime;}
+
+    public void setClosingTime(LocalTime closingTime) {this.closingTime = closingTime;}
 
     public int getId() {
         return id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getStreet() {
@@ -78,32 +73,17 @@ public class Stand {
         this.city = city;
     }
 
-    public String getOpeningTimes() {
-        return openingTimes;
-    }
 
-    public void setOpeningTimes(String openingTimes) {
-        this.openingTimes = openingTimes;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
 
     @Override
     public String toString() {
         return "Stand{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
                 ", street='" + street + '\'' +
                 ", zip='" + zip + '\'' +
                 ", city='" + city + '\'' +
-                ", openingTimes='" + openingTimes + '\'' +
-                ", note='" + note + '\'' +
+                ", openingTimes=" + openingTimes +
+                ", closingTime=" + closingTime +
                 '}';
     }
 }
