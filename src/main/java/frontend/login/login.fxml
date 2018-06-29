@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<GridPane alignment="center" hgap="16.0" vgap="16.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.login.Controller">
+<GridPane fx:id="LoginPane" alignment="center" hgap="16.0" vgap="16.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.login.Controller">
     <children>
       <JFXTextField fx:id="txtUsername" promptText="Username" GridPane.rowIndex="1">
          <GridPane.margin>
