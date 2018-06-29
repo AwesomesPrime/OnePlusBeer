@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by Stefan on 25.06.2018.
  */
-public  . class GenericDatabaseService<T> implements IGenericDatabaseService<T> {
+public abstract class GenericDatabaseService<T> implements IGenericDatabaseService<T> {
 
     public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
