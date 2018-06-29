@@ -77,7 +77,7 @@ public class Main extends Application{
         /* Load Sample Data for Employee */
         ArrayList<Employee> employees = employeeService.getAll(Employee.class);
         if(employees.size() == 0){
-            Employee employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "01.01.2010", true, 0, "684312468473214", 0, "Comment" );
+            Employee employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "2010-01-01", true, 0, "684312468473214", 0, "Comment" );
             employeeService.save(employee);
         }
 

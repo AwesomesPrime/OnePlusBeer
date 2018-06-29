@@ -3,8 +3,11 @@ package validation;
 import interfaces.Validation;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputValidation implements Validation {
+
 
     public boolean validateText(String text) {
         return text.matches("[a-z|A-Z| ä|ö|ü|ß|Ö|Ä|Ü]+");
@@ -16,8 +19,9 @@ public class InputValidation implements Validation {
 
     public boolean validateStartDateBeforeEndDate(Date start, Date end) { return start.before(end);}
 
-    public boolean validateEmail(String mail) {
-        return mail.matches("[a-z]+@{1}[a-z]+.{1}[a-z]+");
+    public boolean validateEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
     }
 
     public boolean validateIBAN(String iban) {
@@ -35,5 +39,8 @@ public class InputValidation implements Validation {
     public boolean validatePhone(String phone) {
         return phone.matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}");
     }
+
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 }
