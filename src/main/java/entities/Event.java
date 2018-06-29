@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -22,6 +23,12 @@ public class Event {
     @Column(name = "endDate")
     private Date end;
 
+    @Column(name = "startTime")
+    private LocalTime startTime;
+
+    @Column(name = "endTime")
+    private LocalTime endTime;
+
     @Column(name = "street")
     private String street;
 
@@ -38,14 +45,33 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, Date start, Date end, String street, int houseNumber, String plz, String city) {
+    public Event(String name, Date start, Date end, LocalTime startTime, LocalTime endTime, String street, int houseNumber, String plz, String city) {
         this.name = name;
         this.start = start;
         this.end = end;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.street = street;
         this.houseNumber = houseNumber;
         this.plz = plz;
         this.city = city;
+    }
+
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public int getId() {

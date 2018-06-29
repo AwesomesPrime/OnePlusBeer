@@ -18,7 +18,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("frontend/mainMenu/mainMenu.fxml"));
-        primaryStage.setTitle("OnePlusBier");
+        primaryStage.setTitle("OnePlusBeer");
         primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.show();
     }
@@ -44,7 +44,7 @@ public class Main extends Application{
             System.out.println(up.toString());
         }
 
-        List<entities.User> users = userService.getAll(entities.User.class);
+        List<User> users = userService.getAll(entities.User.class);
         for(entities.User u: users){
             System.out.println(u.toString());
         }

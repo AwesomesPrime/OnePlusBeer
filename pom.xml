@@ -29,8 +29,8 @@
         <!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx-commons -->
         <dependency>
             <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-commons</artifactId>
-            <version>9.1.2</version>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.9</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->

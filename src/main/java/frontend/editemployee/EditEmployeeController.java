@@ -20,6 +20,9 @@ import validation.InputValidation;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EditEmployeeController implements Initializable {
@@ -78,6 +81,9 @@ public class EditEmployeeController implements Initializable {
     }
 
     public void getDataFromEmployeeView(Employee employee) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate date = LocalDate.parse(employee.getStartOfEmployment(), formatter);
         this.employee = employee;
 
         txtVorname.setText(employee.getFirstName());
@@ -92,7 +98,7 @@ public class EditEmployeeController implements Initializable {
         txtIBAN.setText(employee.getIban());
         txtBIC.setText(employee.getBic());
         txtBruttoStdSatz.setText(Double.toString(employee.getBruttoPerHour()));
-        //dateBesschSeit.setValue(employee.getStartOfEmployment());
+        dateBesschSeit.setValue(date);
         txtSteuerID.setText(employee.getTaxNumber());
         txtBemerkung.setText(employee.getComments());
 
@@ -169,6 +175,16 @@ public class EditEmployeeController implements Initializable {
         stage.setScene(newScene);
 
     }
+
+    public void onMouseClickEvent(MouseEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/eventlist/eventlist.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene newScene = new Scene(root,1000,800);
+        Stage stage = (Stage) editPane.getScene().getWindow();
+        stage.setScene(newScene);
+    }
+
 
     private void validateInput() {
         if( !inputValidation.validateText(txtVorname.getText())) {
