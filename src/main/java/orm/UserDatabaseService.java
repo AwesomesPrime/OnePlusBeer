@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class UserDatabaseService extends GenericDatabaseService<User> {
 
     public UserDatabaseService(){
+
     }
 
     @SuppressWarnings("unchecked")

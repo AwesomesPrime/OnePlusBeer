@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import orm.*;
+import usermanagement.ActiveUser;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -27,28 +28,12 @@ public class Main extends Application{
 
     public static void main(String[] args){
 
-        loadSampleData();
-
         /*TestOutput*/
         UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
         EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
         UserDatabaseService userService = new UserDatabaseService();
 
-
-        List<Employee> employees = employeeService.getAll(entities.Employee.class);
-        for(entities.Employee e: employees){
-            System.out.println(e.toString());
-        }
-
-        List<entities.UserPermission> userpermissions = userPermissionService.getAll(entities.UserPermission.class);
-        for(entities.UserPermission up: userpermissions){
-            System.out.println(up.toString());
-        }
-
-        List<User> users = userService.getAll(entities.User.class);
-        for(entities.User u: users){
-            System.out.println(u.toString());
-        }
+        loadSampleData();
 
         launch(args);
     }
