@@ -2,10 +2,13 @@ package frontend.login;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import orm.UserDatabaseService;
+import usermanagement.ActiveUser;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -32,14 +35,25 @@ public class Controller implements Initializable {
 
     @FXML
     public void checkLogin(ActionEvent event) throws IOException {
+        UserDatabaseService userService = new UserDatabaseService();
+        User user = userService.getUserByEmail(txtUsername.getText());
 
-        System.out.println("Clicked Login");
+        if(user != null){
+            if(user.getPassword().equals(txtPassword.getText())){
+                new ActiveUser(user);
+                System.out.println(ActiveUser.getMailAddress() + " => Permissionlevel: " + ActiveUser.getPermission());
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/mainMenu/mainMenu.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene newScene = new Scene(root,1000,800);
-        Stage stage = (Stage) LoginPane.getScene().getWindow();
-        stage.setScene(newScene);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/mainMenu/mainMenu.fxml"));
+                Parent root = fxmlLoader.load();
+                Scene newScene = new Scene(root,1000,800);
+                Stage stage = (Stage) LoginPane.getScene().getWindow();
+                stage.setScene(newScene);
+            }else {
+                System.out.println("Das Passwort ist falsch!");
+            }
+        }else{
+            System.out.println("Nutzer existiert nicht!");
+        }
     }
 
 }

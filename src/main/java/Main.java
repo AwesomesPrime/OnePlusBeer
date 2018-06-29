@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import orm.*;
+import usermanagement.ActiveUser;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -27,28 +28,12 @@ public class Main extends Application{
 
     public static void main(String[] args){
 
-        loadSampleData();
-
         /*TestOutput*/
         UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
         EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
         UserDatabaseService userService = new UserDatabaseService();
 
-
-        List<Employee> employees = employeeService.getAll(entities.Employee.class);
-        for(entities.Employee e: employees){
-            System.out.println(e.toString());
-        }
-
-        List<entities.UserPermission> userpermissions = userPermissionService.getAll(entities.UserPermission.class);
-        for(entities.UserPermission up: userpermissions){
-            System.out.println(up.toString());
-        }
-
-        List<User> users = userService.getAll(entities.User.class);
-        for(entities.User u: users){
-            System.out.println(u.toString());
-        }
+        loadSampleData();
 
         launch(args);
     }
@@ -77,7 +62,7 @@ public class Main extends Application{
         /* Load Sample Data for Employee */
         ArrayList<Employee> employees = employeeService.getAll(Employee.class);
         if(employees.size() == 0){
-            Employee employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "01.01.2010", true, 0, "684312468473214", 0, "Comment" );
+            Employee employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "2010-01-01", true, 0, "684312468473214", 0, "Comment" );
             employeeService.save(employee);
         }
 

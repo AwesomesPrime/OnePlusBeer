@@ -82,7 +82,7 @@ public class EditEmployeeController implements Initializable {
 
     public void getDataFromEmployeeView(Employee employee) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(employee.getStartOfEmployment(), formatter);
         this.employee = employee;
 
@@ -107,14 +107,12 @@ public class EditEmployeeController implements Initializable {
     @FXML
     public void apply(ActionEvent event){
         try{
-            validateInput();
+            //validateInput();
             if(this.employee == null) {
                 employeeController.addEmployee(generateEmployee());
                 generateEmployee();
             } else {
-
-                employeeController.addEmployee(this.employee);
-
+                employeeController.addEmployee(generateEmployeeOnExisting());
             }
             popup.generateInformationPopupWindow(txtVorname.getText() + " " + txtNachname.getText() + " wurde verarbeitet.");
         }
@@ -136,7 +134,7 @@ public class EditEmployeeController implements Initializable {
         employee.setMailAddress(txtEmail.getText());
         employee.setIban(txtIBAN.getText());
         employee.setBic(txtBIC.getText());
-        employee.setBruttoPerHour(Integer.parseInt(txtBruttoStdSatz.getText()));
+        employee.setBruttoPerHour(Double.parseDouble(txtBruttoStdSatz.getText()));
         employee.setStartOfEmployment(dateBesschSeit.getValue().toString());
         //employee.setActivityState(//TODO switch for activity);
         employee.setTaxNumber(txtSteuerID.getText());
@@ -152,7 +150,7 @@ public class EditEmployeeController implements Initializable {
                 txtOrt.getText(), txtFestnetz.getText(),
                 txtMobil.getText(), txtEmail.getText(),
                 txtIBAN.getText(), txtBIC.getText(),
-                Integer.parseInt(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
+                Double.parseDouble(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
                 true, 0,
                 txtSteuerID.getText(), 0, txtBemerkung.getText());
     }
