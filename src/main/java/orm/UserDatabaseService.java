@@ -16,14 +16,6 @@ import java.util.ArrayList;
 public class UserDatabaseService extends GenericDatabaseService<User> {
 
     public UserDatabaseService(){
-        EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
-        UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
-
-        ArrayList<User> userpermissions = this.getAll(User.class);
-        if(userpermissions.size() == 0){
-            entities.User user = new entities.User( employeeService.get(Employee.class, 1), userPermissionService.get(UserPermission.class, 2), "pwtest");
-            this.save(user);
-        }
     }
 
     @SuppressWarnings("unchecked")
