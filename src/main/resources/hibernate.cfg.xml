@@ -12,5 +12,7 @@
         <mapping class="entities.UserPermission"/>
         <mapping class="entities.User"/>
         <mapping class="entities.Event"/>
+        <mapping class="entities.ResourcePlanning"/>
+        <mapping class="entities.Stand"/>
     </session-factory>
 </hibernate-configuration>
