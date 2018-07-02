@@ -42,6 +42,16 @@ public class ResourcePlanning {
     @Column(name = "travelExpenses")
     private double travelExpenses;
 
+    @Column(name = "travelDistance")
+    private double travelDistance;
+
+    @Column(name = "travelStart")
+    private String travelStart;
+
+    @Column(name = "comment")
+    private String comment;
+
+
     public int getId() {
         return id;
     }
@@ -130,5 +140,29 @@ public class ResourcePlanning {
                 ", pauseTime=" + pauseTime +
                 ", travelExpenses=" + travelExpenses +
                 '}';
+    }
+
+    public double getTravelDistance() {
+        return travelDistance;
+    }
+
+    public void setTravelDistance(double travelDistance) {
+        this.travelDistance = travelDistance;
+    }
+
+    public String getTravelStart() {
+        return travelStart;
+    }
+
+    public void setTravelStart(String travelStart) {
+        this.travelStart = travelStart;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
