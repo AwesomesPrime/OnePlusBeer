@@ -14,3 +14,91 @@
     -fx-border-width: 1;
     -fx-border-color: #000000;
 }
+.menuLabel{
+    -fx-cursor: HAND;
+}
+
+.cursorHand{
+    -fx-cursor: HAND;
+}
+
+.innerPane, .outerPane{
+    -fx-padding: 20;
+}
+
+.button{
+    -fx-border-width: 1;
+    -fx-border-color: #000000;
+}
+
+JFXTextField,JFXPasswordField{
+    -jfx-label-float: true;
+    -jfx-focus-color: #4DB6AC;
+}
+
+JFXButton{
+    -fx-background-color: #4DB6AC;
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 0;
+}
+
+TableView{
+-fx-focus-color: transparent;
+-fx-border-width: 0;
+}
+
+TableView .column-header .label {
+     -fx-font-size: 12pt;
+     -fx-font-style: regular;
+     -fx-font-weight: regular;
+     -fx-font-family: "System";
+     -fx-text-fill: #141414;
+     -fx-alignment: center;
+     -fx-opacity: 1;
+ }
+
+ .table-view .column-header, .table-view .filler {
+     -fx-background-color: white;
+     -fx-size: 30;
+     -fx-border-color: -fx-box-border;
+     -fx-border-width: 0 0 1 0 ;
+     -fx-border-insets: 0;
+ }
+
+ .table-view .column-header-background {
+     -fx-background-color: transparent;
+ }
+
+.table-cell{
+ -fx-font: "System";
+ -fx-font-size: 10pt;
+ -fx-border-width: 0;
+}
+
+.table-row-cell{
+    -fx-focus-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-row-cell:hover{
+    -fx-background-color: #DFDFDF;
+}
+
+.table-row-cell:empty, .table-cell:empty:hover {
+    -fx-background-color: transparent;
+}
+
+
+.table-view:row-selection .table-row-cell:filled:selected {
+    -fx-background-color: #4DB6AC;
+    -fx-focus-color: transparent;
+}
+
+.table-view .column-header:hover {
+    -fx-background-color: whitesmoke;
+}
+
+.heading{
+    -fx-font-size: 24pt;
+}
