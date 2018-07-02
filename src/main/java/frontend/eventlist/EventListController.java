@@ -14,10 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import orm.EventDatabaseService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,7 +23,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EventListController implements Initializable {
-
 
     @FXML
     private JFXTextField txtSearch;
@@ -35,11 +32,9 @@ public class EventListController implements Initializable {
 
     @FXML
     private TableColumn<Event, String> colAnschrift, colName;
-    @FXML
-    private TableColumn<Event, Date> colStart, colEnd;
 
     @FXML
-    private AnchorPane eventPane;
+    private TableColumn<Event, Date> colStart, colEnd;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -58,7 +53,7 @@ public class EventListController implements Initializable {
         tableView.setItems(eventList);
     }
 
-    public void onMouseClick(MouseEvent event) throws IOException {
+    public void editEvent(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Event currentItemSelected = tableView.getSelectionModel().getSelectedItem();
 
@@ -66,39 +61,21 @@ public class EventListController implements Initializable {
             Parent root = fxmlLoader.load();
             EditEventController editEventController = fxmlLoader.<EditEventController>getController();
             editEventController.getDataFromEventView(currentItemSelected);
-            Scene newScene = new Scene(root,1000,800);
-            Stage stage = (Stage) eventPane.getScene().getWindow();
-            stage.setScene(newScene);
-
+            Scene editScene = new Scene(root,500,500);
+            editScene.getStylesheets().add(EventListController.class.getResource("/styles/basic.css").toExternalForm());
+            Stage stage = new Stage();
+            stage.setScene(editScene);
+            stage.show();
         }
     }
 
-    public void addEventOnClick(MouseEvent event) throws IOException {
-
+    public void addEvent(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editevent/editevent.fxml"));
         Parent root = fxmlLoader.load();
-        Scene newScene = new Scene(root,1000,800);
-        Stage stage = (Stage) eventPane.getScene().getWindow();
+        Scene newScene = new Scene(root,500,500);
+        newScene.getStylesheets().add(EventListController.class.getResource("/styles/basic.css").toExternalForm());
+        Stage stage = new Stage();
         stage.setScene(newScene);
+        stage.show();
     }
-
-    public void onMouseClickEmployee(MouseEvent event) throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/employeelist/employeelist.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene newScene = new Scene(root,1000,800);
-        Stage stage = (Stage) eventPane.getScene().getWindow();
-        stage.setScene(newScene);
-    }
-
-    public void onMouseClickMain(MouseEvent event) throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/mainMenu/mainMenu.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene newScene = new Scene(root,1000,800);
-        Stage stage = (Stage) eventPane.getScene().getWindow();
-        stage.setScene(newScene);
-
-    }
-
 }

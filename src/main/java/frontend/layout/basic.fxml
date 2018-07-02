@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane fx:controller="frontend.layout.layoutController" dividerPositions="0.25" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <items>
+        <AnchorPane fx:id="menuPane" minWidth="125" maxWidth="125">
+            <children>
+                <Label fx:id="menuEmployee" styleClass="menuLabel"  onMouseClicked="#openEmployeeList" layoutX="14.0" layoutY="71.0" text="Mitarbeiter" />
+                <Label fx:id="menuLogin" styleClass="menuLabel" onMouseClicked="#openLogin" layoutX="14.0" layoutY="32.0" text="Home"/>
+                <Label fx:id="menuEvent" styleClass="menuLabel" onMouseClicked="#openEventList" layoutX="14.0" layoutY="115.0" text="Veranstaltungen" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="currentPane">
+            <!--Right here the different Panes are shown-->
+        </AnchorPane>
+    </items>
+</SplitPane>

@@ -1,134 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.editemployee.EditEmployeeController">
-  <items>
-      <AnchorPane fx:id="editPane" prefHeight="451.0" prefWidth="147.0">
-          <children>
-              <Label fx:id="menuEmployee" layoutX="14.0" layoutY="71.0" onMouseClicked="#onMouseClickEmployee" text="Mitarbeiter">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-              <Label fx:id="menuMain" layoutX="14.0" layoutY="32.0" onMouseClicked="#onMouseClickMain" text="Home">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-              <Label fx:id="menuEvent" layoutX="14.0" layoutY="115.0" onMouseClicked="#onMouseClickEvent" text="Veranstaltungen">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-          </children></AnchorPane>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
-         <content>
-            <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" vgap="20.0">
-              <columnConstraints>
+<ScrollPane fx:controller="frontend.editemployee.EditEmployeeController" fx:id="editEmployeePane" styleClass="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+    <content>
+        <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" vgap="20.0">
+            <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
+            </columnConstraints>
+            <rowConstraints>
                 <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-              </rowConstraints>
-               <children>
-                   <Label text="Mitarbeiter">
-                     <font>
-                        <Font size="22.0" />
-                     </font></Label>
-                   <Label text="Name" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <Label text="Vorname" GridPane.rowIndex="2" />
-                   <Label text="Nachname" GridPane.rowIndex="3" />
-                  <Label text="Persönliche Daten" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin></Label>
-                   <Label text="Ort" GridPane.rowIndex="5" />
-                   <Label text="PLZ" GridPane.rowIndex="6" />
-                   <Label text="Straße" GridPane.rowIndex="7" />
-                   <Label text="Hausnummer" GridPane.rowIndex="8" />
-                   <Label text="Festnetz" GridPane.rowIndex="9" />
-                   <Label text="Mobil" GridPane.rowIndex="10" />
-                   <Label text="E-Mail" GridPane.rowIndex="11" />
-                   <Label text="Zahlungsdaten" GridPane.rowIndex="12">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                   <Label text="IBAN" GridPane.rowIndex="13" />
-                   <Label text="BIC" GridPane.rowIndex="14" />
-                   <Label text="Bruttostundensatz" GridPane.rowIndex="15" />
-                   <Label text="Sonstiges" GridPane.rowIndex="16">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                   <Label text="Beschäfitgt seit" GridPane.rowIndex="17" />
-                   <Label text="Beschäftigungszustand" GridPane.rowIndex="18" />
-                   <Label text="Arbeitsrechtlicher Status" GridPane.rowIndex="19" />
-                   <Label text="SteuerID" GridPane.rowIndex="20" />
-                   <Label text="Anstellungsstatus" GridPane.rowIndex="21" />
-                   <Label text="Bemerkung" GridPane.rowIndex="22" />
-                  <JFXTextField fx:id="txtVorname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                   <JFXTextField fx:id="txtNachname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                   <JFXTextField fx:id="txtOrt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                   <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                   <JFXTextField fx:id="txtStrasse" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                   <JFXTextField fx:id="txtHausNr" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                   <JFXTextField fx:id="txtFestnetz" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                   <JFXTextField fx:id="txtMobil" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                   <JFXTextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                   <JFXTextField fx:id="txtIBAN" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                   <JFXTextField fx:id="txtBIC" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                   <JFXTextField fx:id="txtBruttoStdSatz" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                   <JFXDatePicker fx:id="dateBesschSeit" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                   <JFXTextField fx:id="txtBeschZustand" GridPane.columnIndex="1" GridPane.rowIndex="18" />
-                   <JFXTextField fx:id="txtArbRechtStatus" GridPane.columnIndex="1" GridPane.rowIndex="19" />
-                   <JFXTextField fx:id="txtSteuerID" GridPane.columnIndex="1" GridPane.rowIndex="20" />
-                   <JFXTextField fx:id="txtAnstellungsstatus" GridPane.columnIndex="1" GridPane.rowIndex="21" />
-                   <JFXTextArea fx:id="txtBemerkung" GridPane.columnIndex="1" GridPane.rowIndex="22" />
-                   <JFXButton fx:id="btnEditEmployee" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />
-               </children>
-            </GridPane>
-         </content>
-      </ScrollPane>
-  </items>
-</SplitPane>
+            </rowConstraints>
+            <children>
+                <Label text="Mitarbeiter" />
+                <Label text="Name" GridPane.rowIndex="1" />
+                <Label text="Vorname" GridPane.rowIndex="2" />
+                <Label text="Nachname" GridPane.rowIndex="3" />
+                <Label text="Persönliche Daten" GridPane.rowIndex="4" />
+                <Label text="Ort" GridPane.rowIndex="5" />
+                <Label text="PLZ" GridPane.rowIndex="6" />
+                <Label text="Straße" GridPane.rowIndex="7" />
+                <Label text="Hausnummer" GridPane.rowIndex="8" />
+                <Label text="Festnetz" GridPane.rowIndex="9" />
+                <Label text="Mobil" GridPane.rowIndex="10" />
+                <Label text="E-Mail" GridPane.rowIndex="11" />
+                <Label text="Zahlungsdaten" GridPane.rowIndex="12" />
+                <Label text="IBAN" GridPane.rowIndex="13" />
+                <Label text="BIC" GridPane.rowIndex="14" />
+                <Label text="Bruttostundensatz" GridPane.rowIndex="15" />
+                <Label text="Sonstiges" GridPane.rowIndex="16" />
+                <Label text="Beschäfitgt seit" GridPane.rowIndex="17" />
+                <Label text="Beschäftigungszustand" GridPane.rowIndex="18" />
+                <Label text="Arbeitsrechtlicher Status" GridPane.rowIndex="19" />
+                <Label text="SteuerID" GridPane.rowIndex="20" />
+                <Label text="Anstellungsstatus" GridPane.rowIndex="21" />
+                <Label text="Bemerkung" GridPane.rowIndex="22" />
+
+                <JFXTextField fx:id="txtVorname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <JFXTextField fx:id="txtNachname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <JFXTextField fx:id="txtOrt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <JFXTextField fx:id="txtStrasse" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <JFXTextField fx:id="txtHausNr" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <JFXTextField fx:id="txtFestnetz" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <JFXTextField fx:id="txtMobil" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <JFXTextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                <JFXTextField fx:id="txtIBAN" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                <JFXTextField fx:id="txtBIC" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                <JFXTextField fx:id="txtBruttoStdSatz" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                <JFXDatePicker fx:id="dateBesschSeit" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                <JFXTextField fx:id="txtBeschZustand" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                <JFXTextField fx:id="txtArbRechtStatus" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                <JFXTextField fx:id="txtSteuerID" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                <JFXTextField fx:id="txtAnstellungsstatus" GridPane.columnIndex="1" GridPane.rowIndex="21" />
+                <JFXTextArea fx:id="txtBemerkung" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+
+                <JFXButton fx:id="btnEditEmployee" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />
+            </children>
+        </GridPane>
+    </content>
+</ScrollPane>

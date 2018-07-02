@@ -9,44 +9,22 @@ import orm.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("frontend/mainMenu/MainMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("frontend/layout/basic.fxml"));
         primaryStage.setTitle("OnePlusBeer");
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        Scene mainScene = new Scene(root, 1000, 800);
+        mainScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
+        primaryStage.setScene(mainScene);
+        primaryStage.setOnCloseRequest(e -> System.exit(0));
         primaryStage.show();
     }
 
-
     public static void main(String[] args){
-
         loadSampleData();
-
-        /*TestOutput*/
-        UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
-        EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
-        UserDatabaseService userService = new UserDatabaseService();
-
-
-        List<Employee> employees = employeeService.getAll(entities.Employee.class);
-        for(entities.Employee e: employees){
-            System.out.println(e.toString());
-        }
-
-        List<entities.UserPermission> userpermissions = userPermissionService.getAll(entities.UserPermission.class);
-        for(entities.UserPermission up: userpermissions){
-            System.out.println(up.toString());
-        }
-
-        List<User> users = userService.getAll(entities.User.class);
-        for(entities.User u: users){
-            System.out.println(u.toString());
-        }
-
         launch(args);
     }
 
@@ -64,6 +42,7 @@ public class Main extends Application{
         Stand stand = null;
 
         /*Load Sample Data for Userpermission */
+        /*Load Initial Data for Userpermission */
         ArrayList<UserPermission> userpermissions = userPermissionService.getAll(UserPermission.class);
         if(userpermissions.size() == 0){
             UserPermission standard = new UserPermission("Standard");
@@ -77,14 +56,12 @@ public class Main extends Application{
             userPermissionService.save(admin);
         }
 
-
         /* Load Sample Data for Employee */
         ArrayList<Employee> employees = employeeService.getAll(Employee.class);
         if(employees.size() == 0){
             employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "01.01.2010", true, 0, "684312468473214", 0, "Comment" );
             employeeService.save(employee);
         }
-
 
         /* Load Sample Data for User */
         ArrayList<User> userlist = userService.getAll(User.class);

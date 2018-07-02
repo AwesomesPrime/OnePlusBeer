@@ -2,77 +2,39 @@
 
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.eventlist.EventListController">
-  <items>
-      <AnchorPane fx:id="eventPane" prefHeight="451.0" prefWidth="147.0">
-          <children>
-              <Label fx:id="menuEmployee" layoutX="14.0" layoutY="71.0" onMouseClicked="#onMouseClickEmployee" text="Mitarbeiter">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-              <Label layoutX="14.0" layoutY="32.0" onMouseClicked="#onMouseClickMain" text="Home">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-              <Label fx:id="menuEvent" layoutX="14.0" layoutY="115.0" text="Veranstaltungen">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-          </children></AnchorPane>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
-         <content>
-            <GridPane alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" vgap="20.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                   <Label alignment="CENTER" contentDisplay="CENTER" text="Veranstaltungen" GridPane.columnSpan="2" GridPane.halignment="CENTER">
-                     <font>
-                        <Font size="22.0" />
-                     </font></Label>
-                  <TableView fx:id="tableView" onMouseClicked="#onMouseClick" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+<ScrollPane fx:id="eventPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.eventlist.EventListController">
+    <content>
+        <GridPane alignment="CENTER" vgap="25.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50" halignment="RIGHT" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Veranstaltungen" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+                <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
+                <FontAwesomeIconView fx:id="addEvent" glyphName="PLUS" glyphStyle="-fx-fill: #444444" onMouseClicked="#addEvent" size="22px" styleClass="cursorHand" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TableView fx:id="tableView" onMouseClicked="#editEvent" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
-                      <TableColumn fx:id="colAnschrift" editable="false" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="128.0" text="Anschrift" />
-                      <TableColumn fx:id="colName" editable="false" maxWidth="1.7976931348623157E308" prefWidth="124.0" text="Veranstaltungsname" />
-                        <TableColumn fx:id="colStart" editable="false" maxWidth="1.7976931348623157E308" prefWidth="81.0" text="Start" />
-                        <TableColumn fx:id="colEnd" editable="false" maxWidth="1.7976931348623157E308" prefWidth="81.0" text="Ende" />
+                        <TableColumn fx:id="colAnschrift" editable="false" text="Anschrift" />
+                        <TableColumn fx:id="colName" editable="false" text="Veranstaltungsname" />
+                        <TableColumn fx:id="colStart" editable="false" text="Start" />
+                        <TableColumn fx:id="colEnd" editable="false" text="Ende" />
                     </columns>
-                  </TableView>
-                  <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
-                   <FontAwesomeIconView fx:id="addEvent" glyphName="PLUS" glyphStyle="-fx-fill: #444444" onMouseClicked="#addEventOnClick" size="22px" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                   <cursor>
-                       <Cursor fx:constant="HAND" />
-                   </cursor>
-                   </FontAwesomeIconView>
-               </children>
-            </GridPane>
-         </content>
-         <padding>
-            <Insets left="2.0" />
-         </padding>
-      </ScrollPane>
-  </items>
-   <padding>
-      <Insets left="20.0" right="20.0" />
-   </padding>
-</SplitPane>
+                </TableView>
+            </children>
+        </GridPane>
+    </content>
+</ScrollPane>
