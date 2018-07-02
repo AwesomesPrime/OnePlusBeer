@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fx:controller="frontend2.employeelist.EmployeeListController" fx:id="employeePane" styleClass="innerPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:controller="frontend.employeelist.EmployeeListController" fx:id="employeePane" styleClass="innerPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <GridPane alignment="TOP_CENTER" vgap="25.0">
             <columnConstraints>
