@@ -1,4 +1,4 @@
-package frontend2.layout;
+package frontend.layout;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,21 +32,21 @@ public class layoutController implements Initializable {
     }
 
     public void openLogin(MouseEvent event) throws IOException {
-        GridPane loginPane =  FXMLLoader.load(getClass().getResource("/frontend2/login/login.fxml"));
+        GridPane loginPane =  FXMLLoader.load(getClass().getResource("/frontend/login/login.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
         setAnchorPaneContraints(loginPane);
         currentPane.getChildren().add(loginPane);
     }
 
     public void openEmployeeList(MouseEvent event) throws IOException {
-        ScrollPane employeePane =  FXMLLoader.load(getClass().getResource("/frontend2/employeelist/employeelist.fxml"));
+        ScrollPane employeePane =  FXMLLoader.load(getClass().getResource("/frontend/employeelist/employeelist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
         setAnchorPaneContraints(employeePane);
         currentPane.getChildren().add(employeePane);
     }
 
     public void openEventList(MouseEvent event) throws IOException {
-        ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend2/eventlist/eventlist.fxml"));
+        ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/eventlist/eventlist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
         setAnchorPaneContraints(eventPane);
         currentPane.getChildren().add(eventPane);
