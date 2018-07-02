@@ -55,7 +55,7 @@ public class Employee
     @Column(name = "bic")
     private String bic;
 
-    @Column(name = "f")
+    @Column(name = "bruttoPerHour")
     private double bruttoPerHour;
 
     @Column(name = "startOfEmployment")
