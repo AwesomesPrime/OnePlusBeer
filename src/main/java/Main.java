@@ -41,7 +41,6 @@ public class Main extends Application{
         Event eventTwo = null;
         Stand stand = null;
 
-        /*Load Sample Data for Userpermission */
         /*Load Initial Data for Userpermission */
         ArrayList<UserPermission> userpermissions = userPermissionService.getAll(UserPermission.class);
         if(userpermissions.size() == 0){
