@@ -16,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import orm.EventDatabaseService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EventListController implements Initializable {
-
 
     @FXML
     private JFXTextField txtSearch;
@@ -64,6 +62,7 @@ public class EventListController implements Initializable {
             EditEventController editEventController = fxmlLoader.<EditEventController>getController();
             editEventController.getDataFromEventView(currentItemSelected);
             Scene editScene = new Scene(root,500,500);
+            editScene.getStylesheets().add(EventListController.class.getResource("/styles/basic.css").toExternalForm());
             Stage stage = new Stage();
             stage.setScene(editScene);
             stage.show();
@@ -74,6 +73,7 @@ public class EventListController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend2/editevent/editevent.fxml"));
         Parent root = fxmlLoader.load();
         Scene newScene = new Scene(root,500,500);
+        newScene.getStylesheets().add(EventListController.class.getResource("/styles/basic.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(newScene);
         stage.show();

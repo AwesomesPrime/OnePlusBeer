@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import orm.EmployeeDatabaseService;
+import sun.applet.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +24,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeeListController implements Initializable {
-
 
     @FXML
     private JFXTextField txtSearch;
@@ -33,6 +33,7 @@ public class EmployeeListController implements Initializable {
 
     @FXML
     private TableColumn<Employee, String> colVorname, colNachname;
+
     @FXML
     private TableColumn<Employee, Integer> colID, colStatusArbRecht, colBerufsstatus;
 
@@ -64,21 +65,20 @@ public class EmployeeListController implements Initializable {
             EditEmployeeController editEmployeeController = fxmlLoader.<EditEmployeeController>getController();
             editEmployeeController.getDataFromEmployeeView(currentItemSelected);
             Scene editScene = new Scene(root,500,500);
+            editScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
             Stage stage = new Stage();
             stage.setScene(editScene);
             stage.show();
-
         }
     }
 
     public void addEmployee(MouseEvent event) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend2/editemployee/editemployee.fxml"));
         Parent root = fxmlLoader.load();
         Scene addScene = new Scene(root,500,500);
+        addScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(addScene);
         stage.show();
     }
-
 }

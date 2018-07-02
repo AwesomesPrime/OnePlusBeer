@@ -5,16 +5,9 @@ import com.jfoenix.controls.JFXTextField;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import orm.UserDatabaseService;
 import usermanagement.ActiveUser;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,10 +15,9 @@ public class Controller implements Initializable {
 
     @FXML
     JFXTextField txtUsername;
+
     @FXML
     JFXPasswordField txtPassword;
-    @FXML
-    private GridPane LoginPane;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -34,7 +26,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void checkLogin(ActionEvent event) throws IOException {
+    public void checkLogin(ActionEvent event){
         UserDatabaseService userService = new UserDatabaseService();
         User user = userService.getUserByEmail(txtUsername.getText());
 

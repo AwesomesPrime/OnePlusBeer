@@ -20,7 +20,7 @@ public class Main extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("frontend2/layout/basic.fxml"));
         primaryStage.setTitle("OnePlusBeer");
         Scene mainScene = new Scene(root, 1000, 800);
-        mainScene.getStylesheets().add(Main.class.getResource("styles/basic.css").toExternalForm());
+        mainScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
         primaryStage.setScene(mainScene);
         primaryStage.setOnCloseRequest(e -> System.exit(0));
         primaryStage.show();
