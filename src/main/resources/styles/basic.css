@@ -1,0 +1,16 @@
+.menuLabel{
+    -fx-cursor: HAND;
+}
+
+.cursorHand{
+    -fx-cursor: HAND;
+}
+
+.innerPane, .outerPane{
+    -fx-padding: 20;
+}
+
+.button{
+    -fx-border-width: 1;
+    -fx-border-color: #000000;
+}

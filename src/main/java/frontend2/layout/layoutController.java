@@ -3,6 +3,7 @@ package frontend2.layout;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -16,19 +17,6 @@ import java.util.ResourceBundle;
 
 public class layoutController implements Initializable {
 
-
-    @FXML
-    private AnchorPane menuPane;
-
-    @FXML
-    private Label menuLogin;
-
-    @FXML
-    private Label menuEvent;
-
-    @FXML
-    private Label menuEmployee;
-
     @FXML
     private Pane currentPane;
 
@@ -38,21 +26,31 @@ public class layoutController implements Initializable {
         //Leer
     }
 
+    private void setAnchorPaneContraints(Node node){
+        AnchorPane.setBottomAnchor(node, 0.0);
+        AnchorPane.setTopAnchor(node, 0.0);
+        AnchorPane.setLeftAnchor(node, 0.0);
+        AnchorPane.setRightAnchor(node, 0.0);
+    }
+
     public void openLogin(MouseEvent event) throws IOException {
         GridPane loginPane =  FXMLLoader.load(getClass().getResource("/frontend2/login/login.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
+        setAnchorPaneContraints(loginPane);
         currentPane.getChildren().add(loginPane);
     }
 
     public void openEmployeeList(MouseEvent event) throws IOException {
         ScrollPane employeePane =  FXMLLoader.load(getClass().getResource("/frontend2/employeelist/employeelist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
+        setAnchorPaneContraints(employeePane);
         currentPane.getChildren().add(employeePane);
     }
 
     public void openEventList(MouseEvent event) throws IOException {
         ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend2/eventlist/eventlist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
+        setAnchorPaneContraints(eventPane);
         currentPane.getChildren().add(eventPane);
     }
 

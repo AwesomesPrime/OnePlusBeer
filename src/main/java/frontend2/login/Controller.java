@@ -42,12 +42,6 @@ public class Controller implements Initializable {
             if(user.getPassword().equals(txtPassword.getText())){
                 new ActiveUser(user);
                 System.out.println(ActiveUser.getMailAddress() + " => Permissionlevel: " + ActiveUser.getPermission());
-
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/mainMenu/mainMenu.fxml"));
-                Parent root = fxmlLoader.load();
-                Scene newScene = new Scene(root,1000,800);
-                Stage stage = (Stage) LoginPane.getScene().getWindow();
-                stage.setScene(newScene);
             }else {
                 System.out.println("Das Passwort ist falsch!");
             }

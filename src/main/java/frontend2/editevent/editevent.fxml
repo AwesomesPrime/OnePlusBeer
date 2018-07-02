@@ -2,54 +2,42 @@
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend2.editevent.EditEventController" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
- <content>
-    <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" vgap="20.0">
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints />
-          <RowConstraints />
-          <RowConstraints />
-          <RowConstraints />
-          <RowConstraints />
-          <RowConstraints />
-          <RowConstraints />
-          <RowConstraints />
-          <RowConstraints />
-      </rowConstraints>
-       <children>
-           <Label text="Veranstaltung">
-             <font>
-                <Font size="22.0" />
-             </font></Label>
-          <Label text="Straße" GridPane.rowIndex="1" />
-           <Label text="Hausnummer" GridPane.rowIndex="2" />
-           <Label text="Ort" GridPane.rowIndex="3" />
-           <Label text="PLZ" GridPane.rowIndex="4" />
-           <Label text="Veranstaltungsname" GridPane.rowIndex="5" />
-           <Label text="Startdatum" GridPane.rowIndex="6" />
-           <Label text="Startzeit" GridPane.rowIndex="7" />
-           <Label text="Enddatum" GridPane.rowIndex="8" />
-           <Label text="Endzeit" GridPane.rowIndex="9" />
 
-          <JFXTextField fx:id="txtStrasse" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-           <JFXTextField fx:id="txtHausNr" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-           <JFXTextField fx:id="txtOrt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-           <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-           <JFXTextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-           <JFXDatePicker fx:id="dateStart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-           <JFXTimePicker fx:id="timeStart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-           <JFXDatePicker fx:id="dateEnd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-           <JFXTimePicker fx:id="timeEnd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-           <JFXButton fx:id="btnEditEvent" onAction="#clickEdit" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-       </children>
-    </GridPane>
- </content>
+<ScrollPane fx:controller="frontend2.editevent.EditEventController" fx:id="editEventPane" styleClass="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+    <content>
+        <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" vgap="20.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Veranstaltung" />
+                <Label text="Straße" GridPane.rowIndex="1" />
+                <Label text="Hausnummer" GridPane.rowIndex="2" />
+                <Label text="Ort" GridPane.rowIndex="3" />
+                <Label text="PLZ" GridPane.rowIndex="4" />
+                <Label text="Veranstaltungsname" GridPane.rowIndex="5" />
+                <Label text="Startdatum" GridPane.rowIndex="6" />
+                <Label text="Startzeit" GridPane.rowIndex="7" />
+                <Label text="Enddatum" GridPane.rowIndex="8" />
+                <Label text="Endzeit" GridPane.rowIndex="9" />
+
+                <JFXTextField fx:id="txtStrasse" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <JFXTextField fx:id="txtHausNr" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <JFXTextField fx:id="txtOrt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <JFXTextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <JFXDatePicker fx:id="dateStart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <JFXTimePicker fx:id="timeStart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <JFXDatePicker fx:id="dateEnd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <JFXTimePicker fx:id="timeEnd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+
+                <JFXButton fx:id="btnEditEvent" onAction="#clickEdit" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            </children>
+        </GridPane>
+    </content>
 </ScrollPane>

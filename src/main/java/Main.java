@@ -20,21 +20,14 @@ public class Main extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("frontend2/layout/basic.fxml"));
         primaryStage.setTitle("OnePlusBeer");
         Scene mainScene = new Scene(root, 1000, 800);
-        mainScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+        mainScene.getStylesheets().add(Main.class.getResource("styles/basic.css").toExternalForm());
         primaryStage.setScene(mainScene);
+        primaryStage.setOnCloseRequest(e -> System.exit(0));
         primaryStage.show();
     }
 
-
     public static void main(String[] args){
-
-        /*TestOutput*/
-        UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
-        EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
-        UserDatabaseService userService = new UserDatabaseService();
-
         loadSampleData();
-
         launch(args);
     }
 
@@ -44,7 +37,7 @@ public class Main extends Application{
         UserDatabaseService userService = new UserDatabaseService();
         EventDatabaseService eventDatabaseService = new EventDatabaseService();
 
-        /*Load Sample Data for Userpermission */
+        /*Load Initial Data for Userpermission */
         ArrayList<UserPermission> userpermissions = userPermissionService.getAll(UserPermission.class);
         if(userpermissions.size() == 0){
             UserPermission standard = new UserPermission("Standard");
@@ -58,14 +51,12 @@ public class Main extends Application{
             userPermissionService.save(admin);
         }
 
-
         /* Load Sample Data for Employee */
         ArrayList<Employee> employees = employeeService.getAll(Employee.class);
         if(employees.size() == 0){
             Employee employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "2010-01-01", true, 0, "684312468473214", 0, "Comment" );
             employeeService.save(employee);
         }
-
 
         /* Load Sample Data for User */
         ArrayList<User> userlist = userService.getAll(User.class);
@@ -95,6 +86,5 @@ public class Main extends Application{
             System.out.println(endDate.getTime().toString());
             eventDatabaseService.save(event);
         }
-
     }
 }
