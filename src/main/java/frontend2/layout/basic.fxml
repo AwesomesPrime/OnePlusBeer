@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend2.layout.layoutController">
+<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend2.layout.layoutController">
     <items>
         <AnchorPane fx:id="menuPane" prefHeight="451.0" prefWidth="147.0">
             <children>
@@ -17,7 +15,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Label>
-                <Label fx:id="menuLogin" layoutX="14.0" layoutY="32.0" text="Home" onMouseClicked="#openLogin">
+                <Label fx:id="menuLogin" layoutX="14.0" layoutY="32.0" onMouseClicked="#openLogin" text="Home">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -29,8 +27,8 @@
                 </Label>
             </children>
         </AnchorPane>
-        <Pane fx:id="currentPane">
+        <AnchorPane fx:id="currentPane">
 
-        </Pane>
+        </AnchorPane>
     </items>
 </SplitPane>

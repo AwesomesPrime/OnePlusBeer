@@ -8,12 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import orm.*;
-import usermanagement.ActiveUser;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Main extends Application{
 
@@ -21,7 +19,9 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("frontend2/layout/basic.fxml"));
         primaryStage.setTitle("OnePlusBeer");
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        Scene mainScene = new Scene(root, 1000, 800);
+        mainScene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+        primaryStage.setScene(mainScene);
         primaryStage.show();
     }
 

@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import orm.EmployeeDatabaseService;
 
@@ -28,9 +27,6 @@ public class EmployeeListController implements Initializable {
 
     @FXML
     private JFXTextField txtSearch;
-
-    @FXML
-    private AnchorPane employeeListPane;
 
     @FXML
     private TableView<Employee> tableView;
@@ -59,28 +55,30 @@ public class EmployeeListController implements Initializable {
 
     }
 
-    public void OnMouseClick(MouseEvent event) throws IOException {
+    public void editEmployee(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Employee currentItemSelected = tableView.getSelectionModel().getSelectedItem();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editemployee/editemployee.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend2/editemployee/editemployee.fxml"));
             Parent root = fxmlLoader.load();
             EditEmployeeController editEmployeeController = fxmlLoader.<EditEmployeeController>getController();
             editEmployeeController.getDataFromEmployeeView(currentItemSelected);
-            Scene newScene = new Scene(root,1000,800);
-            Stage stage = (Stage) employeeListPane.getScene().getWindow();
-            stage.setScene(newScene);
+            Scene editScene = new Scene(root,500,500);
+            Stage stage = new Stage();
+            stage.setScene(editScene);
+            stage.show();
 
         }
     }
 
-    public void addEmployeeOnClick(MouseEvent event) throws IOException {
+    public void addEmployee(MouseEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editemployee/editemployee.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend2/editemployee/editemployee.fxml"));
         Parent root = fxmlLoader.load();
-        Scene newScene = new Scene(root,1000,800);
-        Stage stage = (Stage) employeeListPane.getScene().getWindow();
-        stage.setScene(newScene);
+        Scene addScene = new Scene(root,500,500);
+        Stage stage = new Stage();
+        stage.setScene(addScene);
+        stage.show();
     }
 
 }
