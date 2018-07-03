@@ -1,8 +1,7 @@
-package frontend.employeelist;
+package frontend.employee;
 
 import com.jfoenix.controls.JFXTextField;
 import entities.Employee;
-import frontend.editemployee.EditEmployeeController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,7 +59,7 @@ public class EmployeeListController implements Initializable {
         if (event.getClickCount() == 2) {
             Employee currentItemSelected = tableView.getSelectionModel().getSelectedItem();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editemployee/editemployee.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/employee/editemployee.fxml"));
             Parent root = fxmlLoader.load();
             EditEmployeeController editEmployeeController = fxmlLoader.<EditEmployeeController>getController();
             editEmployeeController.getDataFromEmployeeView(currentItemSelected);
@@ -73,7 +72,7 @@ public class EmployeeListController implements Initializable {
     }
 
     public void addEmployee(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editemployee/editemployee.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/employee/editemployee.fxml"));
         Parent root = fxmlLoader.load();
         Scene addScene = new Scene(root,500,500);
         addScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());

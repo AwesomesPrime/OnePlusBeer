@@ -39,14 +39,14 @@ public class layoutController implements Initializable {
     }
 
     public void openEmployeeList(MouseEvent event) throws IOException {
-        ScrollPane employeePane =  FXMLLoader.load(getClass().getResource("/frontend/employeelist/employeelist.fxml"));
+        ScrollPane employeePane =  FXMLLoader.load(getClass().getResource("/frontend/employee/employeelist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
         setAnchorPaneContraints(employeePane);
         currentPane.getChildren().add(employeePane);
     }
 
     public void openEventList(MouseEvent event) throws IOException {
-        ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/eventlist/eventlist.fxml"));
+        ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/event/eventlist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
         setAnchorPaneContraints(eventPane);
         currentPane.getChildren().add(eventPane);

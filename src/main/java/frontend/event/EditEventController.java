@@ -1,4 +1,4 @@
-package frontend.editevent;
+package frontend.event;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;

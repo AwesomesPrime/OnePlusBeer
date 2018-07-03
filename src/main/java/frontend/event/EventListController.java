@@ -1,8 +1,7 @@
-package frontend.eventlist;
+package frontend.event;
 
 import com.jfoenix.controls.JFXTextField;
 import entities.Event;
-import frontend.editevent.EditEventController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,7 +56,7 @@ public class EventListController implements Initializable {
         if (event.getClickCount() == 2) {
             Event currentItemSelected = tableView.getSelectionModel().getSelectedItem();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editevent/editevent.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/event/editevent.fxml"));
             Parent root = fxmlLoader.load();
             EditEventController editEventController = fxmlLoader.<EditEventController>getController();
             editEventController.getDataFromEventView(currentItemSelected);
@@ -70,7 +69,7 @@ public class EventListController implements Initializable {
     }
 
     public void addEvent(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/editevent/editevent.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/event/editevent.fxml"));
         Parent root = fxmlLoader.load();
         Scene newScene = new Scene(root,500,500);
         newScene.getStylesheets().add(EventListController.class.getResource("/styles/basic.css").toExternalForm());
