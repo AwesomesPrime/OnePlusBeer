@@ -36,10 +36,9 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
                                                                                         employee.getIban().contains(term) ||
                                                                                         employee.getBic().contains(term) ||
                                                                                         Double.toString(employee.getBruttoPerHour()).contains(term) ||
-                                                                                        employee.getStartOfEmployment().contains(term) ||
-                                                                                        Integer.toString(employee.getStateByEmploymentLaw()).contains(term) ||
+                                                                                        employee.getStateByEmploymentLaw().getDescription().contains(term) ||
                                                                                         employee.getTaxNumber().contains(employee.getTaxNumber()) ||
-                                                                                        Integer.toString(employee.getWorkingStatus()).contains(term) ||
+                                                                                        employee.getProfessionalStanding().getDescription().contains(term) ||
                                                                                         employee.getComments().contains(term)).collect(Collectors.toCollection(ArrayList::new));
 
         return resultEmployees;
