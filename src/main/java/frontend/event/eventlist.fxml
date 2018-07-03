@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<ScrollPane fx:id="eventPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.eventlist.EventListController">
+<ScrollPane fx:id="eventPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.event.EventListController">
     <content>
         <GridPane alignment="CENTER" vgap="25.0">
             <columnConstraints>
