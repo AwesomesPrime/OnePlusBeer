@@ -27,7 +27,7 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
                                                                                         employee.getFirstName().contains(term) ||
                                                                                         employee.getLastName().contains(term) ||
                                                                                         employee.getLastName().contains(term) ||
-                                                                                        Integer.toString(employee.getHouseNumber()).contains(term)||
+                                                                                        employee.getHouseNumber().contains(term)||
                                                                                         Integer.toString(employee.getPlz()).contains(term) ||
                                                                                         employee.getCity().contains(term) ||
                                                                                         employee.getPhoneNumber().contains(term) ||

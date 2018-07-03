@@ -1,5 +1,9 @@
 package frontend.layout;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+import entities.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,24 +14,35 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import orm.UserDatabaseService;
 import usermanagement.ActiveUser;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import static usermanagement.ActiveUser.*;
 
-public class LayoutController implements Initializable {
+public class LayoutController implements Initializable{
 
     @FXML
     private Pane currentPane;
 
     @FXML
-    private Label username;
+    public Label username;
 
+    @FXML
+    JFXTextField txtUsername;
+
+    @FXML
+    JFXPasswordField txtPassword;
+
+    @FXML
+    GridPane loginPane;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        //
+        txtUsername.setLabelFloat(true);
+        txtPassword.setLabelFloat(true);
+        initializePanes(loginPane);
     }
 
     private void initializePanes(Node node){
@@ -35,18 +50,19 @@ public class LayoutController implements Initializable {
         AnchorPane.setTopAnchor(node, 0.0);
         AnchorPane.setLeftAnchor(node, 0.0);
         AnchorPane.setRightAnchor(node, 0.0);
-        setUsername();
     }
 
     public void openLogin(MouseEvent event) throws IOException {
-        GridPane loginPane =  FXMLLoader.load(getClass().getResource("/frontend/login/login.fxml"));
-        currentPane.getChildren().remove(0, currentPane.getChildren().size());
-        initializePanes(loginPane);
-        currentPane.getChildren().add(loginPane);
+        if(getMailAddress() != ""){
+            GridPane loginPane =  FXMLLoader.load(getClass().getResource("/frontend/home/home.fxml"));
+            currentPane.getChildren().remove(0, currentPane.getChildren().size());
+            initializePanes(loginPane);
+            currentPane.getChildren().add(loginPane);
+        }
     }
 
     public void openEmployeeList(MouseEvent event) throws IOException {
-        ScrollPane employeePane =  FXMLLoader.load(getClass().getResource("/frontend/employee/employeelist.fxml"));
+        ScrollPane employeePane = FXMLLoader.load(getClass().getResource("/frontend/employee/employeelist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
         initializePanes(employeePane);
         currentPane.getChildren().add(employeePane);
@@ -59,7 +75,20 @@ public class LayoutController implements Initializable {
         currentPane.getChildren().add(eventPane);
     }
 
-    public void setUsername(){
-        this.username.setText(ActiveUser.getUsername());
+    @FXML
+    public void checkLogin(ActionEvent event){
+        UserDatabaseService userService = new UserDatabaseService();
+        User user = userService.getUserByEmail(txtUsername.getText());
+
+        if(user != null){
+            if(user.getPassword().equals(txtPassword.getText())){
+                new ActiveUser(user);
+                username.setText(user.getEmployee().getFirstName() + " " + user.getEmployee().getLastName());
+            }else {
+                System.out.println("Das Passwort ist falsch!");
+            }
+        }else{
+            System.out.println("Nutzer existiert nicht!");
+        }
     }
 }

@@ -28,7 +28,7 @@ public class Employee
     private String street;
 
     @Column(name = "houseNumber")
-    private int houseNumber;
+    private String houseNumber;
 
     @Column(name = "plz")
     private int plz;
@@ -82,7 +82,7 @@ public class Employee
 
     }
 
-    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, StateByEmploymentLaw stateByEmploymentLaw, String taxNumber, ProfessionalStanding professionalStanding, String comments) {
+    public Employee(String salutation, String firstName, String lastName, String street, String houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, StateByEmploymentLaw stateByEmploymentLaw, String taxNumber, ProfessionalStanding professionalStanding, String comments) {
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -148,11 +148,11 @@ public class Employee
         this.street = street;
     }
 
-    public int getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(int houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 

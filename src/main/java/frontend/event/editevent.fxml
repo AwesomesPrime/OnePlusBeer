@@ -14,7 +14,7 @@
                 <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Veranstaltung" />
+                <Label text="Veranstaltung" styleClass="headline" />
                 <Label text="Straße" GridPane.rowIndex="1" />
                 <Label text="Hausnummer" GridPane.rowIndex="2" />
                 <Label text="PLZ" GridPane.rowIndex="3" />

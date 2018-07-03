@@ -10,12 +10,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import orm.ProfessionalStandingDatabaseService;
 import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -83,7 +87,7 @@ public class EditEmployeeController implements Initializable {
     private JFXDatePicker dateStartOfEmployment;
 
     @FXML
-    private AnchorPane editPane;
+    private ScrollPane editEmployeePane;
 
     private Employee employee;
 
@@ -108,7 +112,7 @@ public class EditEmployeeController implements Initializable {
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
         txtStreet.setText(employee.getStreet());
-        txtHouseNumber.setText(Integer.toString(employee.getHouseNumber()));
+        txtHouseNumber.setText(employee.getHouseNumber());
         txtPLZ.setText(Integer.toString(employee.getPlz()));
         txtCity.setText(employee.getCity());
         txtPhoneNumber.setText(employee.getPhoneNumber());
@@ -139,6 +143,8 @@ public class EditEmployeeController implements Initializable {
                 employeeController.addEmployee(generateEmployeeOnExisting());
             }
             popup.generateInformationPopupWindow(txtFirstName.getText() + " " + txtLastName.getText() + " wurde verarbeitet.");
+            Stage stage = (Stage) editEmployeePane.getScene().getWindow();
+            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
@@ -153,11 +159,10 @@ public class EditEmployeeController implements Initializable {
                 dateStartOfEmployment.getValue().getYear(),
                 dateStartOfEmployment.getValue().getMonthValue(),
                 dateStartOfEmployment.getValue().getDayOfMonth());
-
         employee.setFirstName(txtFirstName.getText());
         employee.setLastName(txtLastName.getText());
         employee.setStreet(txtStreet.getText());
-        employee.setHouseNumber(Integer.parseInt(txtHouseNumber.getText()));
+        employee.setHouseNumber(txtHouseNumber.getText());
         employee.setPlz(Integer.parseInt(txtPLZ.getText()));
         employee.setCity(txtCity.getText());
         employee.setPhoneNumber(txtPhoneNumber.getText());
@@ -188,7 +193,7 @@ public class EditEmployeeController implements Initializable {
 
         return new Employee("", txtFirstName.getText(),
                 txtLastName.getText(), txtStreet.getText(),
-                Integer.parseInt(txtHouseNumber.getText()), Integer.parseInt(txtPLZ.getText()),
+                txtHouseNumber.getText(), Integer.parseInt(txtPLZ.getText()),
                 txtCity.getText(), txtPhoneNumber.getText(),
                 txtMobileNumber.getText(), txtMailAddress.getText(),
                 txtIBAN.getText(), txtBIC.getText(),
