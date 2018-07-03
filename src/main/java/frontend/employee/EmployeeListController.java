@@ -31,10 +31,10 @@ public class EmployeeListController implements Initializable {
     private TableView<Employee> tableView;
 
     @FXML
-    private TableColumn<Employee, String> colVorname, colNachname;
+    private TableColumn<Employee, String> colVorname, colNachname, colStatusArbRecht, colBerufsstatus;
 
     @FXML
-    private TableColumn<Employee, Integer> colID, colStatusArbRecht, colBerufsstatus;
+    private TableColumn<Employee, Integer> colID;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -44,8 +44,8 @@ public class EmployeeListController implements Initializable {
         colID.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
         colVorname.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFirstName()));
         colNachname.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getLastName()));
-        colStatusArbRecht.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStateByEmploymentLaw().getId()));
-        colBerufsstatus.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getProfessionalStanding().getId()));
+        colStatusArbRecht.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStateByEmploymentLaw().getDescription()));
+        colBerufsstatus.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getProfessionalStanding().getDescription()));
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         List<Employee> employees = employeeDatabaseService.getAll(Employee.class);

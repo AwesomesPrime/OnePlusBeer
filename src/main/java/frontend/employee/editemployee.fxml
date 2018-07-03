@@ -51,9 +51,9 @@
                 <JFXTextField fx:id="txtSteuerID" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                 <JFXTextField fx:id="txtBruttoStdSatz" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                 <JFXDatePicker fx:id="dateBesschSeit" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                <JFXTextField fx:id="txtArbRechtStatus" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                <JFXTextField fx:id="txtBeschZustand" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                <JFXTextField fx:id="txtAnstellungsstatus" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                <JFXComboBox fx:id="cbProfessionalStanding" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                <JFXComboBox fx:id="cbStateByEmploymentLaw" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                <JFXCheckBox fx:id="chkActivityState" GridPane.columnIndex="1" GridPane.rowIndex="17" />
                 <JFXTextArea fx:id="txtBemerkung" GridPane.columnIndex="1" GridPane.rowIndex="18" />
 
                 <JFXButton fx:id="btnEditEmployee" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />

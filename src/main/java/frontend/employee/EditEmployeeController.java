@@ -1,12 +1,12 @@
 package frontend.employee;
 
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import controller.EmployeeController;
 import entities.Employee;
 import entities.ProfessionalStanding;
 import entities.StateByEmploymentLaw;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +15,11 @@ import orm.ProfessionalStandingDatabaseService;
 import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
+
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditEmployeeController implements Initializable {
@@ -63,16 +65,16 @@ public class EditEmployeeController implements Initializable {
     private JFXTextField txtBruttoStdSatz;
 
     @FXML
-    private JFXTextField txtBeschZustand;
+    private JFXComboBox cbProfessionalStanding;
 
     @FXML
-    private JFXTextField txtArbRechtStatus;
+    private JFXComboBox cbStateByEmploymentLaw;
 
     @FXML
     private JFXTextField txtSteuerID;
 
     @FXML
-    private JFXTextField txtAnstellungsstatus;
+    private JFXCheckBox chkActivityState;
 
     @FXML
     private JFXTextArea txtBemerkung;
@@ -88,7 +90,15 @@ public class EditEmployeeController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
+        StateByEmploymentLawDatabaseService lawStateDbService = new StateByEmploymentLawDatabaseService();
 
+        ObservableList<StateByEmploymentLaw> lawStates = FXCollections.observableList(lawStateDbService.getAll(StateByEmploymentLaw.class));
+        cbStateByEmploymentLaw.setItems(lawStates);
+
+        ProfessionalStandingDatabaseService profStandDbService = new ProfessionalStandingDatabaseService();
+
+        ObservableList<ProfessionalStanding> profStands = FXCollections.observableList(profStandDbService.getAll(ProfessionalStanding.class));
+        cbProfessionalStanding.setItems(profStands);
     }
 
     public void getDataFromEmployeeView(Employee employee) {
@@ -113,7 +123,9 @@ public class EditEmployeeController implements Initializable {
                                         .toLocalDate());
         txtSteuerID.setText(employee.getTaxNumber());
         txtBemerkung.setText(employee.getComments());
-
+        cbProfessionalStanding.getSelectionModel().select(indexOfProfessionalStandingInList(cbProfessionalStanding.getItems(), employee.getProfessionalStanding().getId()));
+        cbStateByEmploymentLaw.getSelectionModel().select(indexOfStandByEmploymentLawInList(cbStateByEmploymentLaw.getItems(), employee.getStateByEmploymentLaw().getId()));
+        chkActivityState.setSelected(employee.getActivityState());
     }
 
     @FXML
@@ -155,7 +167,9 @@ public class EditEmployeeController implements Initializable {
         employee.setBic(txtBIC.getText());
         employee.setBruttoPerHour(Double.parseDouble(txtBruttoStdSatz.getText()));
         employee.setStartOfEmployment(startDate.getTime());
-        //employee.setActivityState(//TODO switch for activity);
+        employee.setActivityState(chkActivityState.isSelected());
+        employee.setProfessionalStanding((ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem());
+        employee.setStateByEmploymentLaw((StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem());
         employee.setTaxNumber(txtSteuerID.getText());
         employee.setComments(txtBemerkung.getText());
 
@@ -179,8 +193,8 @@ public class EditEmployeeController implements Initializable {
                 txtMobil.getText(), txtEmail.getText(),
                 txtIBAN.getText(), txtBIC.getText(),
                 Double.parseDouble(txtBruttoStdSatz.getText()), startDate.getTime(),
-                true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1),
-                txtSteuerID.getText(), professionalStandingService.get(ProfessionalStanding.class, 1), txtBemerkung.getText());
+                chkActivityState.isSelected(), (StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem(),
+                txtSteuerID.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "");
     }
 
     private void validateInput() {
@@ -211,5 +225,23 @@ public class EditEmployeeController implements Initializable {
         if(!inputValidation.validatePhone(txtMobil.getText())) {
             popup.generateWarningPopupWindow("Die Mobilnummer beinhaltet ungültige Zeichen.");
         }
+    }
+
+    private int indexOfProfessionalStandingInList(List<ProfessionalStanding> psList, int professionalStandingId) {
+        for (int i = 0; i <= psList.size(); i++) {
+            if(psList.get(i).getId() == professionalStandingId){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int indexOfStandByEmploymentLawInList(List<StateByEmploymentLaw> stateLawlList, int stateByEmploymentlawId) {
+        for (int i = 0; i <= stateLawlList.size(); i++) {
+            if(stateLawlList.get(i).getId() == stateByEmploymentlawId){
+                return i;
+            }
+        }
+        return -1;
     }
 }

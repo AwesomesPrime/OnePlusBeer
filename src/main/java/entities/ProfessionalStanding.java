@@ -66,9 +66,6 @@ public class ProfessionalStanding
     //-------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "entities.ProfessionalStanding{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                '}';
+        return this.getDescription();
     }
 }

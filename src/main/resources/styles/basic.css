@@ -26,12 +26,7 @@
     -fx-padding: 20;
 }
 
-.button{
-    -fx-border-width: 1;
-    -fx-border-color: #000000;
-}
-
-JFXTextField,JFXPasswordField{
+JFXTextField,JFXPasswordField, JFXComboBox, JFXTextArea{
     -jfx-label-float: true;
     -jfx-focus-color: #4DB6AC;
 }
