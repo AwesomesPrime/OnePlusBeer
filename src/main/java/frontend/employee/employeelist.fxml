@@ -24,10 +24,10 @@
                 <TableView fx:id="tableView" onMouseClicked="#editEmployee" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
                         <TableColumn fx:id="colID" editable="false" text="ID" />
-                        <TableColumn fx:id="colVorname" editable="false" text="Vorname" />
-                        <TableColumn fx:id="colNachname" editable="false" text="Nachname" />
-                        <TableColumn fx:id="colStatusArbRecht" editable="false" text="Status n. Arbeitsrecht" />
-                        <TableColumn fx:id="colBerufsstatus" editable="false" text="Berufsstatus" />
+                        <TableColumn fx:id="colFirstName" editable="false" text="Vorname" />
+                        <TableColumn fx:id="colLastName" editable="false" text="Nachname" />
+                        <TableColumn fx:id="colStateByEmploymentLaw" editable="false" text="Status n. Arbeitsrecht" />
+                        <TableColumn fx:id="colProfessionalStanding" editable="false" text="Berufsstatus" />
                     </columns>
                 </TableView>
             </children>

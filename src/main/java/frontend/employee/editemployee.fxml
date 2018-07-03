@@ -37,24 +37,24 @@
                 <Label text="Aktiv" GridPane.rowIndex="17" />
                 <Label text="Bemerkung" GridPane.rowIndex="18" />
 
-                <JFXTextField fx:id="txtVorname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <JFXTextField fx:id="txtNachname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <JFXTextField fx:id="txtStrasse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <JFXTextField fx:id="txtHausNr" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <JFXTextField fx:id="txtFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <JFXTextField fx:id="txtLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <JFXTextField fx:id="txtStreet" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <JFXTextField fx:id="txtHouseNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <JFXTextField fx:id="txtOrt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <JFXTextField fx:id="txtFestnetz" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <JFXTextField fx:id="txtMobil" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                <JFXTextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <JFXTextField fx:id="txtCity" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <JFXTextField fx:id="txtPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <JFXTextField fx:id="txtMobileNumber" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <JFXTextField fx:id="txtMailAddress" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                 <JFXTextField fx:id="txtIBAN" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                 <JFXTextField fx:id="txtBIC" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                <JFXTextField fx:id="txtSteuerID" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                <JFXTextField fx:id="txtBruttoStdSatz" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                <JFXDatePicker fx:id="dateBesschSeit" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                <JFXTextField fx:id="txtTaxNumber" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                <JFXTextField fx:id="txtBruttoPerHour" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                <JFXDatePicker fx:id="dateStartOfEmployment" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                 <JFXComboBox fx:id="cbProfessionalStanding" GridPane.columnIndex="1" GridPane.rowIndex="15" />
                 <JFXComboBox fx:id="cbStateByEmploymentLaw" GridPane.columnIndex="1" GridPane.rowIndex="16" />
                 <JFXCheckBox fx:id="chkActivityState" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                <JFXTextArea fx:id="txtBemerkung" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                <JFXTextArea fx:id="txtComments" GridPane.columnIndex="1" GridPane.rowIndex="18" />
 
                 <JFXButton fx:id="btnEditEmployee" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />
             </children>
