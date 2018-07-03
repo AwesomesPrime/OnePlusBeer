@@ -1,11 +1,13 @@
 package orm;
 
+import entities.Employee;
 import entities.ResourcePlanning;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -44,5 +46,34 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
         }
 
         return resultResourcePlanning;
+    }
+
+    public ArrayList<ResourcePlanning> filterNextPlansByEmail(String email){
+        ArrayList<ResourcePlanning> resultResourcePlaning;
+        EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
+        Employee employee = employeeDatabaseService.getEmployeeByEmail(email);
+
+
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            Calendar clad = Calendar.getInstance();
+             resultResourcePlaning = (ArrayList<ResourcePlanning>) session.createCriteria(ResourcePlanning.class)
+                     .createAlias("employee", "e")
+                     .add(Restrictions.and(Restrictions.gt("startWorkingTime", clad.getTime()),
+                             Restrictions.eq("e.id",employee.getId())))
+                     .list();
+        } catch (Exception e){
+            e.printStackTrace();
+            resultResourcePlaning = null;
+        } finally {
+            transaction.commit();
+            session.close();
+        }
+
+        return resultResourcePlaning;
+
+
+
     }
 }

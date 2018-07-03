@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
  */
 public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
 
-    public EmployeeDatabaseService(){
+    public EmployeeDatabaseService() {
     }
 
-    public ArrayList<Employee> search (String term){
+    public ArrayList<Employee> search(String term) {
         ArrayList<Employee> allEmployees = this.getAll(Employee.class);
 
         ArrayList<Employee> resultEmployees =  allEmployees.stream().filter(employee -> Boolean.toString(employee.getActivityState()).contains(term)||
@@ -50,15 +50,14 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
         Transaction transaction = session.beginTransaction();
         ArrayList<Employee> resultEmployees;
 
-        try{
+        try {
             resultEmployees = (ArrayList<Employee>) session.createCriteria(Employee.class)
                     .add(Restrictions.like("lastName", lastName))
                     .list();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             resultEmployees = null;
-        }
-        finally {
+        } finally {
             transaction.commit();
             session.close();
         }
@@ -66,25 +65,43 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
         return resultEmployees;
     }
 
-    public ArrayList<Employee> filterByName(String lastName, String firstName){
+    public ArrayList<Employee> filterByName(String lastName, String firstName) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         ArrayList<Employee> resultEmployees;
 
-        try{
+        try {
             resultEmployees = (ArrayList<Employee>) session.createCriteria(Employee.class)
-                    .add( Restrictions.and(Restrictions.like("lastName", lastName) ,
-                                           Restrictions.like("firstName" , firstName)))
+                    .add(Restrictions.and(Restrictions.like("lastName", lastName),
+                            Restrictions.like("firstName", firstName)))
                     .list();
         } catch (Exception e) {
             e.printStackTrace();
             resultEmployees = null;
-        }
-        finally {
+        } finally {
             transaction.commit();
             session.close();
         }
 
         return resultEmployees;
+    }
+
+    public Employee getEmployeeByEmail(String email) {
+
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Employee employee;
+
+        try {
+            ArrayList<Employee> employeeList = (ArrayList<Employee>) session.createCriteria(Employee.class)
+                    .add(Restrictions.like("mailAddress", email))
+                    .list();
+            employee = employeeList.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            employee = null;
+        }
+
+        return employee;
     }
 }
