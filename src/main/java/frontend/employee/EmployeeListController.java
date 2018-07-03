@@ -44,8 +44,8 @@ public class EmployeeListController implements Initializable {
         colID.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
         colVorname.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFirstName()));
         colNachname.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getLastName()));
-        colStatusArbRecht.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStateByEmploymentLaw()));
-        colBerufsstatus.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getWorkingStatus()));
+        colStatusArbRecht.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStateByEmploymentLaw().getId()));
+        colBerufsstatus.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getProfessionalStanding().getId()));
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         List<Employee> employees = employeeDatabaseService.getAll(Employee.class);

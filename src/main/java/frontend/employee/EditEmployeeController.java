@@ -5,16 +5,18 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import controller.EmployeeController;
 import entities.Employee;
+import entities.ProfessionalStanding;
+import entities.StateByEmploymentLaw;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import orm.ProfessionalStandingDatabaseService;
+import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
@@ -161,6 +163,8 @@ public class EditEmployeeController implements Initializable {
     }
 
     private Employee generateEmployee() {
+        ProfessionalStandingDatabaseService professionalStandingService = new ProfessionalStandingDatabaseService();
+        StateByEmploymentLawDatabaseService stateByEmploymentLawService = new StateByEmploymentLawDatabaseService();
 
         Calendar startDate = Calendar.getInstance();
         startDate.set(
@@ -175,8 +179,8 @@ public class EditEmployeeController implements Initializable {
                 txtMobil.getText(), txtEmail.getText(),
                 txtIBAN.getText(), txtBIC.getText(),
                 Double.parseDouble(txtBruttoStdSatz.getText()), startDate.getTime(),
-                true, 0,
-                txtSteuerID.getText(), 0, txtBemerkung.getText());
+                true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1),
+                txtSteuerID.getText(), professionalStandingService.get(ProfessionalStanding.class, 1), txtBemerkung.getText());
     }
 
     private void validateInput() {
