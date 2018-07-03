@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.util.Date;
 
 @Entity
 @Table(name="Employee")
@@ -59,7 +60,7 @@ public class Employee
     private double bruttoPerHour;
 
     @Column(name = "startOfEmployment")
-    private String startOfEmployment;
+    private Date startOfEmployment;
 
     @Column(name = "activityState")
     private boolean activityState;
@@ -84,7 +85,7 @@ public class Employee
 
     }
 
-    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, String startOfEmployment, boolean activityState, int stateByEmploymentLaw, String taxNumber, int workingStatus, String comments) {
+    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, int stateByEmploymentLaw, String taxNumber, int workingStatus, String comments) {
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -218,11 +219,11 @@ public class Employee
         this.bruttoPerHour = bruttoPerHour;
     }
 
-    public String getStartOfEmployment() {
+    public Date getStartOfEmployment() {
         return startOfEmployment;
     }
 
-    public void setStartOfEmployment(String startOfEmployment) {
+    public void setStartOfEmployment(Date startOfEmployment) {
         this.startOfEmployment = startOfEmployment;
     }
 

@@ -13,7 +13,9 @@ import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class EditEmployeeController implements Initializable {
@@ -89,8 +91,6 @@ public class EditEmployeeController implements Initializable {
 
     public void getDataFromEmployeeView(Employee employee) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(employee.getStartOfEmployment(), formatter);
         this.employee = employee;
 
         txtVorname.setText(employee.getFirstName());
@@ -105,7 +105,10 @@ public class EditEmployeeController implements Initializable {
         txtIBAN.setText(employee.getIban());
         txtBIC.setText(employee.getBic());
         txtBruttoStdSatz.setText(Double.toString(employee.getBruttoPerHour()));
-        dateBesschSeit.setValue(date);
+        dateBesschSeit.setValue(employee.getStartOfEmployment()
+                                        .toInstant()
+                                        .atZone(ZoneId.systemDefault())
+                                        .toLocalDate());
         txtSteuerID.setText(employee.getTaxNumber());
         txtBemerkung.setText(employee.getComments());
 
@@ -130,6 +133,13 @@ public class EditEmployeeController implements Initializable {
 
     private Employee generateEmployeeOnExisting() {
         Employee employee = this.employee;
+
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(
+                dateBesschSeit.getValue().getYear(),
+                dateBesschSeit.getValue().getMonthValue(),
+                dateBesschSeit.getValue().getDayOfMonth());
+
         employee.setFirstName(txtVorname.getText());
         employee.setLastName(txtNachname.getText());
         employee.setStreet(txtStrasse.getText());
@@ -142,7 +152,7 @@ public class EditEmployeeController implements Initializable {
         employee.setIban(txtIBAN.getText());
         employee.setBic(txtBIC.getText());
         employee.setBruttoPerHour(Double.parseDouble(txtBruttoStdSatz.getText()));
-        employee.setStartOfEmployment(dateBesschSeit.getValue().toString());
+        employee.setStartOfEmployment(startDate.getTime());
         //employee.setActivityState(//TODO switch for activity);
         employee.setTaxNumber(txtSteuerID.getText());
         employee.setComments(txtBemerkung.getText());
@@ -151,13 +161,20 @@ public class EditEmployeeController implements Initializable {
     }
 
     private Employee generateEmployee() {
+
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(
+                dateBesschSeit.getValue().getYear(),
+                dateBesschSeit.getValue().getMonthValue(),
+                dateBesschSeit.getValue().getDayOfMonth());
+
         return new Employee("", txtVorname.getText(),
                 txtNachname.getText(), txtStrasse.getText(),
                 Integer.parseInt(txtHausNr.getText()), Integer.parseInt(txtPLZ.getText()),
                 txtOrt.getText(), txtFestnetz.getText(),
                 txtMobil.getText(), txtEmail.getText(),
                 txtIBAN.getText(), txtBIC.getText(),
-                Double.parseDouble(txtBruttoStdSatz.getText()), dateBesschSeit.getValue().toString(),
+                Double.parseDouble(txtBruttoStdSatz.getText()), startDate.getTime(),
                 true, 0,
                 txtSteuerID.getText(), 0, txtBemerkung.getText());
     }
