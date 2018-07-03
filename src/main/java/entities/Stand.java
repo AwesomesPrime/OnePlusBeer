@@ -44,6 +44,10 @@ public class Stand {
         this.standDescription = standDescription;
     }
 
+    public LocalTime getOpeningTimes() {
+        return openingTimes;
+    }
+
     public void setOpeningTimes(LocalTime openingTimes) {this.openingTimes = openingTimes;}
 
     public LocalTime getClosingTime() {return closingTime;}

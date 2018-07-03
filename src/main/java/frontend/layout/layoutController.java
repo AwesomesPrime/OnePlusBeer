@@ -52,4 +52,11 @@ public class layoutController implements Initializable {
         currentPane.getChildren().add(eventPane);
     }
 
+    public void openStandList(MouseEvent event) throws IOException {
+        ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/stand/standlist.fxml"));
+        currentPane.getChildren().remove(0, currentPane.getChildren().size());
+        setAnchorPaneContraints(eventPane);
+        currentPane.getChildren().add(eventPane);
+    }
+
 }

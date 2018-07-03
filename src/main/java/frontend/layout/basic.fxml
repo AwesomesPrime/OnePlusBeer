@@ -12,6 +12,7 @@
                 <Label fx:id="menuEmployee" styleClass="menuLabel"  onMouseClicked="#openEmployeeList" layoutX="14.0" layoutY="71.0" text="Mitarbeiter" />
                 <Label fx:id="menuLogin" styleClass="menuLabel" onMouseClicked="#openLogin" layoutX="14.0" layoutY="32.0" text="Home"/>
                 <Label fx:id="menuEvent" styleClass="menuLabel" onMouseClicked="#openEventList" layoutX="14.0" layoutY="115.0" text="Veranstaltungen" />
+                <Label fx:id="menuStand" styleClass="menuLabel" onMouseClicked="#openStandList" layoutX="14.0" layoutY="145.0" text="Stände" />
             </children>
         </AnchorPane>
         <AnchorPane fx:id="currentPane">
