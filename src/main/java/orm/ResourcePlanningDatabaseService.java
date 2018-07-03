@@ -1,8 +1,12 @@
 package orm;
 
 import entities.ResourcePlanning;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -19,5 +23,26 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
                 Double.toString(resourcePlanning.getTravelExpenses()).contains(term)).collect(Collectors.toCollection(ArrayList::new));
 
         return resultEvents;
+    }
+
+    public ArrayList<ResourcePlanning> filterWorkingTimeByDate(Date startDate, Date endDate){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        ArrayList<ResourcePlanning> resultResourcePlanning;
+
+        try{
+            resultResourcePlanning = (ArrayList<ResourcePlanning>) session.createCriteria(ResourcePlanning.class)
+                    .add(Restrictions.between("startWorkingTime",startDate,endDate))
+                    .list();
+        } catch (Exception e){
+            e.printStackTrace();
+            resultResourcePlanning = null;
+        }
+        finally {
+            transaction.commit();
+            session.close();
+        }
+
+        return resultResourcePlanning;
     }
 }
