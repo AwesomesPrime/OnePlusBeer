@@ -1,5 +1,8 @@
 package entities;
 
+import enums.EmploymentLawStates;
+import enums.WorkingStatus;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -65,17 +68,19 @@ public class Employee
     private boolean activityState;
 
     @Column(name = "stateByEmploymentLaw")
-    private int stateByEmploymentLaw;
+    private EmploymentLawStates stateByEmploymentLaw;
 
     @Column(name = "taxNumber")
     private String taxNumber;
 
     @Column(name = "workingStatus")
-    private int workingStatus;
+    private WorkingStatus workingStatus;
 
     @Column(name = "comments")
     private String comments;
 
+    @Column(name="workedTimePerMonthInHours")
+    private int workedTimePerMonthInHours;
 
     //-------------------------------------------------------------------------
     //  Constructor(s)
@@ -84,7 +89,7 @@ public class Employee
 
     }
 
-    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, String startOfEmployment, boolean activityState, int stateByEmploymentLaw, String taxNumber, int workingStatus, String comments) {
+    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, String startOfEmployment, boolean activityState, EmploymentLawStates stateByEmploymentLaw, String taxNumber, WorkingStatus workingStatus, String comments, int workedTimePerMonthInHours) {
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -104,8 +109,8 @@ public class Employee
         this.taxNumber = taxNumber;
         this.workingStatus = workingStatus;
         this.comments = comments;
+        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
     }
-
 
     //-------------------------------------------------------------------------
     //  Get / Set
@@ -234,28 +239,12 @@ public class Employee
         this.activityState = activityState;
     }
 
-    public int getStateByEmploymentLaw() {
-        return stateByEmploymentLaw;
-    }
-
-    public void setStateByEmploymentLaw(int stateByEmploymentLaw) {
-        this.stateByEmploymentLaw = stateByEmploymentLaw;
-    }
-
     public String getTaxNumber() {
         return taxNumber;
     }
 
     public void setTaxNumber(String taxNumber) {
         this.taxNumber = taxNumber;
-    }
-
-    public int getWorkingStatus() {
-        return workingStatus;
-    }
-
-    public void setWorkingStatus(int workingStatus) {
-        this.workingStatus = workingStatus;
     }
 
     public String getComments() {
@@ -266,6 +255,33 @@ public class Employee
         this.comments = comments;
     }
 
+    public boolean isActivityState() {
+        return activityState;
+    }
+
+    public EmploymentLawStates getStateByEmploymentLaw() {
+        return stateByEmploymentLaw;
+    }
+
+    public void setStateByEmploymentLaw(EmploymentLawStates stateByEmploymentLaw) {
+        this.stateByEmploymentLaw = stateByEmploymentLaw;
+    }
+
+    public WorkingStatus getWorkingStatus() {
+        return workingStatus;
+    }
+
+    public void setWorkingStatus(WorkingStatus workingStatus) {
+        this.workingStatus = workingStatus;
+    }
+
+    public int getWorkedTimePerMonthInHours() {
+        return workedTimePerMonthInHours;
+    }
+
+    public void setWorkedTimePerMonthInHours(int workedTimePerMonthInHours) {
+        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
+    }
 
     //-------------------------------------------------------------------------
     //  toString()

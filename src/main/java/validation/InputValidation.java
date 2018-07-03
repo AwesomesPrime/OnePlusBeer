@@ -1,10 +1,16 @@
 package validation;
 
+import entities.Employee;
+import enums.EmploymentLawStates;
+import enums.WorkingStatus;
 import interfaces.Validation;
 
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static constants.Constants.MINIJOB_BRUTTO_PER_MONTH;
+import static enums.EmploymentLawStates.KURZFRISTG_BESCHAEFTIGT;
 
 public class InputValidation implements Validation {
 
@@ -38,6 +44,22 @@ public class InputValidation implements Validation {
 
     public boolean validatePhone(String phone) {
         return phone.matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}");
+    }
+
+    public boolean validateLegalWorktime(Employee employee, double planedWorkTime) {
+        if ( employee.getStateByEmploymentLaw()== EmploymentLawStates.MINIJOB ) {
+            double allowedHoursPerMonth = getAllowedHoursPerMonthBasedOnEmplyomentStatus(employee);
+            double remainingHours = allowedHoursPerMonth - employee.getWorkedTimePerMonthInHours();
+            if ((remainingHours - planedWorkTime) >= 0){
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public double getAllowedHoursPerMonthBasedOnEmplyomentStatus(Employee employee) {
+        return MINIJOB_BRUTTO_PER_MONTH/employee.getBruttoPerHour();
     }
 
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
