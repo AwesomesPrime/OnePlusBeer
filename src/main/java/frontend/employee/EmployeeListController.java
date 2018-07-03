@@ -31,7 +31,7 @@ public class EmployeeListController implements Initializable {
     private TableView<Employee> tableView;
 
     @FXML
-    private TableColumn<Employee, String> colVorname, colNachname, colStatusArbRecht, colBerufsstatus;
+    private TableColumn<Employee, String> colFirstName, colLastName, colStateByEmploymentLaw, colProfessionalStanding;
 
     @FXML
     private TableColumn<Employee, Integer> colID;
@@ -42,10 +42,10 @@ public class EmployeeListController implements Initializable {
         txtSearch.setLabelFloat(true);
 
         colID.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
-        colVorname.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFirstName()));
-        colNachname.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getLastName()));
-        colStatusArbRecht.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStateByEmploymentLaw().getDescription()));
-        colBerufsstatus.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getProfessionalStanding().getDescription()));
+        colFirstName.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFirstName()));
+        colLastName.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getLastName()));
+        colStateByEmploymentLaw.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStateByEmploymentLaw().getDescription()));
+        colProfessionalStanding.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getProfessionalStanding().getDescription()));
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         List<Employee> employees = employeeDatabaseService.getAll(Employee.class);

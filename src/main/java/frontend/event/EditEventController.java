@@ -77,7 +77,7 @@ public class EditEventController implements Initializable {
     }
 
     @FXML
-    public void clickEdit(ActionEvent event){
+    public void apply(ActionEvent event){
         try{
            EventController eventController = new EventController();
 

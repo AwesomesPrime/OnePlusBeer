@@ -29,31 +29,31 @@ public class EditEmployeeController implements Initializable {
     private final EmployeeController employeeController = new EmployeeController();
 
     @FXML
-    private JFXTextField txtVorname;
+    private JFXTextField txtFirstName;
 
     @FXML
-    private JFXTextField txtNachname;
+    private JFXTextField txtLastName;
 
     @FXML
-    private JFXTextField txtOrt;
+    private JFXTextField txtStreet;
+
+    @FXML
+    private JFXTextField txtHouseNumber;
 
     @FXML
     private JFXTextField txtPLZ;
 
     @FXML
-    private JFXTextField txtStrasse;
+    private JFXTextField txtCity;
 
     @FXML
-    private JFXTextField txtHausNr;
+    private JFXTextField txtPhoneNumber;
 
     @FXML
-    private JFXTextField txtFestnetz;
+    private JFXTextField txtMobileNumber;
 
     @FXML
-    private JFXTextField txtMobil;
-
-    @FXML
-    private JFXTextField txtEmail;
+    private JFXTextField txtMailAddress;
 
     @FXML
     private JFXTextField txtIBAN;
@@ -62,7 +62,7 @@ public class EditEmployeeController implements Initializable {
     private JFXTextField txtBIC;
 
     @FXML
-    private JFXTextField txtBruttoStdSatz;
+    private JFXTextField txtBruttoPerHour;
 
     @FXML
     private JFXComboBox cbProfessionalStanding;
@@ -71,16 +71,16 @@ public class EditEmployeeController implements Initializable {
     private JFXComboBox cbStateByEmploymentLaw;
 
     @FXML
-    private JFXTextField txtSteuerID;
+    private JFXTextField txtTaxNumber;
 
     @FXML
     private JFXCheckBox chkActivityState;
 
     @FXML
-    private JFXTextArea txtBemerkung;
+    private JFXTextArea txtComments;
 
     @FXML
-    private JFXDatePicker dateBesschSeit;
+    private JFXDatePicker dateStartOfEmployment;
 
     @FXML
     private AnchorPane editPane;
@@ -105,24 +105,24 @@ public class EditEmployeeController implements Initializable {
 
         this.employee = employee;
 
-        txtVorname.setText(employee.getFirstName());
-        txtNachname.setText(employee.getLastName());
-        txtStrasse.setText(employee.getStreet());
-        txtHausNr.setText(Integer.toString(employee.getHouseNumber()));
+        txtFirstName.setText(employee.getFirstName());
+        txtLastName.setText(employee.getLastName());
+        txtStreet.setText(employee.getStreet());
+        txtHouseNumber.setText(Integer.toString(employee.getHouseNumber()));
         txtPLZ.setText(Integer.toString(employee.getPlz()));
-        txtOrt.setText(employee.getCity());
-        txtFestnetz.setText(employee.getPhoneNumber());
-        txtMobil.setText(employee.getMobileNumber());
-        txtEmail.setText(employee.getMailAddress());
+        txtCity.setText(employee.getCity());
+        txtPhoneNumber.setText(employee.getPhoneNumber());
+        txtMobileNumber.setText(employee.getMobileNumber());
+        txtMailAddress.setText(employee.getMailAddress());
         txtIBAN.setText(employee.getIban());
         txtBIC.setText(employee.getBic());
-        txtBruttoStdSatz.setText(Double.toString(employee.getBruttoPerHour()));
-        dateBesschSeit.setValue(employee.getStartOfEmployment()
+        txtBruttoPerHour.setText(Double.toString(employee.getBruttoPerHour()));
+        dateStartOfEmployment.setValue(employee.getStartOfEmployment()
                                         .toInstant()
                                         .atZone(ZoneId.systemDefault())
                                         .toLocalDate());
-        txtSteuerID.setText(employee.getTaxNumber());
-        txtBemerkung.setText(employee.getComments());
+        txtTaxNumber.setText(employee.getTaxNumber());
+        txtComments.setText(employee.getComments());
         cbProfessionalStanding.getSelectionModel().select(indexOfProfessionalStandingInList(cbProfessionalStanding.getItems(), employee.getProfessionalStanding().getId()));
         cbStateByEmploymentLaw.getSelectionModel().select(indexOfStandByEmploymentLawInList(cbStateByEmploymentLaw.getItems(), employee.getStateByEmploymentLaw().getId()));
         chkActivityState.setSelected(employee.getActivityState());
@@ -138,7 +138,7 @@ public class EditEmployeeController implements Initializable {
             } else {
                 employeeController.addEmployee(generateEmployeeOnExisting());
             }
-            popup.generateInformationPopupWindow(txtVorname.getText() + " " + txtNachname.getText() + " wurde verarbeitet.");
+            popup.generateInformationPopupWindow(txtFirstName.getText() + " " + txtLastName.getText() + " wurde verarbeitet.");
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
@@ -150,28 +150,28 @@ public class EditEmployeeController implements Initializable {
 
         Calendar startDate = Calendar.getInstance();
         startDate.set(
-                dateBesschSeit.getValue().getYear(),
-                dateBesschSeit.getValue().getMonthValue(),
-                dateBesschSeit.getValue().getDayOfMonth());
+                dateStartOfEmployment.getValue().getYear(),
+                dateStartOfEmployment.getValue().getMonthValue(),
+                dateStartOfEmployment.getValue().getDayOfMonth());
 
-        employee.setFirstName(txtVorname.getText());
-        employee.setLastName(txtNachname.getText());
-        employee.setStreet(txtStrasse.getText());
-        employee.setHouseNumber(Integer.parseInt(txtHausNr.getText()));
+        employee.setFirstName(txtFirstName.getText());
+        employee.setLastName(txtLastName.getText());
+        employee.setStreet(txtStreet.getText());
+        employee.setHouseNumber(Integer.parseInt(txtHouseNumber.getText()));
         employee.setPlz(Integer.parseInt(txtPLZ.getText()));
-        employee.setCity(txtOrt.getText());
-        employee.setPhoneNumber(txtFestnetz.getText());
-        employee.setMobileNumber(txtMobil.getText());
-        employee.setMailAddress(txtEmail.getText());
+        employee.setCity(txtCity.getText());
+        employee.setPhoneNumber(txtPhoneNumber.getText());
+        employee.setMobileNumber(txtMobileNumber.getText());
+        employee.setMailAddress(txtMailAddress.getText());
         employee.setIban(txtIBAN.getText());
         employee.setBic(txtBIC.getText());
-        employee.setBruttoPerHour(Double.parseDouble(txtBruttoStdSatz.getText()));
+        employee.setBruttoPerHour(Double.parseDouble(txtBruttoPerHour.getText()));
         employee.setStartOfEmployment(startDate.getTime());
         employee.setActivityState(chkActivityState.isSelected());
         employee.setProfessionalStanding((ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem());
         employee.setStateByEmploymentLaw((StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem());
-        employee.setTaxNumber(txtSteuerID.getText());
-        employee.setComments(txtBemerkung.getText());
+        employee.setTaxNumber(txtTaxNumber.getText());
+        employee.setComments(txtComments.getText());
 
         return employee;
     }
@@ -182,35 +182,35 @@ public class EditEmployeeController implements Initializable {
 
         Calendar startDate = Calendar.getInstance();
         startDate.set(
-                dateBesschSeit.getValue().getYear(),
-                dateBesschSeit.getValue().getMonthValue(),
-                dateBesschSeit.getValue().getDayOfMonth());
+                dateStartOfEmployment.getValue().getYear(),
+                dateStartOfEmployment.getValue().getMonthValue(),
+                dateStartOfEmployment.getValue().getDayOfMonth());
 
-        return new Employee("", txtVorname.getText(),
-                txtNachname.getText(), txtStrasse.getText(),
-                Integer.parseInt(txtHausNr.getText()), Integer.parseInt(txtPLZ.getText()),
-                txtOrt.getText(), txtFestnetz.getText(),
-                txtMobil.getText(), txtEmail.getText(),
+        return new Employee("", txtFirstName.getText(),
+                txtLastName.getText(), txtStreet.getText(),
+                Integer.parseInt(txtHouseNumber.getText()), Integer.parseInt(txtPLZ.getText()),
+                txtCity.getText(), txtPhoneNumber.getText(),
+                txtMobileNumber.getText(), txtMailAddress.getText(),
                 txtIBAN.getText(), txtBIC.getText(),
-                Double.parseDouble(txtBruttoStdSatz.getText()), startDate.getTime(),
+                Double.parseDouble(txtBruttoPerHour.getText()), startDate.getTime(),
                 chkActivityState.isSelected(), (StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem(),
-                txtSteuerID.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "");
+                txtTaxNumber.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "");
     }
 
     private void validateInput() {
-        if( !inputValidation.validateText(txtVorname.getText())) {
+        if( !inputValidation.validateText(txtFirstName.getText())) {
             popup.generateWarningPopupWindow("Der Vorname beinhaltet ungültig Zeichen.");
         }
-        if( !inputValidation.validateText(txtNachname.getText())) {
+        if( !inputValidation.validateText(txtLastName.getText())) {
             popup.generateWarningPopupWindow("Der Nachname beinhaltet ungültig Zeichen.");
         }
-        if( !inputValidation.validateText(txtStrasse.getText())){
+        if( !inputValidation.validateText(txtStreet.getText())){
             popup.generateWarningPopupWindow("Die Straße beinhaltet ungültig Zeichen.");
         }
-        if(!inputValidation.validateText(txtOrt.getText())) {
+        if(!inputValidation.validateText(txtCity.getText())) {
             popup.generateWarningPopupWindow("Der Ort beinhaltet ungültig Zeichen.");
         }
-        if(!inputValidation.validateText(txtEmail.getText())) {
+        if(!inputValidation.validateText(txtMailAddress.getText())) {
             popup.generateWarningPopupWindow("Die Email-Adresse beinhaltet ungültig Zeichen.");
         }
         if(!inputValidation.validateText(txtIBAN.getText())) {
@@ -219,10 +219,10 @@ public class EditEmployeeController implements Initializable {
         if(!inputValidation.validateText(txtBIC.getText())) {
             popup.generateWarningPopupWindow("Der BIC ist ungültig.");
         }
-        if(!inputValidation.validatePhone(txtFestnetz.getText())) {
+        if(!inputValidation.validatePhone(txtPhoneNumber.getText())) {
             popup.generateWarningPopupWindow("Die Festnetztnummer beinhaltet ungültige Zeichen.");
         }
-        if(!inputValidation.validatePhone(txtMobil.getText())) {
+        if(!inputValidation.validatePhone(txtMobileNumber.getText())) {
             popup.generateWarningPopupWindow("Die Mobilnummer beinhaltet ungültige Zeichen.");
         }
     }

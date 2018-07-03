@@ -17,8 +17,8 @@
                 <Label text="Veranstaltung" />
                 <Label text="Straße" GridPane.rowIndex="1" />
                 <Label text="Hausnummer" GridPane.rowIndex="2" />
-                <Label text="Ort" GridPane.rowIndex="3" />
-                <Label text="PLZ" GridPane.rowIndex="4" />
+                <Label text="PLZ" GridPane.rowIndex="3" />
+                <Label text="Ort" GridPane.rowIndex="4" />
                 <Label text="Veranstaltungsname" GridPane.rowIndex="5" />
                 <Label text="Startdatum" GridPane.rowIndex="6" />
                 <Label text="Startzeit" GridPane.rowIndex="7" />
@@ -27,8 +27,8 @@
 
                 <JFXTextField fx:id="txtStrasse" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <JFXTextField fx:id="txtHausNr" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <JFXTextField fx:id="txtOrt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <JFXTextField fx:id="txtOrt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <JFXTextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
                 <JFXDatePicker fx:id="dateStart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -36,7 +36,7 @@
                 <JFXDatePicker fx:id="dateEnd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                 <JFXTimePicker fx:id="timeEnd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9" />
 
-                <JFXButton fx:id="btnEditEvent" onAction="#clickEdit" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <JFXButton fx:id="btnEditEvent" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             </children>
         </GridPane>
     </content>
