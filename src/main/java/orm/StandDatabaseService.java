@@ -14,6 +14,11 @@ public class StandDatabaseService extends GenericDatabaseService<Stand> {
         ArrayList<Stand> allEvents = this.getAll(Stand.class);
         ArrayList<Stand> resultEvents = allEvents.stream().filter(stand -> Integer.toString(stand.getId()).contains(term) ||
                                                                   stand.getStreet().contains(term) ||
-                                                                  stand.getZip().contains(term)
+                                                                  stand.getZip().contains(term) ||
+                                                                  stand.getCity().contains(term) ||
+                                                                  stand.getOpeningTimes().toString().contains(term) ||
+                                                                  stand.getClosingTime().toString().contains(term)).collect(Collectors.toCollection(ArrayList::new));
+
+        return resultEvents;
     }
 }
