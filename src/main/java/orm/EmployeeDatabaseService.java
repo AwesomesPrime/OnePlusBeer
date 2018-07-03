@@ -1,6 +1,9 @@
 package orm;
 
 import entities.Employee;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -38,6 +41,50 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
                                                                                         employee.getTaxNumber().contains(employee.getTaxNumber()) ||
                                                                                         Integer.toString(employee.getWorkingStatus()).contains(term) ||
                                                                                         employee.getComments().contains(term)).collect(Collectors.toCollection(ArrayList::new));
+
+        return resultEmployees;
+    }
+
+
+    public ArrayList<Employee> filterByName(String lastName) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        ArrayList<Employee> resultEmployees;
+
+        try{
+            resultEmployees = (ArrayList<Employee>) session.createCriteria(Employee.class)
+                    .add(Restrictions.like("lastName", lastName))
+                    .list();
+        } catch (Exception e){
+            e.printStackTrace();
+            resultEmployees = null;
+        }
+        finally {
+            transaction.commit();
+            session.close();
+        }
+
+        return resultEmployees;
+    }
+
+    public ArrayList<Employee> filterByName(String lastName, String firstName){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        ArrayList<Employee> resultEmployees;
+
+        try{
+            resultEmployees = (ArrayList<Employee>) session.createCriteria(Employee.class)
+                    .add( Restrictions.and(Restrictions.like("lastName", lastName) ,
+                                           Restrictions.like("firstName" , firstName)))
+                    .list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultEmployees = null;
+        }
+        finally {
+            transaction.commit();
+            session.close();
+        }
 
         return resultEmployees;
     }
