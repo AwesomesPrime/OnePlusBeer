@@ -25,6 +25,7 @@
                 <Label  fx:id="menuEmployee" styleClass="menuItem"  onMouseClicked="#openEmployeeList"  GridPane.rowIndex="4"   text="Mitarbeiter" />
                 <Label  fx:id="menuStand"    styleClass="menuItem" onMouseClicked="#openStandList"     GridPane.rowIndex="5" text="Stände" />
                 <Label  fx:id="menuEvent"    styleClass="menuItem"  onMouseClicked="#openEventList"     GridPane.rowIndex="6"   text="Veranstaltungen" />
+                <Label  fx:id="menuRP"    styleClass="menuItem"  onMouseClicked="#openRPList"     GridPane.rowIndex="6"   text="Einsatzplanung" />
             </children>
         </GridPane>
         <AnchorPane fx:id="currentPane">
