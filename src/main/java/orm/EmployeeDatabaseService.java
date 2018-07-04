@@ -18,6 +18,10 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
     public EmployeeDatabaseService() {
     }
 
+    /**
+     * @param term Der Suchbegriff mit dem alle Attribute des Employess durchsucht werden
+     * @return Gibt eine ArrayList mit allen übereinstimmenden Employees zurück
+     */
     public ArrayList<Employee> search(String term) {
         ArrayList<Employee> allEmployees = this.getAll(Employee.class);
 
@@ -45,6 +49,10 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
     }
 
 
+    /**
+     * @param lastName Nachname nachdem gefiltert werden soll
+     * @return Gibt eine ArrayList mit allen Employees zurück die diesen Nachnamen haben
+     */
     public ArrayList<Employee> filterByName(String lastName) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -65,6 +73,11 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
         return resultEmployees;
     }
 
+    /**
+     * @param lastName Nachname nachdem gefiltert werden soll
+     * @param firstName Vorname nachdem gefiltert werden soll
+     * @return Gibt eine ArrayList mit allen Employees zurück die diesen Nachnamen und Vornamen haben
+     */
     public ArrayList<Employee> filterByName(String lastName, String firstName) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -86,6 +99,11 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
         return resultEmployees;
     }
 
+
+    /**
+     * @param email Email des Employees den man finden möchte
+     * @return Gibt den Employee zurück der diese Email besitzt
+     */
     public Employee getEmployeeByEmail(String email) {
 
         Session session = sessionFactory.openSession();

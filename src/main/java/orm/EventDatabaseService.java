@@ -18,6 +18,10 @@ public class EventDatabaseService extends GenericDatabaseService<Event> {
     public EventDatabaseService(){
     }
 
+    /**
+     * @param term Der Suchbegriff mit dem alle Attribute der Events durchsucht werden
+     * @return Gibt eine ArrayList mit allen übereinstimmenden Events zurück.
+     */
     public ArrayList<Event> search(String term){
         ArrayList<Event> allEvents = this.getAll(Event.class);
         ArrayList<Event> resultEvents = allEvents.stream().filter(event -> Integer.toString(event.getId()).contains(term) ||
