@@ -2,6 +2,9 @@ package entities;
 
 import javax.persistence.*;
 
+/**
+ * Entität für Standbeschreibung
+ */
 @Entity
 @Table(name="Stand_description")
 

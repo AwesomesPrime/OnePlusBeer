@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Date;
 
+/**
+ * Event Entität
+ */
 @Entity
 @Table(name="Event")
 public class Event {

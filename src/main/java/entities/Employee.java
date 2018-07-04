@@ -7,6 +7,9 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+/**
+ * Employee Entität der Datenbank
+ */
 @Entity
 @Table(name="Employee")
 public class Employee

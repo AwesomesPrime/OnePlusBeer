@@ -87,6 +87,10 @@ public class EditEmployeeController implements Initializable {
 
     }
 
+    /**
+     * liest die Bedienereingabe der EmployeeView aus
+     * @param employee employee Entität
+     */
     public void getDataFromEmployeeView(Employee employee) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -111,6 +115,11 @@ public class EditEmployeeController implements Initializable {
 
     }
 
+    /**
+     * Event des Speicherbuttons,
+     * Entweder ein Update oder Save
+     * @param event
+     */
     @FXML
     public void apply(ActionEvent event){
         try{
@@ -128,6 +137,10 @@ public class EditEmployeeController implements Initializable {
         }
     }
 
+    /**
+     * erstelle Employee von vorhandenem Employee
+     * @return Employee
+     */
     private Employee generateEmployeeOnExisting() {
         Employee employee = this.employee;
         employee.setFirstName(txtVorname.getText());
@@ -150,6 +163,10 @@ public class EditEmployeeController implements Initializable {
         return employee;
     }
 
+    /**
+     * erstelle neuen Employee von View eingaben
+     * @return Employee
+     */
     private Employee generateEmployee() {
         return new Employee("", txtVorname.getText(),
                 txtNachname.getText(), txtStrasse.getText(),
@@ -162,6 +179,9 @@ public class EditEmployeeController implements Initializable {
                 txtSteuerID.getText(), 0, txtBemerkung.getText());
     }
 
+    /**
+     * Validiert input und ruft bei fehlern PopUp Fenster auf
+     */
     private void validateInput() {
         if( !inputValidation.validateText(txtVorname.getText())) {
             popup.generateWarningPopupWindow("Der Vorname beinhaltet ungültig Zeichen.");

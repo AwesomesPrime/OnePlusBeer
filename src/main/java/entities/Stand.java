@@ -4,6 +4,9 @@ package entities;
 import javax.persistence.*;
 import java.time.LocalTime;
 
+/**
+ * Entität für Stand
+ */
 @Entity
 @Table(name="Stand")
 public class Stand {
