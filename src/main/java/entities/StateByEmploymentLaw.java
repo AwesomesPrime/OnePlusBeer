@@ -92,11 +92,7 @@ public class StateByEmploymentLaw
 
     @Override
     public String toString() {
-        return "StateByEmploymentLaw{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", incomeMax=" + incomeMax +
-                ", incomeMin=" + incomeMin +
-                '}';
+        return this.getDescription();
+
     }
 }
