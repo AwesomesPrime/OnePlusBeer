@@ -3,7 +3,7 @@ package validation;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
 
-public class PhoneValidator extends ValidatorBase {
+public class WorktimeValidator extends ValidatorBase {
 
     @Override
     protected void eval(){
@@ -15,11 +15,18 @@ public class PhoneValidator extends ValidatorBase {
     private void evalTextInputField(){
         TextInputControl textField = (TextInputControl) srcControl.get();
 
-        if(textField.getText().matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}")){
-           hasErrors.set(false);
+        try{
+            Double worktimeInMin = Double.parseDouble(textField.getText());
+            if(worktimeInMin < 540L){
+                hasErrors.set(false);
+            }
+            else{
+                hasErrors.set(true);
+            }
         }
-        else{
+        catch (Error e){
             hasErrors.set(true);
         }
+
     }
 }

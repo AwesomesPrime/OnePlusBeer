@@ -5,7 +5,7 @@ import javafx.scene.control.TextInputControl;
 
 import java.util.Date;
 
-public class RenameValidator extends ValidatorBase {
+public class IBANValidator extends ValidatorBase {
 
     @Override
     protected void eval(){
@@ -17,7 +17,7 @@ public class RenameValidator extends ValidatorBase {
     private void evalTextInputField(){
         TextInputControl textField = (TextInputControl) srcControl.get();
 
-        if(textField.getText().matches("[\\d]{5}")){
+        if(textField.getText().matches("^DE\\d{2}\\s?([0-9a-zA-Z]{4}\\s?){4}[0-9a-zA-Z]{2}$")){
            hasErrors.set(false);
         }
         else{

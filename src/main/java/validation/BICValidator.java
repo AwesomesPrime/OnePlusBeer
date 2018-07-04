@@ -3,9 +3,7 @@ package validation;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
 
-import java.util.Date;
-
-public class IBANValidator extends ValidatorBase {
+public class BICValidator extends ValidatorBase {
 
     @Override
     protected void eval(){
@@ -17,7 +15,7 @@ public class IBANValidator extends ValidatorBase {
     private void evalTextInputField(){
         TextInputControl textField = (TextInputControl) srcControl.get();
 
-        if(textField.getText().matches("^DE\\d{2}\\s?([0-9a-zA-Z]{4}\\s?){4}[0-9a-zA-Z]{2}$")){
+        if(textField.getText().matches("([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)")){
            hasErrors.set(false);
         }
         else{

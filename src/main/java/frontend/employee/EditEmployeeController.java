@@ -1,10 +1,14 @@
 package frontend.employee;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.validation.base.ValidatorBase;
+import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 import controller.EmployeeController;
 import entities.Employee;
 import entities.ProfessionalStanding;
 import entities.StateByEmploymentLaw;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import orm.ProfessionalStandingDatabaseService;
 import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
-import validation.InputValidation;
+import validation.*;
 
 import java.net.URL;
 import java.time.ZoneId;
@@ -27,6 +31,8 @@ public class EditEmployeeController implements Initializable {
     private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
     private final EmployeeController employeeController = new EmployeeController();
+
+    private ValidatorBase vBase;
 
     @FXML
     private JFXTextField txtVorname;
@@ -90,6 +96,9 @@ public class EditEmployeeController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
+
+        setValidators();
+
         StateByEmploymentLawDatabaseService lawStateDbService = new StateByEmploymentLawDatabaseService();
 
         ObservableList<StateByEmploymentLaw> lawStates = FXCollections.observableList(lawStateDbService.getAll(StateByEmploymentLaw.class));
@@ -99,6 +108,82 @@ public class EditEmployeeController implements Initializable {
 
         ObservableList<ProfessionalStanding> profStands = FXCollections.observableList(profStandDbService.getAll(ProfessionalStanding.class));
         cbProfessionalStanding.setItems(profStands);
+    }
+
+    private void setValidators(){
+
+        EmailValidator emailValidator = new EmailValidator();
+        PhoneValidator phoneValidator = new PhoneValidator();
+        IBANValidator ibanValidator = new IBANValidator();
+        BICValidator bicValidator = new BICValidator();
+        TextValidator textValidator = new TextValidator();
+        ZipValidator zipValidator = new ZipValidator();
+        emailValidator.setMessage("Ungültige E-Mail Adresse");
+        phoneValidator.setMessage("Ungültige Telefonnummer");
+        ibanValidator.setMessage("Ungültige IBAN");
+        bicValidator.setMessage("Ungültige BIC");
+        zipValidator.setMessage("Ungültige PLZ");
+
+        txtEmail.getValidators().add(emailValidator);
+        txtEmail.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    txtEmail.validate();
+                }
+            }
+        });
+
+        txtFestnetz.getValidators().add(phoneValidator);
+        txtFestnetz.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    txtFestnetz.validate();
+                }
+            }
+        });
+
+        txtMobil.getValidators().add(phoneValidator);
+        txtMobil.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    txtMobil.validate();
+                }
+            }
+        });
+
+        txtIBAN.getValidators().add(ibanValidator);
+        txtIBAN.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    txtIBAN.validate();
+                }
+            }
+        });
+
+        txtBIC.getValidators().add(bicValidator);
+        txtBIC.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    txtBIC.validate();
+                }
+            }
+        });
+
+        txtPLZ.getValidators().add(zipValidator);
+        txtPLZ.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    txtPLZ.validate();
+                }
+            }
+        });
+
     }
 
     public void getDataFromEmployeeView(Employee employee) {
@@ -131,7 +216,6 @@ public class EditEmployeeController implements Initializable {
     @FXML
     public void apply(ActionEvent event){
         try{
-            validateInput();
             if(this.employee == null) {
                 employeeController.addEmployee(generateEmployee());
                 generateEmployee();
@@ -195,36 +279,6 @@ public class EditEmployeeController implements Initializable {
                 Double.parseDouble(txtBruttoStdSatz.getText()), startDate.getTime(),
                 chkActivityState.isSelected(), (StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem(),
                 txtSteuerID.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "");
-    }
-
-    private void validateInput() {
-        if( !inputValidation.validateText(txtVorname.getText())) {
-            popup.generateWarningPopupWindow("Der Vorname beinhaltet ungültig Zeichen.");
-        }
-        if( !inputValidation.validateText(txtNachname.getText())) {
-            popup.generateWarningPopupWindow("Der Nachname beinhaltet ungültig Zeichen.");
-        }
-        if( !inputValidation.validateText(txtStrasse.getText())){
-            popup.generateWarningPopupWindow("Die Straße beinhaltet ungültig Zeichen.");
-        }
-        if(!inputValidation.validateText(txtOrt.getText())) {
-            popup.generateWarningPopupWindow("Der Ort beinhaltet ungültig Zeichen.");
-        }
-        if(!inputValidation.validateText(txtEmail.getText())) {
-            popup.generateWarningPopupWindow("Die Email-Adresse beinhaltet ungültig Zeichen.");
-        }
-        if(!inputValidation.validateText(txtIBAN.getText())) {
-            popup.generateWarningPopupWindow("Die IBAN ist ungültig.");
-        }
-        if(!inputValidation.validateText(txtBIC.getText())) {
-            popup.generateWarningPopupWindow("Der BIC ist ungültig.");
-        }
-        if(!inputValidation.validatePhone(txtFestnetz.getText())) {
-            popup.generateWarningPopupWindow("Die Festnetztnummer beinhaltet ungültige Zeichen.");
-        }
-        if(!inputValidation.validatePhone(txtMobil.getText())) {
-            popup.generateWarningPopupWindow("Die Mobilnummer beinhaltet ungültige Zeichen.");
-        }
     }
 
     private int indexOfProfessionalStandingInList(List<ProfessionalStanding> psList, int professionalStandingId) {
