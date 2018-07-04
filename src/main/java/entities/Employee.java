@@ -2,6 +2,15 @@ package entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import enums.EmploymentLawStates;
+import enums.WorkingStatus;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  * Employee Entität der Datenbank
@@ -77,6 +86,8 @@ public class Employee
     @Column(name = "comments")
     private String comments;
 
+    @Column(name="workedTimePerMonthInHours")
+    private int workedTimePerMonthInHours;
 
     //-------------------------------------------------------------------------
     //  Constructor(s)
@@ -105,8 +116,8 @@ public class Employee
         this.taxNumber = taxNumber;
         this.professionalStanding = professionalStanding;
         this.comments = comments;
+        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
     }
-
 
     //-------------------------------------------------------------------------
     //  Get / Set
@@ -273,6 +284,34 @@ public class Employee
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public boolean isActivityState() {
+        return activityState;
+    }
+
+    public EmploymentLawStates getStateByEmploymentLaw() {
+        return stateByEmploymentLaw;
+    }
+
+    public void setStateByEmploymentLaw(EmploymentLawStates stateByEmploymentLaw) {
+        this.stateByEmploymentLaw = stateByEmploymentLaw;
+    }
+
+    public WorkingStatus getWorkingStatus() {
+        return workingStatus;
+    }
+
+    public void setWorkingStatus(WorkingStatus workingStatus) {
+        this.workingStatus = workingStatus;
+    }
+
+    public int getWorkedTimePerMonthInHours() {
+        return workedTimePerMonthInHours;
+    }
+
+    public void setWorkedTimePerMonthInHours(int workedTimePerMonthInHours) {
+        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
     }
 
     //-------------------------------------------------------------------------
