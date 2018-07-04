@@ -34,7 +34,10 @@ public class RPListController implements Initializable {
     //private TableColumn<Stand, String> colName;
 
     @FXML
-    private TableColumn<ResourcePlanning, Integer> colID, colFk_employee, colFk_event, colFk_stand;
+    private TableColumn<ResourcePlanning, Integer> colID;
+
+    @FXML
+    private TableColumn<ResourcePlanning, String> colFk_employee, colFk_event, colFk_stand;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -42,9 +45,9 @@ public class RPListController implements Initializable {
         txtSearch.setLabelFloat(true);
 
         colID.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
-        colFk_employee.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEmployee().getId()));
-        colFk_event.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvent().getId()));
-        colFk_stand.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStand().getId()));
+        colFk_employee.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEmployee().getFirstName() + " " + cellData.getValue().getEmployee().getLastName()));
+        colFk_event.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvent().getName()));
+        colFk_stand.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStand().getStandDescription().getName()));
 
         ResourcePlanningDatabaseService ResourcePlanningListDatabaseService = new ResourcePlanningDatabaseService();
         List<ResourcePlanning> ResourcePlanning = ResourcePlanningListDatabaseService.getAll(ResourcePlanning.class);

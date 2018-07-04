@@ -15,9 +15,13 @@
             </rowConstraints>
             <children>
                 <Label text="Einsatzplanung" styleClass="headline" />
-                <Label text="ID" GridPane.rowIndex="1" />
+                <Label text="Mitarbeiter" GridPane.rowIndex="1"/>
+                <Label text="Stand" GridPane.rowIndex="2"/>
+                <Label text="Veranstaltung" GridPane.rowIndex="3"/>
 
-                <JFXTextField fx:id="txtID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <JFXComboBox fx:id="cbEmployee" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <JFXComboBox fx:id="cbStand" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <JFXComboBox fx:id="cbEvent" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                 <JFXButton fx:id="btnEditRP" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             </children>
