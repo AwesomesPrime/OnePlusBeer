@@ -130,6 +130,7 @@ public class Main extends Application{
         ArrayList<Stand> stands = standDatabaseService.getAll(Stand.class);
         if(stands.size() == 0){
             StandDescription standDescription = new StandDescription("Oettinger Stand", "Bierstand", "IloveBier");
+            standDatabaseService.save(standDescription);
             stand = new Stand("hanstraße","1544","malleSüd",LocalTime.now(), LocalTime.MIDNIGHT, standDescription);
             standDatabaseService.save(stand);
         }
