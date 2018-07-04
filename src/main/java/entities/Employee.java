@@ -1,11 +1,7 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Employee Entität der Datenbank
@@ -35,7 +31,7 @@ public class Employee
     private String street;
 
     @Column(name = "houseNumber")
-    private int houseNumber;
+    private String houseNumber;
 
     @Column(name = "plz")
     private int plz;
@@ -62,19 +58,21 @@ public class Employee
     private double bruttoPerHour;
 
     @Column(name = "startOfEmployment")
-    private String startOfEmployment;
+    private Date startOfEmployment;
 
     @Column(name = "activityState")
     private boolean activityState;
 
-    @Column(name = "stateByEmploymentLaw")
-    private int stateByEmploymentLaw;
+    @ManyToOne
+    @JoinColumn(name = "stateByEmploymentLaw")
+    private StateByEmploymentLaw stateByEmploymentLaw;
 
     @Column(name = "taxNumber")
     private String taxNumber;
 
-    @Column(name = "workingStatus")
-    private int workingStatus;
+    @ManyToOne
+    @JoinColumn(name = "professionalStanding")
+    private ProfessionalStanding professionalStanding;
 
     @Column(name = "comments")
     private String comments;
@@ -87,7 +85,7 @@ public class Employee
 
     }
 
-    public Employee(String salutation, String firstName, String lastName, String street, int houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, String startOfEmployment, boolean activityState, int stateByEmploymentLaw, String taxNumber, int workingStatus, String comments) {
+    public Employee(String salutation, String firstName, String lastName, String street, String houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, StateByEmploymentLaw stateByEmploymentLaw, String taxNumber, ProfessionalStanding professionalStanding, String comments) {
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -105,7 +103,7 @@ public class Employee
         this.activityState = activityState;
         this.stateByEmploymentLaw = stateByEmploymentLaw;
         this.taxNumber = taxNumber;
-        this.workingStatus = workingStatus;
+        this.professionalStanding = professionalStanding;
         this.comments = comments;
     }
 
@@ -113,9 +111,13 @@ public class Employee
     //-------------------------------------------------------------------------
     //  Get / Set
     //-------------------------------------------------------------------------
-    public int getId() {return id;}
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getSalutation() {
         return salutation;
@@ -149,11 +151,11 @@ public class Employee
         this.street = street;
     }
 
-    public int getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(int houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
@@ -221,12 +223,16 @@ public class Employee
         this.bruttoPerHour = bruttoPerHour;
     }
 
-    public String getStartOfEmployment() {
+    public Date getStartOfEmployment() {
         return startOfEmployment;
     }
 
-    public void setStartOfEmployment(String startOfEmployment) {
+    public void setStartOfEmployment(Date startOfEmployment) {
         this.startOfEmployment = startOfEmployment;
+    }
+
+    public boolean isActive() {
+        return activityState;
     }
 
     public boolean getActivityState() {
@@ -237,11 +243,11 @@ public class Employee
         this.activityState = activityState;
     }
 
-    public int getStateByEmploymentLaw() {
+    public StateByEmploymentLaw getStateByEmploymentLaw() {
         return stateByEmploymentLaw;
     }
 
-    public void setStateByEmploymentLaw(int stateByEmploymentLaw) {
+    public void setStateByEmploymentLaw(StateByEmploymentLaw stateByEmploymentLaw) {
         this.stateByEmploymentLaw = stateByEmploymentLaw;
     }
 
@@ -253,12 +259,12 @@ public class Employee
         this.taxNumber = taxNumber;
     }
 
-    public int getWorkingStatus() {
-        return workingStatus;
+    public ProfessionalStanding getProfessionalStanding() {
+        return professionalStanding;
     }
 
-    public void setWorkingStatus(int workingStatus) {
-        this.workingStatus = workingStatus;
+    public void setProfessionalStanding(ProfessionalStanding professionalStanding) {
+        this.professionalStanding = professionalStanding;
     }
 
     public String getComments() {
@@ -269,13 +275,13 @@ public class Employee
         this.comments = comments;
     }
 
-
     //-------------------------------------------------------------------------
     //  toString()
     //-------------------------------------------------------------------------
+
     @Override
     public String toString() {
-        return "entities.Employee{" +
+        return "Employee{" +
                 "id=" + id +
                 ", salutation='" + salutation + '\'' +
                 ", firstName='" + firstName + '\'' +
@@ -284,17 +290,17 @@ public class Employee
                 ", houseNumber=" + houseNumber +
                 ", plz=" + plz +
                 ", city='" + city + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", mobileNumber=" + mobileNumber +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
                 ", mailAddress='" + mailAddress + '\'' +
                 ", iban='" + iban + '\'' +
                 ", bic='" + bic + '\'' +
                 ", bruttoPerHour=" + bruttoPerHour +
-                ", startOfEmployment='" + startOfEmployment + '\'' +
-                ", activityState='" + activityState + '\'' +
-                ", stateByEmploymentLaw='" + stateByEmploymentLaw + '\'' +
+                ", startOfEmployment=" + startOfEmployment +
+                ", activityState=" + activityState +
+                ", stateByEmploymentLaw=" + stateByEmploymentLaw +
                 ", taxNumber='" + taxNumber + '\'' +
-                ", workingStatus='" + workingStatus + '\'' +
+                ", professionalStanding=" + professionalStanding +
                 ", comments='" + comments + '\'' +
                 '}';
     }

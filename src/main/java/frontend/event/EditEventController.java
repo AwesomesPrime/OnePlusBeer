@@ -85,8 +85,8 @@ public class EditEventController implements Initializable {
      * @param event Event Entität
      */
     @FXML
-    public void clickEdit(ActionEvent event){
-    try{
+    public void apply(ActionEvent event){
+        try{
            EventController eventController = new EventController();
 
             Calendar startDate = Calendar.getInstance();

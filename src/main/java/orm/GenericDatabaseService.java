@@ -5,11 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +13,7 @@ import java.util.ArrayList;
  */
 public abstract class GenericDatabaseService<T> implements IGenericDatabaseService<T> {
 
-    public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    protected SessionFactory sessionFactory = SessionFactoryService.getSessionFactory();
 
     public <T> T get(Class<T> type,  int id) {
 
@@ -94,7 +90,7 @@ public abstract class GenericDatabaseService<T> implements IGenericDatabaseServi
     }
 
     /*public <T> ArrayList<T> search (Class<T> type,ArrayList<SearchParam> params) {
-        Session session = sessionFactory.openSession();
+        SessionFactoryService session = sessionFactory.openSession();
 
         Criteria cr = session.createCriteria(type);
         for (int i = 0; i < params.size(); i++) {

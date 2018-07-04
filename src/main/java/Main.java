@@ -20,6 +20,7 @@ public class Main extends Application{
         mainScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
         primaryStage.setScene(mainScene);
         primaryStage.setOnCloseRequest(e -> System.exit(0));
+//        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
@@ -30,6 +31,8 @@ public class Main extends Application{
 
     private static void loadSampleData(){
         UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
+        ProfessionalStandingDatabaseService professionalStandingService = new ProfessionalStandingDatabaseService();
+        StateByEmploymentLawDatabaseService stateByEmploymentLawService = new StateByEmploymentLawDatabaseService();
         EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
         UserDatabaseService userService = new UserDatabaseService();
         EventDatabaseService eventDatabaseService = new EventDatabaseService();
@@ -41,7 +44,7 @@ public class Main extends Application{
         Event eventTwo = null;
         Stand stand = null;
 
-        /*Load Initial Data for Userpermission */
+        /*Load Initial Data for UserPermission */
         ArrayList<UserPermission> userpermissions = userPermissionService.getAll(UserPermission.class);
         if(userpermissions.size() == 0){
             UserPermission standard = new UserPermission("Standard");
@@ -55,17 +58,47 @@ public class Main extends Application{
             userPermissionService.save(admin);
         }
 
+        /*Load Initial Data for ProfessionalStanding */
+        ArrayList<ProfessionalStanding> professionalstandings = professionalStandingService.getAll(ProfessionalStanding.class);
+        if(professionalstandings.size() == 0){
+            ProfessionalStanding student = new ProfessionalStanding("Student");
+            ProfessionalStanding auszubildender = new ProfessionalStanding("Auszubildende/r");
+            ProfessionalStanding arbeitnehmer = new ProfessionalStanding("Arbeitnehmer/in");
+            ProfessionalStanding beamter = new ProfessionalStanding("Beamte/r");
+            ProfessionalStanding selbststaendiger = new ProfessionalStanding("Selbstständige/r");
+
+            professionalStandingService.save(student);
+            professionalStandingService.save(auszubildender);
+            professionalStandingService.save(arbeitnehmer);
+            professionalStandingService.save(beamter);
+            professionalStandingService.save(selbststaendiger);
+        }
+
+        /*Load Initial Data for StateByEmploymentLaw */
+        ArrayList<StateByEmploymentLaw> statesByEmploymentLaw = stateByEmploymentLawService.getAll(StateByEmploymentLaw.class);
+        if(statesByEmploymentLaw.size() == 0){
+            StateByEmploymentLaw shorttermemployment = new StateByEmploymentLaw("kurzfristige Beschäftigung");
+            StateByEmploymentLaw minijob = new StateByEmploymentLaw("Minijob");
+            StateByEmploymentLaw socialinsurance = new StateByEmploymentLaw("sozialversicherungspflichtig");
+
+            stateByEmploymentLawService.save(shorttermemployment);
+            stateByEmploymentLawService.save(minijob);
+            stateByEmploymentLawService.save(socialinsurance);
+        }
+
         /* Load Sample Data for Employee */
         ArrayList<Employee> employees = employeeService.getAll(Employee.class);
         if(employees.size() == 0){
-            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", 60, 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50, "01.01.2010", true, 0, "684312468473214", 0, "Comment" );
+            Calendar startDate = Calendar.getInstance();
+            startDate.set(2018,11,1, 0, 0, 0);
+            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment" );
             employeeService.save(employee);
         }
 
         /* Load Sample Data for User */
         ArrayList<User> userlist = userService.getAll(User.class);
         if(userlist.size() == 0){
-            entities.User user = new entities.User( employeeService.get(Employee.class, 1), userPermissionService.get(UserPermission.class, 2), "pwtest");
+            User user = new User( employeeService.get(Employee.class, 1), userPermissionService.get(UserPermission.class, 2), "pwtest");
             userService.save(user);
         }
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<ScrollPane fx:id="eventPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.eventlist.EventListController">
+<ScrollPane fx:id="eventPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.event.EventListController">
     <content>
         <GridPane alignment="CENTER" vgap="25.0">
             <columnConstraints>
@@ -23,9 +23,9 @@
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Veranstaltungen" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+                <Label text="Veranstaltungen" styleClass="headline" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
                 <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
-                <FontAwesomeIconView fx:id="addEvent" glyphName="PLUS" glyphStyle="-fx-fill: #444444" onMouseClicked="#addEvent" size="22px" styleClass="cursorHand" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <FontAwesomeIconView fx:id="addEvent" styleClass="cursorHand" onMouseClicked="#addEvent" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TableView fx:id="tableView" onMouseClicked="#editEvent" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
                         <TableColumn fx:id="colAnschrift" editable="false" text="Anschrift" />
