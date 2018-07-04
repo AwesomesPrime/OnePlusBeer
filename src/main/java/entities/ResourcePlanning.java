@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Created by Ulokal on 29.06.2018.
+ * Resourceplanungs Entität mit Fremdschlüssel auf Employee, Event und Stand
  */
 @Entity
 @Table(name = "ResourcePlanning")

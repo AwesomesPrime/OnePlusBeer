@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 
+/**
+ * Entität für Nutzerberechtigung
+ */
 @Entity
 @Table(name="UserPermission")
 public class UserPermission

@@ -57,6 +57,10 @@ public class EditEventController implements Initializable {
 
     }
 
+    /**
+     * Liest eingegebenen Daten aus Event view
+     * @param event Event Entität
+     */
     public void getDataFromEventView(Event event) {
 
         txtStrasse.setText(event.getStreet());
@@ -76,9 +80,13 @@ public class EditEventController implements Initializable {
         timeEnd.setValue(event.getEndTime());
     }
 
+    /**
+     * Editieren des übergebenen Events
+     * @param event Event Entität
+     */
     @FXML
     public void clickEdit(ActionEvent event){
-        try{
+    try{
            EventController eventController = new EventController();
 
             Calendar startDate = Calendar.getInstance();

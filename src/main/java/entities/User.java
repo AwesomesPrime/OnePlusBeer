@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+/**
+ * Entität für Nutzer
+ */
 @Entity
 @Table(name="User")
 public class User
