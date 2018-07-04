@@ -84,7 +84,6 @@ public class EditStandController implements Initializable {
             if(this.Stand == null) {
                 getStandDescription();
                 StandController.addStand(generateStand());
-                generateStand();
             } else {
                 StandController.addStand(generateStandOnExisting());
             }

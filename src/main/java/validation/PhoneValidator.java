@@ -15,7 +15,7 @@ public class PhoneValidator extends ValidatorBase {
     private void evalTextInputField(){
         TextInputControl textField = (TextInputControl) srcControl.get();
 
-        if(textField.getText().matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}")){
+        if(textField.getText().matches("[\\d| ]+")){
            hasErrors.set(false);
         }
         else{

@@ -128,32 +128,32 @@ public class EditEmployeeController implements Initializable {
         bicValidator.setMessage("Ungültige BIC");
         zipValidator.setMessage("Ungültige PLZ");
 
-        txtEmail.getValidators().add(emailValidator);
-        txtEmail.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        txtMailAddress.getValidators().add(emailValidator);
+        txtMailAddress.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(!newValue){
-                    txtEmail.validate();
+                    txtMailAddress.validate();
                 }
             }
         });
 
-        txtFestnetz.getValidators().add(phoneValidator);
-        txtFestnetz.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        txtPhoneNumber.getValidators().add(phoneValidator);
+        txtPhoneNumber.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(!newValue){
-                    txtFestnetz.validate();
+                    txtPhoneNumber.validate();
                 }
             }
         });
 
-        txtMobil.getValidators().add(phoneValidator);
-        txtMobil.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        txtMobileNumber.getValidators().add(phoneValidator);
+        txtMobileNumber.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(!newValue){
-                    txtMobil.validate();
+                    txtMobileNumber.validate();
                 }
             }
         });
@@ -231,7 +231,6 @@ public class EditEmployeeController implements Initializable {
         try{
             if(this.employee == null) {
                 employeeController.addEmployee(generateEmployee());
-                generateEmployee();
             } else {
                 employeeController.addEmployee(generateEmployeeOnExisting());
             }

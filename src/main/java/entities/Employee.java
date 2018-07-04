@@ -2,7 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.Date;
-import enums.EmploymentLawStates;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
