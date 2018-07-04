@@ -82,10 +82,11 @@ public class EditStandController implements Initializable {
         try{
             validateInput();
             if(this.Stand == null) {
-                StandController.addStand(generateStand(), getStandDescription());
+                getStandDescription();
+                StandController.addStand(generateStand());
                 generateStand();
             } else {
-                StandController.addStand(generateStandOnExisting(), getStandDescription());
+                StandController.addStand(generateStandOnExisting());
             }
             popup.generateInformationPopupWindow(txtType.getText() + " wurde verarbeitet.");
         }
@@ -112,18 +113,12 @@ public class EditStandController implements Initializable {
 
     private Stand generateStand() {
 
-        StandDescription desc = getStandDescription();
-
-        desc.setComment(txtComments.getText());
-        desc.setType(txtType.getText());
-        desc.setName(txtName.getText());
-
         return new Stand(txtStreet.getText()
                         ,txtPLZ.getText()
                         ,txtStreet.getText()
                         ,TimeOpen.getValue()
                         ,TimeClose.getValue()
-                        ,desc);
+                        ,getStandDescription());
     }
 
     private StandDescription getStandDescription() {
@@ -131,6 +126,8 @@ public class EditStandController implements Initializable {
         desc.setComment(txtComments.getText());
         desc.setType(txtType.getText());
         desc.setName(txtName.getText());
+
+        StandController.addStandDescription(desc);
         return desc;
     }
 

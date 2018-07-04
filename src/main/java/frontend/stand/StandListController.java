@@ -32,7 +32,7 @@ public class StandListController implements Initializable {
     private TableView<Stand> tableView;
 
     @FXML
-    private TableColumn<Stand, String> colStandDescription;
+    private TableColumn<Stand, String> colStandDescription, colName;
 
     @FXML
     private TableColumn<Stand, Integer> colID;
@@ -44,6 +44,7 @@ public class StandListController implements Initializable {
 
         colID.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
         colStandDescription.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStandDescription().getComment()));
+        colName.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStandDescription().getName()));
 
         StandDatabaseService StandDatabaseService = new StandDatabaseService();
         List<Stand> Stands = StandDatabaseService.getAll(Stand.class);
