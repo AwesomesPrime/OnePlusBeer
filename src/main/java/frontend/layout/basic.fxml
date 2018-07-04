@@ -23,8 +23,8 @@
                 <Label  fx:id="username"     styleClass="username"                                      GridPane.rowIndex="1" />
                 <Label  fx:id="menuLogin"    styleClass="menuItem"  onMouseClicked="#openLogin"         GridPane.rowIndex="3"   text="Home"/>
                 <Label  fx:id="menuEmployee" styleClass="menuItem"  onMouseClicked="#openEmployeeList"  GridPane.rowIndex="4"   text="Mitarbeiter" />
-                <Label  fx:id="menuEvent"    styleClass="menuItem"  onMouseClicked="#openEventList"     GridPane.rowIndex="5"   text="Veranstaltungen" />
-                <Label fx:id="menuStand" styleClass="menuLabel" onMouseClicked="#openStandList" layoutX="14.0" layoutY="145.0" text="Stände" />
+                <Label  fx:id="menuStand"    styleClass="menuItem" onMouseClicked="#openStandList"     GridPane.rowIndex="5" text="Stände" />
+                <Label  fx:id="menuEvent"    styleClass="menuItem"  onMouseClicked="#openEventList"     GridPane.rowIndex="6"   text="Veranstaltungen" />
             </children>
         </GridPane>
         <AnchorPane fx:id="currentPane">

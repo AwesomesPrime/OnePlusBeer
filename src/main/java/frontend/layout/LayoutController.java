@@ -68,6 +68,14 @@ public class LayoutController implements Initializable{
         currentPane.getChildren().add(employeePane);
     }
 
+
+    public void openStandList(MouseEvent event) throws IOException {
+        ScrollPane standlist = FXMLLoader.load(getClass().getResource("/frontend/stand/standlist.fxml"));
+        currentPane.getChildren().remove(0, currentPane.getChildren().size());
+        initializePanes(standlist);
+        currentPane.getChildren().add(standlist);
+    }
+
     public void openEventList(MouseEvent event) throws IOException {
         ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/event/eventlist.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
