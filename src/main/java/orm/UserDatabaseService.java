@@ -19,6 +19,10 @@ public class UserDatabaseService extends GenericDatabaseService<User> {
 
     }
 
+    /**
+     * @param email Email des Employees
+     * @return User der diese Email besitzt
+     */
     @SuppressWarnings("unchecked")
     public User getUserByEmail(String email){
         Session session = sessionFactory.openSession();

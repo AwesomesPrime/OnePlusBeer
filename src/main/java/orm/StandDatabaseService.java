@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
  */
 public class StandDatabaseService extends GenericDatabaseService<Stand> {
 
+    /**
+     * @param term Der Suchbegriff mit dem alle Attribute der Stände durchsucht werden
+     * @return Gibt eine ArrayList mit allen übereinstimmenden Ständen zurück
+     */
     public ArrayList<Stand> search (String term) {
         ArrayList<Stand> allEvents = this.getAll(Stand.class);
         ArrayList<Stand> resultEvents = allEvents.stream().filter(stand -> Integer.toString(stand.getId()).contains(term) ||

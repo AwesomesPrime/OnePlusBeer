@@ -16,6 +16,10 @@ import java.util.stream.Collectors;
  */
 public class ResourcePlanningDatabaseService extends GenericDatabaseService<ResourcePlanning> {
 
+    /**
+     * @param term Der Suchbegriff mit dem alle Attribute der ResourcePlaning durchsucht werden
+     * @return Gibt eine ArrayList mit allen übereinstimmenden ResourcePlanings zurück
+     */
     public ArrayList<ResourcePlanning> search(String term) {
         ArrayList<ResourcePlanning> allEvents = this.getAll(ResourcePlanning.class);
         ArrayList<ResourcePlanning> resultEvents = allEvents.stream().filter(resourcePlanning -> Integer.toString(resourcePlanning.getId()).contains((term)) ||
@@ -27,6 +31,11 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
         return resultEvents;
     }
 
+    /**
+     * @param startDate StartDatum nach dem gefiltert werden soll
+     * @param endDate EndDatum nach dem gefiltert werden soll
+     * @return ArrayList mit allen Einträge die in dem Zeitraum liegen
+     */
     public ArrayList<ResourcePlanning> filterWorkingTimeByDate(Date startDate, Date endDate){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -48,6 +57,10 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
         return resultResourcePlanning;
     }
 
+    /**
+     * @param email Email des Employees dessen Pläne man haben möchte
+     * @return ArrayList mit allen ResourcePlnanings des Employees die in der Zukunft liegen
+     */
     public ArrayList<ResourcePlanning> filterNextPlansByEmail(String email){
         ArrayList<ResourcePlanning> resultResourcePlaning;
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();

@@ -15,6 +15,12 @@ public abstract class GenericDatabaseService<T> implements IGenericDatabaseServi
 
     protected SessionFactory sessionFactory = SessionFactoryService.getSessionFactory();
 
+    /**
+     * @param type Klasse der zu findenden Entität
+     * @param id Id der zu findenden Entiät
+     * @param <T> Typparameter
+     * @return Gibt die Entität mit der übereinstimmenden Id zurück
+     */
     public <T> T get(Class<T> type,  int id) {
 
         Session session = sessionFactory.openSession();
@@ -35,6 +41,11 @@ public abstract class GenericDatabaseService<T> implements IGenericDatabaseServi
         return (T) result;
     }
 
+    /**
+     * @param type Klasse der Entität
+     * @param <T> Typparameter
+     * @return ArrayList mit allen Entitäten der übergebenen Klasse
+     */
     public <T> ArrayList<T> getAll(Class<T> type) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -56,6 +67,10 @@ public abstract class GenericDatabaseService<T> implements IGenericDatabaseServi
         return resultList;
     }
 
+    /**
+     * @param entity Zu speicherende Entität
+     * @param <T> Typparameter
+     */
     public <T> void save(T entity) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -73,6 +88,10 @@ public abstract class GenericDatabaseService<T> implements IGenericDatabaseServi
         }
     }
 
+    /**
+     * @param entity Zu löschende Entität
+     * @param <T> Typparameter
+     */
     public <T> void delete(T entity) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -88,17 +107,4 @@ public abstract class GenericDatabaseService<T> implements IGenericDatabaseServi
             session.close();
         }
     }
-
-    /*public <T> ArrayList<T> search (Class<T> type,ArrayList<SearchParam> params) {
-        SessionFactoryService session = sessionFactory.openSession();
-
-        Criteria cr = session.createCriteria(type);
-        for (int i = 0; i < params.size(); i++) {
-            if(params.get(i).getOperation().equals("like")){
-                cr.add(Restrictions.like(params.get(i).getColumn(), params.get(i).getValue()));
-            }
-        }
-
-        return (ArrayList<T>) cr.list();
-    }*/
 }
