@@ -52,6 +52,9 @@ public class ResourcePlanning {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "bonus")
+    private Double bonus;
+
 
     public int getId() {
         return id;
@@ -165,5 +168,13 @@ public class ResourcePlanning {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(Double bonus) {
+        this.bonus = bonus;
     }
 }
