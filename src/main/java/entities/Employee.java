@@ -3,7 +3,6 @@ package entities;
 import javax.persistence.*;
 import java.util.Date;
 import enums.EmploymentLawStates;
-import enums.WorkingStatus;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -288,22 +287,6 @@ public class Employee
 
     public boolean isActivityState() {
         return activityState;
-    }
-
-    public EmploymentLawStates getStateByEmploymentLaw() {
-        return stateByEmploymentLaw;
-    }
-
-    public void setStateByEmploymentLaw(EmploymentLawStates stateByEmploymentLaw) {
-        this.stateByEmploymentLaw = stateByEmploymentLaw;
-    }
-
-    public WorkingStatus getWorkingStatus() {
-        return workingStatus;
-    }
-
-    public void setWorkingStatus(WorkingStatus workingStatus) {
-        this.workingStatus = workingStatus;
     }
 
     public int getWorkedTimePerMonthInHours() {

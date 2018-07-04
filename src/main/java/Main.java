@@ -77,13 +77,15 @@ public class Main extends Application{
         /*Load Initial Data for StateByEmploymentLaw */
         ArrayList<StateByEmploymentLaw> statesByEmploymentLaw = stateByEmploymentLawService.getAll(StateByEmploymentLaw.class);
         if(statesByEmploymentLaw.size() == 0){
-            StateByEmploymentLaw shorttermemployment = new StateByEmploymentLaw("kurzfristige Beschäftigung");
-            StateByEmploymentLaw minijob = new StateByEmploymentLaw("Minijob");
-            StateByEmploymentLaw socialinsurance = new StateByEmploymentLaw("sozialversicherungspflichtig");
+            StateByEmploymentLaw shorttermemployment = new StateByEmploymentLaw("kurzfristige Beschäftigung", 0, 450);
+            StateByEmploymentLaw minijob = new StateByEmploymentLaw("Minijob", 450, 0);
+            StateByEmploymentLaw socialinsurance = new StateByEmploymentLaw("Vollerwerb", 0, 850);
+            StateByEmploymentLaw midijob = new StateByEmploymentLaw("Midijob", 850, 451);
 
             stateByEmploymentLawService.save(shorttermemployment);
             stateByEmploymentLawService.save(minijob);
             stateByEmploymentLawService.save(socialinsurance);
+            stateByEmploymentLawService.save(midijob);
         }
 
         /* Load Sample Data for Employee */

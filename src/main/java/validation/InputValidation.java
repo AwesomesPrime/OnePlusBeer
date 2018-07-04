@@ -84,7 +84,7 @@ public class InputValidation implements Validation {
     }
 
     public boolean validateLegalWorktime(Employee employee, double planedWorkTime) {
-        if ( employee.getStateByEmploymentLaw()== EmploymentLawStates.MINIJOB ) {
+        if ( employee.getStateByEmploymentLaw().getIncomeMax() == 450) {
             double allowedHoursPerMonth = getAllowedHoursPerMonthBasedOnEmplyomentStatus(employee);
             double remainingHours = allowedHoursPerMonth - employee.getWorkedTimePerMonthInHours();
             if ((remainingHours - planedWorkTime) >= 0){
@@ -98,8 +98,5 @@ public class InputValidation implements Validation {
     public double getAllowedHoursPerMonthBasedOnEmplyomentStatus(Employee employee) {
         return MINIJOB_BRUTTO_PER_MONTH/employee.getBruttoPerHour();
     }
-
-    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 }
