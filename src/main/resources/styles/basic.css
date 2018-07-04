@@ -35,6 +35,10 @@ JFXTextField,JFXPasswordField, JFXComboBox, JFXTextArea{
     -jfx-focus-color: #4DB6AC;
 }
 
+JFXCheckBox{
+    -jfx-checked-color: #4DB6AC;
+}
+
 JFXButton{
     -fx-background-color: #4DB6AC;
     -fx-text-fill: #FFF;
