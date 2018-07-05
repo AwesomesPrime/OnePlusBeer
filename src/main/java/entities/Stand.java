@@ -89,14 +89,7 @@ public class Stand {
 
     @Override
     public String toString() {
-        return "Stand{" +
-                "id=" + id +
-                ", street='" + street + '\'' +
-                ", zip='" + zip + '\'' +
-                ", city='" + city + '\'' +
-                ", openingTimes=" + openingTimes +
-                ", closingTime=" + closingTime +
-                '}';
+        return standDescription.getName();
     }
 
     public StandDescription getStandDescription() {

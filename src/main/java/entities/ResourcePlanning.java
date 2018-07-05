@@ -108,18 +108,6 @@ public class ResourcePlanning {
         return pauseTime;
     }
 
-    public ResourcePlanning(){}
-
-    public ResourcePlanning(Employee employee, Event event, Stand stand, Date startWorkingTime, Date endWorkingTime, long pauseTime, double travelExpenses) {
-        this.employee = employee;
-        this.event = event;
-        this.stand = stand;
-        this.startWorkingTime = startWorkingTime;
-        this.endWorkingTime = endWorkingTime;
-        this.pauseTime = pauseTime;
-        this.travelExpenses = travelExpenses;
-    }
-
     public void setPauseTime(long pauseTime) {
         this.pauseTime = pauseTime;
     }
@@ -130,20 +118,6 @@ public class ResourcePlanning {
 
     public void setTravelExpenses(double travelExpenses) {
         this.travelExpenses = travelExpenses;
-    }
-
-    @Override
-    public String toString() {
-        return "ResourcePlanning{" +
-                "id=" + id +
-                ", employee=" + employee +
-                ", event=" + event +
-                ", stand=" + stand +
-                ", startWorkingTime=" + startWorkingTime +
-                ", endWorkingTime=" + endWorkingTime +
-                ", pauseTime=" + pauseTime +
-                ", travelExpenses=" + travelExpenses +
-                '}';
     }
 
     public double getTravelDistance() {
@@ -161,6 +135,43 @@ public class ResourcePlanning {
     public void setTravelStart(String travelStart) {
         this.travelStart = travelStart;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public ResourcePlanning(){}
+
+    public ResourcePlanning(Employee employee, Event event, Stand stand, Date startWorkingTime, Date endWorkingTime, long pauseTime, double travelExpenses) {
+        this.employee = employee;
+        this.event = event;
+        this.stand = stand;
+        this.startWorkingTime = startWorkingTime;
+        this.endWorkingTime = endWorkingTime;
+        this.pauseTime = pauseTime;
+        this.travelExpenses = travelExpenses;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "ResourcePlanning{" +
+                "id=" + id +
+                ", employee=" + employee +
+                ", event=" + event +
+                ", stand=" + stand +
+                ", startWorkingTime=" + startWorkingTime +
+                ", endWorkingTime=" + endWorkingTime +
+                ", pauseTime=" + pauseTime +
+                ", travelExpenses=" + travelExpenses +
+                '}';
+    }
+
 
     public String getComment() {
         return comment;

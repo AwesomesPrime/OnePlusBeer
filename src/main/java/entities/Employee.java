@@ -303,27 +303,6 @@ public class Employee
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", salutation='" + salutation + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", street='" + street + '\'' +
-                ", houseNumber=" + houseNumber +
-                ", plz=" + plz +
-                ", city='" + city + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", mailAddress='" + mailAddress + '\'' +
-                ", iban='" + iban + '\'' +
-                ", bic='" + bic + '\'' +
-                ", bruttoPerHour=" + bruttoPerHour +
-                ", startOfEmployment=" + startOfEmployment +
-                ", activityState=" + activityState +
-                ", stateByEmploymentLaw=" + stateByEmploymentLaw +
-                ", taxNumber='" + taxNumber + '\'' +
-                ", professionalStanding=" + professionalStanding +
-                ", comments='" + comments + '\'' +
-                '}';
+        return firstName+" "+lastName;
     }
 }

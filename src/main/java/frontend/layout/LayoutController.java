@@ -83,6 +83,13 @@ public class LayoutController implements Initializable{
         currentPane.getChildren().add(eventPane);
     }
 
+    public void openRPList(MouseEvent event) throws IOException {
+        ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/resourcePlanning/rplist.fxml"));
+        currentPane.getChildren().remove(0, currentPane.getChildren().size());
+        initializePanes(eventPane);
+        currentPane.getChildren().add(eventPane);
+    }
+
     @FXML
     public void checkLogin(ActionEvent event){
         UserDatabaseService userService = new UserDatabaseService();
