@@ -1,22 +1,24 @@
 package frontend.resourcePlanning;
 
 import com.jfoenix.controls.*;
-import controller.EventController;
 import controller.ResourcePlanningController;
 import entities.*;
+import entities.Event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ScrollPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import orm.EmployeeDatabaseService;
 import orm.EventDatabaseService;
 import orm.StandDatabaseService;
-import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
+import java.awt.*;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -45,6 +47,9 @@ public class EditResourcePlanningController implements Initializable {
 
     @FXML
     private JFXComboBox<Event> cbEvent;
+
+    @FXML
+    private ScrollPane editRPPane;
 
     private ResourcePlanning resourcePlanning;
     private final ResourcePlanningController resourcePlanningController = new ResourcePlanningController();
@@ -112,6 +117,8 @@ public class EditResourcePlanningController implements Initializable {
             } else {
                 resourcePlanningController.addResourcePlan(generateResourcePlan(this.resourcePlanning));
             }
+            Stage stage = (Stage) editRPPane.getScene().getWindow();
+            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
             popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
         }
         catch(NumberFormatException e){

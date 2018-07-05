@@ -7,6 +7,9 @@ import entities.StandDescription;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
@@ -44,6 +47,9 @@ public class EditStandController implements Initializable {
     @FXML
     private JFXTimePicker TimeClose;
 
+    @FXML
+    private ScrollPane editStandPane;
+
     private Stand stand;
 
 
@@ -76,6 +82,8 @@ public class EditStandController implements Initializable {
             } else {
                 standController.addStand(generateStandOnExisting());
             }
+            Stage stage = (Stage) editStandPane.getScene().getWindow();
+            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
             popup.generateInformationPopupWindow(txtName.getText() + " wurde verarbeitet.");
         }
         catch(NumberFormatException e){
