@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.geometry.Insets?>
 <ScrollPane fx:id="eventPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.event.EventListController">
     <content>
         <GridPane alignment="CENTER" vgap="25.0">
@@ -25,8 +26,21 @@
             <children>
                 <Label text="Veranstaltungen" styleClass="headline" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
                 <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
-                <FontAwesomeIconView fx:id="addEvent" styleClass="cursorHand" onMouseClicked="#addEvent" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <FontAwesomeIconView fx:id="deleteEvent" styleClass="cursorHand" onMouseClicked="#deleteEvent" glyphName="MINUS" glyphStyle="-fx-fill: #444444" size="22px" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <GridPane maxWidth="-Infinity" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                    <FontAwesomeIconView fx:id="addEvent" styleClass="cursorHand" onMouseClicked="#addEvent" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+                    <GridPane.margin>
+                            <Insets right="20" />
+                        </GridPane.margin>
+                    </FontAwesomeIconView>
+            <FontAwesomeIconView fx:id="deleteEvent" styleClass="cursorHand" onMouseClicked="#deleteEvent" glyphName="MINUS" glyphStyle="-fx-fill: #444444" size="22px" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <columnConstraints>
+                        <ColumnConstraints maxWidth="-Infinity" />
+                        <ColumnConstraints fillWidth="false" halignment="RIGHT" maxWidth="-Infinity" minWidth="-Infinity" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
 
                 <TableView fx:id="tableView" onMouseClicked="#editEvent" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
