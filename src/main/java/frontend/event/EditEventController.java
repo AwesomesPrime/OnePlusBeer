@@ -8,9 +8,14 @@ import entities.Event;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
+
+import java.awt.*;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -50,6 +55,9 @@ public class EditEventController implements Initializable {
 
     @FXML
     private JFXTimePicker timeEnd;
+
+    @FXML
+    private ScrollPane editEventPane;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -116,6 +124,8 @@ public class EditEventController implements Initializable {
                                                 txtPLZ.getText(),
                                                 txtOrt.getText()));
             popup.generateInformationPopupWindow(txtName.getText() + " wurde verarbeitet.");
+            Stage stage = (Stage) editEventPane.getScene().getWindow();
+            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
