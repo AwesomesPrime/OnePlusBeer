@@ -58,7 +58,7 @@ public class StandListController implements Initializable {
         if (event.getClickCount() == 2) {
             Stand currentItemSelected = tableView.getSelectionModel().getSelectedItem();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/stand/editStand.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/stand/editstand.fxml"));
             Parent root = fxmlLoader.load();
             EditStandController editStandController = fxmlLoader.<EditStandController>getController();
             editStandController.getDataFromStandView(currentItemSelected);
@@ -71,7 +71,7 @@ public class StandListController implements Initializable {
     }
 
     public void addStand(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/stand/editStand.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/stand/editstand.fxml"));
         Parent root = fxmlLoader.load();
         Scene addScene = new Scene(root,500,500);
         addScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());

@@ -3,31 +3,21 @@ package frontend.stand;
 import com.jfoenix.controls.*;
 import controller.StandController;
 import entities.Stand;
-import entities.ProfessionalStanding;
 import entities.StandDescription;
-import entities.StateByEmploymentLaw;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
-import orm.ProfessionalStandingDatabaseService;
-import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
 import java.net.URL;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditStandController implements Initializable {
 
     private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
-    private final StandController StandController = new StandController();
+    private final StandController standController = new StandController();
 
     @FXML
     private JFXTextField txtName;
@@ -54,7 +44,7 @@ public class EditStandController implements Initializable {
     @FXML
     private JFXTimePicker TimeClose;
 
-    private Stand Stand;
+    private Stand stand;
 
 
     @FXML
@@ -64,7 +54,7 @@ public class EditStandController implements Initializable {
 
     public void getDataFromStandView(Stand Stand) {
 
-        this.Stand = Stand;
+        this.stand = Stand;
 
 
         txtName.setText(Stand.getStandDescription().getName());
@@ -81,13 +71,12 @@ public class EditStandController implements Initializable {
     public void apply(ActionEvent event){
         try{
             validateInput();
-            if(this.Stand == null) {
-                getStandDescription();
-                StandController.addStand(generateStand());
+            if(this.stand == null) {
+                standController.addStand(generateStand());
             } else {
-                StandController.addStand(generateStandOnExisting());
+                standController.addStand(generateStandOnExisting());
             }
-            popup.generateInformationPopupWindow(txtType.getText() + " wurde verarbeitet.");
+            popup.generateInformationPopupWindow(txtName.getText() + " wurde verarbeitet.");
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
@@ -95,19 +84,20 @@ public class EditStandController implements Initializable {
     }
 
     private Stand generateStandOnExisting() {
-        Stand Stand = this.Stand;
+        Stand stand = this.stand;
+        StandDescription desc = this.stand.getStandDescription();
 
+        stand.setStreet(txtStreet.getText());
+        stand.setZip(txtPLZ.getText());
+        stand.setCity(txtCity.getText());
+        stand.setOpeningTimes(TimeOpen.getValue());
+        stand.setClosingTime(TimeOpen.getValue());
+        desc.setName(txtName.getText());
+        desc.setType(txtType.getText());
+        desc.setComment(txtComments.getText());
 
-        Stand.getStandDescription().setName(txtName.getText());
-        Stand.getStandDescription().setType(txtType.getText());
-        Stand.setStreet(txtStreet.getText());
-        Stand.setZip(txtPLZ.getText());
-        Stand.setCity(txtCity.getText());
-        Stand.setOpeningTimes(TimeOpen.getValue());
-        Stand.setClosingTime(TimeOpen.getValue());
-        Stand.getStandDescription().setComment(txtComments.getText());
-
-        return Stand;
+        standController.addStandDescription(desc);
+        return stand;
     }
 
     private Stand generateStand() {
@@ -126,7 +116,7 @@ public class EditStandController implements Initializable {
         desc.setType(txtType.getText());
         desc.setName(txtName.getText());
 
-        StandController.addStandDescription(desc);
+        standController.addStandDescription(desc);
         return desc;
     }
 
