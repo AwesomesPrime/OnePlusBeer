@@ -136,14 +136,6 @@ public class ResourcePlanning {
         this.travelStart = travelStart;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
     public ResourcePlanning(){}
 
     public ResourcePlanning(Employee employee, Event event, Stand stand, Date startWorkingTime, Date endWorkingTime, long pauseTime, double travelExpenses) {
