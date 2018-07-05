@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextField?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fx:controller="frontend.employee.EmployeeListController" fx:id="employeePane" styleClass="innerPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:controller="frontend.layout.HomeController" fx:id="homePane" styleClass="innerPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <GridPane alignment="TOP_CENTER" vgap="25.0">
             <columnConstraints>
@@ -18,10 +17,8 @@
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label GridPane.halignment="CENTER" styleClass="headline" text="Mitarbeiter" GridPane.columnSpan="2" />
-                <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
-                <FontAwesomeIconView fx:id="addEmployee" styleClass="cursorHand" onMouseClicked="#addEmployee" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TableView fx:id="tableView" onMouseClicked="#editEmployee" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                <Label GridPane.halignment="CENTER" styleClass="headline" text="Home" GridPane.columnSpan="2" />
+                <TableView fx:id="tableView" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
                         <TableColumn fx:id="salutation"             text="Anrede"                   editable="false" />
                         <TableColumn fx:id="name"                   text="Name"                     editable="false" />
@@ -38,10 +35,14 @@
                         <TableColumn fx:id="bruttoPerHour"          text="Bruttolohn/h"             editable="false" />
                         <TableColumn fx:id="activityState"          text="Aktiv"                    editable="false" />
                         <TableColumn fx:id="comments"               text="Kommentare"               editable="false" />
+                        <TableColumn fx:id="bruttoPerHour"          text="Bruttolohn/h"             editable="false" />
+                        <TableColumn fx:id="activityState"          text="Aktiv"                    editable="false" />
+                        <TableColumn fx:id="comments"               text="Kommentare"               editable="false" />
                         <TableColumn fx:id="userPermission"         text="Berechtigungen"           editable="false" />
                         <TableColumn fx:id="password"               text="Passwort"                 editable="false" />
                     </columns>
                 </TableView>
+                <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </content>

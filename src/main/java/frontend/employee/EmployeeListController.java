@@ -34,7 +34,7 @@ public class EmployeeListController implements Initializable {
     private TableView<Employee> tableView;
 
     @FXML
-    private TableColumn<Employee, String> salutation, name, address, phoneNumber, mobileNumber, mailAddress, iban, bic, bruttoPerHour, startOfEmployment, activityState, stateByEmploymentLaw, taxNumber, professionalStanding, comments;
+    private TableColumn<Employee, String> salutation, name, address, phoneNumber, mobileNumber, mailAddress, iban, bic, bruttoPerHour, startOfEmployment, activityState, stateByEmploymentLaw, taxNumber, professionalStanding, comments, userPermission, password;
 
     @FXML
     private TableColumn<Employee, Integer> colID;
@@ -67,6 +67,8 @@ public class EmployeeListController implements Initializable {
             }
         });
         comments.setCellValueFactory(cellData               -> new SimpleObjectProperty<>(cellData.getValue().getComments()));
+        userPermission.setCellValueFactory(cellData               -> new SimpleObjectProperty<>(cellData.getValue().getUserPermission().getDescription()));
+        password.setCellValueFactory(cellData               -> new SimpleObjectProperty<>(cellData.getValue().getPassword()));
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         List<Employee> employees = employeeDatabaseService.getAll(Employee.class);
