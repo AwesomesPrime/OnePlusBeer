@@ -140,15 +140,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", start=" + start +
-                ", end=" + end +
-                ", street='" + street + '\'' +
-                ", houseNumber=" + houseNumber +
-                ", plz='" + plz + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+        return name;
     }
 }

@@ -20,11 +20,12 @@
                 <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label  fx:id="username"     styleClass="username"                                      GridPane.rowIndex="1" />
-                <Label  fx:id="menuLogin"    styleClass="menuItem"  onMouseClicked="#openLogin"         GridPane.rowIndex="3"   text="Home"/>
-                <Label  fx:id="menuEmployee" styleClass="menuItem"  onMouseClicked="#openEmployeeList"  GridPane.rowIndex="4"   text="Mitarbeiter" />
-                <Label  fx:id="menuStand"    styleClass="menuItem" onMouseClicked="#openStandList"     GridPane.rowIndex="5" text="Stände" />
-                <Label  fx:id="menuEvent"    styleClass="menuItem"  onMouseClicked="#openEventList"     GridPane.rowIndex="6"   text="Veranstaltungen" />
+                <Label  fx:id="username"       styleClass="username"                                      GridPane.rowIndex="1" />
+                <Label  fx:id="menuLogin"      styleClass="menuItem"  onMouseClicked="#openLogin"         GridPane.rowIndex="3"   text="Home"/>
+                <Label  fx:id="menuEmployee"   styleClass="menuItem"  onMouseClicked="#openEmployeeList"  GridPane.rowIndex="4"   text="Mitarbeiter" />
+                <Label  fx:id="menuStand"      styleClass="menuItem"  onMouseClicked="#openStandList"     GridPane.rowIndex="5"   text="Stände" />
+                <Label  fx:id="menuEvent"      styleClass="menuItem"  onMouseClicked="#openEventList"     GridPane.rowIndex="6"   text="Veranstaltungen" />
+                <Label  fx:id="reportEvent"    styleClass="menuItem"  onMouseClicked="#openReports"       GridPane.rowIndex="8"   text="Reports" />
             </children>
         </GridPane>
         <AnchorPane fx:id="currentPane">
