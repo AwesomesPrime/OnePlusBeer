@@ -102,6 +102,7 @@ public class EmployeeListController implements Initializable {
         addScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(addScene);
+        stage.setOnCloseRequest(e -> tableView.refresh());
         stage.show();
     }
 }

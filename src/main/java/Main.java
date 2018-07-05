@@ -92,7 +92,13 @@ public class Main extends Application{
         if(employees.size() == 0){
             Calendar startDate = Calendar.getInstance();
             startDate.set(2018,11,1, 0, 0, 0);
-            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment", userPermissionService.get(UserPermission.class, 2), "changeme" );
+            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "standard@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment", userPermissionService.get(UserPermission.class, 1), "changeme" );
+            employeeService.save(employee);
+            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "planer@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment", userPermissionService.get(UserPermission.class, 2), "changeme" );
+            employeeService.save(employee);
+            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "manager@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment", userPermissionService.get(UserPermission.class, 3), "changeme" );
+            employeeService.save(employee);
+            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "admin@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment", userPermissionService.get(UserPermission.class, 4), "changeme" );
             employeeService.save(employee);
         }
         else{

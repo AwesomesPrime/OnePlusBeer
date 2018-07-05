@@ -14,12 +14,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import net.bytebuddy.dynamic.scaffold.TypeWriter;
-import orm.EmployeeDatabaseService;
 import usermanagement.ActiveUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import orm.EmployeeDatabaseService;
 
 public class LayoutController implements Initializable{
 
@@ -37,6 +36,9 @@ public class LayoutController implements Initializable{
 
     @FXML
     private Label menuEvent;
+
+    @FXML
+    private Label menuRP;
 
     @FXML
     public Label username;
@@ -74,17 +76,28 @@ public class LayoutController implements Initializable{
         switch(permission){
             case 1: //Standard
                 hideAll();
+                menuRP.setVisible(true);
+                GridPane.setRowIndex(menuRP, 4);
                 break;
             case 2: //Planer
                 showAll();
                 GridPane.setRowIndex(menuStand, 4);
                 GridPane.setRowIndex(menuEvent, 5);
+                GridPane.setRowIndex(menuRP, 6);
                 break;
             case 3: //Manager
                 showAll();
+                GridPane.setRowIndex(menuEmployee, 4);
+                GridPane.setRowIndex(menuStand, 5);
+                GridPane.setRowIndex(menuEvent, 6);
+                GridPane.setRowIndex(menuRP, 7);
                 break;
             case 4: //Admin
                 showAll();
+                GridPane.setRowIndex(menuEmployee, 4);
+                GridPane.setRowIndex(menuStand, 5);
+                GridPane.setRowIndex(menuEvent, 6);
+                GridPane.setRowIndex(menuRP, 7);
                 break;
         }
     }
@@ -93,12 +106,14 @@ public class LayoutController implements Initializable{
         menuEmployee.setVisible(true);
         menuStand.setVisible(true);
         menuEvent.setVisible(true);
+        menuRP.setVisible(true);
     }
 
     private void hideAll(){
         menuEmployee.setVisible(false);
         menuStand.setVisible(false);
         menuEvent.setVisible(false);
+        menuRP.setVisible(false);
     }
 
     public void openLogin() throws IOException {

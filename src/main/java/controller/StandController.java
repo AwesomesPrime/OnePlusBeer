@@ -17,4 +17,10 @@ public class StandController {
         StandDatabaseService standDatabaseService = new StandDatabaseService();
         standDatabaseService.save(desc);
     }
+
+    public void deleteStand(Stand stand){
+
+        StandDatabaseService standDatabaseService = new StandDatabaseService();
+        standDatabaseService.delete(stand);
+    }
 }
