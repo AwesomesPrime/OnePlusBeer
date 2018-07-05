@@ -34,7 +34,6 @@ public class Main extends Application{
         ProfessionalStandingDatabaseService professionalStandingService = new ProfessionalStandingDatabaseService();
         StateByEmploymentLawDatabaseService stateByEmploymentLawService = new StateByEmploymentLawDatabaseService();
         EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
-        UserDatabaseService userService = new UserDatabaseService();
         EventDatabaseService eventDatabaseService = new EventDatabaseService();
         ResourcePlanningDatabaseService resourcePlanningDatabaseService = new ResourcePlanningDatabaseService();
         StandDatabaseService standDatabaseService = new StandDatabaseService();
@@ -93,18 +92,11 @@ public class Main extends Application{
         if(employees.size() == 0){
             Calendar startDate = Calendar.getInstance();
             startDate.set(2018,11,1, 0, 0, 0);
-            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment" );
+            employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment", userPermissionService.get(UserPermission.class, 2), "changeme" );
             employeeService.save(employee);
         }
         else{
             employee = employeeService.get(Employee.class, 1);
-        }
-
-        /* Load Sample Data for User */
-        ArrayList<User> userlist = userService.getAll(User.class);
-        if(userlist.size() == 0){
-            User user = new User( employeeService.get(Employee.class, 1), userPermissionService.get(UserPermission.class, 2), "pwtest");
-            userService.save(user);
         }
 
 
@@ -143,12 +135,12 @@ public class Main extends Application{
         if(resourcePlannings.size() == 0){
 
             Calendar startWorkingTime = Calendar.getInstance();
-            startWorkingTime.set(2018,11,1,8,0,0);
-
             Calendar endWorkingTime = Calendar.getInstance();
+
+            startWorkingTime.set(2018,11,1,8,0,0);
             endWorkingTime.set(2018,11,1,18,0,0);
 
-            ResourcePlanning resourcePlanningOne = new ResourcePlanning(employee,eventOne,stand,startWorkingTime.getTime(),endWorkingTime.getTime(),30,30.4);
+            ResourcePlanning resourcePlanningOne = new ResourcePlanning(employee,eventOne,stand,startWorkingTime.getTime(),endWorkingTime.getTime(),15,30.4);
             resourcePlanningDatabaseService.save(resourcePlanningOne);
 
             startWorkingTime.set(2018,11,2,8,0,0);
@@ -163,6 +155,8 @@ public class Main extends Application{
             ResourcePlanning resourcePlanningThree = new ResourcePlanning(employee,eventTwo,stand,startWorkingTime.getTime(), endWorkingTime.getTime(), 30, 30.4);
             resourcePlanningDatabaseService.save(resourcePlanningThree);
         }
+
+        System.out.println(employee.getWorkedTimeInMonth(12, 2018));
 
     }
 }

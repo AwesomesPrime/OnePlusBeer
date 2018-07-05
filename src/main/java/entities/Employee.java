@@ -1,6 +1,11 @@
 package entities;
 
+import orm.EmployeeDatabaseService;
+import orm.ResourcePlanningDatabaseService;
+
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -85,8 +90,12 @@ public class Employee
     @Column(name = "comments")
     private String comments;
 
-    @Column(name="workedTimePerMonthInHours")
-    private int workedTimePerMonthInHours;
+    @ManyToOne
+    @JoinColumn(name = "userPermission")
+    private UserPermission userPermission;
+
+    @Column(name = "password")
+    private String password;
 
     //-------------------------------------------------------------------------
     //  Constructor(s)
@@ -95,7 +104,7 @@ public class Employee
 
     }
 
-    public Employee(String salutation, String firstName, String lastName, String street, String houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, StateByEmploymentLaw stateByEmploymentLaw, String taxNumber, ProfessionalStanding professionalStanding, String comments) {
+    public Employee(String salutation, String firstName, String lastName, String street, String houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, StateByEmploymentLaw stateByEmploymentLaw, String taxNumber, ProfessionalStanding professionalStanding, String comments, UserPermission userPermission, String password) {
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -115,7 +124,8 @@ public class Employee
         this.taxNumber = taxNumber;
         this.professionalStanding = professionalStanding;
         this.comments = comments;
-        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
+        this.userPermission = userPermission;
+        this.password = password;
     }
 
     //-------------------------------------------------------------------------
@@ -241,11 +251,11 @@ public class Employee
         this.startOfEmployment = startOfEmployment;
     }
 
-    public boolean isActive() {
+    public boolean getActivityState() {
         return activityState;
     }
 
-    public boolean getActivityState() {
+    public boolean isActive() {
         return activityState;
     }
 
@@ -285,22 +295,42 @@ public class Employee
         this.comments = comments;
     }
 
-    public boolean isActivityState() {
-        return activityState;
+    public UserPermission getUserPermission() {
+        return userPermission;
     }
 
-    public int getWorkedTimePerMonthInHours() {
-        return workedTimePerMonthInHours;
+    public void setUserPermission(UserPermission userPermission) {
+        this.userPermission = userPermission;
     }
 
-    public void setWorkedTimePerMonthInHours(int workedTimePerMonthInHours) {
-        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getWorkedTimeInMonth(int month, int year){
+        ResourcePlanningDatabaseService resourceService = new ResourcePlanningDatabaseService();
+        ArrayList<ResourcePlanning> resourcePlans = resourceService.getResourcePlansInMonth(this, month-1, year);
+
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        double workedTimeInMonth = 0;
+
+        for(ResourcePlanning resourcePlan:resourcePlans) {
+            double time = resourcePlan.getEndWorkingTime().getTime() - resourcePlan.getStartWorkingTime().getTime();
+            double workedTimeInDay = (time / 1000 / 60 - resourcePlan.getPauseTime()) / 60;
+            workedTimeInMonth += workedTimeInDay;
+        }
+
+        return workedTimeInMonth;
+    }
+
 
     //-------------------------------------------------------------------------
     //  toString()
     //-------------------------------------------------------------------------
-
     @Override
     public String toString() {
         return firstName+" "+lastName;
