@@ -21,6 +21,8 @@
                 <Label GridPane.halignment="CENTER" styleClass="headline" text="Mitarbeiter" GridPane.columnSpan="2" />
                 <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
                 <FontAwesomeIconView fx:id="addEmployee" styleClass="cursorHand" onMouseClicked="#addEmployee" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <FontAwesomeIconView fx:id="deleteEmployee" styleClass="cursorHand" onMouseClicked="#deleteEmployee" glyphName="MINUS" glyphStyle="-fx-fill: #444444" size="22px" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
                 <TableView fx:id="tableView" onMouseClicked="#editEmployee" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
                         <TableColumn fx:id="salutation"             text="Anrede"                   editable="false" />

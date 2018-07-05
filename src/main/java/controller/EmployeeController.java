@@ -13,6 +13,12 @@ public class EmployeeController {
         employeeService.save(employee);
     }
 
+    public void deleteEmployee(Employee employee) {
+
+        EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
+        employeeService.delete(employee);
+    }
+
     public ArrayList<Employee> getAllActiveEmployee() {
 
         EmployeeDatabaseService employeeService = new EmployeeDatabaseService();

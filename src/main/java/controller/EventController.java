@@ -10,4 +10,10 @@ public class EventController {
         EventDatabaseService eventDatabaseService = new EventDatabaseService();
         eventDatabaseService.save(eve);
     }
+
+    public void deleteEvent(Event eve) {
+
+        EventDatabaseService eventDatabaseService = new EventDatabaseService();
+        eventDatabaseService.delete(eve);
+    }
 }

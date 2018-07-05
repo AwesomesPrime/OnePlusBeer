@@ -1,7 +1,10 @@
 package frontend.employee;
 
 import com.jfoenix.controls.JFXTextField;
+import controller.EmployeeController;
+import controller.StandController;
 import entities.Employee;
+import entities.Stand;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +18,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import orm.EmployeeDatabaseService;
+import orm.StandDatabaseService;
 import sun.applet.Main;
+import utilities.AlerterMessagePopup;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +43,9 @@ public class EmployeeListController implements Initializable {
 
     @FXML
     private TableColumn<Employee, Integer> colID;
+
+    private final EmployeeController employeeController = new EmployeeController();
+    private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -70,11 +78,16 @@ public class EmployeeListController implements Initializable {
         userPermission.setCellValueFactory(cellData               -> new SimpleObjectProperty<>(cellData.getValue().getUserPermission().getDescription()));
         password.setCellValueFactory(cellData               -> new SimpleObjectProperty<>(cellData.getValue().getPassword()));
 
-        EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
-        List<Employee> employees = employeeDatabaseService.getAll(Employee.class);
-        ObservableList<Employee> employeeList = FXCollections.observableList(employees);
+       ObservableList<Employee> employeeList = getItems();
 
         tableView.setItems(employeeList);
+
+    }
+
+    public ObservableList<Employee> getItems(){
+        EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
+        List<Employee> employees = employeeDatabaseService.getAll(Employee.class);
+        return FXCollections.observableList(employees);
 
     }
 
@@ -102,7 +115,25 @@ public class EmployeeListController implements Initializable {
         addScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(addScene);
-        stage.setOnCloseRequest(e -> tableView.refresh());
+        stage.setOnCloseRequest(e -> {
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+        });
         stage.show();
+    }
+
+    public void deleteEmployee(MouseEvent event) throws IOException {
+        Employee currentItemSelected = tableView.getSelectionModel().getSelectedItem();
+        try{
+            employeeController.deleteEmployee(currentItemSelected);
+
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+
+        }
+        catch(Exception e){
+            popup.generateWarningPopupWindow("Der Datensatz: "+currentItemSelected.getId()+" konnte nicht gelöscht werden!");
+        }
+
     }
 }

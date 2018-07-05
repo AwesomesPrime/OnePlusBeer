@@ -1,6 +1,9 @@
 package frontend.resourcePlanning;
 
 import com.jfoenix.controls.JFXTextField;
+import controller.EmployeeController;
+import controller.ResourcePlanningController;
+import entities.Employee;
 import entities.ResourcePlanning;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -14,8 +17,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import orm.EmployeeDatabaseService;
 import orm.ResourcePlanningDatabaseService;
 import sun.applet.Main;
+import utilities.AlerterMessagePopup;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +45,10 @@ public class RPListController implements Initializable {
     private TableColumn<ResourcePlanning, String> colEventName,colStartDate, colEndDate, colStand,
                                                     colEmployeeName, colStartWorkingTime , colEndWorkingTime,
                                                     colPauseTime, colTravelDistance, colWorkedTime, colComment;
+
+    private final ResourcePlanningController resourcePlanningController = new ResourcePlanningController();
+    private final AlerterMessagePopup popup = new AlerterMessagePopup();
+
     @FXML
     public void initialize(URL url, ResourceBundle rb){
 
@@ -58,11 +67,17 @@ public class RPListController implements Initializable {
         colWorkedTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getEmployee().getWorkedTimeInMonth(cellData.getValue().getStartWorkingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue(), cellData.getValue().getStartWorkingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear()))));
         colComment.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getComment()));
 
-        ResourcePlanningDatabaseService ResourcePlanningListDatabaseService = new ResourcePlanningDatabaseService();
-        List<ResourcePlanning> ResourcePlanning = ResourcePlanningListDatabaseService.getAll(ResourcePlanning.class);
-        ObservableList<ResourcePlanning> ResourcePlanningList = FXCollections.observableList(ResourcePlanning);
+
+        ObservableList<ResourcePlanning> ResourcePlanningList = getItems();
 
         tableView.setItems(ResourcePlanningList);
+
+    }
+
+    public ObservableList<ResourcePlanning> getItems(){
+        ResourcePlanningDatabaseService ResourcePlanningListDatabaseService = new ResourcePlanningDatabaseService();
+        List<ResourcePlanning> ResourcePlanning = ResourcePlanningListDatabaseService.getAll(ResourcePlanning.class);
+        return FXCollections.observableList(ResourcePlanning);
 
     }
 
@@ -78,6 +93,7 @@ public class RPListController implements Initializable {
             editScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
             Stage stage = new Stage();
             stage.setScene(editScene);
+            stage.setOnCloseRequest(e -> tableView.refresh());
             stage.show();
         }
     }
@@ -89,6 +105,25 @@ public class RPListController implements Initializable {
         addScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(addScene);
+        stage.setOnCloseRequest(e -> {
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+        });
         stage.show();
+    }
+
+    public void deletePlan(MouseEvent event) throws IOException {
+        ResourcePlanning currentItemSelected = tableView.getSelectionModel().getSelectedItem();
+        try{
+            resourcePlanningController.deleteResourcePlan(currentItemSelected);
+
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+
+        }
+        catch(Exception e){
+            popup.generateWarningPopupWindow("Der Datensatz: "+currentItemSelected.getId()+" konnte nicht gelöscht werden!");
+        }
+
     }
 }
