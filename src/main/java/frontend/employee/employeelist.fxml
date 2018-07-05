@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <ScrollPane fx:controller="frontend.employee.EmployeeListController" fx:id="employeePane" styleClass="innerPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <GridPane alignment="TOP_CENTER" vgap="25.0">
@@ -20,8 +21,21 @@
             <children>
                 <Label GridPane.halignment="CENTER" styleClass="headline" text="Mitarbeiter" GridPane.columnSpan="2" />
                 <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
-                <FontAwesomeIconView fx:id="addEmployee" styleClass="cursorHand" onMouseClicked="#addEmployee" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <FontAwesomeIconView fx:id="deleteEmployee" styleClass="cursorHand" onMouseClicked="#deleteEmployee" glyphName="MINUS" glyphStyle="-fx-fill: #444444" size="22px" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <GridPane maxWidth="-Infinity" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                    <FontAwesomeIconView fx:id="addEmployee" styleClass="cursorHand" onMouseClicked="#addEmployee" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+                    <GridPane.margin>
+                            <Insets right="20" />
+                        </GridPane.margin>
+                    </FontAwesomeIconView>
+            <FontAwesomeIconView fx:id="deleteEmployee" styleClass="cursorHand" onMouseClicked="#deleteEmployee" glyphName="MINUS" glyphStyle="-fx-fill: #444444" size="22px" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <columnConstraints>
+                        <ColumnConstraints maxWidth="-Infinity" />
+                        <ColumnConstraints fillWidth="false" halignment="RIGHT" maxWidth="-Infinity" minWidth="-Infinity" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
 
                 <TableView fx:id="tableView" onMouseClicked="#editEmployee" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
