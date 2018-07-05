@@ -98,7 +98,7 @@ public class EditResourcePlanningController implements Initializable {
     @FXML
     public void apply(ActionEvent event){
         try{
-            popup.generateInformationPopupWindow(cbEmployee.getSelectionModel().getSelectedItem().getFirstName()+" wurde NICHT verarbeitet.");
+            popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
