@@ -1,6 +1,9 @@
 package frontend.event;
 
 import com.jfoenix.controls.JFXTextField;
+import controller.EmployeeController;
+import controller.EventController;
+import entities.Employee;
 import entities.Event;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -14,11 +17,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import orm.EmployeeDatabaseService;
 import orm.EventDatabaseService;
+import utilities.AlerterMessagePopup;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventListController implements Initializable {
@@ -35,6 +42,9 @@ public class EventListController implements Initializable {
     @FXML
     private TableColumn<Event, Date> colStart, colEnd;
 
+    private final EventController eventController = new EventController();
+    private final AlerterMessagePopup popup = new AlerterMessagePopup();
+
     @FXML
     public void initialize(URL url, ResourceBundle rb){
 
@@ -45,11 +55,15 @@ public class EventListController implements Initializable {
         colStart.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStart()));
         colEnd.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEnd()));
 
-        EventDatabaseService eventDatabaseService = new EventDatabaseService();
-        ArrayList<Event> events = eventDatabaseService.getAll(Event.class);
-        ObservableList<Event> eventList = FXCollections.observableList(events);
+        ObservableList<Event> eventList = getItems();
 
         tableView.setItems(eventList);
+    }
+
+    public ObservableList<Event> getItems(){
+        EventDatabaseService eventDatabaseService = new EventDatabaseService();
+        ArrayList<Event> events = eventDatabaseService.getAll(Event.class);
+        return FXCollections.observableList(events);
     }
 
     public void editEvent(MouseEvent event) throws IOException {
@@ -64,6 +78,7 @@ public class EventListController implements Initializable {
             editScene.getStylesheets().add(EventListController.class.getResource("/styles/basic.css").toExternalForm());
             Stage stage = new Stage();
             stage.setScene(editScene);
+            stage.setOnCloseRequest(e -> tableView.refresh());
             stage.show();
         }
     }
@@ -75,6 +90,25 @@ public class EventListController implements Initializable {
         newScene.getStylesheets().add(EventListController.class.getResource("/styles/basic.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(newScene);
+        stage.setOnCloseRequest(e -> {
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+        });
         stage.show();
+    }
+
+    public void deleteEvent(MouseEvent event) throws IOException {
+        Event currentItemSelected = tableView.getSelectionModel().getSelectedItem();
+        try{
+            eventController.deleteEvent(currentItemSelected);
+
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+
+        }
+        catch(Exception e){
+            popup.generateWarningPopupWindow("Der Datensatz: "+currentItemSelected.getId()+" konnte nicht gelöscht werden!");
+        }
+
     }
 }
