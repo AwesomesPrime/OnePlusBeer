@@ -17,7 +17,7 @@
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Einsatzplanung" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+                <Label text="Einsatzplanung"  styleClass="headline" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
                 <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
                 <FontAwesomeIconView fx:id="addRP" styleClass="cursorHand" onMouseClicked="#addRP" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TableView fx:id="tableView" onMouseClicked="#editRP" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
