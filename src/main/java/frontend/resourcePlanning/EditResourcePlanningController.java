@@ -2,6 +2,7 @@ package frontend.resourcePlanning;
 
 import com.jfoenix.controls.*;
 import controller.EventController;
+import controller.ResourcePlanningController;
 import entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,8 @@ public class EditResourcePlanningController implements Initializable {
     @FXML
     private JFXComboBox<Event> cbEvent;
 
+    private ResourcePlanning resourcePlanning;
+    private final ResourcePlanningController resourcePlanningController = new ResourcePlanningController();
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -69,6 +72,8 @@ public class EditResourcePlanningController implements Initializable {
      *  event Event Entität
      */
     public void getDataFromRPView(ResourcePlanning rp) {
+
+        this.resourcePlanning = rp;
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         StandDatabaseService standDatabaseService = new StandDatabaseService();
@@ -95,14 +100,53 @@ public class EditResourcePlanningController implements Initializable {
      * Editieren des übergebenen Events
      *  event Event Entität
      */
+
     @FXML
     public void apply(ActionEvent event){
         try{
+            validateInput();
+            if(this.resourcePlanning == null) {
+                ResourcePlanning plan = new ResourcePlanning();
+                resourcePlanningController.addResourcePlan(generateResourcePlan(plan));
+            } else {
+                resourcePlanningController.addResourcePlan(generateResourcePlan(this.resourcePlanning));
+            }
             popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
         }
+    }
+
+
+
+    private ResourcePlanning generateResourcePlan(ResourcePlanning plan) {
+
+
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(
+                timeStart.getValue().getHour(),
+                timeStart.getValue().getMinute(),
+                timeStart.getValue().getSecond());
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(
+                timeEnd.getValue().getHour(),
+                timeEnd.getValue().getMinute(),
+                timeEnd.getValue().getSecond());
+
+
+        plan.setComment(txtComment.getText());
+        plan.setEmployee(cbEmployee.getValue());
+        plan.setEndWorkingTime(endDate.getTime());
+        plan.setStartWorkingTime(startDate.getTime());
+        plan.setEvent(cbEvent.getValue());
+        plan.setPauseTime(Long.valueOf(txtTimePause.getText()).longValue());
+        plan.setStand(cbStand.getValue());
+        plan.setTravelDistance(Double.parseDouble(txtTravelDistance.getText()));
+        plan.setTravelExpenses(Double.parseDouble(txtTravelExpenses.getText()));
+        plan.setTravelStart(txtTravelStart.getText());
+
+        return plan;
     }
 
     private void validateInput() {
