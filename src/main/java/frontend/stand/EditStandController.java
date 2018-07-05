@@ -3,24 +3,14 @@ package frontend.stand;
 import com.jfoenix.controls.*;
 import controller.StandController;
 import entities.Stand;
-import entities.ProfessionalStanding;
 import entities.StandDescription;
-import entities.StateByEmploymentLaw;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
-import orm.ProfessionalStandingDatabaseService;
-import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
 import java.net.URL;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditStandController implements Initializable {

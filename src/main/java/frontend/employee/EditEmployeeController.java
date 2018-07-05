@@ -7,6 +7,7 @@ import controller.EmployeeController;
 import entities.Employee;
 import entities.ProfessionalStanding;
 import entities.StateByEmploymentLaw;
+import entities.UserPermission;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orm.ProfessionalStandingDatabaseService;
 import orm.StateByEmploymentLawDatabaseService;
+import orm.UserPermissionDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.*;
 
@@ -284,6 +286,7 @@ public class EditEmployeeController implements Initializable {
     private Employee generateEmployee() {
         ProfessionalStandingDatabaseService professionalStandingService = new ProfessionalStandingDatabaseService();
         StateByEmploymentLawDatabaseService stateByEmploymentLawService = new StateByEmploymentLawDatabaseService();
+        UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
 
         Calendar startDate = Calendar.getInstance();
         startDate.set(
@@ -299,7 +302,7 @@ public class EditEmployeeController implements Initializable {
                 txtIBAN.getText(), txtBIC.getText(),
                 Double.parseDouble(txtBruttoPerHour.getText()), startDate.getTime(),
                 chkActivityState.isSelected(), (StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem(),
-                txtTaxNumber.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "");
+                txtTaxNumber.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "", userPermissionService.get(UserPermission.class, 1), "changeme");
     }
 
     private int indexOfProfessionalStandingInList(List<ProfessionalStanding> psList, int professionalStandingId) {
