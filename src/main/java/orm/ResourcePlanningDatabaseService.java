@@ -85,8 +85,34 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
         }
 
         return resultResourcePlaning;
+    }
 
+    public ArrayList<ResourcePlanning> getResourcePlansInMonth (Employee employee, int month, int year){
+        ArrayList<ResourcePlanning> employeesResourcePlanings;
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
 
+        try{
+            Calendar lowCalendar = Calendar.getInstance();
+            lowCalendar.set(year,month,1,0,0,0);
 
+            Calendar highCalendar = Calendar.getInstance();
+            highCalendar.set(year,month,31,0,0,0);
+
+            employeesResourcePlanings = (ArrayList<ResourcePlanning>) session.createCriteria(ResourcePlanning.class)
+                    .createAlias("employee", "e")
+                    .add(Restrictions.and(Restrictions.eq("e.id", employee.getId()),
+                            Restrictions.between("startWorkingTime", lowCalendar.getTime(), highCalendar.getTime())))
+                    .list();
+        } catch (Exception e){
+            e.printStackTrace();
+            employeesResourcePlanings = null;
+        }
+        finally {
+            transaction.commit();
+            session.close();
+        }
+
+        return employeesResourcePlanings;
     }
 }

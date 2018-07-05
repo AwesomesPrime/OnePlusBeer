@@ -96,6 +96,9 @@ public class Main extends Application{
             employee = new Employee( "Herr", "Robin", "Kitzelmann", "Nordring", "60", 42579, "Heiligenhaus", "0123456789", "015902633063", "robin.kitzelmann@yahoo.de","DE01 2345 6789 1234 5678 90", "WEAREBIC", 8.50,  startDate.getTime(), true, stateByEmploymentLawService.get(StateByEmploymentLaw.class, 1), "684312468473214", professionalStandingService.get(ProfessionalStanding.class, 1), "Comment" );
             employeeService.save(employee);
         }
+        else{
+            employee = employeeService.get(Employee.class, 1);
+        }
 
         /* Load Sample Data for User */
         ArrayList<User> userlist = userService.getAll(User.class);
