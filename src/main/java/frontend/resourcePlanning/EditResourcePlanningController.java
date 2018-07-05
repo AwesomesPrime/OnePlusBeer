@@ -94,6 +94,7 @@ public class EditResourcePlanningController implements Initializable {
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalTime());
         txtTimePause.setText(Long.toString(rp.getPauseTime()));
+        txtComment.setText((rp.getComment()));
     }
 
     /**
