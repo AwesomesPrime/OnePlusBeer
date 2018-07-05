@@ -311,7 +311,7 @@ public class Employee
         this.password = password;
     }
 
-    public double getWorkedTimeInMonth(int month, int year){
+    public double getWorkedTimeHoursInMonth(int month, int year){
         ResourcePlanningDatabaseService resourceService = new ResourcePlanningDatabaseService();
         ArrayList<ResourcePlanning> resourcePlans = resourceService.getResourcePlansInMonth(this, month-1, year);
 
@@ -325,6 +325,10 @@ public class Employee
         }
 
         return workedTimeInMonth;
+    }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
     }
 
 

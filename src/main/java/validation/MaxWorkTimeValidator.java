@@ -3,7 +3,7 @@ package validation;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
 
-public class WorktimeValidator extends ValidatorBase {
+public class MaxWorkTimeValidator extends ValidatorBase {
 
     @Override
     protected void eval(){
@@ -27,6 +27,5 @@ public class WorktimeValidator extends ValidatorBase {
         catch (Error e){
             hasErrors.set(true);
         }
-
     }
 }
