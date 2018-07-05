@@ -123,7 +123,6 @@ public class Main extends Application{
             endDate.set(2017,11,23, 0, 0 ,0);
 
             eventTwo = new Event( "Weihnachtsmarkt 2017", startDate.getTime() , endDate.getTime(),LocalTime.now(),LocalTime.now(), "Hauptstraße", 19, "40597", "MalleSüd");
-            System.out.println(endDate.getTime().toString());
             eventDatabaseService.save(eventTwo);
         }
 
@@ -161,8 +160,5 @@ public class Main extends Application{
             ResourcePlanning resourcePlanningThree = new ResourcePlanning(employee,eventTwo,stand,startWorkingTime.getTime(), endWorkingTime.getTime(), 30, 30.4);
             resourcePlanningDatabaseService.save(resourcePlanningThree);
         }
-
-        System.out.println(employee.getWorkedTimeInMonth(12, 2018));
-
     }
 }
