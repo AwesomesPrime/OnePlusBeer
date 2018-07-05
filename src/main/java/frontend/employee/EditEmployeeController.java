@@ -2,7 +2,6 @@ package frontend.employee;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.base.ValidatorBase;
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 import controller.EmployeeController;
 import entities.Employee;
 import entities.ProfessionalStanding;
@@ -16,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orm.ProfessionalStandingDatabaseService;
@@ -24,8 +22,6 @@ import orm.StateByEmploymentLawDatabaseService;
 import orm.UserPermissionDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.*;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
