@@ -14,12 +14,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import net.bytebuddy.dynamic.scaffold.TypeWriter;
-import orm.EmployeeDatabaseService;
 import usermanagement.ActiveUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import orm.EmployeeDatabaseService;
 
 public class LayoutController implements Initializable{
 
