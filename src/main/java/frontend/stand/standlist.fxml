@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<ScrollPane fx:id="eventPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.stand.StandListController">
+<ScrollPane fx:id="standPane" fitToHeight="true" fitToWidth="true" styleClass="innerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.stand.StandListController">
     <content>
         <GridPane alignment="CENTER" vgap="25.0">
             <columnConstraints>
@@ -26,6 +26,7 @@
                 <Label text="Stände" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
                 <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" promptText="Suchen" GridPane.rowIndex="1" />
                 <FontAwesomeIconView fx:id="addStand" styleClass="cursorHand" onMouseClicked="#addStand" glyphName="PLUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <FontAwesomeIconView fx:id="deleteStand" styleClass="cursorHand" onMouseClicked="#deleteStand" glyphName="MINUS" glyphStyle="-fx-fill: #444444" size="22px" text="" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <TableView fx:id="tableView" onMouseClicked="#editStand" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
                         <TableColumn fx:id="colID" editable="false" text="ID" />

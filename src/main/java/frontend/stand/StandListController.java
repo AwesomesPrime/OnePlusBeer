@@ -1,8 +1,8 @@
 package frontend.stand;
 
 import com.jfoenix.controls.JFXTextField;
+import controller.StandController;
 import entities.Stand;
-import frontend.stand.EditStandController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,12 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import orm.StandDatabaseService;
 import sun.applet.Main;
+import utilities.AlerterMessagePopup;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +40,12 @@ public class StandListController implements Initializable {
     private TableColumn<Stand, Integer> colID;
 
     @FXML
+    private ScrollPane standPane;
+
+    private final StandController standController = new StandController();
+    private final AlerterMessagePopup popup = new AlerterMessagePopup();
+
+    @FXML
     public void initialize(URL url, ResourceBundle rb){
 
         txtSearch.setLabelFloat(true);
@@ -46,12 +54,16 @@ public class StandListController implements Initializable {
         colStandDescription.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStandDescription().getComment()));
         colName.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStandDescription().getName()));
 
-        StandDatabaseService StandDatabaseService = new StandDatabaseService();
-        List<Stand> Stands = StandDatabaseService.getAll(Stand.class);
-        ObservableList<Stand> StandList = FXCollections.observableList(Stands);
+        ObservableList<Stand> StandList = getItems();
 
         tableView.setItems(StandList);
 
+    }
+
+    public ObservableList<Stand> getItems(){
+        StandDatabaseService StandDatabaseService = new StandDatabaseService();
+        List<Stand> Stands = StandDatabaseService.getAll(Stand.class);
+        return FXCollections.observableList(Stands);
     }
 
     public void editStand(MouseEvent event) throws IOException {
@@ -66,6 +78,7 @@ public class StandListController implements Initializable {
             editScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
             Stage stage = new Stage();
             stage.setScene(editScene);
+            stage.setOnCloseRequest(e -> tableView.refresh());
             stage.show();
         }
     }
@@ -77,6 +90,25 @@ public class StandListController implements Initializable {
         addScene.getStylesheets().add(Main.class.getResource("/styles/basic.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(addScene);
+        stage.setOnCloseRequest(e -> {
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+        });
         stage.show();
+    }
+
+    public void deleteStand(MouseEvent event) throws IOException {
+        Stand currentItemSelected = tableView.getSelectionModel().getSelectedItem();
+        try{
+            standController.deleteStand(currentItemSelected);
+
+            tableView.getItems().clear();
+            tableView.getItems().addAll(getItems());
+
+        }
+        catch(Exception e){
+            popup.generateWarningPopupWindow("Der Datensatz: "+currentItemSelected.getId()+" konnte nicht gelöscht werden!");
+        }
+
     }
 }
