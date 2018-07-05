@@ -20,7 +20,6 @@ import sun.applet.Main;
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -55,7 +54,7 @@ public class RPListController implements Initializable {
         colEndWorkingTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEndWorkingTime().toString()));
         colPauseTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Long.toString(cellData.getValue().getPauseTime())));
         colTravelDistance.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getTravelDistance())));
-        colWorkedTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getEmployee().getWorkedTimeInMonth(cellData.getValue().getStartWorkingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue(), cellData.getValue().getStartWorkingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear()))));
+        colWorkedTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getEmployee().getWorkedTimeHoursInMonth(cellData.getValue().getStartWorkingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue(), cellData.getValue().getStartWorkingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear()))));
         colComment.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getComment()));
 
         ResourcePlanningDatabaseService ResourcePlanningListDatabaseService = new ResourcePlanningDatabaseService();

@@ -156,7 +156,7 @@ public class Main extends Application{
             resourcePlanningDatabaseService.save(resourcePlanningThree);
         }
 
-        System.out.println(employee.getWorkedTimeInMonth(12, 2018));
+        System.out.println(employee.getWorkedTimeHoursInMonth(12, 2018));
 
     }
 }

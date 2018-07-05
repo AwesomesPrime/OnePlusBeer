@@ -1,7 +1,6 @@
 package frontend.resourcePlanning;
 
 import com.jfoenix.controls.*;
-import controller.EventController;
 import controller.ResourcePlanningController;
 import entities.*;
 import javafx.collections.FXCollections;
@@ -9,19 +8,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 import orm.EmployeeDatabaseService;
 import orm.EventDatabaseService;
 import orm.StandDatabaseService;
-import orm.StateByEmploymentLawDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
 import java.net.URL;
+import java.time.Duration;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class EditResourcePlanningController implements Initializable {
 
@@ -105,20 +106,25 @@ public class EditResourcePlanningController implements Initializable {
     @FXML
     public void apply(ActionEvent event){
         try{
-            validateInput();
-            if(this.resourcePlanning == null) {
-                ResourcePlanning plan = new ResourcePlanning();
-                resourcePlanningController.addResourcePlan(generateResourcePlan(plan));
-            } else {
-                resourcePlanningController.addResourcePlan(generateResourcePlan(this.resourcePlanning));
+            if(validateWorktimeForMiniJober() && validateLegalBreaKTime()){
+                if(this.resourcePlanning == null) {
+                    ResourcePlanning plan = new ResourcePlanning();
+                    resourcePlanningController.addResourcePlan(generateResourcePlan(plan));
+                } else {
+                    resourcePlanningController.addResourcePlan(generateResourcePlan(this.resourcePlanning));
+                }
+                popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
             }
-            popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
         }
     }
 
+    private boolean validateLegalBreaKTime() {
+        long worktime = calcWorkingTimeInHours();
+        return (worktime > 8 && Long.valueOf(txtTimePause.getText()) > 60) || (worktime > 9 && Long.valueOf(txtTimePause.getText()) > 75) || worktime >= 10;
+    }
 
 
     private ResourcePlanning generateResourcePlan(ResourcePlanning plan) {
@@ -151,7 +157,32 @@ public class EditResourcePlanningController implements Initializable {
     }
 
     private void validateInput() {
+        validateWorktimeForMiniJober();
+    }
 
+    private long calcWorkingTimeInHours() {
+        return HOURS.between(timeStart.getValue(), timeEnd.getValue());
+    }
+
+    private boolean validateWorktimeForMiniJober() {
+        Employee employee = cbEmployee.getValue();
+        if( employee.getStateByEmploymentLaw().getIncomeMax() == 450 ) {
+            long planedWorkTimeForEmployee = getEffectivWorkingTime();
+            Event event = cbEvent.getValue();
+            Double workedTimeHours = employee.getWorkedTimeHoursInMonth(event.getStart().getMonth(), event.getStart().getYear());
+
+            double possibleHoursPerMonth = 450/employee.getBruttoPerHour();
+            double remainingPossibleWorkingHours = possibleHoursPerMonth - workedTimeHours;
+            if((remainingPossibleWorkingHours - planedWorkTimeForEmployee) <= 0){
+              popup.generateErrorPopupWindow("Die für den Mitarbeiter " + employee.getFullName() + " geplannte Arbeitszeit überschreitet die mögliche Zeit.");
+              return false;
+            }
+        }
+        return true;
+    }
+
+    private long getEffectivWorkingTime() {
+        return calcWorkingTimeInHours() - Long.valueOf(txtTimePause.getText());
     }
 
     private int indexOfEmployeeInList(List<Employee> employeeList, int employeeId) {
