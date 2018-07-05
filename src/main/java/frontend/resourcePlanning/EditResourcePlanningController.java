@@ -1,9 +1,6 @@
 package frontend.resourcePlanning;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTimePicker;
+import com.jfoenix.controls.*;
 import controller.EventController;
 import entities.*;
 import javafx.collections.FXCollections;
@@ -31,7 +28,13 @@ public class EditResourcePlanningController implements Initializable {
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML
-    private JFXTextField txtID;
+    private JFXTextField txtTravelStart, txtTravelDistance, txtTravelExpenses,txtTimePause;
+
+    @FXML
+    private JFXTimePicker timeStart, timeEnd;
+
+    @FXML
+    private JFXTextArea txtComment;
 
     @FXML
     private JFXComboBox<Employee> cbEmployee;
@@ -74,6 +77,18 @@ public class EditResourcePlanningController implements Initializable {
         cbStand.getSelectionModel().select(indexOfStandInList(standDatabaseService.getAll(Stand.class),rp.getStand().getId()));
         cbEmployee.getSelectionModel().select(indexOfEmployeeInList(employeeDatabaseService.getAll(Employee.class),rp.getEmployee().getId()));
         cbEvent.getSelectionModel().select(indexOfEventInList(eventDatabaseService.getAll(Event.class),rp.getEvent().getId()));
+        txtTravelStart.setText(rp.getTravelStart());
+        txtTravelDistance.setText(Double.toString(rp.getTravelDistance()));
+        txtTravelExpenses.setText(Double.toString(rp.getTravelExpenses()));
+        timeStart.setValue(rp.getStartWorkingTime()
+                                .toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalTime());
+        timeEnd.setValue(rp.getEndWorkingTime()
+                                .toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalTime());
+        txtTimePause.setText(Long.toString(rp.getPauseTime()));
     }
 
     /**

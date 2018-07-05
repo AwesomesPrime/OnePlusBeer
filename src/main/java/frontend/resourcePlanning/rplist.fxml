@@ -23,9 +23,17 @@
                 <TableView fx:id="tableView" onMouseClicked="#editRP" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <columns>
                         <TableColumn fx:id="colID" editable="false" text="ID" />
-                        <TableColumn fx:id="colFk_employee" editable="false" text="ID Mitarbeiter" />
-                        <TableColumn fx:id="colFk_event" editable="false" text="ID Event" />
-                        <TableColumn fx:id="colFk_stand" editable="false" text="ID Stand" />
+                        <TableColumn fx:id="colEventName" editable="false" text="Veranstaltung" />
+                        <TableColumn fx:id="colStartDate" editable="false" text="Beginn" />
+                        <TableColumn fx:id="colEndDate" editable="false" text="Ende" />
+                        <TableColumn fx:id="colStand" editable="false" text="Stand" />
+                        <TableColumn fx:id="colEmployeeName" editable="false" text="Mitarbeiter" />
+                        <TableColumn fx:id="colStartWorkingTime" editable="false" text="von" />
+                        <TableColumn fx:id="colEndWorkingTime" editable="false" text="bis" />
+                        <TableColumn fx:id="colPauseTime" editable="false" text="Pause" />
+                        <TableColumn fx:id="colTravelDistance" editable="false" text="Distanz" />
+                        <TableColumn fx:id="colWorkedTime" editable="false" text="Stunden/Monat" />
+                        <TableColumn fx:id="colComment" editable="false" text="Info" />
                     </columns>
                 </TableView>
             </children>

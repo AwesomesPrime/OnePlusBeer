@@ -30,24 +30,31 @@ public class RPListController implements Initializable {
     @FXML
     private TableView<ResourcePlanning> tableView;
 
-    //@FXML
-    //private TableColumn<Stand, String> colName;
 
     @FXML
     private TableColumn<ResourcePlanning, Integer> colID;
 
     @FXML
-    private TableColumn<ResourcePlanning, String> colFk_employee, colFk_event, colFk_stand;
-
+    private TableColumn<ResourcePlanning, String> colEventName,colStartDate, colEndDate, colStand,
+                                                    colEmployeeName, colStartWorkingTime , colEndWorkingTime,
+                                                    colPauseTime, colTravelDistance, colWorkedTime, colComment;
     @FXML
     public void initialize(URL url, ResourceBundle rb){
 
         txtSearch.setLabelFloat(true);
 
         colID.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
-        colFk_employee.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEmployee().getFirstName() + " " + cellData.getValue().getEmployee().getLastName()));
-        colFk_event.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvent().getName()));
-        colFk_stand.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStand().getStandDescription().getName()));
+        colEventName.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvent().getName()));
+        colStartDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvent().getStart().toString()));
+        colEndDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEvent().getEnd().toString()));
+        colStand.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStand().getStandDescription().getName()));
+        colEmployeeName.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEmployee().getFirstName()+" "+cellData.getValue().getEmployee().getLastName()));
+        colStartWorkingTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStartWorkingTime().toString()));
+        colEndWorkingTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEndWorkingTime().toString()));
+        colPauseTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Long.toString(cellData.getValue().getPauseTime())));
+        colTravelDistance.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getTravelDistance())));
+        colWorkedTime.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getEmployee().getWorkedTimePerMonthInHours())));
+        colComment.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getComment()));
 
         ResourcePlanningDatabaseService ResourcePlanningListDatabaseService = new ResourcePlanningDatabaseService();
         List<ResourcePlanning> ResourcePlanning = ResourcePlanningListDatabaseService.getAll(ResourcePlanning.class);
