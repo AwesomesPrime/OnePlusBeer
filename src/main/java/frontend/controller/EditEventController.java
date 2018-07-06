@@ -1,9 +1,9 @@
-package frontend.event;
+package frontend.controller;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
-import controller.EventController;
+import controller.EntityController;
 import entities.Event;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,6 @@ import javafx.stage.WindowEvent;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
-import java.awt.*;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -69,19 +68,19 @@ public class EditEventController implements Initializable {
      * Liest eingegebenen Daten aus Event view
      * @param event Event Entität
      */
-    public void getDataFromEventView(Event event) {
+    public void setDataFromView(Event event) {
 
         txtStrasse.setText(event.getStreet());
-        txtHausNr.setText(Integer.toString(event.getHouseNumber()));
+        txtHausNr.setText(event.getHouseNumber());
         txtOrt.setText(event.getCity());
         txtPLZ.setText(event.getPlz());
         txtName.setText(event.getName());
-        dateStart.setValue(event.getStart()
+        dateStart.setValue(event.getStartDate()
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalDate());
         timeStart.setValue(event.getStartTime());
-        dateEnd.setValue(event.getEnd()
+        dateEnd.setValue(event.getEndDate()
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalDate());
@@ -95,7 +94,7 @@ public class EditEventController implements Initializable {
     @FXML
     public void apply(ActionEvent event){
         try{
-           EventController eventController = new EventController();
+           EntityController controller = new EntityController();
 
             Calendar startDate = Calendar.getInstance();
             startDate.set(
@@ -114,13 +113,13 @@ public class EditEventController implements Initializable {
                     timeEnd.getValue().getMinute(),
                     timeEnd.getValue().getSecond());
 
-            eventController.addEvent( new Event( txtName.getText(),
+            controller.save(Event.class,  new Event( txtName.getText(),
                                                 startDate.getTime(),
                                                 endDate.getTime(),
                                                 timeStart.getValue(),
                                                 timeEnd.getValue(),
                                                 txtStrasse.getText(),
-                                                Integer.parseInt(txtHausNr.getText()),
+                                                txtHausNr.getText(),
                                                 txtPLZ.getText(),
                                                 txtOrt.getText()));
             popup.generateInformationPopupWindow(txtName.getText() + " wurde verarbeitet.");

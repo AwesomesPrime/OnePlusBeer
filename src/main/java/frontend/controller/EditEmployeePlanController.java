@@ -1,7 +1,7 @@
-package frontend.resourcePlanning;
+package frontend.controller;
 
 import com.jfoenix.controls.*;
-import controller.ResourcePlanningController;
+import controller.EntityController;
 import entities.*;
 import entities.Event;
 import javafx.collections.FXCollections;
@@ -18,18 +18,15 @@ import orm.StandDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
-import java.awt.*;
 import java.net.URL;
-import java.time.Duration;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static java.time.temporal.ChronoUnit.HOURS;
-import static java.time.temporal.ChronoUnit.MINUTES;
 
-public class EditResourcePlanningController implements Initializable {
+public class EditEmployeePlanController implements Initializable {
 
     private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
@@ -47,7 +44,7 @@ public class EditResourcePlanningController implements Initializable {
     private JFXComboBox<Employee> cbEmployee;
 
     @FXML
-    private JFXComboBox<Stand> cbStand;
+    private JFXComboBox<StandPlan> cbStand;
 
     @FXML
     private JFXComboBox<Event> cbEvent;
@@ -55,8 +52,8 @@ public class EditResourcePlanningController implements Initializable {
     @FXML
     private ScrollPane editRPPane;
 
-    private ResourcePlanning resourcePlanning;
-    private final ResourcePlanningController resourcePlanningController = new ResourcePlanningController();
+    private EmployeePlan employeePlan;
+    private final EntityController controller = new EntityController();
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -67,8 +64,8 @@ public class EditResourcePlanningController implements Initializable {
 
         StandDatabaseService standDatabaseService = new StandDatabaseService();
 
-        ObservableList<Stand> standList = FXCollections.observableList(standDatabaseService.getAll(Stand.class));
-        cbStand.setItems(standList);
+        ObservableList<StandPlan> standPlanList = FXCollections.observableList(standDatabaseService.getAll(StandPlan.class));
+        cbStand.setItems(standPlanList);
 
         EventDatabaseService eventDatabaseService = new EventDatabaseService();
 
@@ -80,17 +77,15 @@ public class EditResourcePlanningController implements Initializable {
      * Liest eingegebenen Daten aus Event view
      *  event Event Entität
      */
-    public void getDataFromRPView(ResourcePlanning rp) {
+    public void setDataFromView(EmployeePlan rp) {
 
-        this.resourcePlanning = rp;
+        this.employeePlan = rp;
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         StandDatabaseService standDatabaseService = new StandDatabaseService();
-        EventDatabaseService eventDatabaseService = new EventDatabaseService();
 
-        cbStand.getSelectionModel().select(indexOfStandInList(standDatabaseService.getAll(Stand.class),rp.getStand().getId()));
+        cbStand.getSelectionModel().select(indexOfStandInList(standDatabaseService.getAll(StandPlan.class),rp.getStandPlan().getId()));
         cbEmployee.getSelectionModel().select(indexOfEmployeeInList(employeeDatabaseService.getAll(Employee.class),rp.getEmployee().getId()));
-        cbEvent.getSelectionModel().select(indexOfEventInList(eventDatabaseService.getAll(Event.class),rp.getEvent().getId()));
         txtTravelStart.setText(rp.getTravelStart());
         txtTravelDistance.setText(Double.toString(rp.getTravelDistance()));
         txtTravelExpenses.setText(Double.toString(rp.getTravelExpenses()));
@@ -115,11 +110,11 @@ public class EditResourcePlanningController implements Initializable {
     public void apply(ActionEvent event){
         try{
             if(validateWorktimeForMiniJober() && validateLegalBreaKTime()){
-                if(this.resourcePlanning == null) {
-                    ResourcePlanning plan = new ResourcePlanning();
-                    resourcePlanningController.addResourcePlan(generateResourcePlan(plan));
+                if(this.employeePlan == null) {
+                    EmployeePlan plan = new EmployeePlan();
+                    controller.save(EmployeePlan.class, generateResourcePlan(plan));
                 } else {
-                    resourcePlanningController.addResourcePlan(generateResourcePlan(this.resourcePlanning));
+                    controller.save(EmployeePlan.class, generateResourcePlan(this.employeePlan));
                 }
                 Stage stage = (Stage) editRPPane.getScene().getWindow();
                 stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
@@ -137,7 +132,7 @@ public class EditResourcePlanningController implements Initializable {
     }
 
 
-    private ResourcePlanning generateResourcePlan(ResourcePlanning plan) {
+    private EmployeePlan generateResourcePlan(EmployeePlan plan) {
 
 
         Calendar startDate = Calendar.getInstance();
@@ -156,9 +151,8 @@ public class EditResourcePlanningController implements Initializable {
         plan.setEmployee(cbEmployee.getValue());
         plan.setEndWorkingTime(endDate.getTime());
         plan.setStartWorkingTime(startDate.getTime());
-        plan.setEvent(cbEvent.getValue());
         plan.setPauseTime(Long.valueOf(txtTimePause.getText()).longValue());
-        plan.setStand(cbStand.getValue());
+        plan.setStandPlan(cbStand.getValue());
         plan.setTravelDistance(Double.parseDouble(txtTravelDistance.getText()));
         plan.setTravelExpenses(Double.parseDouble(txtTravelExpenses.getText()));
         plan.setTravelStart(txtTravelStart.getText());
@@ -179,7 +173,7 @@ public class EditResourcePlanningController implements Initializable {
         if( employee.getStateByEmploymentLaw().getIncomeMax() == 450 ) {
             long planedWorkTimeForEmployee = getEffectivWorkingTime();
             Event event = cbEvent.getValue();
-            Double workedTimeHours = employee.getWorkedTimeHoursInMonth(event.getStart().getMonth(), event.getStart().getYear());
+            Double workedTimeHours = employee.getWorkedTimeHoursInMonth(event.getStartDate().getMonth(), event.getEndDate().getYear());
 
             double possibleHoursPerMonth = 450/employee.getBruttoPerHour();
             double remainingPossibleWorkingHours = possibleHoursPerMonth - workedTimeHours;
@@ -213,9 +207,9 @@ public class EditResourcePlanningController implements Initializable {
         return -1;
     }
 
-    private int indexOfStandInList(List<Stand> standList, int standId) {
-        for (int i = 0; i <= standList.size(); i++) {
-            if(standList.get(i).getId() == standId){
+    private int indexOfStandInList(List<StandPlan> standPlanList, int standId) {
+        for (int i = 0; i <= standPlanList.size(); i++) {
+            if(standPlanList.get(i).getId() == standId){
                 return i;
             }
         }

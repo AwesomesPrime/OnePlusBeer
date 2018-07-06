@@ -92,7 +92,7 @@ public class StateByEmploymentLaw
 
     @Override
     public String toString() {
-        return this.getDescription();
+        return getDescription();
 
     }
 }

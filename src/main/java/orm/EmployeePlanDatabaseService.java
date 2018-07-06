@@ -1,7 +1,7 @@
 package orm;
 
 import entities.Employee;
-import entities.ResourcePlanning;
+import entities.EmployeePlan;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -14,15 +14,15 @@ import java.util.stream.Collectors;
 /**
  * Created by Ulokal on 29.06.2018.
  */
-public class ResourcePlanningDatabaseService extends GenericDatabaseService<ResourcePlanning> {
+public class EmployeePlanDatabaseService extends GenericDatabaseService<EmployeePlan> {
 
     /**
      * @param term Der Suchbegriff mit dem alle Attribute der ResourcePlaning durchsucht werden
      * @return Gibt eine ArrayList mit allen übereinstimmenden ResourcePlanings zurück
      */
-    public ArrayList<ResourcePlanning> search(String term) {
-        ArrayList<ResourcePlanning> allEvents = this.getAll(ResourcePlanning.class);
-        ArrayList<ResourcePlanning> resultEvents = allEvents.stream().filter(resourcePlanning -> Integer.toString(resourcePlanning.getId()).contains((term)) ||
+    public ArrayList<EmployeePlan> search(String term) {
+        ArrayList<EmployeePlan> allEvents = this.getAll(EmployeePlan.class);
+        ArrayList<EmployeePlan> resultEvents = allEvents.stream().filter(resourcePlanning -> Integer.toString(resourcePlanning.getId()).contains((term)) ||
                 resourcePlanning.getStartWorkingTime().toString().contains(term) ||
                 resourcePlanning.getEndWorkingTime().toString().contains(term) ||
                 Long.toString(resourcePlanning.getPauseTime()).contains(term) ||
@@ -36,33 +36,33 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
      * @param endDate EndDatum nach dem gefiltert werden soll
      * @return ArrayList mit allen Einträge die in dem Zeitraum liegen
      */
-    public ArrayList<ResourcePlanning> filterWorkingTimeByDate(Date startDate, Date endDate){
+    public ArrayList<EmployeePlan> filterWorkingTimeByDate(Date startDate, Date endDate){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        ArrayList<ResourcePlanning> resultResourcePlanning;
+        ArrayList<EmployeePlan> resultEmployeePlan;
 
         try{
-            resultResourcePlanning = (ArrayList<ResourcePlanning>) session.createCriteria(ResourcePlanning.class)
+            resultEmployeePlan = (ArrayList<EmployeePlan>) session.createCriteria(EmployeePlan.class)
                     .add(Restrictions.between("startWorkingTime",startDate,endDate))
                     .list();
         } catch (Exception e){
             e.printStackTrace();
-            resultResourcePlanning = null;
+            resultEmployeePlan = null;
         }
         finally {
             transaction.commit();
             session.close();
         }
 
-        return resultResourcePlanning;
+        return resultEmployeePlan;
     }
 
     /**
      * @param email Email des Employees dessen Pläne man haben möchte
      * @return ArrayList mit allen ResourcePlnanings des Employees die in der Zukunft liegen
      */
-    public ArrayList<ResourcePlanning> filterNextPlansByEmail(String email){
-        ArrayList<ResourcePlanning> resultResourcePlaning;
+    public ArrayList<EmployeePlan> filterNextPlansByEmail(String email){
+        ArrayList<EmployeePlan> resultResourcePlaning;
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         Employee employee = employeeDatabaseService.getEmployeeByEmail(email);
 
@@ -71,7 +71,7 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
         Transaction transaction = session.beginTransaction();
         try{
             Calendar clad = Calendar.getInstance();
-             resultResourcePlaning = (ArrayList<ResourcePlanning>) session.createCriteria(ResourcePlanning.class)
+             resultResourcePlaning = (ArrayList<EmployeePlan>) session.createCriteria(EmployeePlan.class)
                      .createAlias("employee", "e")
                      .add(Restrictions.and(Restrictions.gt("startWorkingTime", clad.getTime()),
                              Restrictions.eq("e.id",employee.getId())))
@@ -87,8 +87,8 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
         return resultResourcePlaning;
     }
 
-    public ArrayList<ResourcePlanning> getResourcePlansInMonth (Employee employee, int month, int year){
-        ArrayList<ResourcePlanning> employeesResourcePlanings;
+    public ArrayList<EmployeePlan> getResourcePlansInMonth (Employee employee, int month, int year){
+        ArrayList<EmployeePlan> employeesResourcePlanings;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -99,7 +99,7 @@ public class ResourcePlanningDatabaseService extends GenericDatabaseService<Reso
             Calendar highCalendar = Calendar.getInstance();
             highCalendar.set(year,month,31,0,0,0);
 
-            employeesResourcePlanings = (ArrayList<ResourcePlanning>) session.createCriteria(ResourcePlanning.class)
+            employeesResourcePlanings = (ArrayList<EmployeePlan>) session.createCriteria(EmployeePlan.class)
                     .createAlias("employee", "e")
                     .add(Restrictions.and(Restrictions.eq("e.id", employee.getId()),
                             Restrictions.between("startWorkingTime", lowCalendar.getTime(), highCalendar.getTime())))

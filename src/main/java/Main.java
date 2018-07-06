@@ -35,13 +35,13 @@ public class Main extends Application{
         StateByEmploymentLawDatabaseService stateByEmploymentLawService = new StateByEmploymentLawDatabaseService();
         EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
         EventDatabaseService eventDatabaseService = new EventDatabaseService();
-        ResourcePlanningDatabaseService resourcePlanningDatabaseService = new ResourcePlanningDatabaseService();
+        EmployeePlanDatabaseService employeePlanDatabaseService = new EmployeePlanDatabaseService();
         StandDatabaseService standDatabaseService = new StandDatabaseService();
 
         Employee employee = null;
         Event eventOne = null;
         Event eventTwo = null;
-        Stand stand = null;
+        StandPlan standPlan = null;
 
         /*Load Initial Data for UserPermission */
         ArrayList<UserPermission> userpermissions = userPermissionService.getAll(UserPermission.class);
@@ -115,29 +115,37 @@ public class Main extends Application{
             Calendar endDate = Calendar.getInstance();
             endDate.set(2018,11,23, 0, 0 ,0);
 
-            eventOne = new Event( "Weihnachtsmarkt 2018", startDate.getTime() , endDate.getTime(), LocalTime.now(),LocalTime.now(),"Straße", 12, "1256", "Düsseldorf");
+            eventOne = new Event( "Weihnachtsmarkt 2018", startDate.getTime() , endDate.getTime(), LocalTime.now(),LocalTime.now(),"Straße", "12", "1256", "Düsseldorf");
             eventDatabaseService.save(eventOne);
 
             startDate.set(2017,11,1, 0, 0, 0);
 
             endDate.set(2017,11,23, 0, 0 ,0);
 
-            eventTwo = new Event( "Weihnachtsmarkt 2017", startDate.getTime() , endDate.getTime(),LocalTime.now(),LocalTime.now(), "Hauptstraße", 19, "40597", "MalleSüd");
+            eventTwo = new Event( "Weihnachtsmarkt 2017", startDate.getTime() , endDate.getTime(),LocalTime.now(),LocalTime.now(), "Hauptstraße", "19", "40597", "MalleSüd");
             eventDatabaseService.save(eventTwo);
         }
 
-        /* Load Sample Data for Stand */
-        ArrayList<Stand> stands = standDatabaseService.getAll(Stand.class);
-        if(stands.size() == 0){
-            StandDescription standDescription = new StandDescription("Oettinger Stand", "Bierstand", "IloveBier");
-            standDatabaseService.save(standDescription);
-            stand = new Stand("hanstraße","1544","malleSüd",LocalTime.now(), LocalTime.MIDNIGHT, standDescription);
+        /* Load Sample Data for StandPlan */
+        ArrayList<StandPlan> standPlans = standDatabaseService.getAll(StandPlan.class);
+        if(standPlans.size() == 0){
+            Stand stand = new Stand("Oettinger StandPlan", "Bierstand", "IloveBier");
+
             standDatabaseService.save(stand);
+
+            Calendar openingTime = Calendar.getInstance();
+            Calendar closingTIme = Calendar.getInstance();
+
+            openingTime.set(2018,11,1,8,0,0);
+            closingTIme.set(2018,11,1,18,0,0);
+
+            standPlan = new StandPlan(stand, eventOne, "hanstraße","1544","malleSüd",openingTime.getTime(), closingTIme.getTime());
+            standDatabaseService.save(standPlan);
         }
 
-        /* Load Sample Data for ResourcePlanning */
-        ArrayList<ResourcePlanning> resourcePlannings = resourcePlanningDatabaseService.getAll(ResourcePlanning.class);
-        if(resourcePlannings.size() == 0){
+        /* Load Sample Data for EmployeePlan */
+        ArrayList<EmployeePlan> employeePlans = employeePlanDatabaseService.getAll(EmployeePlan.class);
+        if(employeePlans.size() == 0){
 
             Calendar startWorkingTime = Calendar.getInstance();
             Calendar endWorkingTime = Calendar.getInstance();
@@ -145,20 +153,20 @@ public class Main extends Application{
             startWorkingTime.set(2018,11,1,8,0,0);
             endWorkingTime.set(2018,11,1,18,0,0);
 
-            ResourcePlanning resourcePlanningOne = new ResourcePlanning(employee,eventOne,stand,startWorkingTime.getTime(),endWorkingTime.getTime(),15,30.4);
-            resourcePlanningDatabaseService.save(resourcePlanningOne);
+            EmployeePlan employeePlanOne = new EmployeePlan(employee, standPlan,startWorkingTime.getTime(),endWorkingTime.getTime(),15,30.4, 20, "Hier", "Kommentar", 3.50);
+            employeePlanDatabaseService.save(employeePlanOne);
 
             startWorkingTime.set(2018,11,2,8,0,0);
             endWorkingTime.set(2018,11,2,16,0,0);
 
-            ResourcePlanning resourcePlanningTwo = new ResourcePlanning(employee,eventOne,stand,startWorkingTime.getTime(), endWorkingTime.getTime(),30,30.4);
-            resourcePlanningDatabaseService.save(resourcePlanningTwo);
+            EmployeePlan employeePlanTwo = new EmployeePlan(employee, standPlan, startWorkingTime.getTime(), endWorkingTime.getTime(), 30, 30.4, 20, "Hier", "Kommentar", 3.50);
+            employeePlanDatabaseService.save(employeePlanTwo);
 
             startWorkingTime.set(2018,10,3,5,0,0);
             endWorkingTime.set(2018,10,3,21,0,0);
 
-            ResourcePlanning resourcePlanningThree = new ResourcePlanning(employee,eventTwo,stand,startWorkingTime.getTime(), endWorkingTime.getTime(), 30, 30.4);
-            resourcePlanningDatabaseService.save(resourcePlanningThree);
+            EmployeePlan employeePlanThree = new EmployeePlan(employee, standPlan, startWorkingTime.getTime(), endWorkingTime.getTime(), 30, 30.4, 20, "Hier", "Kommentar", 3.50);
+            employeePlanDatabaseService.save(employeePlanThree);
         }
     }
 }
