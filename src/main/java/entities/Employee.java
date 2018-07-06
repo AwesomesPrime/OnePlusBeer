@@ -1,7 +1,6 @@
 package entities;
 
-import orm.EmployeeDatabaseService;
-import orm.ResourcePlanningDatabaseService;
+import orm.EmployeePlanDatabaseService;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -131,6 +130,8 @@ public class Employee
     //-------------------------------------------------------------------------
     //  Get / Set
     //-------------------------------------------------------------------------
+
+
     public int getId() {
         return id;
     }
@@ -312,13 +313,13 @@ public class Employee
     }
 
     public double getWorkedTimeHoursInMonth(int month, int year){
-        ResourcePlanningDatabaseService resourceService = new ResourcePlanningDatabaseService();
-        ArrayList<ResourcePlanning> resourcePlans = resourceService.getResourcePlansInMonth(this, month-1, year);
+        EmployeePlanDatabaseService resourceService = new EmployeePlanDatabaseService();
+        ArrayList<EmployeePlan> resourcePlans = resourceService.getResourcePlansInMonth(this, month-1, year);
 
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         double workedTimeInMonth = 0;
 
-        for(ResourcePlanning resourcePlan:resourcePlans) {
+        for(EmployeePlan resourcePlan:resourcePlans) {
             double time = resourcePlan.getEndWorkingTime().getTime() - resourcePlan.getStartWorkingTime().getTime();
             double workedTimeInDay = (time / 1000 / 60 - resourcePlan.getPauseTime()) / 60;
             workedTimeInMonth += workedTimeInDay;
@@ -331,12 +332,16 @@ public class Employee
         return this.firstName + " " + this.lastName;
     }
 
+    public String getAdress() {
+        return this.street + " " + this.houseNumber + ", " + this.plz + " " + this.city;
+    }
+
 
     //-------------------------------------------------------------------------
     //  toString()
     //-------------------------------------------------------------------------
     @Override
     public String toString() {
-        return firstName+" "+lastName;
+        return getFullName();
     }
 }

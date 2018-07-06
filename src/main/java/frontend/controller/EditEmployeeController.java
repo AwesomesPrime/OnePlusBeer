@@ -1,8 +1,8 @@
-package frontend.employee;
+package frontend.controller;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.base.ValidatorBase;
-import controller.EmployeeController;
+import controller.EntityController;
 import entities.Employee;
 import entities.ProfessionalStanding;
 import entities.StateByEmploymentLaw;
@@ -32,7 +32,7 @@ public class EditEmployeeController implements Initializable {
 
     private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
-    private final EmployeeController employeeController = new EmployeeController();
+    private final EntityController controller = new EntityController();
 
     private ValidatorBase vBase;
 
@@ -192,7 +192,7 @@ public class EditEmployeeController implements Initializable {
      * liest die Bedienereingabe der EmployeeView aus
      * @param employee employee Entität
      */
-    public void getDataFromEmployeeView(Employee employee) {
+    public void setDataFromView(Employee employee) {
 
         this.employee = employee;
 
@@ -228,9 +228,9 @@ public class EditEmployeeController implements Initializable {
     public void apply(ActionEvent event){
         try{
             if(this.employee == null) {
-                employeeController.addEmployee(generateEmployee());
+                controller.save(Employee.class, generateEmployee());
             } else {
-                employeeController.addEmployee(generateEmployeeOnExisting());
+                controller.save(Employee.class, generateEmployeeOnExisting());
             }
             popup.generateInformationPopupWindow(txtFirstName.getText() + " " + txtLastName.getText() + " wurde verarbeitet.");
             Stage stage = (Stage) editEmployeePane.getScene().getWindow();

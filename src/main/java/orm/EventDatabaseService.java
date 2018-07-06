@@ -26,12 +26,12 @@ public class EventDatabaseService extends GenericDatabaseService<Event> {
         ArrayList<Event> allEvents = this.getAll(Event.class);
         ArrayList<Event> resultEvents = allEvents.stream().filter(event -> Integer.toString(event.getId()).contains(term) ||
                                                                   event.getName().contains(term) ||
-                                                                  event.getStart().toString().contains(term) ||
-                                                                  event.getEnd().toString().contains(term) ||
+                                                                  event.getStartDate().toString().contains(term) ||
+                                                                  event.getEndDate().toString().contains(term) ||
                                                                   event.getStartTime().toString().contains(term) ||
                                                                   event.getEndTime().toString().contains(term) ||
                                                                   event.getStreet().contains(term) ||
-                                                                  Integer.toString(event.getHouseNumber()).contains(term) ||
+                                                                  event.getHouseNumber().contains(term) ||
                                                                   event.getPlz().contains(term) ||
                                                                   event.getCity().contains(term)).collect(Collectors.toCollection(ArrayList::new));
         return resultEvents;

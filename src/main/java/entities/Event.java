@@ -21,10 +21,10 @@ public class Event {
     private String name;
 
     @Column(name = "startDate")
-    private Date start;
+    private Date startDate;
 
     @Column(name = "endDate")
-    private Date end;
+    private Date endDate;
 
     @Column(name = "startTime")
     private LocalTime startTime;
@@ -36,7 +36,7 @@ public class Event {
     private String street;
 
     @Column(name = "houseNumber")
-    private int houseNumber;
+    private String houseNumber;
 
     @Column(name = "plz")
     private String plz;
@@ -48,10 +48,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, Date start, Date end, LocalTime startTime, LocalTime endTime, String street, int houseNumber, String plz, String city) {
+    public Event(String name, Date startDate, Date endDate, LocalTime startTime, LocalTime endTime, String street, String houseNumber, String plz, String city) {
         this.name = name;
-        this.start = start;
-        this.end = end;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.street = street;
@@ -60,6 +60,37 @@ public class Event {
         this.city = city;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public LocalTime getStartTime() {
         return startTime;
@@ -77,41 +108,20 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getStart() {
-        return start;
-    }
-
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public Date getEnd() {
-        return end;
-    }
-
-    public void setEnd(Date end) {
-        this.end = end;
-    }
-
-
     public String getStreet() {
         return street;
     }
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
     }
 
     public String getPlz() {
@@ -122,14 +132,6 @@ public class Event {
         this.plz = plz;
     }
 
-    public int getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(int houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
     public String getCity() {
         return city;
     }
@@ -138,8 +140,12 @@ public class Event {
         this.city = city;
     }
 
+    public String getAdress() {
+        return this.street + " " + this.houseNumber + ", " + this.plz + " " + this.city;
+    }
+
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 }

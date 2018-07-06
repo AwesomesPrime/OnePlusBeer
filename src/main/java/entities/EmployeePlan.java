@@ -5,11 +5,11 @@ import java.util.Date;
 
 /**
  * Created by Ulokal on 29.06.2018.
- * Resourceplanungs Entität mit Fremdschlüssel auf Employee, Event und Stand
+ * Resourceplanungs Entität mit Fremdschlüssel auf Employee und StandPlan
  */
 @Entity
-@Table(name = "ResourcePlanning")
-public class ResourcePlanning {
+@Table(name = "EmployeePlan")
+public class EmployeePlan {
 
     //-------------------------------------------------------------------------
     //  Vars
@@ -20,16 +20,12 @@ public class ResourcePlanning {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_employee")
+    @JoinColumn(name = "employee")
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "fk_event")
-    private Event event;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_stand")
-    private Stand stand;
+    @JoinColumn(name = "standPlan")
+    private StandPlan standPlan;
 
     @Column(name = "startWorkingTime")
     private Date startWorkingTime;
@@ -53,8 +49,22 @@ public class ResourcePlanning {
     private String comment;
 
     @Column(name = "bonus")
-    private Double bonus;
+    private double bonus;
 
+    public EmployeePlan(){}
+
+    public EmployeePlan(Employee employee, StandPlan standPlan, Date startWorkingTime, Date endWorkingTime, long pauseTime, double travelExpenses, double travelDistance, String travelStart, String comment, double bonus) {
+        this.employee = employee;
+        this.standPlan = standPlan;
+        this.startWorkingTime = startWorkingTime;
+        this.endWorkingTime = endWorkingTime;
+        this.pauseTime = pauseTime;
+        this.travelExpenses = travelExpenses;
+        this.travelDistance = travelDistance;
+        this.travelStart = travelStart;
+        this.comment = comment;
+        this.bonus = bonus;
+    }
 
     public int getId() {
         return id;
@@ -72,20 +82,12 @@ public class ResourcePlanning {
         this.employee = employee;
     }
 
-    public Event getEvent() {
-        return event;
+    public StandPlan getStandPlan() {
+        return standPlan;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
-    public Stand getStand() {
-        return stand;
-    }
-
-    public void setStand(Stand stand) {
-        this.stand = stand;
+    public void setStandPlan(StandPlan standPlan) {
+        this.standPlan = standPlan;
     }
 
     public Date getStartWorkingTime() {
@@ -136,35 +138,6 @@ public class ResourcePlanning {
         this.travelStart = travelStart;
     }
 
-    public ResourcePlanning(){}
-
-    public ResourcePlanning(Employee employee, Event event, Stand stand, Date startWorkingTime, Date endWorkingTime, long pauseTime, double travelExpenses) {
-        this.employee = employee;
-        this.event = event;
-        this.stand = stand;
-        this.startWorkingTime = startWorkingTime;
-        this.endWorkingTime = endWorkingTime;
-        this.pauseTime = pauseTime;
-        this.travelExpenses = travelExpenses;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "ResourcePlanning{" +
-                "id=" + id +
-                ", employee=" + employee +
-                ", event=" + event +
-                ", stand=" + stand +
-                ", startWorkingTime=" + startWorkingTime +
-                ", endWorkingTime=" + endWorkingTime +
-                ", pauseTime=" + pauseTime +
-                ", travelExpenses=" + travelExpenses +
-                '}';
-    }
-
-
     public String getComment() {
         return comment;
     }
@@ -173,11 +146,28 @@ public class ResourcePlanning {
         this.comment = comment;
     }
 
-    public Double getBonus() {
+    public double getBonus() {
         return bonus;
     }
 
-    public void setBonus(Double bonus) {
+    public void setBonus(double bonus) {
         this.bonus = bonus;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeePlan{" +
+                "id=" + id +
+                ", employee=" + employee +
+                ", standPlan=" + standPlan +
+                ", startWorkingTime=" + startWorkingTime +
+                ", endWorkingTime=" + endWorkingTime +
+                ", pauseTime=" + pauseTime +
+                ", travelExpenses=" + travelExpenses +
+                ", travelDistance=" + travelDistance +
+                ", travelStart='" + travelStart + '\'' +
+                ", comment='" + comment + '\'' +
+                ", bonus=" + bonus +
+                '}';
     }
 }
