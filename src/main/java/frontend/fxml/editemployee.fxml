@@ -18,43 +18,49 @@
             </rowConstraints>
             <children>
                 <Label text="Mitarbeiter" styleClass="headline" />
-                <Label text="Vorname" GridPane.rowIndex="1" />
-                <Label text="Nachname" GridPane.rowIndex="2" />
-                <Label text="Straße" GridPane.rowIndex="3" />
-                <Label text="Hausnummer" GridPane.rowIndex="4" />
-                <Label text="PLZ" GridPane.rowIndex="5" />
-                <Label text="Ort" GridPane.rowIndex="6" />
-                <Label text="Festnetz" GridPane.rowIndex="7" />
-                <Label text="Mobil" GridPane.rowIndex="8" />
-                <Label text="E-Mail" GridPane.rowIndex="9" />
-                <Label text="IBAN" GridPane.rowIndex="10" />
-                <Label text="BIC" GridPane.rowIndex="11" />
-                <Label text="SteuerID" GridPane.rowIndex="12" />
-                <Label text="Bruttostundensatz" GridPane.rowIndex="13" />
-                <Label text="Beschäfitgt seit" GridPane.rowIndex="14" />
-                <Label text="Status nach Arbeitsrecht" GridPane.rowIndex="15" />
-                <Label text="Berufsstand" GridPane.rowIndex="16" />
-                <Label text="Aktiv" GridPane.rowIndex="17" />
-                <Label text="Bemerkung" GridPane.rowIndex="18" />
+                <Label text="Anrede"                    GridPane.rowIndex="1" />
+                <Label text="Vorname"                   GridPane.rowIndex="2" />
+                <Label text="Nachname"                  GridPane.rowIndex="3" />
+                <Label text="Straße"                    GridPane.rowIndex="4" />
+                <Label text="Hausnummer"                GridPane.rowIndex="5" />
+                <Label text="PLZ"                       GridPane.rowIndex="6" />
+                <Label text="Ort"                       GridPane.rowIndex="7" />
+                <Label text="Festnetz"                  GridPane.rowIndex="8" />
+                <Label text="Mobilfunknummer"           GridPane.rowIndex="9" />
+                <Label text="E-Mail-Adresse"            GridPane.rowIndex="10" />
+                <Label text="IBAN"                      GridPane.rowIndex="11" />
+                <Label text="BIC"                       GridPane.rowIndex="12" />
+                <Label text="Bruttostundensatz"         GridPane.rowIndex="13" />
+                <Label text="Beschäfitgt seit"          GridPane.rowIndex="14" />
+                <Label text="Aktiv"                     GridPane.rowIndex="15" />
+                <Label text="Status nach Arbeitsrecht"  GridPane.rowIndex="16" />
+                <Label text="SteuerID"                  GridPane.rowIndex="17" />
+                <Label text="Berufsstand"               GridPane.rowIndex="18" />
+                <Label text="Bemerkung"                 GridPane.rowIndex="19" />
+                <Label text="Berechtigung"              GridPane.rowIndex="20" />
+                <Label text="Passowrt"                  GridPane.rowIndex="21" />
 
-                <JFXTextField fx:id="txtFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <JFXTextField fx:id="txtLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <JFXTextField fx:id="txtStreet" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <JFXTextField fx:id="txtHouseNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <JFXTextField fx:id="txtCity" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <JFXTextField fx:id="txtPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <JFXTextField fx:id="txtMobileNumber" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                <JFXTextField fx:id="txtMailAddress" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                <JFXTextField fx:id="txtIBAN" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                <JFXTextField fx:id="txtBIC" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                <JFXTextField fx:id="txtTaxNumber" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                <JFXTextField fx:id="txtBruttoPerHour" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                <JFXDatePicker fx:id="dateStartOfEmployment" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                <JFXComboBox fx:id="cbProfessionalStanding" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                <JFXComboBox fx:id="cbStateByEmploymentLaw" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                <JFXCheckBox fx:id="chkActivityState" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                <JFXTextArea fx:id="txtComments" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                <JFXTextField fx:id="txtSalutation"             GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <JFXTextField fx:id="txtFirstName"              GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <JFXTextField fx:id="txtLastName"               GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <JFXTextField fx:id="txtStreet"                 GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <JFXTextField fx:id="txtHouseNumber"            GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <JFXTextField fx:id="txtPLZ"                    GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <JFXTextField fx:id="txtCity"                   GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <JFXTextField fx:id="txtPhoneNumber"            GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <JFXTextField fx:id="txtMobileNumber"           GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <JFXTextField fx:id="txtMailAddress"            GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <JFXTextField fx:id="txtIBAN"                   GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                <JFXTextField fx:id="txtBIC"                    GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                <JFXTextField fx:id="txtBruttoPerHour"          GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                <JFXDatePicker fx:id="dateStartOfEmployment"    GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                <JFXCheckBox fx:id="chkActivityState"           GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                <JFXComboBox fx:id="cbStateByEmploymentLaw"     GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                <JFXTextField fx:id="txtTaxNumber"              GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                <JFXComboBox fx:id="cbProfessionalStanding"     GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                <JFXTextArea fx:id="txtComments"                GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                <JFXComboBox fx:id="cbUserPermission"           GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                <JFXTextArea fx:id="txtPassword"                GridPane.columnIndex="1" GridPane.rowIndex="21" />
 
                 <JFXButton fx:id="btnEditEmployee" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />
             </children>
