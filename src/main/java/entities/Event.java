@@ -26,12 +26,6 @@ public class Event {
     @Column(name = "endDate")
     private Date endDate;
 
-    @Column(name = "startTime")
-    private LocalTime startTime;
-
-    @Column(name = "endTime")
-    private LocalTime endTime;
-
     @Column(name = "street")
     private String street;
 
@@ -48,12 +42,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, Date startDate, Date endDate, LocalTime startTime, LocalTime endTime, String street, String houseNumber, String plz, String city) {
+    public Event(String name, Date startDate, Date endDate, String street, String houseNumber, String plz, String city) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
         this.street = street;
         this.houseNumber = houseNumber;
         this.plz = plz;
@@ -90,22 +82,6 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
     }
 
     public String getStreet() {
@@ -155,8 +131,6 @@ public class Event {
                         name + " " +
                         startDate + " " +
                         endDate + " " +
-                        startTime + " " +
-                        endTime + " " +
                         street + " " +
                         houseNumber + " " +
                         plz + " " +

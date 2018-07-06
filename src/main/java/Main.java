@@ -110,19 +110,19 @@ public class Main extends Application{
         ArrayList<Event> events = eventDatabaseService.getAll(Event.class);
         if(events.size() == 0){
             Calendar startDate = Calendar.getInstance();
-            startDate.set(2018,11,1, 0, 0, 0);
+            startDate.set(2018,11,1, 8, 0, 0);
 
             Calendar endDate = Calendar.getInstance();
-            endDate.set(2018,11,23, 0, 0 ,0);
+            endDate.set(2018,11,23, 20, 0 ,0);
 
-            eventOne = new Event( "Weihnachtsmarkt 2018", startDate.getTime() , endDate.getTime(), LocalTime.now(),LocalTime.now(),"Straße", "12", "1256", "Düsseldorf");
+            eventOne = new Event( "Weihnachtsmarkt 2018", startDate.getTime() , endDate.getTime(),"Straße", "12", "1256", "Düsseldorf");
             eventDatabaseService.save(eventOne);
 
-            startDate.set(2017,11,1, 0, 0, 0);
+            startDate.set(2017,11,1, 6, 0, 0);
 
-            endDate.set(2017,11,23, 0, 0 ,0);
+            endDate.set(2017,11,23, 24, 0 ,0);
 
-            eventTwo = new Event( "Weihnachtsmarkt 2017", startDate.getTime() , endDate.getTime(),LocalTime.now(),LocalTime.now(), "Hauptstraße", "19", "40597", "MalleSüd");
+            eventTwo = new Event( "Weihnachtsmarkt 2017", startDate.getTime() , endDate.getTime(), "Hauptstraße", "19", "40597", "MalleSüd");
             eventDatabaseService.save(eventTwo);
         }
 

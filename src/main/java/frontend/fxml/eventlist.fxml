@@ -47,8 +47,6 @@
                         <TableColumn fx:id="name"           text="Name"         editable="false" />
                         <TableColumn fx:id="startDate"      text="Startdatum"   editable="false" />
                         <TableColumn fx:id="endDate"        text="Enddatum"     editable="false" />
-                        <TableColumn fx:id="startTime"      text="Startzeit"    editable="false" />
-                        <TableColumn fx:id="endTime"        text="Endzeit"      editable="false" />
                         <TableColumn fx:id="address"        text="Adresse"      editable="false" />
                     </columns>
                 </TableView>

@@ -20,6 +20,7 @@ import validation.InputValidation;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -35,6 +36,9 @@ public class EditStandPlanController implements Initializable {
 
     @FXML
     private JFXTimePicker openingTime, closingTime;
+
+    @FXML
+    private JFXDatePicker openingDate, closingDate;
 
     @FXML
     private JFXComboBox<Event> event;
@@ -85,6 +89,14 @@ public class EditStandPlanController implements Initializable {
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalTime());
+        openingDate.setValue(standPlan.getOpeningTime()
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
+        closingDate.setValue(standPlan.getClosingTime()
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
     }
 
     /**
@@ -110,29 +122,37 @@ public class EditStandPlanController implements Initializable {
         }
     }
 
+    private Date getDateFromPickers(JFXDatePicker datePicker){
+        Calendar date = Calendar.getInstance();
+        date.set(datePicker.getValue().getYear(),
+                datePicker.getValue().getMonthValue()-1,
+                datePicker.getValue().getDayOfMonth());
+
+        return date.getTime();
+    }
+
+
+    private Date getDateFromPickers(JFXDatePicker datePicker, JFXTimePicker timePicker){
+        Calendar date = Calendar.getInstance();
+        date.set(datePicker.getValue().getYear(),
+                datePicker.getValue().getMonthValue()-1,
+                datePicker.getValue().getDayOfMonth(),
+                timePicker.getValue().getHour(),
+                timePicker.getValue().getMinute(),
+                timePicker.getValue().getSecond());
+
+        return date.getTime();
+    }
+
 
     private StandPlan generateResourcePlan(StandPlan plan) {
-
-
-        Calendar startDate = Calendar.getInstance();
-        startDate.set(
-                openingTime.getValue().getHour(),
-                openingTime.getValue().getMinute(),
-                openingTime.getValue().getSecond());
-        Calendar endDate = Calendar.getInstance();
-        endDate.set(
-                closingTime.getValue().getHour(),
-                closingTime.getValue().getMinute(),
-                closingTime.getValue().getSecond());
-
-
         plan.setStand(stand.getValue());
         plan.setEvent(event.getValue());
         plan.setStreet(street.getText());
         plan.setPlz(plz.getText());
         plan.setCity(city.getText());
-        plan.setOpeningTime(startDate.getTime());
-        plan.setClosingTime(endDate.getTime());
+        plan.setOpeningTime(getDateFromPickers(openingDate, openingTime));
+        plan.setClosingTime(getDateFromPickers(closingDate, closingTime));
 
         return plan;
     }

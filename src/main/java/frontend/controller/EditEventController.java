@@ -79,12 +79,18 @@ public class EditEventController implements Initializable {
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalDate());
-        timeStart.setValue(event.getStartTime());
+        timeStart.setValue(event.getStartDate()
+                                .toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalTime());
         dateEnd.setValue(event.getEndDate()
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalDate());
-        timeEnd.setValue(event.getEndTime());
+        timeEnd.setValue(event.getEndDate()
+                                .toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalTime());
     }
 
     /**
@@ -116,8 +122,6 @@ public class EditEventController implements Initializable {
             controller.save(Event.class,  new Event( txtName.getText(),
                                                 startDate.getTime(),
                                                 endDate.getTime(),
-                                                timeStart.getValue(),
-                                                timeEnd.getValue(),
                                                 txtStrasse.getText(),
                                                 txtHausNr.getText(),
                                                 txtPLZ.getText(),
