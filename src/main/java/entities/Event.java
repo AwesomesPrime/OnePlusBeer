@@ -148,4 +148,18 @@ public class Event {
     public String toString() {
         return getName();
     }
+
+    public String getStringWithAll() {
+        return
+                id + " " +
+                        name + " " +
+                        startDate + " " +
+                        endDate + " " +
+                        startTime + " " +
+                        endTime + " " +
+                        street + " " +
+                        houseNumber + " " +
+                        plz + " " +
+                        city;
+    }
 }

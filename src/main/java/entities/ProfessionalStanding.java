@@ -68,4 +68,9 @@ public class ProfessionalStanding
     public String toString() {
         return getDescription();
     }
+
+    public String getStringWithAll() {
+        return  id + " " +
+                description;
+    }
 }
