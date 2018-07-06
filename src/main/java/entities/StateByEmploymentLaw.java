@@ -95,4 +95,11 @@ public class StateByEmploymentLaw
         return getDescription();
 
     }
+
+    public String getStringWithAll() {
+        return id + " " +
+                description + " " +
+                incomeMax + " " +
+                incomeMin;
+    }
 }

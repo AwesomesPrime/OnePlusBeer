@@ -344,4 +344,30 @@ public class Employee
     public String toString() {
         return getFullName();
     }
+
+    public String getStringWithAll() {
+        return
+                + id + " "
+                        + salutation + " "+
+                        firstName + " " +
+                        lastName + " " +
+                        street + " "+
+                        houseNumber + " " +
+                        plz + " " +
+                        city + " " +
+                        phoneNumber + " " +
+                        mobileNumber + " " +
+                        mailAddress + " " +
+                        iban + " " +
+                        bic + " " +
+                        bruttoPerHour + " " +
+                        startOfEmployment + " " +
+                        activityState + " " +
+                        stateByEmploymentLaw + " " +
+                        taxNumber + " " +
+                        professionalStanding + " " +
+                        comments + " " +
+                        userPermission + " " +
+                        password;
+    }
 }

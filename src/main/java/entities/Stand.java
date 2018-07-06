@@ -69,4 +69,11 @@ public class Stand {
     public String toString() {
         return getName();
     }
+
+    public String getStringWithAll() {
+        return id + " " +
+                name + " " +
+                type + " " +
+                Comment;
+    }
 }

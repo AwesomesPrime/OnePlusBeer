@@ -25,25 +25,8 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
     public ArrayList<Employee> search(String term) {
         ArrayList<Employee> allEmployees = this.getAll(Employee.class);
 
-        ArrayList<Employee> resultEmployees =  allEmployees.stream().filter(employee -> Boolean.toString(employee.getActivityState()).contains(term)||
-                                                                                        Integer.toString(employee.getId()).contains(term) ||
-                                                                                        employee.getSalutation().contains(term) ||
-                                                                                        employee.getFirstName().contains(term) ||
-                                                                                        employee.getLastName().contains(term) ||
-                                                                                        employee.getLastName().contains(term) ||
-                                                                                        employee.getHouseNumber().contains(term)||
-                                                                                        Integer.toString(employee.getPlz()).contains(term) ||
-                                                                                        employee.getCity().contains(term) ||
-                                                                                        employee.getPhoneNumber().contains(term) ||
-                                                                                        employee.getMobileNumber().contains(term) ||
-                                                                                        employee.getMailAddress().contains(term) ||
-                                                                                        employee.getIban().contains(term) ||
-                                                                                        employee.getBic().contains(term) ||
-                                                                                        Double.toString(employee.getBruttoPerHour()).contains(term) ||
-                                                                                        employee.getStateByEmploymentLaw().getDescription().contains(term) ||
-                                                                                        employee.getTaxNumber().contains(term) ||
-                                                                                        employee.getProfessionalStanding().getDescription().contains(term) ||
-                                                                                        employee.getComments().contains(term)).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Employee> resultEmployees =  allEmployees.stream().filter(employee -> employee.getStringWithAll().contains(term))
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return resultEmployees;
     }

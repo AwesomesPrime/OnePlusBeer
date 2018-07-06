@@ -170,4 +170,19 @@ public class EmployeePlan {
                 ", bonus=" + bonus +
                 '}';
     }
+
+    public String getStringWithAll() {
+        return
+                id + " " +
+                        employee + " " +
+                        standPlan + " " +
+                        startWorkingTime + " " +
+                        endWorkingTime + " " +
+                        pauseTime + " " +
+                        travelExpenses + " " +
+                        travelDistance + " " +
+                        travelStart + " " +
+                        comment + " " +
+                        bonus;
+    }
 }
