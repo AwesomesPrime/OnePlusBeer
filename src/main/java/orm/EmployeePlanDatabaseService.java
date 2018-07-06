@@ -22,11 +22,8 @@ public class EmployeePlanDatabaseService extends GenericDatabaseService<Employee
      */
     public ArrayList<EmployeePlan> search(String term) {
         ArrayList<EmployeePlan> allEvents = this.getAll(EmployeePlan.class);
-        ArrayList<EmployeePlan> resultEvents = allEvents.stream().filter(resourcePlanning -> Integer.toString(resourcePlanning.getId()).contains((term)) ||
-                resourcePlanning.getStartWorkingTime().toString().contains(term) ||
-                resourcePlanning.getEndWorkingTime().toString().contains(term) ||
-                Long.toString(resourcePlanning.getPauseTime()).contains(term) ||
-                Double.toString(resourcePlanning.getTravelExpenses()).contains(term)).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<EmployeePlan> resultEvents = allEvents.stream().filter(resourcePlanning -> resourcePlanning.getStringWithAll().contains(term))
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return resultEvents;
     }

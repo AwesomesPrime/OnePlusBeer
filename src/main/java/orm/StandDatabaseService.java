@@ -16,10 +16,7 @@ public class StandDatabaseService extends GenericDatabaseService<Stand> {
      */
     public ArrayList<Stand> search (String term) {
         ArrayList<Stand> allStands = this.getAll(Stand.class);
-        ArrayList<Stand> resultStands = (ArrayList<Stand>) allStands.stream().filter(stand -> Integer.toString(stand.getId()).contains(term) ||
-                                                                  stand.getName().contains(term) ||
-                                                                  stand.getType().contains(term) ||
-                                                                  stand.getComment().contains(term)).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Stand> resultStands = (ArrayList<Stand>) allStands.stream().filter(stand -> stand.getStringWithAll().contains(term)).collect(Collectors.toCollection(ArrayList::new));
 
         return resultStands;
     }
