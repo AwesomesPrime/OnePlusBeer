@@ -28,8 +28,6 @@ public class EventListController extends GenericListController implements Initia
                                         name,
                                         startDate,
                                         endDate,
-                                        startTime,
-                                        endTime,
                                         address;
 
     private final EntityController controller = new EntityController();
@@ -38,14 +36,12 @@ public class EventListController extends GenericListController implements Initia
     public void initialize(URL url, ResourceBundle rb) {
         search.setLabelFloat(true);
 
-        DateFormat daf = new SimpleDateFormat("dd.MM.yyyy");
+        DateFormat daf = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
 
         id.setCellValueFactory(cellData             -> new SimpleObjectProperty<>(cellData.getValue().getId() + ""));
         name.setCellValueFactory(cellData           -> new SimpleObjectProperty<>(cellData.getValue().getName()));
         startDate.setCellValueFactory(cellData      -> new SimpleObjectProperty<>(daf.format(cellData.getValue().getStartDate())));
         endDate.setCellValueFactory(cellData        -> new SimpleObjectProperty<>(daf.format(cellData.getValue().getEndDate())));
-        startTime.setCellValueFactory(cellData      -> new SimpleObjectProperty<>(cellData.getValue().getStartTime() + ""));
-        endTime.setCellValueFactory(cellData        -> new SimpleObjectProperty<>(cellData.getValue().getEndTime() + ""));
         address.setCellValueFactory(cellData        -> new SimpleObjectProperty<>(cellData.getValue().getAdress()));
 
         ObservableList<Event> list = getAllItems();

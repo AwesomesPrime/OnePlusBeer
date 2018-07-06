@@ -21,6 +21,7 @@ import validation.InputValidation;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,6 +37,9 @@ public class EditEmployeePlanController implements Initializable {
 
     @FXML
     private JFXTimePicker timeStart, timeEnd;
+
+    @FXML
+    private JFXDatePicker dateStart, dateEnd;
 
     @FXML
     private JFXTextArea txtComment;
@@ -85,10 +89,18 @@ public class EditEmployeePlanController implements Initializable {
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalTime());
+        dateStart.setValue(employeePlan.getStartWorkingTime()
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
         timeEnd.setValue(employeePlan.getEndWorkingTime()
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalTime());
+        dateEnd.setValue(employeePlan.getEndWorkingTime()
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
         txtTimePause.setText(Long.toString(employeePlan.getPauseTime()));
         txtComment.setText((employeePlan.getComment()));
         txtBonus.setText(Double.toString(employeePlan.getBonus()));
@@ -124,26 +136,34 @@ public class EditEmployeePlanController implements Initializable {
         return (worktime > 8 && Long.valueOf(txtTimePause.getText()) > 60) || (worktime > 9 && Long.valueOf(txtTimePause.getText()) > 75) || worktime >= 10;
     }
 
+    private Date getDateFromPickers(JFXDatePicker datePicker){
+        Calendar date = Calendar.getInstance();
+        date.set(datePicker.getValue().getYear(),
+                datePicker.getValue().getMonthValue()-1,
+                datePicker.getValue().getDayOfMonth());
+
+        return date.getTime();
+    }
+
+
+    private Date getDateFromPickers(JFXDatePicker datePicker, JFXTimePicker timePicker){
+        Calendar date = Calendar.getInstance();
+        date.set(datePicker.getValue().getYear(),
+                datePicker.getValue().getMonthValue()-1,
+                datePicker.getValue().getDayOfMonth(),
+                timePicker.getValue().getHour(),
+                timePicker.getValue().getMinute(),
+                timePicker.getValue().getSecond());
+
+        return date.getTime();
+    }
 
     private EmployeePlan generateResourcePlan(EmployeePlan plan) {
 
-
-        Calendar startDate = Calendar.getInstance();
-        startDate.set(
-                timeStart.getValue().getHour(),
-                timeStart.getValue().getMinute(),
-                timeStart.getValue().getSecond());
-        Calendar endDate = Calendar.getInstance();
-        endDate.set(
-                timeEnd.getValue().getHour(),
-                timeEnd.getValue().getMinute(),
-                timeEnd.getValue().getSecond());
-
-
         plan.setComment(txtComment.getText());
         plan.setEmployee(cbEmployee.getValue());
-        plan.setEndWorkingTime(endDate.getTime());
-        plan.setStartWorkingTime(startDate.getTime());
+        plan.setEndWorkingTime(getDateFromPickers(dateStart, timeStart));
+        plan.setStartWorkingTime(getDateFromPickers(dateEnd, timeEnd));
         plan.setPauseTime(Long.valueOf(txtTimePause.getText()).longValue());
         plan.setStandPlan(cbStandPlan.getValue());
         plan.setTravelDistance(Double.parseDouble(txtTravelDistance.getText()));

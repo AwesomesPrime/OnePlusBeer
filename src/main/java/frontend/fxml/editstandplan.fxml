@@ -28,8 +28,10 @@
                 <JFXTextField fx:id="street" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <JFXTextField fx:id="plz" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
                 <JFXTextField fx:id="city" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                <JFXTimePicker fx:id="openingTime" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-                <JFXTimePicker fx:id="closingTime" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                <JFXDatePicker fx:id="openingDate" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                <JFXTimePicker fx:id="openingTime" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                <JFXDatePicker fx:id="closingDate" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                <JFXTimePicker fx:id="closingTime" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
 
                 <JFXButton fx:id="btnEditStandPlan" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="12" />
             </children>

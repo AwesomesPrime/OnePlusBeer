@@ -21,26 +21,28 @@
                 <Label text="Mitarbeiter"   GridPane.rowIndex="1"/>
                 <Label text="StandPlan"     GridPane.rowIndex="2"/>
                 <Label text="Start"         GridPane.rowIndex="3"/>
-                <Label text="Ende"          GridPane.rowIndex="4"/>
-                <Label text="Pause"         GridPane.rowIndex="5"/>
-                <Label text="Startpunkt"    GridPane.rowIndex="6"/>
-                <Label text="Arbeitsweg"    GridPane.rowIndex="7"/>
-                <Label text="Reisekosten"   GridPane.rowIndex="8"/>
-                <Label text="Bonus"         GridPane.rowIndex="9"/>
-                <Label text="Kommentar"     GridPane.rowIndex="11"/>
+                <Label text="Ende"          GridPane.rowIndex="5"/>
+                <Label text="Pause"         GridPane.rowIndex="7"/>
+                <Label text="Startpunkt"    GridPane.rowIndex="8"/>
+                <Label text="Arbeitsweg"    GridPane.rowIndex="9"/>
+                <Label text="Reisekosten"   GridPane.rowIndex="10"/>
+                <Label text="Bonus"         GridPane.rowIndex="11"/>
+                <Label text="Kommentar"     GridPane.rowIndex="12"/>
 
                 <JFXComboBox fx:id="cbEmployee"         GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <JFXComboBox fx:id="cbStandPlan"        GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <JFXTimePicker fx:id="timeStart"        GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                <JFXTimePicker fx:id="timeEnd"          GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                <JFXTextField fx:id="txtTimePause"      GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                <JFXTextField fx:id="txtTravelStart"    GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                <JFXTextField fx:id="txtTravelDistance" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-                <JFXTextField fx:id="txtTravelExpenses" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-                <JFXTextField fx:id="txtBonus"          GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-                <JFXTextArea fx:id="txtComment"         GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+                <JFXDatePicker fx:id="dateStart"        GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <JFXTimePicker fx:id="timeStart"        GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <JFXDatePicker fx:id="dateEnd"          GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <JFXTimePicker fx:id="timeEnd"          GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                <JFXTextField fx:id="txtTimePause"      GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                <JFXTextField fx:id="txtTravelStart"    GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                <JFXTextField fx:id="txtTravelDistance" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                <JFXTextField fx:id="txtTravelExpenses" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+                <JFXTextField fx:id="txtBonus"          GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+                <JFXTextArea fx:id="txtComment"         GridPane.columnIndex="1" GridPane.rowIndex="12"/>
 
-                <JFXButton fx:id="btnEditRP" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                <JFXButton fx:id="btnEditRP" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="14" />
             </children>
         </GridPane>
     </content>
