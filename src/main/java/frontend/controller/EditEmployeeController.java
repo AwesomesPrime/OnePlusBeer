@@ -37,6 +37,9 @@ public class EditEmployeeController implements Initializable {
     private ValidatorBase vBase;
 
     @FXML
+    private JFXTextField txtSalutation;
+
+    @FXML
     private JFXTextField txtFirstName;
 
     @FXML
@@ -64,6 +67,9 @@ public class EditEmployeeController implements Initializable {
     private JFXTextField txtMailAddress;
 
     @FXML
+    private JFXTextField txtPassword;
+
+    @FXML
     private JFXTextField txtIBAN;
 
     @FXML
@@ -77,6 +83,9 @@ public class EditEmployeeController implements Initializable {
 
     @FXML
     private JFXComboBox cbStateByEmploymentLaw;
+
+    @FXML
+    private JFXComboBox cbUserPermission;
 
     @FXML
     private JFXTextField txtTaxNumber;
@@ -100,6 +109,11 @@ public class EditEmployeeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
 
         setValidators();
+
+        UserPermissionDatabaseService userPermissionDatabaseService = new UserPermissionDatabaseService();
+
+        ObservableList<UserPermission> permissions = FXCollections.observableList(userPermissionDatabaseService.getAll(UserPermission.class));
+        cbUserPermission.setItems(permissions);
 
         StateByEmploymentLawDatabaseService lawStateDbService = new StateByEmploymentLawDatabaseService();
 
@@ -196,6 +210,7 @@ public class EditEmployeeController implements Initializable {
 
         this.employee = employee;
 
+        txtSalutation.setText(employee.getSalutation());
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
         txtStreet.setText(employee.getStreet());
@@ -214,8 +229,10 @@ public class EditEmployeeController implements Initializable {
                                         .toLocalDate());
         txtTaxNumber.setText(employee.getTaxNumber());
         txtComments.setText(employee.getComments());
+        txtPassword.setText(employee.getPassword());
         cbProfessionalStanding.getSelectionModel().select(indexOfProfessionalStandingInList(cbProfessionalStanding.getItems(), employee.getProfessionalStanding().getId()));
         cbStateByEmploymentLaw.getSelectionModel().select(indexOfStandByEmploymentLawInList(cbStateByEmploymentLaw.getItems(), employee.getStateByEmploymentLaw().getId()));
+        cbUserPermission.getSelectionModel().select(indexOfUserPermissionInList(cbUserPermission.getItems(), employee.getUserPermission().getId()));
         chkActivityState.setSelected(employee.getActivityState());
     }
 
@@ -254,6 +271,7 @@ public class EditEmployeeController implements Initializable {
                 dateStartOfEmployment.getValue().getMonthValue(),
                 dateStartOfEmployment.getValue().getDayOfMonth());
         employee.setFirstName(txtFirstName.getText());
+        employee.setSalutation(txtSalutation.getText());
         employee.setLastName(txtLastName.getText());
         employee.setStreet(txtStreet.getText());
         employee.setHouseNumber(txtHouseNumber.getText());
@@ -269,8 +287,10 @@ public class EditEmployeeController implements Initializable {
         employee.setActivityState(chkActivityState.isSelected());
         employee.setProfessionalStanding((ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem());
         employee.setStateByEmploymentLaw((StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem());
+        employee.setUserPermission((UserPermission) cbUserPermission.getSelectionModel().getSelectedItem());
         employee.setTaxNumber(txtTaxNumber.getText());
         employee.setComments(txtComments.getText());
+        employee.setPassword(txtPassword.getText());
 
         return employee;
     }
@@ -313,6 +333,15 @@ public class EditEmployeeController implements Initializable {
     private int indexOfStandByEmploymentLawInList(List<StateByEmploymentLaw> stateLawlList, int stateByEmploymentlawId) {
         for (int i = 0; i <= stateLawlList.size(); i++) {
             if(stateLawlList.get(i).getId() == stateByEmploymentlawId){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int indexOfUserPermissionInList(List<UserPermission> permissions, int permissionId) {
+        for (int i = 0; i <= permissions.size(); i++) {
+            if(permissions.get(i).getId() == permissionId){
                 return i;
             }
         }

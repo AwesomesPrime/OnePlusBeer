@@ -60,7 +60,7 @@
                 <JFXComboBox fx:id="cbProfessionalStanding"     GridPane.columnIndex="1" GridPane.rowIndex="18" />
                 <JFXTextArea fx:id="txtComments"                GridPane.columnIndex="1" GridPane.rowIndex="19" />
                 <JFXComboBox fx:id="cbUserPermission"           GridPane.columnIndex="1" GridPane.rowIndex="20" />
-                <JFXTextArea fx:id="txtPassword"                GridPane.columnIndex="1" GridPane.rowIndex="21" />
+                <JFXTextField fx:id="txtPassword"               GridPane.columnIndex="1" GridPane.rowIndex="21" />
 
                 <JFXButton fx:id="btnEditEmployee" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="23" />
             </children>

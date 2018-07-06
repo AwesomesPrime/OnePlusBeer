@@ -16,6 +16,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -66,7 +67,14 @@ public class EmployeePlanListController extends GenericListController implements
 
     @Override
     protected boolean checkPermission() {
-        return ActiveUser.getPermission() > 1;
+        if(ActiveUser.getPermission() > 1 && getSelectedItem().getEndWorkingTime().getTime() > new Date().getTime()){
+            return true;
+        }else if(ActiveUser.getPermission() > 2){
+            return true;
+        }else{
+            popup.generateWarningPopupWindow("Keine Berechtigung zum Bearbeiten des Datensatzes "+getSelectedItem().getId());
+            return false;
+        }
     }
 
     @Override
