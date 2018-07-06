@@ -22,7 +22,7 @@ public class EmployeePlanDatabaseService extends GenericDatabaseService<Employee
      */
     public ArrayList<EmployeePlan> search(String term) {
         ArrayList<EmployeePlan> allEvents = this.getAll(EmployeePlan.class);
-        ArrayList<EmployeePlan> resultEvents = allEvents.stream().filter(resourcePlanning -> resourcePlanning.getStringWithAll().contains(term))
+        ArrayList<EmployeePlan> resultEvents = allEvents.stream().filter(employeePlan -> employeePlan.getStringWithAll().contains(term))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return resultEvents;

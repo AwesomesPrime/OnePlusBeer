@@ -1,13 +1,8 @@
 package orm;
 
-import entities.Employee;
 import entities.Event;
 
-import java.time.Instant;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -27,5 +22,10 @@ public class EventDatabaseService extends GenericDatabaseService<Event> {
         ArrayList<Event> resultEvents = allEvents.stream().filter(event -> event.getStringWithAll().contains(term))
                 .collect(Collectors.toCollection(ArrayList::new));
         return resultEvents;
+    }
+
+
+    public <T> ArrayList<Event> getAll() {
+        return super.getAll(Event.class);
     }
 }

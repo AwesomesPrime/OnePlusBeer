@@ -39,6 +39,14 @@
             <artifactId>jfoenix</artifactId>
             <version>8.0.4</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,6 +1,7 @@
 package orm;
 
 import entities.Employee;
+import entities.Event;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -104,5 +105,9 @@ public class EmployeeDatabaseService extends GenericDatabaseService<Employee> {
         }
 
         return employee;
+    }
+
+    public <T> ArrayList<Employee> getAll() {
+        return super.getAll(Employee.class);
     }
 }

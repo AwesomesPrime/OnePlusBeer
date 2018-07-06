@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Lohn_Fahrkostenabrechnung" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="859cab86-2457-4d1c-85eb-1c492f1ad497">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Localhost"/>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Arbeitszeiten" uuid="f8166dc8-2bb5-4ad1-8705-cecb8bc98553">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Localhost"/>
+		<parameter name="prmEmployeeId" class="java.lang.Integer"/>
+		<parameter name="prmStartDate" class="java.sql.Date"/>
+		<parameter name="prmEndDate" class="java.sql.Date"/>
+		<queryString>
+			<![CDATA[SELECT
+	DATE_FORMAT(CAST(oneplusbier.resourceplanning.startWorkingTime AS DATE), '%d.%m') AS workDate
+	,oneplusbier.resourceplanning.startWorkingTime
+	,oneplusbier.resourceplanning.endWorkingTime
+	,TIMEDIFF(TIMEDIFF(oneplusbier.resourceplanning.endWorkingTime, oneplusbier.resourceplanning.startWorkingTime), SEC_TO_TIME(oneplusbier.resourceplanning.pauseTime * 60)) AS Arbeitszeit
+FROM oneplusbier.resourceplanning
+INNER JOIN oneplusbier.employee
+ON oneplusbier.resourceplanning.fk_employee = oneplusbier.employee.id
+WHERE oneplusbier.employee.id =  $P{prmEmployeeId}
+AND (DATE(oneplusbier.resourceplanning.startWorkingTime) >=  $P{prmStartDate}  AND DATE(oneplusbier.resourceplanning.startWorkingTime) <=   $P{prmEndDate}  )]]>
+		</queryString>
+		<field name="workDate" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="workDate"/>
+		</field>
+		<field name="startWorkingTime" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.label" value="startWorkingTime"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="resourceplanning"/>
+		</field>
+		<field name="endWorkingTime" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.label" value="endWorkingTime"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="resourceplanning"/>
+		</field>
+		<field name="Arbeitszeit" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="Arbeitszeit"/>
+		</field>
+	</subDataset>
+	<subDataset name="Fahrtkosten" uuid="91659383-5c65-466f-a122-4105a2d5faeb">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Localhost"/>
+		<parameter name="prmEmployeeId" class="java.lang.Integer"/>
+		<parameter name="prmStartDate" class="java.sql.Date"/>
+		<parameter name="prmEndDate" class="java.sql.Date"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+   oneplusbier.resourceplanning.travelDistance,
+   oneplusbier.resourceplanning.travelStart,
+   oneplusbier.event.city AS Veranstaltungsort,
+   oneplusbier.resourceplanning.comment 
+FROM
+   oneplusbier.resourceplanning 
+   LEFT JOIN
+      oneplusbier.event 
+      ON oneplusbier.resourceplanning.fk_event = oneplusbier.event.id 
+WHERE
+   oneplusbier.resourceplanning.fk_employee = $P{prmEmployeeId} 
+   AND 
+   (
+      DATE(oneplusbier.resourceplanning.startWorkingTime) >= $P{prmStartDate} 
+      AND DATE(oneplusbier.resourceplanning.startWorkingTime) <= $P{prmEndDate} 
+   )]]>
+		</queryString>
+		<field name="travelDistance" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="travelDistance"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="resourceplanning"/>
+		</field>
+		<field name="travelStart" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="travelStart"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="resourceplanning"/>
+		</field>
+		<field name="Veranstaltungsort" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Veranstaltungsort"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="event"/>
+		</field>
+		<field name="comment" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="comment"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="resourceplanning"/>
+		</field>
+	</subDataset>
+	<parameter name="prmEmployeeId" class="java.lang.Integer"/>
+	<parameter name="prmStartDate" class="java.sql.Date"/>
+	<parameter name="prmEndDate" class="java.sql.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+	oneplusbier.resourceplanning.fk_employee
+	,oneplusbier.employee.street
+	,CONCAT(oneplusbier.employee.plz, " ", oneplusbier.employee.city) AS Ort
+	,CONCAT(oneplusbier.employee.firstName, ", ", oneplusbier.employee.lastName) AS Name
+	,oneplusbier.employee.bruttoPerHour
+	,CONCAT(
+	CAST(SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime, startWorkingTime + INTERVAL pauseTime MINUTE))) / 3600 AS Int)
+	,":"
+	,CAST((SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime, startWorkingTime + INTERVAL pauseTime MINUTE))) % 3600) / 60 AS Int)
+	) AS Gesamtzeit
+	,LEFT(SEC_TO_TIME(SUM(oneplusbier.resourceplanning.pauseTime*60)),5) AS Pause
+	,CAST(SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime,  startWorkingTime + INTERVAL pauseTime MINUTE))) / 3600 AS INT) * oneplusbier.employee.bruttoPerHour
+	+ CAST((SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime,  startWorkingTime + INTERVAL pauseTime MINUTE))) % 3600) / 60 AS INT) / 60 * oneplusbier.employee.bruttoPerHour AS Lohn
+	,COUNT(oneplusbier.resourceplanning.id) AS RowNumber
+	,SUM(travelDistance) AS kilometerGesamt
+	,SUM(travelDistance) * 0.3 AS fKosten
+    ,SUM(bonus) AS Zulage
+    ,(SUM(bonus)
+    + CAST(SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime,  startWorkingTime + INTERVAL pauseTime MINUTE))) / 3600 AS INT) * oneplusbier.employee.bruttoPerHour
+    + CAST((SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime,  startWorkingTime + INTERVAL pauseTime MINUTE))) % 3600) / 60 AS INT) / 60 * oneplusbier.employee.bruttoPerHour
+    ) AS BruttoLohn
+    ,(SUM(bonus)
+    + CAST(SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime,  startWorkingTime + INTERVAL pauseTime MINUTE))) / 3600 AS INT) * oneplusbier.employee.bruttoPerHour
+    + CAST((SUM(TIME_TO_SEC(TIMEDIFF(endWorkingTime,  startWorkingTime + INTERVAL pauseTime MINUTE))) % 3600) / 60 AS INT) / 60 * oneplusbier.employee.bruttoPerHour
+    + SUM(travelDistance) * 0.3
+    ) AS GesamtLohn
+FROM oneplusbier.employee
+LEFT JOIN oneplusbier.resourceplanning
+ON oneplusbier.resourceplanning.fk_employee = oneplusbier.employee.id
+WHERE oneplusbier.employee.id = $P{prmEmployeeId} 
+ AND (DATE(oneplusbier.resourceplanning.startWorkingTime) >= $P{prmStartDate} AND DATE(oneplusbier.resourceplanning.startWorkingTime) <=$P{prmEndDate})]]>
+	</queryString>
+	<field name="fk_employee" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="fk_employee"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="resourceplanning"/>
+	</field>
+	<field name="street" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="street"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="Ort" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Ort"/>
+	</field>
+	<field name="Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Name"/>
+	</field>
+	<field name="bruttoPerHour" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="bruttoPerHour"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="Gesamtzeit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Gesamtzeit"/>
+	</field>
+	<field name="Pause" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Pause"/>
+	</field>
+	<field name="Lohn" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Lohn"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="RowNumber" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="RowNumber"/>
+	</field>
+	<field name="kilometerGesamt" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="kilometerGesamt"/>
+	</field>
+	<field name="fKosten" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="fKosten"/>
+	</field>
+	<field name="Zulage" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Zulage"/>
+	</field>
+	<field name="BruttoLohn" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="BruttoLohn"/>
+	</field>
+	<field name="GesamtLohn" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="GesamtLohn"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40">
+			<staticText>
+				<reportElement x="0" y="0" width="404" height="40" uuid="1b5c21f5-1034-47d9-a695-d60034bd8e54"/>
+				<textElement>
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Lohn- und Fahrtkostenabrechnung]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="183" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="120" width="360" height="59" uuid="908ec410-8c36-4424-909f-d4c4d5a0b2b5">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 3_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 3_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 3_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Arbeitszeiten" uuid="015d7573-3ca4-4355-951f-3a0c0de6f666">
+						<datasetParameter name="prmEmployeeId">
+							<datasetParameterExpression><![CDATA[$P{prmEmployeeId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="prmStartDate">
+							<datasetParameterExpression><![CDATA[$P{prmStartDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="prmEndDate">
+							<datasetParameterExpression><![CDATA[$P{prmEndDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="91" uuid="98d643f8-5f50-4c1d-b80d-5994d0ba3cb5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="91" height="30" uuid="574bb2c3-b971-404c-a955-722135f25551"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Datum]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="91" height="30" uuid="632c3853-9064-4256-a92a-499ecb71c67b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{workDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="88" uuid="3fdda504-4512-4d82-83eb-615278ca6567">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="88" height="30" uuid="a0939d4a-ef33-44e5-a112-09286abe80bf"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Beginn]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="30">
+							<textField pattern="HH:mm ">
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="88" height="30" uuid="194e0f06-9c33-4cfc-982e-e5411e26cb08"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{startWorkingTime}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="82" uuid="1f1b5003-5552-43eb-8df0-104f41e7b38c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="82" height="30" uuid="130d869c-0446-410a-a9c0-9b335c5e20e7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Ende]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="30">
+							<textField pattern="HH:mm">
+								<reportElement x="0" y="0" width="82" height="30" uuid="d589775d-fcd6-4a21-9ea0-abdabe98ec3c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{endWorkingTime}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="99" uuid="9d668522-1b0c-48bc-91c1-f112b7e4203f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="99" height="30" uuid="4d71e350-31c8-421f-9fee-4d99d1ab562e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Arbeitszeit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="30">
+							<textField pattern="HH:mm">
+								<reportElement x="0" y="0" width="99" height="30" uuid="2af83d42-4684-48b1-8ba3-62c473e6ad92"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Arbeitszeit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<rectangle>
+				<reportElement x="0" y="20" width="60" height="21" uuid="2d9de966-a56f-432b-9ed6-25d9ce15b46a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="41" width="60" height="21" uuid="16fe2866-1ab6-45dc-92fd-6e4d29655a60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="62" width="60" height="21" uuid="3f8a71aa-206f-4a05-bd17-849961b45965"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="60" y="20" width="192" height="21" uuid="2a3e7874-b26a-4b21-bb81-b7949b39c879"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="60" y="41" width="192" height="21" uuid="932bb91f-96d5-47bf-9a10-3fbf37fc6ace"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="60" y="62" width="192" height="21" uuid="4f01aa2e-6c00-459d-94c8-32c8cff63455"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="252" y="20" width="238" height="63" uuid="93be0f01-88c0-4666-aa0b-f090be5c65dd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="20" width="50" height="21" uuid="a441068a-21bd-4c33-aef3-9d9a757e3ded"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="40" width="50" height="21" uuid="4be4fe05-d61e-4de9-bd2a-977ae67b1a5d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Straße:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="61" width="50" height="21" uuid="9b159b6e-c3de-4cec-b757-8c1082fd25dc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[PLZ / Ort:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="66" y="20" width="180" height="20" uuid="7fb802d1-643d-4488-951d-f313460d2b2e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="41" width="180" height="20" uuid="9dfe4b47-cba7-4008-9ed9-ee5e94631676"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{street}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="62" width="180" height="21" uuid="a56cbd2a-a6b2-43b6-8572-e0af03b61625"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Ort}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="252" y="19" width="238" height="63" uuid="a7fd8294-02a9-4142-be31-8636ffc0009f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Bier Gbr
+Thomas Klein
+Heim Weg 22, 91827 Schaumlippe]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="360" y="120" width="400" height="59" uuid="0fada1a3-253d-4c7a-a5c0-7d3e3763751e">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 4_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 4_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 4_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Fahrtkosten" uuid="237853c7-04bc-4739-ab16-32ba141127d8">
+						<datasetParameter name="prmEmployeeId">
+							<datasetParameterExpression><![CDATA[$P{prmEmployeeId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="prmStartDate">
+							<datasetParameterExpression><![CDATA[$P{prmStartDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="prmEndDate">
+							<datasetParameterExpression><![CDATA[$P{prmEndDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="103" uuid="6f50caff-1824-4658-90e2-285f38ba45c8">
+						<jr:columnHeader style="Table 4_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="103" height="30" uuid="b0e0bbcd-b78f-473f-8186-b8de8597eeaa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Kilometer]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 4_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="103" height="30" uuid="8dae8a98-5325-4075-846b-386fb241b601"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{travelDistance}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="103" uuid="96bbf78e-b3df-4b64-9366-0a86fb7a8d8e">
+						<jr:columnHeader style="Table 4_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="103" height="30" uuid="9d1a56d8-ae16-42fc-85b4-54ee24fdaca1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Abfahrtsort]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 4_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="103" height="30" uuid="2d9469f3-15ed-4142-bbf8-8582dd221036"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{travelStart}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="97" uuid="43e59ca2-785c-4a5f-a913-560f63c8d1ba">
+						<jr:columnHeader style="Table 4_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="97" height="30" uuid="b8ed6ae3-fd00-4563-82ee-273ab1f216aa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Veranstaltungsort]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 4_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="97" height="30" uuid="6690bba0-28ac-49aa-a6f4-efe0573d6155"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Veranstaltungsort}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="97" uuid="aa11b99b-000e-4c6a-b94c-ba3b574361f9">
+						<jr:columnHeader style="Table 4_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="97" height="30" uuid="26c211aa-cd02-4294-9511-aa48620551f1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Info]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 4_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="97" height="30" uuid="86399037-3ffd-4df7-a9ca-7843d22d316f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<rectangle>
+				<reportElement x="0" y="99" width="360" height="21" uuid="e4915566-9fe2-4b78-8788-67ca1018d5a2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="99" width="303" height="21" uuid="2828fa6b-194a-4b90-ad7d-f5bd26755ea5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="663" y="99" width="97" height="21" uuid="4389336b-0e15-41b1-ae20-6ad89ed5c844"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="142" y="100" width="77" height="17" uuid="7d65371e-0326-476c-a0ac-fa99c46077ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Arbeitszeiten]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="100" width="150" height="17" uuid="56fa9b06-4d2a-4cfc-9495-73afb7caeb53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fahrtkosten eigener PKW]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="674" y="101" width="77" height="17" uuid="80b3ba0c-ac59-4d37-a8c9-f858a517b3f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sonstige]]></text>
+			</staticText>
+		</band>
+		<band height="205">
+			<staticText>
+				<reportElement x="0" y="25" width="70" height="40" uuid="2991c727-303a-4cd2-8e55-171a6933cbb5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lohnab-rechnung:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="90" y="27" width="171" height="81" uuid="7d5776f6-a1c2-4470-8fdf-ee769eeff21a"/>
+			</rectangle>
+			<textField>
+				<reportElement x="100" y="35" width="130" height="20" uuid="fb619d9b-88a2-4cd5-91e8-0988f24ab3da"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="100" y="56" width="129" height="1" uuid="9b397504-2ded-48bf-a566-d59854ac3b20"/>
+			</line>
+			<rectangle>
+				<reportElement x="261" y="27" width="99" height="40" uuid="9a659f2b-bb59-48eb-be11-3d975413408b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="277" y="29" width="66" height="16" uuid="14eaa696-0e35-45ed-9393-d54eaf8e13f3"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Std-Lohn:]]></text>
+			</staticText>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="270" y="49" width="82" height="15" uuid="b6f86fb4-ea21-4d4c-9061-a2fe98b14810"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{bruttoPerHour}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="569" y="25" width="191" height="121" uuid="b3d070a1-f57b-48fb-be4a-4f16d595b16f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="580" y="29" width="84" height="13" uuid="c0fdfba5-b6a2-4d51-ae8e-09fd4015355e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Lohn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="43" width="84" height="13" uuid="6a70801a-7d97-4c3a-9743-0fcf56b5d056"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Zulage:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="57" width="84" height="13" uuid="d394afe6-fd79-4df6-a83d-9c636736fd9f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bruttolohn:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="668" y="74" width="88" height="1" uuid="2acf8daf-cd68-4c6c-a1fa-2e9d6c359531"/>
+			</line>
+			<line>
+				<reportElement x="668" y="72" width="88" height="1" uuid="bf8e67ed-9022-4a67-92d0-5d68995f7ed1"/>
+			</line>
+			<staticText>
+				<reportElement x="580" y="84" width="84" height="13" uuid="51eeac77-6bde-470a-9e2f-a1c2f6c8d907"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[gesamte Km:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="576" y="105" width="88" height="13" uuid="846bf582-1e5e-4717-bd12-a01970a94a05"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fahrtkostenerstattung¹:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="668" y="122" width="88" height="1" uuid="a0572908-51c7-4932-9682-37b18c5f3059"/>
+			</line>
+			<line>
+				<reportElement x="668" y="120" width="88" height="1" uuid="aec6454a-3bd8-4c4d-b7a3-e348093a9b94"/>
+			</line>
+			<staticText>
+				<reportElement x="576" y="125" width="88" height="18" uuid="9a506c3c-92a6-4bc1-98f7-827d1a48b2e1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gesamt Lohn und Fahrkosten:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="510" y="25" width="59" height="39" uuid="1250d345-0f6b-4c33-9c7c-392355e99f17"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="510" y="64" width="59" height="33" uuid="e2857ad0-a44c-47dd-b964-bc566d19add6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="520" y="27" width="40" height="11" uuid="5535b229-4c07-4877-8839-1d5bbe0721c1"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[AZ-Std:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="515" y="67" width="49" height="11" uuid="d00c0bd8-a682-45f4-bdb8-3d292e32cee4"/>
+				<textElement textAlignment="Center">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Pausen ges:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="87" width="30" height="13" uuid="aee554c9-cc60-4c69-8a1b-9e90cb09dd50"/>
+				<text><![CDATA[Tage:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="576" y="151" width="72" height="9" uuid="b552ac66-bf53-49ff-ad44-ce176abb0bc1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[¹ 0,30 € Erstattung pro km]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="261" y="6" width="99" height="15" uuid="2fe358df-88c0-417d-8884-32765517df31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Gesamtzeit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="6" width="100" height="15" uuid="e1b26483-bce9-4138-86b9-d0957a1e7065"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Gesamte Arbeitszeit:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="512" y="80" width="54" height="15" uuid="6a18de58-09ed-4f53-ab07-d1ab77b56c65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Pause}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="512" y="45" width="54" height="15" uuid="eca1aabd-74db-408d-bfad-20b757e5f3f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Gesamtzeit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="695" y="29" width="61" height="13" uuid="7a70460a-b961-469a-bdb9-1ea1e7f48f61"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Lohn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="87" width="80" height="13" uuid="84e6d623-9572-4341-a440-48475c6a5f91"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RowNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###">
+				<reportElement x="680" y="84" width="76" height="13" uuid="485a110c-dc77-4db4-a905-cf316fd4c00a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kilometerGesamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="686" y="105" width="70" height="13" uuid="02b9c4b9-c981-400a-814a-abf05da934c6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fKosten}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="160" width="400" height="1" uuid="d2a46b16-872b-4421-9092-57075daafca1"/>
+			</line>
+			<staticText>
+				<reportElement x="200" y="162" width="70" height="19" uuid="d4c7bbc4-08ae-4a1a-8c42-c5d5051676a6"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Unterschrift]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="162" width="55" height="19" uuid="99c79986-7035-4d94-8626-ac375280d9c1"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Datum]]></text>
+			</staticText>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="696" y="43" width="60" height="12" uuid="e9052bb6-792e-4902-9ff2-ec63637ad99e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Zulage}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="695" y="57" width="61" height="13" uuid="eb00955a-17b1-4b2d-af3d-fdf4dbe62a02"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BruttoLohn}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="686" y="125" width="70" height="18" uuid="a2e72abd-0347-4f73-b3f8-93e37c9bef8f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GesamtLohn}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

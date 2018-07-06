@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="reportPane" fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="outerPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.reports.ReportController">
+    <content>
+       <GridPane fx:id="gridPane" maxWidth="1.7976931348623157E308">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="20.0">
+                </ColumnConstraints>
+            <ColumnConstraints />
+            </columnConstraints>
+           <rowConstraints>
+               <RowConstraints percentHeight="25" />
+               <RowConstraints percentHeight="25" />
+               <RowConstraints percentHeight="25" />
+               <RowConstraints percentHeight="25" />
+           </rowConstraints>
+           <Label text="Einsatzplanung" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </Label>
+            <GridPane maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <JFXComboBox fx:id="cbEmployeeEinsatzplanung" maxWidth="1.7976931348623157E308" promptText="Mitarbeiter" GridPane.rowIndex="0">
+                      <GridPane.margin>
+                         <Insets bottom="10.0" left="10.0" top="10.0" />
+                      </GridPane.margin>
+                    </JFXComboBox>
+                    <JFXComboBox fx:id="cbVeranstaltungEinsatzplanung" maxWidth="1.7976931348623157E308" promptText="Veranstaltung" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets bottom="10.0" left="10.0" top="10.0" />
+                        </GridPane.margin>
+                    </JFXComboBox>
+                    <JFXDatePicker fx:id="dpStartDateEinsatzplanung" maxWidth="1.7976931348623157E308" promptText="Startdatum" GridPane.rowIndex="2">
+                        <GridPane.margin>
+                            <Insets bottom="10.0" left="10.0" top="10.0" />
+                        </GridPane.margin>
+                    </JFXDatePicker>
+                    <JFXDatePicker fx:id="dpEndDateEinsatzplanung" maxWidth="1.7976931348623157E308" promptText="Enddatum" GridPane.rowIndex="3">
+                        <GridPane.margin>
+                            <Insets bottom="10.0" left="10.0" top="10.0" />
+                        </GridPane.margin>
+                    </JFXDatePicker>
+                    <JFXButton text="Generieren" onAction="#generateEinsatzplanung" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+
+            </GridPane>
+           <Label text="Lohn &amp; Fahrtkostenabrechnung" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </Label>
+           <GridPane maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                   <JFXComboBox fx:id="cbEmployeeLohnkosten" maxWidth="1.7976931348623157E308" promptText="Mitarbeiter" GridPane.rowIndex="0">
+                       <GridPane.margin>
+                           <Insets bottom="10.0" left="10.0" top="10.0" />
+                       </GridPane.margin>
+                   </JFXComboBox>
+                   <JFXDatePicker fx:id="dpStartDateLohnkosten" maxWidth="1.7976931348623157E308" promptText="Startdatum" GridPane.rowIndex="1">
+                       <GridPane.margin>
+                           <Insets bottom="10.0" left="10.0" top="10.0" />
+                       </GridPane.margin>
+                   </JFXDatePicker>
+                   <JFXDatePicker fx:id="dpEndDateLohnkosten" maxWidth="1.7976931348623157E308" promptText="Enddatum" GridPane.rowIndex="2">
+                       <GridPane.margin>
+                           <Insets bottom="10.0" left="10.0" top="10.0" />
+                       </GridPane.margin>
+                   </JFXDatePicker>
+                   <JFXButton text="Generieren" onAction="#generateLohnkostenreport" GridPane.halignment="RIGHT" GridPane.rowIndex="3"  />
+               <columnConstraints>
+                   <ColumnConstraints percentWidth="100"></ColumnConstraints>
+               </columnConstraints>
+           </GridPane>
+           <Label GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP" text="Lohnmeldung">
+               <font>
+                <Font size="15.0" />
+               </font>
+           </Label>
+               <GridPane maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                   <JFXDatePicker fx:id="dpLohnmeldung" maxWidth="1.7976931348623157E308" promptText="Abrechnungsmonat" GridPane.rowIndex="0">
+                       <GridPane.margin>
+                           <Insets bottom="10.0" left="10.0" top="10.0" />
+                       </GridPane.margin>
+                   </JFXDatePicker>
+                   <JFXButton text="Generieren" onAction="#generateLohnMeldung" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+               </GridPane>
+           <Label GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP" text="Mitarbeiterübersicht">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </Label>
+               <GridPane maxWidth="1.7976931348623157E308" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                   <JFXButton text="Generieren" onAction="#generateMitarbeiteruebersicht" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+               </GridPane>
+           </GridPane>
+    </content>
+</ScrollPane>

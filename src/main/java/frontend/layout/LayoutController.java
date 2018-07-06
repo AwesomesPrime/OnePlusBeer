@@ -44,6 +44,9 @@ public class LayoutController implements Initializable{
     private Label menuStandPlan;
 
     @FXML
+    private Label menuReport;
+
+    @FXML
     public Label username;
 
     @FXML
@@ -83,10 +86,15 @@ public class LayoutController implements Initializable{
                 GridPane.setRowIndex(menuEmployeePlan, 4);
                 break;
             case 2: //Planer
-                showAll();
+                hideAll();
+                menuEvent.setVisible(true);
+                menuStandPlan.setVisible(true);
+                menuEmployeePlan.setVisible(true);
+                menuReport.setVisible(true);
                 GridPane.setRowIndex(menuEvent, 4);
                 GridPane.setRowIndex(menuStandPlan, 5);
                 GridPane.setRowIndex(menuEmployeePlan, 6);
+                GridPane.setRowIndex(menuReport, 7);
                 break;
             case 3: //Manager
                 showAll();
@@ -95,6 +103,7 @@ public class LayoutController implements Initializable{
                 GridPane.setRowIndex(menuEvent, 6);
                 GridPane.setRowIndex(menuStandPlan, 7);
                 GridPane.setRowIndex(menuEmployeePlan, 8);
+                GridPane.setRowIndex(menuReport, 8);
                 break;
             case 4: //Admin
                 showAll();
@@ -113,6 +122,7 @@ public class LayoutController implements Initializable{
         menuEvent.setVisible(true);
         menuStandPlan.setVisible(true);
         menuEmployeePlan.setVisible(true);
+        menuReport.setVisible(true);
     }
 
     private void hideAll(){
@@ -121,6 +131,7 @@ public class LayoutController implements Initializable{
         menuEvent.setVisible(false);
         menuStandPlan.setVisible(false);
         menuEmployeePlan.setVisible(false);
+        menuReport.setVisible(false);
     }
 
     public void openLogin() throws IOException {
@@ -167,6 +178,13 @@ public class LayoutController implements Initializable{
 
     public void openEmployeePlanList(MouseEvent event) throws IOException {
         ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/fxml/employeeplanlist.fxml"));
+        currentPane.getChildren().remove(0, currentPane.getChildren().size());
+        initializePanes(eventPane);
+        currentPane.getChildren().add(eventPane);
+    }
+
+    public void openReports(MouseEvent event) throws IOException {
+        ScrollPane eventPane =  FXMLLoader.load(getClass().getResource("/frontend/reports/generateReport.fxml"));
         currentPane.getChildren().remove(0, currentPane.getChildren().size());
         initializePanes(eventPane);
         currentPane.getChildren().add(eventPane);
