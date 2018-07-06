@@ -16,14 +16,8 @@ public class StandPlanDatabaseService extends GenericDatabaseService<StandPlan> 
      */
     public ArrayList<StandPlan> search (String term) {
         ArrayList<StandPlan> allStandPlans = this.getAll(StandPlan.class);
-        ArrayList<StandPlan> resultStandPlans = (ArrayList<StandPlan>) allStandPlans.stream().filter(standPlan -> Integer.toString(standPlan.getId()).contains(term) ||
-                standPlan.getStreet().contains(term) ||
-                standPlan.getPlz().contains(term) ||
-                standPlan.getCity().contains(term) ||
-                standPlan.getOpeningTime().toString().contains(term) ||
-                standPlan.getClosingTime().toString().contains(term) ||
-                standPlan.getStand().getName().contains(term) ||
-                standPlan.getEvent().getName().contains(term)).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<StandPlan> resultStandPlans = (ArrayList<StandPlan>) allStandPlans.stream().filter(standPlan -> standPlan.getStringWithAll().contains(term))
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return resultStandPlans;
     }

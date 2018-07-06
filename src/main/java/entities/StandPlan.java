@@ -129,4 +129,15 @@ public class StandPlan {
     public String toString() {
         return getName();
     }
+
+    public String getStringWithAll() {
+        return  id + " " +
+                event + " " +
+                stand + " " +
+                street + " " +
+                plz + " " +
+                city + " " +
+                openingTime + " " +
+                closingTime;
+    }
 }
