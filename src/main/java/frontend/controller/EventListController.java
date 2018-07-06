@@ -15,6 +15,7 @@ import usermanagement.ActiveUser;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -56,7 +57,14 @@ public class EventListController extends GenericListController implements Initia
 
     @Override
     protected boolean checkPermission() {
-        return ActiveUser.getPermission() > 1;
+        if(ActiveUser.getPermission() > 1 && getSelectedItem().getEndDate().getTime() > new Date().getTime()){
+            return true;
+        }else if(ActiveUser.getPermission() > 2){
+            return true;
+        }else{
+            popup.generateWarningPopupWindow("Keine Berechtigung zum Bearbeiten des Datensatzes "+getSelectedItem().getId());
+            return false;
+        }
     }
 
     @Override

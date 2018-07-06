@@ -32,7 +32,7 @@ public class EditEmployeePlanController implements Initializable {
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML
-    private JFXTextField txtTravelStart, txtTravelDistance, txtTravelExpenses,txtTimePause;
+    private JFXTextField txtTravelStart, txtTravelDistance, txtTravelExpenses,txtTimePause, txtBonus;
 
     @FXML
     private JFXTimePicker timeStart, timeEnd;
@@ -44,10 +44,7 @@ public class EditEmployeePlanController implements Initializable {
     private JFXComboBox<Employee> cbEmployee;
 
     @FXML
-    private JFXComboBox<StandPlan> cbStand;
-
-    @FXML
-    private JFXComboBox<Event> cbEvent;
+    private JFXComboBox<StandPlan> cbStandPlan;
 
     @FXML
     private ScrollPane editRPPane;
@@ -65,40 +62,36 @@ public class EditEmployeePlanController implements Initializable {
         StandDatabaseService standDatabaseService = new StandDatabaseService();
 
         ObservableList<StandPlan> standPlanList = FXCollections.observableList(standDatabaseService.getAll(StandPlan.class));
-        cbStand.setItems(standPlanList);
-
-        EventDatabaseService eventDatabaseService = new EventDatabaseService();
-
-        ObservableList<Event> eventList = FXCollections.observableList(eventDatabaseService.getAll(Event.class));
-        cbEvent.setItems(eventList);
+        cbStandPlan.setItems(standPlanList);
     }
 
     /**
      * Liest eingegebenen Daten aus Event view
      *  event Event Entität
      */
-    public void setDataFromView(EmployeePlan rp) {
+    public void setDataFromView(EmployeePlan employeePlan) {
 
-        this.employeePlan = rp;
+        this.employeePlan = employeePlan;
 
         EmployeeDatabaseService employeeDatabaseService = new EmployeeDatabaseService();
         StandDatabaseService standDatabaseService = new StandDatabaseService();
 
-        cbStand.getSelectionModel().select(indexOfStandInList(standDatabaseService.getAll(StandPlan.class),rp.getStandPlan().getId()));
-        cbEmployee.getSelectionModel().select(indexOfEmployeeInList(employeeDatabaseService.getAll(Employee.class),rp.getEmployee().getId()));
-        txtTravelStart.setText(rp.getTravelStart());
-        txtTravelDistance.setText(Double.toString(rp.getTravelDistance()));
-        txtTravelExpenses.setText(Double.toString(rp.getTravelExpenses()));
-        timeStart.setValue(rp.getStartWorkingTime()
+        cbStandPlan.getSelectionModel().select(indexOfStandInList(standDatabaseService.getAll(StandPlan.class),employeePlan.getStandPlan().getId()));
+        cbEmployee.getSelectionModel().select(indexOfEmployeeInList(employeeDatabaseService.getAll(Employee.class),employeePlan.getEmployee().getId()));
+        txtTravelStart.setText(employeePlan.getTravelStart());
+        txtTravelDistance.setText(Double.toString(employeePlan.getTravelDistance()));
+        txtTravelExpenses.setText(Double.toString(employeePlan.getTravelExpenses()));
+        timeStart.setValue(employeePlan.getStartWorkingTime()
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalTime());
-        timeEnd.setValue(rp.getEndWorkingTime()
+        timeEnd.setValue(employeePlan.getEndWorkingTime()
                                 .toInstant()
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalTime());
-        txtTimePause.setText(Long.toString(rp.getPauseTime()));
-        txtComment.setText((rp.getComment()));
+        txtTimePause.setText(Long.toString(employeePlan.getPauseTime()));
+        txtComment.setText((employeePlan.getComment()));
+        txtBonus.setText(Double.toString(employeePlan.getBonus()));
     }
 
     /**
@@ -152,10 +145,11 @@ public class EditEmployeePlanController implements Initializable {
         plan.setEndWorkingTime(endDate.getTime());
         plan.setStartWorkingTime(startDate.getTime());
         plan.setPauseTime(Long.valueOf(txtTimePause.getText()).longValue());
-        plan.setStandPlan(cbStand.getValue());
+        plan.setStandPlan(cbStandPlan.getValue());
         plan.setTravelDistance(Double.parseDouble(txtTravelDistance.getText()));
         plan.setTravelExpenses(Double.parseDouble(txtTravelExpenses.getText()));
         plan.setTravelStart(txtTravelStart.getText());
+        plan.setBonus(Double.valueOf(txtBonus.getText()).doubleValue());
 
         return plan;
     }
@@ -172,7 +166,7 @@ public class EditEmployeePlanController implements Initializable {
         Employee employee = cbEmployee.getValue();
         if( employee.getStateByEmploymentLaw().getIncomeMax() == 450 ) {
             long planedWorkTimeForEmployee = getEffectivWorkingTime();
-            Event event = cbEvent.getValue();
+            Event event = cbStandPlan.getValue().getEvent();
             Double workedTimeHours = employee.getWorkedTimeHoursInMonth(event.getStartDate().getMonth(), event.getEndDate().getYear());
 
             double possibleHoursPerMonth = 450/employee.getBruttoPerHour();
@@ -192,15 +186,6 @@ public class EditEmployeePlanController implements Initializable {
     private int indexOfEmployeeInList(List<Employee> employeeList, int employeeId) {
         for (int i = 0; i <= employeeList.size(); i++) {
             if(employeeList.get(i).getId() == employeeId){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private int indexOfEventInList(List<Event> eventList, int eventId) {
-        for (int i = 0; i <= eventList.size(); i++) {
-            if(eventList.get(i).getId() == eventId){
                 return i;
             }
         }
