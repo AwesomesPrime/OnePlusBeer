@@ -28,7 +28,7 @@ public class EditStandController implements Initializable {
     private JFXTextField txtType;
 
     @FXML
-    private JFXTextField txtComments;
+    private JFXTextArea txtComments;
 
     @FXML
     private ScrollPane editStandPane;
