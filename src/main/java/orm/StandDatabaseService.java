@@ -15,14 +15,9 @@ public class StandDatabaseService extends GenericDatabaseService<Stand> {
      * @return Gibt eine ArrayList mit allen übereinstimmenden Ständen zurück
      */
     public ArrayList<Stand> search (String term) {
-        ArrayList<Stand> allEvents = this.getAll(Stand.class);
-        ArrayList<Stand> resultEvents = allEvents.stream().filter(stand -> Integer.toString(stand.getId()).contains(term) ||
-                                                                  stand.getStreet().contains(term) ||
-                                                                  stand.getZip().contains(term) ||
-                                                                  stand.getCity().contains(term) ||
-                                                                  stand.getOpeningTimes().toString().contains(term) ||
-                                                                  stand.getClosingTime().toString().contains(term)).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Stand> allStands = this.getAll(Stand.class);
+        ArrayList<Stand> resultStands = (ArrayList<Stand>) allStands.stream().filter(stand -> stand.getStringWithAll().contains(term)).collect(Collectors.toCollection(ArrayList::new));
 
-        return resultEvents;
+        return resultStands;
     }
 }

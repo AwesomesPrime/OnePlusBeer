@@ -66,6 +66,11 @@ public class ProfessionalStanding
     //-------------------------------------------------------------------------
     @Override
     public String toString() {
-        return this.getDescription();
+        return getDescription();
+    }
+
+    public String getStringWithAll() {
+        return  id + " " +
+                description;
     }
 }

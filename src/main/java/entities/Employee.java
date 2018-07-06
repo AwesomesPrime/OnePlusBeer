@@ -1,6 +1,10 @@
 package entities;
 
+import orm.EmployeePlanDatabaseService;
+
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -85,8 +89,12 @@ public class Employee
     @Column(name = "comments")
     private String comments;
 
-    @Column(name="workedTimePerMonthInHours")
-    private int workedTimePerMonthInHours;
+    @ManyToOne
+    @JoinColumn(name = "userPermission")
+    private UserPermission userPermission;
+
+    @Column(name = "password")
+    private String password;
 
     //-------------------------------------------------------------------------
     //  Constructor(s)
@@ -95,7 +103,7 @@ public class Employee
 
     }
 
-    public Employee(String salutation, String firstName, String lastName, String street, String houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, StateByEmploymentLaw stateByEmploymentLaw, String taxNumber, ProfessionalStanding professionalStanding, String comments) {
+    public Employee(String salutation, String firstName, String lastName, String street, String houseNumber, int plz, String city, String phoneNumber, String mobileNumber, String mailAddress, String iban, String bic, double bruttoPerHour, Date startOfEmployment, boolean activityState, StateByEmploymentLaw stateByEmploymentLaw, String taxNumber, ProfessionalStanding professionalStanding, String comments, UserPermission userPermission, String password) {
         this.salutation = salutation;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -115,12 +123,15 @@ public class Employee
         this.taxNumber = taxNumber;
         this.professionalStanding = professionalStanding;
         this.comments = comments;
-        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
+        this.userPermission = userPermission;
+        this.password = password;
     }
 
     //-------------------------------------------------------------------------
     //  Get / Set
     //-------------------------------------------------------------------------
+
+
     public int getId() {
         return id;
     }
@@ -241,11 +252,11 @@ public class Employee
         this.startOfEmployment = startOfEmployment;
     }
 
-    public boolean isActive() {
+    public boolean getActivityState() {
         return activityState;
     }
 
-    public boolean getActivityState() {
+    public boolean isActive() {
         return activityState;
     }
 
@@ -285,24 +296,78 @@ public class Employee
         this.comments = comments;
     }
 
-    public boolean isActivityState() {
-        return activityState;
+    public UserPermission getUserPermission() {
+        return userPermission;
     }
 
-    public int getWorkedTimePerMonthInHours() {
-        return workedTimePerMonthInHours;
+    public void setUserPermission(UserPermission userPermission) {
+        this.userPermission = userPermission;
     }
 
-    public void setWorkedTimePerMonthInHours(int workedTimePerMonthInHours) {
-        this.workedTimePerMonthInHours = workedTimePerMonthInHours;
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getWorkedTimeHoursInMonth(int month, int year){
+        EmployeePlanDatabaseService resourceService = new EmployeePlanDatabaseService();
+        ArrayList<EmployeePlan> resourcePlans = resourceService.getResourcePlansInMonth(this, month-1, year);
+
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        double workedTimeInMonth = 0;
+
+        for(EmployeePlan resourcePlan:resourcePlans) {
+            double time = resourcePlan.getEndWorkingTime().getTime() - resourcePlan.getStartWorkingTime().getTime();
+            double workedTimeInDay = (time / 1000 / 60 - resourcePlan.getPauseTime()) / 60;
+            workedTimeInMonth += workedTimeInDay;
+        }
+
+        return workedTimeInMonth;
+    }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public String getAdress() {
+        return this.street + " " + this.houseNumber + ", " + this.plz + " " + this.city;
+    }
+
 
     //-------------------------------------------------------------------------
     //  toString()
     //-------------------------------------------------------------------------
-
     @Override
     public String toString() {
-        return firstName + " "+ lastName;
+        return getFullName();
+    }
+
+    public String getStringWithAll() {
+        return
+                + id + " "
+                        + salutation + " "+
+                        firstName + " " +
+                        lastName + " " +
+                        street + " "+
+                        houseNumber + " " +
+                        plz + " " +
+                        city + " " +
+                        phoneNumber + " " +
+                        mobileNumber + " " +
+                        mailAddress + " " +
+                        iban + " " +
+                        bic + " " +
+                        bruttoPerHour + " " +
+                        startOfEmployment + " " +
+                        activityState + " " +
+                        stateByEmploymentLaw + " " +
+                        taxNumber + " " +
+                        professionalStanding + " " +
+                        comments + " " +
+                        userPermission + " " +
+                        password;
     }
 }

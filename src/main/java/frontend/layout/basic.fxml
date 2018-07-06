@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.Label?>
-
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXButton?>
+
 <SplitPane fx:controller="frontend.layout.LayoutController" dividerPositions="0.25" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <items>
         <GridPane fx:id="menuPane" minWidth="130" maxWidth="115">
@@ -20,12 +20,14 @@
                 <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label  fx:id="username"       styleClass="username"                                      GridPane.rowIndex="1" />
-                <Label  fx:id="menuLogin"      styleClass="menuItem"  onMouseClicked="#openLogin"         GridPane.rowIndex="3"   text="Home"/>
-                <Label  fx:id="menuEmployee"   styleClass="menuItem"  onMouseClicked="#openEmployeeList"  GridPane.rowIndex="4"   text="Mitarbeiter" />
-                <Label  fx:id="menuStand"      styleClass="menuItem"  onMouseClicked="#openStandList"     GridPane.rowIndex="5"   text="Stände" />
-                <Label  fx:id="menuEvent"      styleClass="menuItem"  onMouseClicked="#openEventList"     GridPane.rowIndex="6"   text="Veranstaltungen" />
-                <Label  fx:id="reportEvent"    styleClass="menuItem"  onMouseClicked="#openReports"       GridPane.rowIndex="8"   text="Reports" />
+                <Label  fx:id="username"     styleClass="username"                                      GridPane.rowIndex="1" />
+                <Label  fx:id="menuLogin"    styleClass="menuItem"  onMouseClicked="#openLogin"         GridPane.rowIndex="3"   text="Login"/>
+                <Label  fx:id="menuEmployee" styleClass="menuItem"  onMouseClicked="#openEmployeeList"  GridPane.rowIndex="4"   text="Mitarbeiter" />
+                <Label  fx:id="menuStand"    styleClass="menuItem" onMouseClicked="#openStandList"     GridPane.rowIndex="5" text="Stände" />
+                <Label  fx:id="menuEvent"    styleClass="menuItem"  onMouseClicked="#openEventList"     GridPane.rowIndex="6"   text="Veranstaltungen" />
+                <Label  fx:id="menuStandPlan"    styleClass="menuItem"  onMouseClicked="#openStandPlanList"     GridPane.rowIndex="7"   text="Standverwaltung" />
+                <Label  fx:id="menuEmployeePlan"    styleClass="menuItem"  onMouseClicked="#openEmployeePlanList"     GridPane.rowIndex="8"   text="Einsatzplanung" />
+                <Label  fx:id="menuReport"    styleClass="menuItem"  onMouseClicked="#openReports"     GridPane.rowIndex="9"   text="Reports" />
             </children>
         </GridPane>
         <AnchorPane fx:id="currentPane">
@@ -39,7 +41,8 @@
                 <children>
                     <JFXTextField fx:id="txtUsername" promptText="Username" GridPane.rowIndex="1" />
                     <JFXPasswordField fx:id="txtPassword" promptText="Password" GridPane.rowIndex="2" />
-                    <JFXButton onAction="#checkLogin" defaultButton="true" mnemonicParsing="false" text="Login" GridPane.rowIndex="3" />
+                    <Label GridPane.rowIndex="3"></Label>
+                    <JFXButton onAction="#checkLogin" defaultButton="true" mnemonicParsing="false" text="Login" GridPane.rowIndex="4" />
                 </children>
             </GridPane>
         </AnchorPane>

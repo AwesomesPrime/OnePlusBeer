@@ -1,12 +1,12 @@
-package frontend.employee;
+package frontend.controller;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.base.ValidatorBase;
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
-import controller.EmployeeController;
+import controller.EntityController;
 import entities.Employee;
 import entities.ProfessionalStanding;
 import entities.StateByEmploymentLaw;
+import entities.UserPermission;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,15 +15,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orm.ProfessionalStandingDatabaseService;
 import orm.StateByEmploymentLawDatabaseService;
+import orm.UserPermissionDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.*;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -34,9 +32,12 @@ public class EditEmployeeController implements Initializable {
 
     private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
-    private final EmployeeController employeeController = new EmployeeController();
+    private final EntityController controller = new EntityController();
 
     private ValidatorBase vBase;
+
+    @FXML
+    private JFXTextField txtSalutation;
 
     @FXML
     private JFXTextField txtFirstName;
@@ -66,6 +67,9 @@ public class EditEmployeeController implements Initializable {
     private JFXTextField txtMailAddress;
 
     @FXML
+    private JFXTextField txtPassword;
+
+    @FXML
     private JFXTextField txtIBAN;
 
     @FXML
@@ -79,6 +83,9 @@ public class EditEmployeeController implements Initializable {
 
     @FXML
     private JFXComboBox cbStateByEmploymentLaw;
+
+    @FXML
+    private JFXComboBox cbUserPermission;
 
     @FXML
     private JFXTextField txtTaxNumber;
@@ -102,6 +109,11 @@ public class EditEmployeeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
 
         setValidators();
+
+        UserPermissionDatabaseService userPermissionDatabaseService = new UserPermissionDatabaseService();
+
+        ObservableList<UserPermission> permissions = FXCollections.observableList(userPermissionDatabaseService.getAll(UserPermission.class));
+        cbUserPermission.setItems(permissions);
 
         StateByEmploymentLawDatabaseService lawStateDbService = new StateByEmploymentLawDatabaseService();
 
@@ -194,10 +206,11 @@ public class EditEmployeeController implements Initializable {
      * liest die Bedienereingabe der EmployeeView aus
      * @param employee employee Entität
      */
-    public void getDataFromEmployeeView(Employee employee) {
+    public void setDataFromView(Employee employee) {
 
         this.employee = employee;
 
+        txtSalutation.setText(employee.getSalutation());
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
         txtStreet.setText(employee.getStreet());
@@ -216,8 +229,10 @@ public class EditEmployeeController implements Initializable {
                                         .toLocalDate());
         txtTaxNumber.setText(employee.getTaxNumber());
         txtComments.setText(employee.getComments());
+        txtPassword.setText(employee.getPassword());
         cbProfessionalStanding.getSelectionModel().select(indexOfProfessionalStandingInList(cbProfessionalStanding.getItems(), employee.getProfessionalStanding().getId()));
         cbStateByEmploymentLaw.getSelectionModel().select(indexOfStandByEmploymentLawInList(cbStateByEmploymentLaw.getItems(), employee.getStateByEmploymentLaw().getId()));
+        cbUserPermission.getSelectionModel().select(indexOfUserPermissionInList(cbUserPermission.getItems(), employee.getUserPermission().getId()));
         chkActivityState.setSelected(employee.getActivityState());
     }
 
@@ -230,9 +245,9 @@ public class EditEmployeeController implements Initializable {
     public void apply(ActionEvent event){
         try{
             if(this.employee == null) {
-                employeeController.addEmployee(generateEmployee());
+                controller.save(Employee.class, generateEmployee());
             } else {
-                employeeController.addEmployee(generateEmployeeOnExisting());
+                controller.save(Employee.class, generateEmployeeOnExisting());
             }
             popup.generateInformationPopupWindow(txtFirstName.getText() + " " + txtLastName.getText() + " wurde verarbeitet.");
             Stage stage = (Stage) editEmployeePane.getScene().getWindow();
@@ -256,6 +271,7 @@ public class EditEmployeeController implements Initializable {
                 dateStartOfEmployment.getValue().getMonthValue(),
                 dateStartOfEmployment.getValue().getDayOfMonth());
         employee.setFirstName(txtFirstName.getText());
+        employee.setSalutation(txtSalutation.getText());
         employee.setLastName(txtLastName.getText());
         employee.setStreet(txtStreet.getText());
         employee.setHouseNumber(txtHouseNumber.getText());
@@ -271,8 +287,10 @@ public class EditEmployeeController implements Initializable {
         employee.setActivityState(chkActivityState.isSelected());
         employee.setProfessionalStanding((ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem());
         employee.setStateByEmploymentLaw((StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem());
+        employee.setUserPermission((UserPermission) cbUserPermission.getSelectionModel().getSelectedItem());
         employee.setTaxNumber(txtTaxNumber.getText());
         employee.setComments(txtComments.getText());
+        employee.setPassword(txtPassword.getText());
 
         return employee;
     }
@@ -284,6 +302,7 @@ public class EditEmployeeController implements Initializable {
     private Employee generateEmployee() {
         ProfessionalStandingDatabaseService professionalStandingService = new ProfessionalStandingDatabaseService();
         StateByEmploymentLawDatabaseService stateByEmploymentLawService = new StateByEmploymentLawDatabaseService();
+        UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
 
         Calendar startDate = Calendar.getInstance();
         startDate.set(
@@ -299,7 +318,7 @@ public class EditEmployeeController implements Initializable {
                 txtIBAN.getText(), txtBIC.getText(),
                 Double.parseDouble(txtBruttoPerHour.getText()), startDate.getTime(),
                 chkActivityState.isSelected(), (StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem(),
-                txtTaxNumber.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "");
+                txtTaxNumber.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "", userPermissionService.get(UserPermission.class, 1), "changeme");
     }
 
     private int indexOfProfessionalStandingInList(List<ProfessionalStanding> psList, int professionalStandingId) {
@@ -314,6 +333,15 @@ public class EditEmployeeController implements Initializable {
     private int indexOfStandByEmploymentLawInList(List<StateByEmploymentLaw> stateLawlList, int stateByEmploymentlawId) {
         for (int i = 0; i <= stateLawlList.size(); i++) {
             if(stateLawlList.get(i).getId() == stateByEmploymentlawId){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int indexOfUserPermissionInList(List<UserPermission> permissions, int permissionId) {
+        for (int i = 0; i <= permissions.size(); i++) {
+            if(permissions.get(i).getId() == permissionId){
                 return i;
             }
         }

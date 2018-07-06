@@ -69,9 +69,11 @@ public class UserPermission
     //-------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "entities.UserPermission{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                '}';
+        return getDescription();
+    }
+
+    public String getStringWithAll() {
+        return id + " " +
+                description;
     }
 }

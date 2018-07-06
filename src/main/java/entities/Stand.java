@@ -1,109 +1,79 @@
 package entities;
 
-
 import javax.persistence.*;
-import java.time.LocalTime;
 
 /**
- * Entität für Stand
+ * Entität für Standbeschreibung
  */
 @Entity
 @Table(name="Stand")
+
 public class Stand {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "street")
-    private String street;
+    @Column(name="name")
+    private String name;
 
-    @Column(name = "zip")
-    private String zip;
+    @Column(name="type")
+    private String type;
 
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "openingtime")
-    private LocalTime openingTimes;
-
-    @Column (name="closingtime")
-    private LocalTime closingTime;
-
-    @ManyToOne
-    @JoinColumn(name ="fk_standDescription")
-    private StandDescription standDescription;
+    @Column(name="comment")
+    private String Comment;
 
     public Stand() {
     }
 
-    public Stand(String street, String zip, String city, LocalTime openingTimes, LocalTime closingTime, StandDescription standDescription) {
-        this.street = street;
-        this.zip = zip;
-        this.city = city;
-        this.openingTimes = openingTimes;
-        this.closingTime = closingTime;
-        this.standDescription = standDescription;
+    public Stand(String name, String type, String comment) {
+        this.name = name;
+        this.type = type;
+        Comment = comment;
     }
-
-    public LocalTime getOpeningTimes() {
-        return openingTimes;
-    }
-
-    public void setOpeningTimes(LocalTime openingTimes) {this.openingTimes = openingTimes;}
-
-    public LocalTime getClosingTime() {return closingTime;}
-
-    public void setClosingTime(LocalTime closingTime) {this.closingTime = closingTime;}
 
     public int getId() {
         return id;
     }
 
-    public String getStreet() {
-        return street;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public String getName() {
+        return name;
     }
 
-    public String getZip() {
-        return zip;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public String getType() {
+        return type;
     }
 
-    public String getCity() {
-        return city;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public String getComment() {
+        return Comment;
     }
 
-
+    public void setComment(String comment) {
+        Comment = comment;
+    }
 
     @Override
     public String toString() {
-        return "Stand{" +
-                "id=" + id +
-                ", street='" + street + '\'' +
-                ", zip='" + zip + '\'' +
-                ", city='" + city + '\'' +
-                ", openingTimes=" + openingTimes +
-                ", closingTime=" + closingTime +
-                '}';
+        return getName();
     }
 
-    public StandDescription getStandDescription() {
-        return standDescription;
-    }
-
-    public void setStandDescription(StandDescription standDescription) {
-        this.standDescription = standDescription;
+    public String getStringWithAll() {
+        return id + " " +
+                name + " " +
+                type + " " +
+                Comment;
     }
 }

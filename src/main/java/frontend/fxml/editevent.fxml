@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fx:controller="frontend.event.EditEventController" fx:id="editEventPane" styleClass="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+<ScrollPane fx:controller="frontend.controller.EditEventController" fx:id="editEventPane" styleClass="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
     <content>
         <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" vgap="20.0">
             <columnConstraints>

@@ -7,16 +7,15 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.show_sql">false</property>
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
         <!-- Mapping files -->
         <mapping class="entities.ProfessionalStanding"/>
         <mapping class="entities.StateByEmploymentLaw"/>
         <mapping class="entities.Employee"/>
         <mapping class="entities.UserPermission"/>
-        <mapping class="entities.User"/>
         <mapping class="entities.Event"/>
-        <mapping class="entities.ResourcePlanning"/>
+        <mapping class="entities.EmployeePlan"/>
+        <mapping class="entities.StandPlan"/>
         <mapping class="entities.Stand"/>
-        <mapping class="entities.StandDescription"/>
     </session-factory>
 </hibernate-configuration>
