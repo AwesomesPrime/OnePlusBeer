@@ -51,7 +51,7 @@ public class EmployeePlanListController extends GenericListController implements
         standPlan.setCellValueFactory(cellData          -> new SimpleObjectProperty<>(cellData.getValue().getStandPlan().getStand().getName()));
         startWorkingTime.setCellValueFactory(cellData   -> new SimpleObjectProperty<>(daf.format(cellData.getValue().getStartWorkingTime())));
         endWorkingTime.setCellValueFactory(cellData     -> new SimpleObjectProperty<>(daf.format(cellData.getValue().getEndWorkingTime())));
-        pauseTime.setCellValueFactory(cellData          -> new SimpleObjectProperty<>(cellData.getValue().getPauseTime() + ""));
+        pauseTime.setCellValueFactory(cellData          -> new SimpleObjectProperty<>(cellData.getValue().getPauseTime() + " Minuten"));
         travelExpenses.setCellValueFactory(cellData     -> new SimpleObjectProperty<>(df.format(cellData.getValue().getTravelExpenses()) + " €"));
         travelDistance.setCellValueFactory(cellData     -> new SimpleObjectProperty<>(df.format(cellData.getValue().getTravelDistance()) + " km"));
         travelStart.setCellValueFactory(cellData        -> new SimpleObjectProperty<>(cellData.getValue().getTravelStart()));
