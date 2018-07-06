@@ -1,9 +1,6 @@
 package frontend.reports;
 
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTimePicker;
-import controller.EventController;
 import entities.Employee;
 import entities.Event;
 import javafx.collections.FXCollections;
@@ -11,17 +8,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import net.sf.jasperreports.engine.JRException;
 import orm.EmployeeDatabaseService;
 import orm.EventDatabaseService;
+import reports.CallReport;
 import utilities.AlerterMessagePopup;
 import validation.InputValidation;
 
 import java.net.URL;
-import java.time.ZoneId;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ReportController implements Initializable {
@@ -42,6 +42,7 @@ public class ReportController implements Initializable {
     @FXML
     private ComboBox<Event> cbVeranstaltungEinsatzplanung;
 
+    private final CallReport report = new CallReport();
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -54,44 +55,78 @@ public class ReportController implements Initializable {
     }
 
     public void generateEinsatzplanung(ActionEvent event) {
-        Employee e = cbEmployeeEinsatzplanung.getSelectionModel().getSelectedItem();
-        Event ev = cbVeranstaltungEinsatzplanung.getSelectionModel().getSelectedItem();
+        Employee employee = cbEmployeeEinsatzplanung.getSelectionModel().getSelectedItem();
+        Event selectedEvent = cbVeranstaltungEinsatzplanung.getSelectionModel().getSelectedItem();
+        if(dpStartDateEinsatzplanung != null && dpEndDateEinsatzplanung != null) {
+            Calendar startDate = Calendar.getInstance();
+            startDate.set(
+                    dpStartDateEinsatzplanung.getValue().getYear(),
+                    dpStartDateEinsatzplanung.getValue().getMonthValue()
+            );
 
-        Calendar startDate = Calendar.getInstance();
-        startDate.set(
-                dpStartDateEinsatzplanung.getValue().getYear(),
-                dpStartDateEinsatzplanung.getValue().getMonthValue(),
-                dpStartDateEinsatzplanung.getValue().getDayOfMonth()
-        );
+            Calendar endDate = Calendar.getInstance();
+            endDate.set(
+                    dpEndDateEinsatzplanung.getValue().getYear(),
+                    dpEndDateEinsatzplanung.getValue().getMonthValue()
+            );
 
-        Calendar endDate = Calendar.getInstance();
-        startDate.set(
-                dpEndDateEinsatzplanung.getValue().getYear(),
-                dpEndDateEinsatzplanung.getValue().getMonthValue(),
-                dpEndDateEinsatzplanung.getValue().getDayOfMonth()
-        );
+            Date start = new Date(startDate.getTimeInMillis());
+            Date end= new Date(endDate.getTimeInMillis());
 
-        //TODO: report generieren
+            Map<String, Object> parameterMap = new HashMap<>();
+            parameterMap.put("prmEmployeeId", employee.getId());
+            parameterMap.put("prmEvent", selectedEvent.getId());
+            parameterMap.put("prmStartDate", start);
+            parameterMap.put("prmEndDate", end);
+
+
+            try {
+                report.generateReport("Lohnkostenreport", parameterMap);
+            } catch (JRException e1) {
+                popup.generateErrorPopupWindow("Report konnte nicht erstellt werden, versuchen Sie es erneut.");
+            } catch (SQLException e1) {
+                popup.generateErrorPopupWindow("Report konnte nicht erstellt werden, bitte starten Sie das Programm neu.");
+            }
+        }
+        popup.generateInformationPopupWindow("Bitte wählen Sie einen Zeitraum aus.");
     }
 
-    public void generateLohnkostenreport(ActionEvent event) {
-        Employee e = cbEmployeeLohnkosten.getSelectionModel().getSelectedItem();
+    public void generateLohnkostenreport(ActionEvent event){
+        Employee employee = cbEmployeeLohnkosten.getSelectionModel().getSelectedItem();
+        if(dpStartDateLohnkosten.getValue() != null && dpEndDateLohnkosten.getValue() != null &&  employee != null) {
+            Calendar start = Calendar.getInstance();
+            start.set(
+                    dpStartDateLohnkosten.getValue().getYear(),
+                    dpStartDateLohnkosten.getValue().getMonthValue(),
+                    dpStartDateLohnkosten.getValue().getDayOfMonth()
+            );
 
-        Calendar startDate = Calendar.getInstance();
-        startDate.set(
-                dpStartDateLohnkosten.getValue().getYear(),
-                dpStartDateLohnkosten.getValue().getMonthValue(),
-                dpStartDateLohnkosten.getValue().getDayOfMonth()
-        );
+            Calendar end = Calendar.getInstance();
+            end.set(
+                    dpEndDateLohnkosten.getValue().getYear(),
+                    dpEndDateLohnkosten.getValue().getMonthValue(),
+                    dpEndDateLohnkosten.getValue().getDayOfMonth()
+            );
 
-        Calendar endDate = Calendar.getInstance();
-        startDate.set(
-                dpEndDateLohnkosten.getValue().getYear(),
-                dpEndDateLohnkosten.getValue().getMonthValue(),
-                dpEndDateLohnkosten.getValue().getDayOfMonth()
-        );
 
-        //TODO: report generieren
+            Date startDate = new Date(start.getTimeInMillis());
+            Date endDate = new Date(end.getTimeInMillis());
+
+            Map<String, Object> parameterMap = new HashMap<>();
+            parameterMap.put("prmEmployeeId", employee.getId());
+            parameterMap.put("prmStartDate", startDate);
+            parameterMap.put("prmEndDate", endDate);
+
+            try {
+                report.generateReport("Lohnkostenreport", parameterMap);
+            } catch (JRException e1) {
+                popup.generateErrorPopupWindow("Report konnte nicht erstellt werden, versuchen Sie es erneut.");
+            } catch (SQLException e1) {
+                popup.generateErrorPopupWindow("Report konnte nicht erstellt werden, bitte starten Sie das Programm neu.");
+            }
+        } else {
+            popup.generateInformationPopupWindow("Bitte wählen Sie alle Felder aus.");
+        }
     }
 
     public void generateLohnMeldung(ActionEvent event) {
@@ -101,6 +136,15 @@ public class ReportController implements Initializable {
     }
 
     public void generateMitarbeiteruebersicht(ActionEvent event) {
-        //TODO: report generieren
+
+        Map<String, Object> parameterMap = new HashMap<>();
+
+        try {
+            report.generateReport("Mitarbeiteruebersicht", parameterMap);
+        } catch (JRException e1) {
+            popup.generateErrorPopupWindow("Report konnte nicht erstellt werden, versuchen Sie es erneut.");
+        } catch (SQLException e1) {
+            popup.generateErrorPopupWindow("Report konnte nicht erstellt werden, bitte starten Sie das Programm neu.");
+        }
     }
 }

@@ -166,7 +166,7 @@ AND (DATE(oneplusbier.resourceplanning.startWorkingTime) >=  $P{prmStartDate}  A
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Localhost"/>
 		<parameter name="prmEmployeeId" class="java.lang.Integer"/>
-		<parameter name="prmStartDate" class="java.lang.String"/>
+		<parameter name="prmStartDate" class="java.sql.Date"/>
 		<parameter name="prmEndDate" class="java.sql.Date"/>
 		<queryString language="SQL">
 			<![CDATA[SELECT
@@ -239,8 +239,7 @@ FROM oneplusbier.employee
 LEFT JOIN oneplusbier.resourceplanning
 ON oneplusbier.resourceplanning.fk_employee = oneplusbier.employee.id
 WHERE oneplusbier.employee.id = $P{prmEmployeeId} 
- AND (DATE(oneplusbier.resourceplanning.startWorkingTime) >= $P{prmStartDate} AND DATE(oneplusbier.resourceplanning.startWorkingTime) <=$P{prmEndDate})
-]]>
+ AND (DATE(oneplusbier.resourceplanning.startWorkingTime) >= $P{prmStartDate} AND DATE(oneplusbier.resourceplanning.startWorkingTime) <=$P{prmEndDate})]]>
 	</queryString>
 	<field name="fk_employee" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="fk_employee"/>

@@ -1,5 +1,6 @@
 package reports;
 
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.io.File;
@@ -19,30 +20,23 @@ import net.sf.jasperreports.export.OutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import utilities.AlerterMessagePopup;
 
-public class callReport {
+public class CallReport {
 
-    public static void main() throws JRException, SQLException {
+    private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
-        String reportName = "Lohnkostenreport";
+    public void generateReport(String reportName, Map<String, Object> parameterMap) throws JRException, SQLException {
 
-        String reportSrcFile = "C:/Users/Nils/Documents/GitHub/OnePlusBeer/Reports/" + reportName + ".jrxml";
+        String path = new File("Reports/" + reportName + ".jrxml").getAbsolutePath();
 
         // First, compile jrxml file.
-        JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
+        JasperReport jasperReport = JasperCompileManager.compileReport(path);
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oneplusbier", "root", "root");
-
-        // Parameters for report
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("prmEmployeeId",1);
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oneplusbier", "root", "");
 
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
-                parameters, conn);
-
-        // Make sure the output directory exists.
-        File outDir = new File("C:/Users/Nils/Documents/GitHub/OnePlusBeer/Reports");
-        outDir.mkdirs();
+                parameterMap, conn);
 
         // PDF Exportor.
         JRPdfExporter exporter = new JRPdfExporter();
@@ -53,7 +47,7 @@ public class callReport {
 
         // ExporterOutput
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "C:/Users/Nils/Documents/GitHub/OnePlusBeer/Reports/" + reportName + ".pdf");
+                "C:\\Users\\d_klein\\" + reportName + ".pdf");
         // Output
         exporter.setExporterOutput(exporterOutput);
 
@@ -62,7 +56,7 @@ public class callReport {
         exporter.setConfiguration(configuration);
         exporter.exportReport();
 
-        System.out.print("Done!");
+        popup.generateInformationPopupWindow("Ihr Report wurde erstellt.");
     }
 
 }
