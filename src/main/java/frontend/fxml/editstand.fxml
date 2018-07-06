@@ -16,27 +16,16 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="StandPlan" />
+                <Label text="Stand" />
                 <Label text="Name" GridPane.rowIndex="1" />
                 <Label text="Typ" GridPane.rowIndex="2" />
-                <Label text="Straße" GridPane.rowIndex="3" />
-                <Label text="PLZ" GridPane.rowIndex="4" />
-                <Label text="Ort" GridPane.rowIndex="5" />
-                <Label text="Öffnungszeiten" GridPane.rowIndex="6" />
-                <Label text="von" GridPane.rowIndex="8" />
-                <Label text="bis" GridPane.rowIndex="9" />
-                <Label text="Bemerkung" GridPane.rowIndex="11" />
+                <Label text="Bemerkung" GridPane.rowIndex="3" />
 
                 <JFXTextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <JFXTextField fx:id="txtType" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <JFXTextField fx:id="txtStreet" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <JFXTextField fx:id="txtPLZ" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <JFXTextField fx:id="txtCity" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <JFXTimePicker fx:id="TimeOpen" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                <JFXTimePicker fx:id="TimeClose" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                <JFXTextArea fx:id="txtComments" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                <JFXTextArea fx:id="txtComments" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <JFXButton fx:id="btnEditStand" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                <JFXButton fx:id="btnEditStand" onAction="#apply" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             </children>
         </GridPane>
     </content>
