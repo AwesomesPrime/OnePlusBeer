@@ -3,6 +3,7 @@ package orm;
 import entities.Stand;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Created by Ulokal on 29.06.2018.
@@ -18,7 +19,7 @@ public class StandDatabaseService extends GenericDatabaseService<Stand> {
         ArrayList<Stand> resultStands = (ArrayList<Stand>) allStands.stream().filter(stand -> Integer.toString(stand.getId()).contains(term) ||
                                                                   stand.getName().contains(term) ||
                                                                   stand.getType().contains(term) ||
-                                                                  stand.getComment().contains(term));
+                                                                  stand.getComment().contains(term)).collect(Collectors.toCollection(ArrayList::new));
 
         return resultStands;
     }

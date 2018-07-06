@@ -3,6 +3,7 @@ package orm;
 import entities.StandPlan;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Created by Ulokal on 29.06.2018.
@@ -22,7 +23,7 @@ public class StandPlanDatabaseService extends GenericDatabaseService<StandPlan> 
                 standPlan.getOpeningTime().toString().contains(term) ||
                 standPlan.getClosingTime().toString().contains(term) ||
                 standPlan.getStand().getName().contains(term) ||
-                standPlan.getEvent().getName().contains(term));
+                standPlan.getEvent().getName().contains(term)).collect(Collectors.toCollection(ArrayList::new));
 
         return resultStandPlans;
     }
