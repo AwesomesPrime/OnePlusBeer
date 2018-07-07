@@ -6,17 +6,24 @@ import java.io.Serializable;
 
 public class ActiveUser implements Serializable {
     private static Employee activeUser;
-    private static int permission;
+    private static int permission = 1;
     private static String username;
     private static String mailAdress;
     private static boolean set = false;
 
     public ActiveUser(Employee activeUser){
         activeUser = activeUser;
-        permission = activeUser.getUserPermission().getId();
-        username = activeUser.getFirstName() + " " + activeUser.getLastName();
-        mailAdress = activeUser.getMailAddress();
-        set = true;
+        if(activeUser == null){
+            permission = 1;
+            username = null;
+            mailAdress = null;
+            set = false;
+        }else{
+            permission = activeUser.getUserPermission().getId();
+            username = activeUser.getFirstName() + " " + activeUser.getLastName();
+            mailAdress = activeUser.getMailAddress();
+            set = true;
+        }
     }
 
     public ActiveUser(){

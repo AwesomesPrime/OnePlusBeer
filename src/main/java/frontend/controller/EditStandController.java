@@ -63,11 +63,7 @@ public class EditStandController implements Initializable {
     @FXML
     public void apply(ActionEvent event){
         try{
-            if(this.stand == null) {
-                controller.save(Stand.class, generateStand());
-            } else {
-                controller.save(Stand.class, generateStandOnExisting());
-            }
+            controller.save(Stand.class, generate());
             popup.generateInformationPopupWindow(txtName.getText() + " wurde verarbeitet.");
             Stage stage = (Stage) editStandPane.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
@@ -81,21 +77,15 @@ public class EditStandController implements Initializable {
      * erstelle Stand von vorhandenem Stand
      * @return Stand
      */
-    private Stand generateStandOnExisting() {
-        Stand stand = this.stand;
+    private Stand generate() {
+        if(this.stand == null){
+            this.stand =  new Stand();
+        }
 
         stand.setName(txtName.getText());
         stand.setType(txtType.getText());
         stand.setComment(txtComments.getText());
 
         return stand;
-    }
-
-    /**
-     * erstelle neuen Stand von View eingaben
-     * @return Stand
-     */
-    private Stand generateStand() {
-        return new Stand("", "", "");
     }
 }

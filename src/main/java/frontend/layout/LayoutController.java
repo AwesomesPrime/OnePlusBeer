@@ -26,6 +26,9 @@ public class LayoutController implements Initializable{
     private Pane currentPane;
 
     @FXML
+    private Label logout;
+
+    @FXML
     private Label menuLogin;
 
     @FXML
@@ -58,7 +61,7 @@ public class LayoutController implements Initializable{
     @FXML
     GridPane loginPane;
 
-    private int permission = 1;
+    private int permission;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -79,14 +82,20 @@ public class LayoutController implements Initializable{
             menuLogin.setText("Login");
         }
 
+        permission = ActiveUser.getPermission();
+
         switch(permission){
             case 1: //Standard
                 hideAll();
+                if(ActiveUser.isSet()){
+                    logout.setVisible(true);
+                }
                 menuEmployeePlan.setVisible(true);
                 GridPane.setRowIndex(menuEmployeePlan, 4);
                 break;
             case 2: //Planer
                 hideAll();
+                logout.setVisible(true);
                 menuEvent.setVisible(true);
                 menuStandPlan.setVisible(true);
                 menuEmployeePlan.setVisible(true);
@@ -117,6 +126,7 @@ public class LayoutController implements Initializable{
     }
 
     private void showAll(){
+        logout.setVisible(true);
         menuEmployee.setVisible(true);
         menuStand.setVisible(true);
         menuEvent.setVisible(true);
@@ -126,12 +136,19 @@ public class LayoutController implements Initializable{
     }
 
     private void hideAll(){
+        logout.setVisible(false);
         menuEmployee.setVisible(false);
         menuStand.setVisible(false);
         menuEvent.setVisible(false);
         menuStandPlan.setVisible(false);
         menuEmployeePlan.setVisible(false);
         menuReport.setVisible(false);
+    }
+
+    public void logout(MouseEvent event) throws IOException {
+        new ActiveUser(null);
+        username.setText("");
+        openLogin();
     }
 
     public void openLogin() throws IOException {
@@ -190,6 +207,8 @@ public class LayoutController implements Initializable{
         currentPane.getChildren().add(eventPane);
     }
 
+
+
     @FXML
     public void checkLogin(ActionEvent event) throws IOException {
         EmployeeDatabaseService employeeService = new EmployeeDatabaseService();
@@ -200,7 +219,7 @@ public class LayoutController implements Initializable{
                 new ActiveUser(employee);
                 permission = ActiveUser.getPermission();
                 openLogin();
-                username.setText(employee.getFirstName() + " " + employee.getLastName());
+                username.setText(employee.getFullName());
             }else {
                 System.out.println("Das Passwort ist falsch!");
             }

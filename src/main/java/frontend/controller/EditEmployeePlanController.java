@@ -13,10 +13,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orm.EmployeeDatabaseService;
-import orm.EventDatabaseService;
 import orm.StandDatabaseService;
 import utilities.AlerterMessagePopup;
-import validation.InputValidation;
 
 import java.net.URL;
 import java.time.ZoneId;
@@ -29,7 +27,6 @@ import static java.time.temporal.ChronoUnit.HOURS;
 
 public class EditEmployeePlanController implements Initializable {
 
-    private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML
@@ -115,12 +112,7 @@ public class EditEmployeePlanController implements Initializable {
     public void apply(ActionEvent event){
         try{
             if(validateWorktimeForMiniJober() && validateLegalBreaKTime()){
-                if(this.employeePlan == null) {
-                    EmployeePlan plan = new EmployeePlan();
-                    controller.save(EmployeePlan.class, generateResourcePlan(plan));
-                } else {
-                    controller.save(EmployeePlan.class, generateResourcePlan(this.employeePlan));
-                }
+                controller.save(EmployeePlan.class, generate());
                 Stage stage = (Stage) editRPPane.getScene().getWindow();
                 stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
                 popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
@@ -158,20 +150,24 @@ public class EditEmployeePlanController implements Initializable {
         return date.getTime();
     }
 
-    private EmployeePlan generateResourcePlan(EmployeePlan plan) {
+    private EmployeePlan generate() {
 
-        plan.setComment(txtComment.getText());
-        plan.setEmployee(cbEmployee.getValue());
-        plan.setEndWorkingTime(getDateFromPickers(dateStart, timeStart));
-        plan.setStartWorkingTime(getDateFromPickers(dateEnd, timeEnd));
-        plan.setPauseTime(Long.valueOf(txtTimePause.getText()).longValue());
-        plan.setStandPlan(cbStandPlan.getValue());
-        plan.setTravelDistance(Double.parseDouble(txtTravelDistance.getText()));
-        plan.setTravelExpenses(Double.parseDouble(txtTravelExpenses.getText()));
-        plan.setTravelStart(txtTravelStart.getText());
-        plan.setBonus(Double.valueOf(txtBonus.getText()).doubleValue());
+        if(this.employeePlan == null){
+            this.employeePlan =  new EmployeePlan();
+        }
 
-        return plan;
+        employeePlan.setComment(txtComment.getText());
+        employeePlan.setEmployee(cbEmployee.getValue());
+        employeePlan.setEndWorkingTime(getDateFromPickers(dateStart, timeStart));
+        employeePlan.setStartWorkingTime(getDateFromPickers(dateEnd, timeEnd));
+        employeePlan.setPauseTime(Long.valueOf(txtTimePause.getText()).longValue());
+        employeePlan.setStandPlan(cbStandPlan.getValue());
+        employeePlan.setTravelDistance(Double.parseDouble(txtTravelDistance.getText()));
+        employeePlan.setTravelExpenses(Double.parseDouble(txtTravelExpenses.getText()));
+        employeePlan.setTravelStart(txtTravelStart.getText());
+        employeePlan.setBonus(Double.valueOf(txtBonus.getText()).doubleValue());
+
+        return employeePlan;
     }
 
     private void validateInput() {

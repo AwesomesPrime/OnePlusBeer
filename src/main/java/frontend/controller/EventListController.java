@@ -53,7 +53,7 @@ public class EventListController extends GenericListController implements Initia
 
     @Override
     protected boolean checkPermission() {
-        if(ActiveUser.getPermission() > 1 && getSelectedItem().getEndDate().getTime() > new Date().getTime()){
+        if(ActiveUser.getPermission() > 1 && (getSelectedItem() == null || getSelectedItem().getEndDate().getTime() > new Date().getTime())){
             return true;
         }else if(ActiveUser.getPermission() > 2){
             return true;

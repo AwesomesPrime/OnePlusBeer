@@ -15,7 +15,6 @@ import javafx.stage.WindowEvent;
 import orm.StandDatabaseService;
 import orm.EventDatabaseService;
 import utilities.AlerterMessagePopup;
-import validation.InputValidation;
 
 import java.net.URL;
 import java.time.ZoneId;
@@ -24,11 +23,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static java.time.temporal.ChronoUnit.HOURS;
-
 public class EditStandPlanController implements Initializable {
 
-    private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML
@@ -107,12 +103,7 @@ public class EditStandPlanController implements Initializable {
     @FXML
     public void apply(ActionEvent event){
         try{
-            if(this.standPlan == null) {
-                StandPlan plan = new StandPlan();
-                controller.save(StandPlan.class, generateResourcePlan(plan));
-            } else {
-                controller.save(StandPlan.class, generateResourcePlan(this.standPlan));
-            }
+            controller.save(StandPlan.class, generate());
             Stage stage = (Stage) editStandPlanPane.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
             popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
@@ -145,16 +136,19 @@ public class EditStandPlanController implements Initializable {
     }
 
 
-    private StandPlan generateResourcePlan(StandPlan plan) {
-        plan.setStand(stand.getValue());
-        plan.setEvent(event.getValue());
-        plan.setStreet(street.getText());
-        plan.setPlz(plz.getText());
-        plan.setCity(city.getText());
-        plan.setOpeningTime(getDateFromPickers(openingDate, openingTime));
-        plan.setClosingTime(getDateFromPickers(closingDate, closingTime));
+    private StandPlan generate() {
+        if(this.standPlan == null){
+            this.standPlan =  new StandPlan();
+        }
+        standPlan.setStand(stand.getValue());
+        standPlan.setEvent(event.getValue());
+        standPlan.setStreet(street.getText());
+        standPlan.setPlz(plz.getText());
+        standPlan.setCity(city.getText());
+        standPlan.setOpeningTime(getDateFromPickers(openingDate, openingTime));
+        standPlan.setClosingTime(getDateFromPickers(closingDate, closingTime));
 
-        return plan;
+        return standPlan;
     }
 
     private int indexOfEventInList(List<Event> eventList, int eventId) {

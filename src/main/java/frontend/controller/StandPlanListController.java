@@ -54,7 +54,7 @@ public class StandPlanListController extends GenericListController implements In
 
     @Override
     protected boolean checkPermission() {
-        if(ActiveUser.getPermission() > 1 && getSelectedItem().getClosingTime().getTime() > new Date().getTime()){
+        if(ActiveUser.getPermission() > 1 && (getSelectedItem() == null || getSelectedItem().getClosingTime().getTime() > new Date().getTime())){
             return true;
         }else if(ActiveUser.getPermission() > 2){
             return true;

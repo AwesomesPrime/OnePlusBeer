@@ -7,14 +7,11 @@ import entities.Employee;
 import entities.ProfessionalStanding;
 import entities.StateByEmploymentLaw;
 import entities.UserPermission;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orm.ProfessionalStandingDatabaseService;
@@ -22,85 +19,51 @@ import orm.StateByEmploymentLawDatabaseService;
 import orm.UserPermissionDatabaseService;
 import utilities.AlerterMessagePopup;
 import validation.*;
+
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditEmployeeController implements Initializable {
 
-    private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
     private final EntityController controller = new EntityController();
 
-    private ValidatorBase vBase;
+    @FXML
+    private JFXTextField
+            salutation,
+            firstName,
+            lastName,
+            street,
+            houseNumber,
+            plz,
+            city,
+            phoneNumber,
+            mobileNumber,
+            mailAddress,
+            password,
+            iban,
+            bic,
+            bruttoPerHour,
+            taxNumber
+    ;
 
     @FXML
-    private JFXTextField txtSalutation;
+    private JFXTextArea comments;
 
     @FXML
-    private JFXTextField txtFirstName;
+    private JFXDatePicker startOfEmployment;
 
     @FXML
-    private JFXTextField txtLastName;
+    private JFXComboBox
+            professionalStanding,
+            stateByEmploymentLaw,
+            userPermission
+    ;
 
     @FXML
-    private JFXTextField txtStreet;
-
-    @FXML
-    private JFXTextField txtHouseNumber;
-
-    @FXML
-    private JFXTextField txtPLZ;
-
-    @FXML
-    private JFXTextField txtCity;
-
-    @FXML
-    private JFXTextField txtPhoneNumber;
-
-    @FXML
-    private JFXTextField txtMobileNumber;
-
-    @FXML
-    private JFXTextField txtMailAddress;
-
-    @FXML
-    private JFXTextField txtPassword;
-
-    @FXML
-    private JFXTextField txtIBAN;
-
-    @FXML
-    private JFXTextField txtBIC;
-
-    @FXML
-    private JFXTextField txtBruttoPerHour;
-
-    @FXML
-    private JFXComboBox cbProfessionalStanding;
-
-    @FXML
-    private JFXComboBox cbStateByEmploymentLaw;
-
-    @FXML
-    private JFXComboBox cbUserPermission;
-
-    @FXML
-    private JFXTextField txtTaxNumber;
-
-    @FXML
-    private JFXCheckBox chkActivityState;
-
-    @FXML
-    private JFXTextArea txtComments;
-
-    @FXML
-    private JFXDatePicker dateStartOfEmployment;
-
-    @FXML
-    private ScrollPane editEmployeePane;
+    private JFXCheckBox activityState;
 
     private Employee employee;
 
@@ -113,93 +76,38 @@ public class EditEmployeeController implements Initializable {
         UserPermissionDatabaseService userPermissionDatabaseService = new UserPermissionDatabaseService();
 
         ObservableList<UserPermission> permissions = FXCollections.observableList(userPermissionDatabaseService.getAll(UserPermission.class));
-        cbUserPermission.setItems(permissions);
+        userPermission.setItems(permissions);
 
         StateByEmploymentLawDatabaseService lawStateDbService = new StateByEmploymentLawDatabaseService();
 
         ObservableList<StateByEmploymentLaw> lawStates = FXCollections.observableList(lawStateDbService.getAll(StateByEmploymentLaw.class));
-        cbStateByEmploymentLaw.setItems(lawStates);
+        stateByEmploymentLaw.setItems(lawStates);
 
         ProfessionalStandingDatabaseService profStandDbService = new ProfessionalStandingDatabaseService();
 
         ObservableList<ProfessionalStanding> profStands = FXCollections.observableList(profStandDbService.getAll(ProfessionalStanding.class));
-        cbProfessionalStanding.setItems(profStands);
+        professionalStanding.setItems(profStands);
+    }
+
+
+    private <T extends ValidatorBase> void initializeValidators(T validator, String message, JFXTextField input){
+        validator.setMessage(message);
+
+        input.getValidators().add(validator);
+        input.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue && !input.getText().equals("")){
+                input.validate();
+            }
+        });
     }
 
     private void setValidators(){
-
-        EmailValidator emailValidator = new EmailValidator();
-        PhoneValidator phoneValidator = new PhoneValidator();
-        IBANValidator ibanValidator = new IBANValidator();
-        BICValidator bicValidator = new BICValidator();
-        TextValidator textValidator = new TextValidator();
-        ZipValidator zipValidator = new ZipValidator();
-        emailValidator.setMessage("Ungültige E-Mail Adresse");
-        phoneValidator.setMessage("Ungültige Telefonnummer");
-        ibanValidator.setMessage("Ungültige IBAN");
-        bicValidator.setMessage("Ungültige BIC");
-        zipValidator.setMessage("Ungültige PLZ");
-
-        txtMailAddress.getValidators().add(emailValidator);
-        txtMailAddress.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue){
-                    txtMailAddress.validate();
-                }
-            }
-        });
-
-        txtPhoneNumber.getValidators().add(phoneValidator);
-        txtPhoneNumber.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue){
-                    txtPhoneNumber.validate();
-                }
-            }
-        });
-
-        txtMobileNumber.getValidators().add(phoneValidator);
-        txtMobileNumber.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue){
-                    txtMobileNumber.validate();
-                }
-            }
-        });
-
-        txtIBAN.getValidators().add(ibanValidator);
-        txtIBAN.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue){
-                    txtIBAN.validate();
-                }
-            }
-        });
-
-        txtBIC.getValidators().add(bicValidator);
-        txtBIC.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue){
-                    txtBIC.validate();
-                }
-            }
-        });
-
-        txtPLZ.getValidators().add(zipValidator);
-        txtPLZ.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue){
-                    txtPLZ.validate();
-                }
-            }
-        });
-
+        initializeValidators(new EmailValidator(), "Ungültige E-Mail-Adresse", mailAddress);
+        initializeValidators(new PhoneValidator(), "Ungültige Telefonnummer", phoneNumber);
+        initializeValidators(new PhoneValidator(), "Ungültige Telefonnummer", mobileNumber);
+        initializeValidators(new IBANValidator(), "Ungültige IBAN", iban);
+        initializeValidators(new BICValidator(), "Ungültige BIC", bic);
+        initializeValidators(new PLZValidator(), "Ungültige PLZ", plz);
     }
 
     /**
@@ -210,30 +118,30 @@ public class EditEmployeeController implements Initializable {
 
         this.employee = employee;
 
-        txtSalutation.setText(employee.getSalutation());
-        txtFirstName.setText(employee.getFirstName());
-        txtLastName.setText(employee.getLastName());
-        txtStreet.setText(employee.getStreet());
-        txtHouseNumber.setText(employee.getHouseNumber());
-        txtPLZ.setText(Integer.toString(employee.getPlz()));
-        txtCity.setText(employee.getCity());
-        txtPhoneNumber.setText(employee.getPhoneNumber());
-        txtMobileNumber.setText(employee.getMobileNumber());
-        txtMailAddress.setText(employee.getMailAddress());
-        txtIBAN.setText(employee.getIban());
-        txtBIC.setText(employee.getBic());
-        txtBruttoPerHour.setText(Double.toString(employee.getBruttoPerHour()));
-        dateStartOfEmployment.setValue(employee.getStartOfEmployment()
+        salutation.setText(employee.getSalutation());
+        firstName.setText(employee.getFirstName());
+        lastName.setText(employee.getLastName());
+        street.setText(employee.getStreet());
+        houseNumber.setText(employee.getHouseNumber());
+        plz.setText(Integer.toString(employee.getPlz()));
+        city.setText(employee.getCity());
+        phoneNumber.setText(employee.getPhoneNumber());
+        mobileNumber.setText(employee.getMobileNumber());
+        mailAddress.setText(employee.getMailAddress());
+        iban.setText(employee.getIban());
+        bic.setText(employee.getBic());
+        bruttoPerHour.setText(Double.toString(employee.getBruttoPerHour()));
+        startOfEmployment.setValue(employee.getStartOfEmployment()
                                         .toInstant()
                                         .atZone(ZoneId.systemDefault())
                                         .toLocalDate());
-        txtTaxNumber.setText(employee.getTaxNumber());
-        txtComments.setText(employee.getComments());
-        txtPassword.setText(employee.getPassword());
-        cbProfessionalStanding.getSelectionModel().select(indexOfProfessionalStandingInList(cbProfessionalStanding.getItems(), employee.getProfessionalStanding().getId()));
-        cbStateByEmploymentLaw.getSelectionModel().select(indexOfStandByEmploymentLawInList(cbStateByEmploymentLaw.getItems(), employee.getStateByEmploymentLaw().getId()));
-        cbUserPermission.getSelectionModel().select(indexOfUserPermissionInList(cbUserPermission.getItems(), employee.getUserPermission().getId()));
-        chkActivityState.setSelected(employee.getActivityState());
+        taxNumber.setText(employee.getTaxNumber());
+        comments.setText(employee.getComments());
+        password.setText(employee.getPassword());
+        professionalStanding.getSelectionModel().select(employee.getProfessionalStanding().getId()-1);
+        stateByEmploymentLaw.getSelectionModel().select(employee.getStateByEmploymentLaw().getId()-1);
+        userPermission.getSelectionModel().select(employee.getUserPermission().getId()-1);
+        activityState.setSelected(employee.getActivityState());
     }
 
     /**
@@ -243,14 +151,10 @@ public class EditEmployeeController implements Initializable {
      */
     @FXML
     public void apply(ActionEvent event){
-        try{
-            if(this.employee == null) {
-                controller.save(Employee.class, generateEmployee());
-            } else {
-                controller.save(Employee.class, generateEmployeeOnExisting());
-            }
-            popup.generateInformationPopupWindow(txtFirstName.getText() + " " + txtLastName.getText() + " wurde verarbeitet.");
-            Stage stage = (Stage) editEmployeePane.getScene().getWindow();
+        try {
+            controller.save(Employee.class, generate());
+            popup.generateInformationPopupWindow(firstName.getText() + " " + lastName.getText() + " wurde verarbeitet.");
+            Stage stage = (Stage) salutation.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         }
         catch(NumberFormatException e){
@@ -262,89 +166,38 @@ public class EditEmployeeController implements Initializable {
      * erstelle Employee von vorhandenem Employee
      * @return Employee
      */
-    private Employee generateEmployeeOnExisting() {
-        Employee employee = this.employee;
+    private Employee generate() {
+        if(this.employee == null){
+            this.employee =  new Employee();
+        }
 
         Calendar startDate = Calendar.getInstance();
         startDate.set(
-                dateStartOfEmployment.getValue().getYear(),
-                dateStartOfEmployment.getValue().getMonthValue(),
-                dateStartOfEmployment.getValue().getDayOfMonth());
-        employee.setFirstName(txtFirstName.getText());
-        employee.setSalutation(txtSalutation.getText());
-        employee.setLastName(txtLastName.getText());
-        employee.setStreet(txtStreet.getText());
-        employee.setHouseNumber(txtHouseNumber.getText());
-        employee.setPlz(Integer.parseInt(txtPLZ.getText()));
-        employee.setCity(txtCity.getText());
-        employee.setPhoneNumber(txtPhoneNumber.getText());
-        employee.setMobileNumber(txtMobileNumber.getText());
-        employee.setMailAddress(txtMailAddress.getText());
-        employee.setIban(txtIBAN.getText());
-        employee.setBic(txtBIC.getText());
-        employee.setBruttoPerHour(Double.parseDouble(txtBruttoPerHour.getText()));
+                startOfEmployment.getValue().getYear(),
+                startOfEmployment.getValue().getMonthValue(),
+                startOfEmployment.getValue().getDayOfMonth());
+        employee.setFirstName(firstName.getText());
+        employee.setSalutation(salutation.getText());
+        employee.setLastName(lastName.getText());
+        employee.setStreet(street.getText());
+        employee.setHouseNumber(houseNumber.getText());
+        employee.setPlz(Integer.parseInt(plz.getText()));
+        employee.setCity(city.getText());
+        employee.setPhoneNumber(phoneNumber.getText());
+        employee.setMobileNumber(mobileNumber.getText());
+        employee.setMailAddress(mailAddress.getText());
+        employee.setIban(iban.getText());
+        employee.setBic(bic.getText());
+        employee.setBruttoPerHour(Double.parseDouble( bruttoPerHour.getText()));
         employee.setStartOfEmployment(startDate.getTime());
-        employee.setActivityState(chkActivityState.isSelected());
-        employee.setProfessionalStanding((ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem());
-        employee.setStateByEmploymentLaw((StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem());
-        employee.setUserPermission((UserPermission) cbUserPermission.getSelectionModel().getSelectedItem());
-        employee.setTaxNumber(txtTaxNumber.getText());
-        employee.setComments(txtComments.getText());
-        employee.setPassword(txtPassword.getText());
+        employee.setActivityState(activityState.isSelected());
+        employee.setProfessionalStanding((ProfessionalStanding) professionalStanding.getSelectionModel().getSelectedItem());
+        employee.setStateByEmploymentLaw((StateByEmploymentLaw) stateByEmploymentLaw.getSelectionModel().getSelectedItem());
+        employee.setUserPermission((UserPermission) userPermission.getSelectionModel().getSelectedItem());
+        employee.setTaxNumber(taxNumber.getText());
+        employee.setComments(comments.getText());
+        employee.setPassword(password.getText());
 
         return employee;
-    }
-
-    /**
-     * erstelle neuen Employee von View eingaben
-     * @return Employee
-     */
-    private Employee generateEmployee() {
-        ProfessionalStandingDatabaseService professionalStandingService = new ProfessionalStandingDatabaseService();
-        StateByEmploymentLawDatabaseService stateByEmploymentLawService = new StateByEmploymentLawDatabaseService();
-        UserPermissionDatabaseService userPermissionService = new UserPermissionDatabaseService();
-
-        Calendar startDate = Calendar.getInstance();
-        startDate.set(
-                dateStartOfEmployment.getValue().getYear(),
-                dateStartOfEmployment.getValue().getMonthValue(),
-                dateStartOfEmployment.getValue().getDayOfMonth());
-
-        return new Employee("", txtFirstName.getText(),
-                txtLastName.getText(), txtStreet.getText(),
-                txtHouseNumber.getText(), Integer.parseInt(txtPLZ.getText()),
-                txtCity.getText(), txtPhoneNumber.getText(),
-                txtMobileNumber.getText(), txtMailAddress.getText(),
-                txtIBAN.getText(), txtBIC.getText(),
-                Double.parseDouble(txtBruttoPerHour.getText()), startDate.getTime(),
-                chkActivityState.isSelected(), (StateByEmploymentLaw) cbStateByEmploymentLaw.getSelectionModel().getSelectedItem(),
-                txtTaxNumber.getText(), (ProfessionalStanding) cbProfessionalStanding.getSelectionModel().getSelectedItem(), "", userPermissionService.get(UserPermission.class, 1), "changeme");
-    }
-
-    private int indexOfProfessionalStandingInList(List<ProfessionalStanding> psList, int professionalStandingId) {
-        for (int i = 0; i <= psList.size(); i++) {
-            if(psList.get(i).getId() == professionalStandingId){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private int indexOfStandByEmploymentLawInList(List<StateByEmploymentLaw> stateLawlList, int stateByEmploymentlawId) {
-        for (int i = 0; i <= stateLawlList.size(); i++) {
-            if(stateLawlList.get(i).getId() == stateByEmploymentlawId){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private int indexOfUserPermissionInList(List<UserPermission> permissions, int permissionId) {
-        for (int i = 0; i <= permissions.size(); i++) {
-            if(permissions.get(i).getId() == permissionId){
-                return i;
-            }
-        }
-        return -1;
     }
 }

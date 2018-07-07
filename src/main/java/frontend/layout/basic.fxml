@@ -21,6 +21,7 @@
             </rowConstraints>
             <children>
                 <Label  fx:id="username"     styleClass="username"                                      GridPane.rowIndex="1" />
+                <Label  fx:id="logout"    styleClass="menuItem"  onMouseClicked="#logout"     GridPane.rowIndex="2"   text="Logout" />
                 <Label  fx:id="menuLogin"    styleClass="menuItem"  onMouseClicked="#openLogin"         GridPane.rowIndex="3"   text="Login"/>
                 <Label  fx:id="menuEmployee" styleClass="menuItem"  onMouseClicked="#openEmployeeList"  GridPane.rowIndex="4"   text="Mitarbeiter" />
                 <Label  fx:id="menuStand"    styleClass="menuItem" onMouseClicked="#openStandList"     GridPane.rowIndex="5" text="Stände" />

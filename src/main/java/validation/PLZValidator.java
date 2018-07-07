@@ -6,7 +6,7 @@ import javafx.scene.control.TextInputControl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ZipValidator extends ValidatorBase {
+public class PLZValidator extends ValidatorBase {
 
     @Override
     protected void eval(){

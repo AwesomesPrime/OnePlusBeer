@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import utilities.AlerterMessagePopup;
-import validation.InputValidation;
 
 import java.net.URL;
 import java.time.ZoneId;
@@ -22,7 +21,6 @@ import java.util.ResourceBundle;
 
 public class EditEventController implements Initializable {
 
-    private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML
@@ -58,6 +56,9 @@ public class EditEventController implements Initializable {
     @FXML
     private ScrollPane editEventPane;
 
+    EntityController controller = new EntityController();
+    Event event;
+
     @FXML
     public void initialize(URL url, ResourceBundle rb){
 
@@ -69,6 +70,8 @@ public class EditEventController implements Initializable {
      * @param event Event Entität
      */
     public void setDataFromView(Event event) {
+
+        this.event = event;
 
         txtStrasse.setText(event.getStreet());
         txtHausNr.setText(event.getHouseNumber());
@@ -99,40 +102,50 @@ public class EditEventController implements Initializable {
      */
     @FXML
     public void apply(ActionEvent event){
+
         try{
-           EntityController controller = new EntityController();
-
-            Calendar startDate = Calendar.getInstance();
-            startDate.set(
-                    dateStart.getValue().getYear(),
-                    dateStart.getValue().getMonthValue(),
-                    dateStart.getValue().getDayOfMonth(),
-                    timeStart.getValue().getHour(),
-                    timeStart.getValue().getMinute(),
-                    timeStart.getValue().getSecond());
-            Calendar endDate = Calendar.getInstance();
-            endDate.set(
-                    dateEnd.getValue().getYear(),
-                    dateEnd.getValue().getMonthValue(),
-                    dateEnd.getValue().getDayOfMonth(),
-                    timeEnd.getValue().getHour(),
-                    timeEnd.getValue().getMinute(),
-                    timeEnd.getValue().getSecond());
-
-            controller.save(Event.class,  new Event( txtName.getText(),
-                                                startDate.getTime(),
-                                                endDate.getTime(),
-                                                txtStrasse.getText(),
-                                                txtHausNr.getText(),
-                                                txtPLZ.getText(),
-                                                txtOrt.getText()));
-            popup.generateInformationPopupWindow(txtName.getText() + " wurde verarbeitet.");
+            controller.save(Event.class, generate());
             Stage stage = (Stage) editEventPane.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+            popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
         }
         catch(NumberFormatException e){
             popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
         }
+    }
+
+    private Event generate() {
+
+        if(this.event == null){
+            this.event =  new Event();
+        }
+
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(
+                dateStart.getValue().getYear(),
+                dateStart.getValue().getMonthValue(),
+                dateStart.getValue().getDayOfMonth(),
+                timeStart.getValue().getHour(),
+                timeStart.getValue().getMinute(),
+                timeStart.getValue().getSecond());
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(
+                dateEnd.getValue().getYear(),
+                dateEnd.getValue().getMonthValue(),
+                dateEnd.getValue().getDayOfMonth(),
+                timeEnd.getValue().getHour(),
+                timeEnd.getValue().getMinute(),
+                timeEnd.getValue().getSecond());
+
+            event.setName(txtName.getText());
+            event.setStartDate(startDate.getTime());
+            event.setEndDate(endDate.getTime());
+            event.setStreet(txtStrasse.getText());
+            event.setHouseNumber(txtHausNr.getText());
+            event.setPlz(txtPLZ.getText());
+            event.setCity(txtOrt.getText());
+
+        return event;
     }
 
     private void validateInput() {
