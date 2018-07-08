@@ -4,19 +4,24 @@ import com.jfoenix.controls.*;
 import controller.EntityController;
 import entities.*;
 import entities.Event;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orm.EmployeeDatabaseService;
 import orm.StandDatabaseService;
+import usermanagement.ActiveUser;
 import utilities.AlerterMessagePopup;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,6 +69,41 @@ public class EditEmployeePlanController implements Initializable {
 
         ObservableList<StandPlan> standPlanList = FXCollections.observableList(standDatabaseService.getAll(StandPlan.class));
         cbStandPlan.setItems(standPlanList);
+
+        cbStandPlan.valueProperty().addListener(new ChangeListener<StandPlan>() {
+            @Override
+            public void changed(ObservableValue<? extends StandPlan> observable, StandPlan oldValue, StandPlan newValue) {
+                dateStart.setDayCellFactory(picker -> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        setDisable(empty
+                                || date.isAfter(newValue.getClosingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(newValue.getOpeningTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(LocalDate.now()) && ActiveUser.getPermission()<=2);
+                    }
+                });
+                dateStart.setValue(null);
+                dateStart.setEditable(false);
+
+                dateEnd.setDayCellFactory(picker -> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        setDisable(empty
+                                || date.isAfter(newValue.getClosingTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(newValue.getOpeningTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(LocalDate.now()) && ActiveUser.getPermission()<=2);
+                    }
+                });
+                dateEnd.setValue(null);
+                dateEnd.setEditable(false);
+
+            }
+        });
+
+        timeStart._24HourViewProperty().setValue(true);
+        timeEnd._24HourViewProperty().setValue(true);
     }
 
     /**
@@ -124,8 +164,23 @@ public class EditEmployeePlanController implements Initializable {
     }
 
     private boolean validateLegalBreaKTime() {
+        String errMsg = "";
         long worktime = calcWorkingTimeInHours();
-        return (worktime > 8 && Long.valueOf(txtTimePause.getText()) > 60) || (worktime > 9 && Long.valueOf(txtTimePause.getText()) > 75) || worktime >= 10;
+        if(worktime >= 8 && worktime < 9 && Long.valueOf(txtTimePause.getText()) < 60){
+            errMsg = "Die Pause muss mindestens 60 Min betragen!";
+        }
+        else if(worktime >= 9 && worktime <= 10 && Long.valueOf(txtTimePause.getText()) < 75){
+            errMsg = "Die Pause muss mindestens 75 Min betragen!";
+        }
+        else if(worktime > 10){
+            errMsg = "Die Arbeitszeit ist zu lang!";
+        }
+
+        if(errMsg.isEmpty()){
+            return true;
+        }
+        popup.generateErrorPopupWindow("Fehleingabe: "+errMsg);
+        return false;
     }
 
     private Date getDateFromPickers(JFXDatePicker datePicker){

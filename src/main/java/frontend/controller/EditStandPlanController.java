@@ -4,19 +4,24 @@ import com.jfoenix.controls.*;
 import controller.EntityController;
 import entities.*;
 import entities.Event;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orm.StandDatabaseService;
 import orm.EventDatabaseService;
+import usermanagement.ActiveUser;
 import utilities.AlerterMessagePopup;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,6 +64,41 @@ public class EditStandPlanController implements Initializable {
 
         ObservableList<Event> eventList = FXCollections.observableList(eventDatabaseService.getAll(Event.class));
         event.setItems(eventList);
+
+        event.valueProperty().addListener(new ChangeListener<Event>() {
+            @Override
+            public void changed(ObservableValue<? extends Event> observable, Event oldValue, Event newValue) {
+                openingDate.setDayCellFactory(picker -> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        setDisable(empty
+                                || date.isAfter(newValue.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(newValue.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(LocalDate.now()) && ActiveUser.getPermission()<=2);
+                    }
+                });
+                openingDate.setValue(null);
+                openingDate.setEditable(false);
+
+                closingDate.setDayCellFactory(picker -> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        setDisable(empty
+                                || date.isAfter(newValue.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(newValue.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                                || date.isBefore(LocalDate.now()) && ActiveUser.getPermission()<=2);
+                    }
+                });
+                closingDate.setValue(null);
+                closingDate.setEditable(false);
+
+            }
+        });
+
+        openingTime._24HourViewProperty().setValue(true);
+        closingTime._24HourViewProperty().setValue(true);
     }
 
     /**
