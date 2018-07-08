@@ -102,15 +102,18 @@ public class EditEventController implements Initializable {
      */
     @FXML
     public void apply(ActionEvent event){
-
-        try{
-            controller.save(Event.class, generate());
-            Stage stage = (Stage) editEventPane.getScene().getWindow();
-            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-            popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
-        }
-        catch(NumberFormatException e){
-            popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
+        if(txtPLZ.getText().matches("[\\d]{5}")) {
+            try{
+                controller.save(Event.class, generate());
+                Stage stage = (Stage) editEventPane.getScene().getWindow();
+                stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
+            }
+            catch(NumberFormatException e){
+                popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
+            }
+        } else {
+            popup.generateInformationPopupWindow("Ihre Eingaben beinhalten Fehler. Daher konnte der Vorgang nicht gespeichert werden");
         }
     }
 

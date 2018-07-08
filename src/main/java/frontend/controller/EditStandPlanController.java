@@ -142,14 +142,19 @@ public class EditStandPlanController implements Initializable {
 
     @FXML
     public void apply(ActionEvent event){
-        try{
-            controller.save(StandPlan.class, generate());
-            Stage stage = (Stage) editStandPlanPane.getScene().getWindow();
-            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-            popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
-        }
-        catch(NumberFormatException e){
-            popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
+        if(plz.getText().matches("[\\d]{5}")){
+            try{
+                controller.save(StandPlan.class, generate());
+                Stage stage = (Stage) editStandPlanPane.getScene().getWindow();
+                stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                popup.generateInformationPopupWindow("Einsatzplan wurde verarbeitet.");
+            }
+            catch(NumberFormatException e){
+                popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
+            }
+        } else {
+            popup.generateInformationPopupWindow("Ihre Eingaben beinhalten Fehler. Daher konnte der Vorgang nicht gespeichert werden");
+
         }
     }
 
