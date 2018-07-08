@@ -151,14 +151,18 @@ public class EditEmployeeController implements Initializable {
      */
     @FXML
     public void apply(ActionEvent event){
-        try {
-            controller.save(Employee.class, generate());
-            popup.generateInformationPopupWindow(firstName.getText() + " " + lastName.getText() + " wurde verarbeitet.");
-            Stage stage = (Stage) salutation.getScene().getWindow();
-            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-        }
-        catch(NumberFormatException e){
-            popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
+        if(validateInputs()) {
+            try {
+                controller.save(Employee.class, generate());
+                popup.generateInformationPopupWindow(firstName.getText() + " " + lastName.getText() + " wurde verarbeitet.");
+                Stage stage = (Stage) salutation.getScene().getWindow();
+                stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+            }
+            catch(NumberFormatException e){
+                popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
+            }
+        } else {
+            popup.generateInformationPopupWindow("Ihre Eingaben beinhalten Fehler. Daher konnte der Vorgang nicht gespeichert werden");
         }
     }
 
@@ -199,5 +203,13 @@ public class EditEmployeeController implements Initializable {
         employee.setPassword(password.getText());
 
         return employee;
+    }
+
+    private boolean validateInputs() {
+        return plz.getText().matches("[\\d]{5}")
+                && phoneNumber.getText().matches("[\\d| ]+")
+                && iban.getText().matches("^DE\\d{2}\\s?([0-9a-zA-Z]{4}\\s?){4}[0-9a-zA-Z]{2}$")
+                && mailAddress.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
+                && bic.getText().matches("([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)");
     }
 }
