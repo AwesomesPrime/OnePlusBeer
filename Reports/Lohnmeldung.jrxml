@@ -62,8 +62,9 @@
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Localhost"/>
 		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
 		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="prmStartDate" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[SELECT oneplusbier.resourceplanning.fk_employee
+			<![CDATA[SELECT oneplusbier.resourceplanning.employee
 	,CONCAT (
 		oneplusbier.employee.lastName
 		,", "
@@ -92,16 +93,15 @@
 	,oneplusbier.employee.startOfEmployment
     	,COUNT(oneplusbier.resourceplanning.id) AS tageMonat
 		
-FROM oneplusbier.resourceplanning
-RIGHT JOIN oneplusbier.employee ON oneplusbier.resourceplanning.fk_employee = oneplusbier.employee.id AND MONTH(oneplusbier.resourceplanning.startWorkingTime) = '12' AND YEAR(oneplusbier.resourceplanning.startWorkingTime) = '2018'
+FROM oneplusbier.employeeplan AS resourceplanning
+RIGHT JOIN oneplusbier.employee ON oneplusbier.resourceplanning.employee = oneplusbier.employee.id AND MONTH(oneplusbier.resourceplanning.startWorkingTime) = $P{prmStartDate}  AND YEAR(oneplusbier.resourceplanning.startWorkingTime) = $P{prmStartDate} 
 LEFT JOIN oneplusbier.professionalStanding ON oneplusbier.professionalStanding.id = oneplusbier.employee.professionalStanding
 LEFT JOIN oneplusbier.stateByEmploymentLaw ON oneplusbier.stateByEmploymentLaw.id = oneplusbier.employee.stateByEmploymentLaw
-
 GROUP BY oneplusbier.employee.id]]>
 		</queryString>
-		<field name="fk_employee" class="java.lang.Integer">
-			<property name="com.jaspersoft.studio.field.label" value="fk_employee"/>
-			<property name="com.jaspersoft.studio.field.tree.path" value="resourceplanning"/>
+		<field name="employee" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="employee"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employeeplan"/>
 		</field>
 		<field name="Name" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="Name"/>
@@ -146,11 +146,13 @@ GROUP BY oneplusbier.employee.id]]>
 	<subDataset name="workedPerYear" uuid="77fb204d-ccf7-423b-ac59-ea1d236688fb">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Localhost"/>
+		<parameter name="prmStartDate" class="java.sql.Date"/>
 		<queryString language="SQL">
 			<![CDATA[SELECT oneplusbier.employee.id, COUNT(oneplusbier.resourceplanning.id) AS tageJahr 
 FROM oneplusbier.employee
 LEFT JOIN 
-oneplusbier.resourceplanning ON oneplusbier.employee.id = oneplusbier.resourceplanning.fk_employee AND YEAR(startWorkingTime) = '2018'
+oneplusbier.employeeplan AS resourceplanning
+ON oneplusbier.employee.id = oneplusbier.resourceplanning.employee AND YEAR(startWorkingTime) =  $P{prmStartDate} 
 GROUP BY oneplusbier.employee.id]]>
 		</queryString>
 		<field name="id" class="java.lang.Integer">
@@ -161,6 +163,7 @@ GROUP BY oneplusbier.employee.id]]>
 			<property name="com.jaspersoft.studio.field.label" value="tageJahr"/>
 		</field>
 	</subDataset>
+	<parameter name="prmStartDate" class="java.sql.Date"/>
 	<queryString>
 		<![CDATA[SELECT 1]]>
 	</queryString>
@@ -182,7 +185,10 @@ GROUP BY oneplusbier.employee.id]]>
 					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="lohnmeldung" uuid="08367ec3-75af-457e-abee-74dcc93745ab">
+					<datasetRun subDataset="lohnmeldung" uuid="f77b3402-083b-4de7-9ac3-c168709d367a">
+						<datasetParameter name="prmStartDate">
+							<datasetParameterExpression><![CDATA[$P{prmStartDate}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="68" uuid="094cb5df-11c7-416f-ba72-ebdd983e110d">
@@ -197,7 +203,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="68" height="40" uuid="9a8ee171-1d94-483e-af79-e25c8c70af71"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -218,7 +224,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField pattern="¤#,##0.00;¤-#,##0.00">
+							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="67" height="40" uuid="30fd1ed4-b3a9-4714-9933-deaae3e0b2cb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -239,7 +245,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="40" uuid="6de4d5e8-f3d7-4ad0-aeeb-2d3d7da1a314"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -260,7 +266,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField pattern="¤#,##0.00;¤-#,##0.00">
+							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="67" height="40" uuid="d155a819-5a3f-4f23-86f9-106e63edfd63"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -281,7 +287,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField pattern="¤#,##0.00;¤-#,##0.00">
+							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="40" uuid="9e16f9ee-853a-4580-b319-5003984eb417"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -302,7 +308,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField pattern="¤#,##0.00;¤-#,##0.00">
+							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="40" uuid="675cbf08-eb65-4412-bbd5-e9bf0021f51c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -323,7 +329,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField pattern="¤#,##0.00;¤-#,##0.00">
+							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="62" height="40" uuid="0783b71c-5511-4e21-8218-405cc3b64ba4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -344,7 +350,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField pattern="¤#,##0.00;¤-#,##0.00">
+							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="59" height="40" uuid="67067789-e050-40f6-bb34-08bd26009399"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -365,7 +371,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="53" height="40" uuid="7b2fba49-7bfc-4690-9f9f-d1d2ad711c73"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -386,7 +392,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="108" height="40" uuid="62ce804f-17da-41de-92f1-d2c68dd74633"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -407,7 +413,7 @@ GROUP BY oneplusbier.employee.id]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField pattern="MMMM d, yyyy">
+							<textField pattern="MMMM d, yyyy" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="54" height="40" uuid="440a9f27-26aa-4f1e-b02e-cc2bc094a831"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -422,13 +428,13 @@ GROUP BY oneplusbier.employee.id]]>
 							<staticText>
 								<reportElement x="0" y="0" width="34" height="20" uuid="8b94be3a-1e07-4e01-b23b-93d6ef1efd12"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="8"/>
+									<font size="6"/>
 								</textElement>
 								<text><![CDATA[Monat Tage]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="40">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="34" height="40" uuid="3bac9742-f4ad-45de-be9a-192ae39dfc2d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>
@@ -440,10 +446,10 @@ GROUP BY oneplusbier.employee.id]]>
 				</jr:table>
 			</componentElement>
 			<rectangle>
-				<reportElement x="0" y="3" width="679" height="51" uuid="096bafab-32eb-4508-b78e-3a94d7c0d264"/>
+				<reportElement x="0" y="3" width="682" height="51" uuid="096bafab-32eb-4508-b78e-3a94d7c0d264"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="679" y="3" width="121" height="51" uuid="12ecc9bb-52fd-4d40-bbff-030534161404"/>
+				<reportElement x="682" y="3" width="118" height="51" uuid="12ecc9bb-52fd-4d40-bbff-030534161404"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="10" y="30" width="100" height="20" uuid="c1b3db93-38fb-4559-a996-15ab84eaba2b"/>
@@ -467,7 +473,7 @@ GROUP BY oneplusbier.employee.id]]>
 				<text><![CDATA[Fax: 0211 / 1234567]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="679" y="3" width="120" height="52" uuid="a45d5c4f-39a5-4734-b756-af94119accb5"/>
+				<reportElement x="682" y="3" width="118" height="52" uuid="a45d5c4f-39a5-4734-b756-af94119accb5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6"/>
 				</textElement>
@@ -483,7 +489,10 @@ Heim Weg 22, 91827 Schaumlippe]]></text>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="workedPerYear" uuid="f49451ed-2bfe-4bf5-b3e2-1fb66607230a">
+					<datasetRun subDataset="workedPerYear" uuid="cff73fa9-b813-4715-9a1c-184d06727e06">
+						<datasetParameter name="prmStartDate">
+							<datasetParameterExpression><![CDATA[$P{prmStartDate}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="30" uuid="d73183ff-3407-4c00-b09c-afbda97db6c6">
@@ -491,13 +500,13 @@ Heim Weg 22, 91827 Schaumlippe]]></text>
 							<staticText>
 								<reportElement x="0" y="0" width="30" height="20" uuid="29f1c275-1532-4965-a448-e5c2b82ae7e4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="8"/>
+									<font size="6"/>
 								</textElement>
 								<text><![CDATA[tageJahr]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="40">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="30" height="40" uuid="61e51481-90f4-49cb-81a8-4f9df11116ca"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8"/>

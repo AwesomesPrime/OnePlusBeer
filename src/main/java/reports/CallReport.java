@@ -33,7 +33,7 @@ public class CallReport {
         // First, compile jrxml file.
         JasperReport jasperReport = JasperCompileManager.compileReport(path);
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oneplusbier", "root", "");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oneplusbier", "root", "root");
 
         JasperPrint print = JasperFillManager.fillReport(jasperReport,
                 parameterMap, conn);
@@ -47,7 +47,7 @@ public class CallReport {
 
         // ExporterOutput
         OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(
-                "C:\\Users\\d_klein\\" + reportName + ".pdf");
+                "Reports/" + reportName + ".pdf");
         // Output
         exporter.setExporterOutput(exporterOutput);
 

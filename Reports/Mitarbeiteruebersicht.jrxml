@@ -183,7 +183,7 @@ FROM oneplusbier.employee]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 2_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement style="Table 2_TD" positionType="Float" x="0" y="0" width="137" height="30" uuid="9c54c3a8-31bd-4e70-9933-b0b45d7feb3c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10"/>
@@ -203,7 +203,7 @@ FROM oneplusbier.employee]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 2_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement style="Table 2_TD" positionType="Float" x="0" y="0" width="137" height="30" uuid="871176d2-d20d-46a2-bb74-2a742973fb3a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10"/>
@@ -223,7 +223,7 @@ FROM oneplusbier.employee]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 2_TD" height="30">
-							<textField>
+							<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
 								<reportElement style="Table 2_TD" positionType="Float" x="0" y="0" width="132" height="30" uuid="cb39cc13-d732-46ca-a58d-c39ce5d26091"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10"/>
@@ -243,7 +243,7 @@ FROM oneplusbier.employee]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 2_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement style="Table 2_TD" positionType="Float" x="0" y="0" width="131" height="30" uuid="6b2c7efb-86c5-4dd4-ad25-a9c7505fff2f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10"/>
@@ -263,7 +263,7 @@ FROM oneplusbier.employee]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 2_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement style="Table 2_TD" positionType="Float" x="0" y="0" width="131" height="30" uuid="4cd0bab2-c58b-42b4-9692-5e46e48327bb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10"/>
@@ -283,7 +283,7 @@ FROM oneplusbier.employee]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 2_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement style="Table 2_TD" positionType="Float" x="0" y="0" width="131" height="30" uuid="957280c6-7a22-45c1-bd94-c58f880e8c29"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10"/>
