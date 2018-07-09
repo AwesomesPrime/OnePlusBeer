@@ -102,6 +102,8 @@ public class EditEventController implements Initializable {
      */
     @FXML
     public void apply(ActionEvent event){
+        Calendar startDate = getStartDate();
+        Calendar endDate = getEndDate();
         if(txtPLZ.getText().matches("[\\d]{5}")) {
             try{
                 controller.save(Event.class, generate());
@@ -112,17 +114,15 @@ public class EditEventController implements Initializable {
             catch(NumberFormatException e){
                 popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
             }
+        } else if(endDate.before(startDate)) {
+            popup.generateInformationPopupWindow("Das Enddatum liegt vor dem Startdatum");
+
         } else {
             popup.generateInformationPopupWindow("Ihre Eingaben beinhalten Fehler. Daher konnte der Vorgang nicht gespeichert werden");
         }
     }
 
-    private Event generate() {
-
-        if(this.event == null){
-            this.event =  new Event();
-        }
-
+    private Calendar getStartDate() {
         Calendar startDate = Calendar.getInstance();
         startDate.set(
                 dateStart.getValue().getYear(),
@@ -131,6 +131,10 @@ public class EditEventController implements Initializable {
                 timeStart.getValue().getHour(),
                 timeStart.getValue().getMinute(),
                 timeStart.getValue().getSecond());
+        return startDate;
+    }
+
+    private Calendar getEndDate() {
         Calendar endDate = Calendar.getInstance();
         endDate.set(
                 dateEnd.getValue().getYear(),
@@ -139,20 +143,25 @@ public class EditEventController implements Initializable {
                 timeEnd.getValue().getHour(),
                 timeEnd.getValue().getMinute(),
                 timeEnd.getValue().getSecond());
+        return endDate;
+    }
 
-            event.setName(txtName.getText());
-            event.setStartDate(startDate.getTime());
-            event.setEndDate(endDate.getTime());
-            event.setStreet(txtStrasse.getText());
-            event.setHouseNumber(txtHausNr.getText());
-            event.setPlz(txtPLZ.getText());
-            event.setCity(txtOrt.getText());
+    private Event generate() {
+
+        if(this.event == null){
+            this.event =  new Event();
+        }
+        Calendar startDate = getStartDate();
+        Calendar endDate = getEndDate();
+
+        event.setName(txtName.getText());
+        event.setStartDate(startDate.getTime());
+        event.setEndDate(endDate.getTime());
+        event.setStreet(txtStrasse.getText());
+        event.setHouseNumber(txtHausNr.getText());
+        event.setPlz(txtPLZ.getText());
+        event.setCity(txtOrt.getText());
 
         return event;
     }
-
-    private void validateInput() {
-
-    }
-
 }
