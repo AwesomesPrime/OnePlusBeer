@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import orm.EmployeeDatabaseService;
+import utilities.AlerterMessagePopup;
 
 public class LayoutController implements Initializable{
 
@@ -62,6 +63,8 @@ public class LayoutController implements Initializable{
     GridPane loginPane;
 
     private int permission;
+    private final AlerterMessagePopup popup = new AlerterMessagePopup();
+
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -221,10 +224,10 @@ public class LayoutController implements Initializable{
                 openLogin();
                 username.setText(employee.getFullName());
             }else {
-                System.out.println("Das Passwort ist falsch!");
+                popup.generateInformationPopupWindow("Das Passwort ist falsch!");
             }
         }else{
-            System.out.println("Nutzer existiert nicht!");
+            popup.generateInformationPopupWindow("Nutzer existiert nicht!");
         }
     }
 }

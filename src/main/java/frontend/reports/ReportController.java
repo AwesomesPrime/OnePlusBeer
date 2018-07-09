@@ -14,7 +14,6 @@ import orm.EmployeeDatabaseService;
 import orm.EventDatabaseService;
 import reports.CallReport;
 import utilities.AlerterMessagePopup;
-import validation.InputValidation;
 
 import java.net.URL;
 import java.sql.Date;
@@ -26,7 +25,6 @@ import java.util.ResourceBundle;
 
 public class ReportController implements Initializable {
 
-    private final InputValidation inputValidation = new InputValidation();
     private final AlerterMessagePopup popup = new AlerterMessagePopup();
 
     @FXML

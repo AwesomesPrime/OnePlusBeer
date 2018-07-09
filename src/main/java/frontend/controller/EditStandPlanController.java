@@ -142,6 +142,10 @@ public class EditStandPlanController implements Initializable {
 
     @FXML
     public void apply(ActionEvent event){
+        Calendar startDate = getStartDate();
+        Calendar endDate = getEndDate();
+        Calendar startTime = getStartTime();
+        Calendar endTime = getEndTime();
         if(plz.getText().matches("[\\d]{5}")){
             try{
                 controller.save(StandPlan.class, generate());
@@ -152,10 +156,51 @@ public class EditStandPlanController implements Initializable {
             catch(NumberFormatException e){
                 popup.generateWarningPopupWindow("Es wurden ungültige Zeichen in reinen Zahlenfeldern festgestellt.");
             }
+        } else if(endDate.before(startDate)) {
+            popup.generateInformationPopupWindow("Das Enddatum liegt vor dem Startdatum.");
+
+        } else if (endTime.before(startDate)) {
+            popup.generateInformationPopupWindow("Die Endzeit liegt vor der Startzeit.");
+
         } else {
             popup.generateInformationPopupWindow("Ihre Eingaben beinhalten Fehler. Daher konnte der Vorgang nicht gespeichert werden");
 
         }
+    }
+
+    private Calendar getStartDate() {
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(
+                openingDate.getValue().getYear(),
+                openingDate.getValue().getMonthValue(),
+                openingDate.getValue().getDayOfMonth());
+        return startDate;
+    }
+
+    private Calendar getEndDate() {
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(
+                closingDate.getValue().getYear(),
+                closingDate.getValue().getMonthValue(),
+                closingDate.getValue().getDayOfMonth());
+        return endDate;
+    }
+
+    private Calendar getStartTime() {
+        Calendar start = Calendar.getInstance();
+        start.set(
+                openingTime.getValue().getHour(),
+                openingTime.getValue().getMinute(),
+                openingTime.getValue().getSecond());
+        return start;
+    }
+    private Calendar getEndTime() {
+        Calendar end = Calendar.getInstance();
+        end.set(
+                closingTime.getValue().getHour(),
+                closingTime.getValue().getMinute(),
+                closingTime.getValue().getSecond());
+        return end;
     }
 
     private Date getDateFromPickers(JFXDatePicker datePicker){
